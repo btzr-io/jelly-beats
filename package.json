@@ -34,6 +34,7 @@
     "husky": "^0.15.0-rc.8",
     "prettier": "^1.11.1",
     "pretty-quick": "^1.4.1",
+    "react-redux": "^5.0.7",
     "webpack": "^3.11.0"
   }
 }
