@@ -14,13 +14,17 @@
     "type": "git",
     "url": "git+https://github.com/btzr-io/jelly-beats.git"
   },
-  "author": "Baltazar Gomez <btzr.io@gmail.com>",
+  "author": {
+    "name": "Baltazar Gomez",
+    "email": "<btzr.io@gmail.com>"
+  },
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/btzr-io/jelly-beats/issues"
   },
   "homepage": "https://github.com/btzr-io/jelly-beats#readme",
   "dependencies": {
+    "history": "^4.7.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "redux": "^3.7.2",
@@ -35,6 +39,7 @@
     "prettier": "^1.11.1",
     "pretty-quick": "^1.4.1",
     "react-redux": "^5.0.7",
+    "universal-router": "^6.0.0",
     "webpack": "^3.11.0"
   }
 }
