@@ -1,0 +1,38 @@
+{
+  "name": "jelly-beats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "dist": "yarn compile && electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
+    "format": "prettier 'src/**/*.{js,jsx,css,json}' --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/btzr-io/jelly-beats.git"
+  },
+  "author": "Baltazar Gomez <btzr.io@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/btzr-io/jelly-beats/issues"
+  },
+  "homepage": "https://github.com/btzr-io/jelly-beats#readme",
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "redux": "^3.7.2",
+    "source-map-support": "^0.5.3"
+  },
+  "devDependencies": {
+    "babel-preset-react": "^6.24.1",
+    "electron": "^1.8.3",
+    "electron-builder": "^20.4.0",
+    "electron-webpack": "^1.13.0",
+    "husky": "0.14.3",
+    "prettier": "1.11.1",
+    "webpack": "^3.11.0"
+  }
+}

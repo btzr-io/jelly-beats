@@ -1,7 +1,11 @@
 # Logs
 logs
 *.log
+
+#npm
 npm-debug.log*
+
+#yarn
 yarn-debug.log*
 yarn-error.log*
 
@@ -57,3 +61,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# Dist / build directory
+dist
