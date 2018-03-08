@@ -32,6 +32,7 @@
     "electron-builder": "^20.4.0",
     "electron-webpack": "^1.13.0",
     "husky": "^0.15.0-rc.8",
+    "prettier": "^1.11.1",
     "pretty-quick": "^1.4.1",
     "webpack": "^3.11.0"
   }
