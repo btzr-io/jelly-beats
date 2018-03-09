@@ -1,6 +1,8 @@
-import React from 'react'
+import { h, render, Component } from 'preact'
+// Tell Babel to transform JSX into h() calls:
+/** @jsx h */
 
-class App extends React.PureComponent {
+class App extends Component {
   constructor() {
     super()
   }

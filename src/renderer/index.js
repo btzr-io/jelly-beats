@@ -5,10 +5,14 @@
  * code.
  */
 
-// Import all the third party stuff
-import React from 'react'
-import { render } from 'react-dom'
-import { Provider } from 'react-redux'
+// Tell Babel to transform JSX into h() calls:
+
+import { h, render, Component } from 'preact'
+// Tell Babel to transform JSX into h() calls:
+/** @jsx h */
+import { Provider } from 'preact-redux'
+import UniversalRouter from 'universal-router'
+import history from 'history'
 import App from './components/app'
 import store from './store'
 
