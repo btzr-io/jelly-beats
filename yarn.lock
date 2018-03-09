@@ -41,9 +41,6 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@jelly-beats/utils@./src/common/@utils":
-  version "0.0.1"
-
 "@types/node@^8.0.24":
   version "8.9.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.9.4.tgz#dfd327582a06c114eb6e0441fa3d6fab35edad48"
@@ -51,9 +48,6 @@
 "@types/webpack-env@^1.13.5":
   version "1.13.5"
   resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.13.5.tgz#ca854e9fbdbcdf45d7376882875f28e2c60593f8"
-
-"@utils/utils@./src/common/@utils":
-  version "0.0.1"
 
 abbrev@1:
   version "1.1.1"

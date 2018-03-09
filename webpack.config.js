@@ -1,6 +1,7 @@
 const path = require('path')
-
-//const ELECTRON_RENDERER_PROCESS_ROOT = path.resolve(__dirname, 'src/renderer/');
+// ELECTRON_RENDERER_PROCESS_ROOT
+const root = path.resolve(__dirname, 'src/renderer/')
+console.log(path.resolve(root, 'utils'))
 
 module.exports = {
   module: {
@@ -12,6 +13,9 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      '@utils': path.resolve(root, 'utils'),
+    },
     extensions: ['.js', '.jsx'],
   },
 }

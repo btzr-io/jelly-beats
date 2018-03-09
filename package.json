@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/btzr-io/jelly-beats#readme",
   "dependencies": {
-    "@jelly-beats/utils": "./src/common/utils",
     "history": "^4.7.2",
     "preact": "^8.2.7",
     "preact-redux": "^2.0.3",

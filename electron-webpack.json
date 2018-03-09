@@ -1,5 +1,5 @@
 {
-    "renderer": {
-     "webpackConfig": "webpack/renderer.config.js"
-   }
+  "renderer": {
+    "webpackConfig": "webpack.config.js"
+  }
 }
