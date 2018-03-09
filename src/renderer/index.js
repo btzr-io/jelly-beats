@@ -6,10 +6,10 @@
  */
 
 // Tell Babel to transform JSX into h() calls:
+/** @jsx h */
 
 import { h, render, Component } from 'preact'
-// Tell Babel to transform JSX into h() calls:
-/** @jsx h */
+
 import { Provider } from 'preact-redux'
 import UniversalRouter from 'universal-router'
 import history from 'history'

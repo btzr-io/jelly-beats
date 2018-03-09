@@ -1,6 +1,6 @@
-import { h, render, Component } from 'preact'
 // Tell Babel to transform JSX into h() calls:
 /** @jsx h */
+import { h, render, Component } from 'preact'
 
 class App extends Component {
   constructor() {

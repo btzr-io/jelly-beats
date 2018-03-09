@@ -1,10 +1,12 @@
+import { updateObject } from '@utils'
+
 const defaultState = {
   count: 0,
 }
 
 const reducers = {}
 
-reducers['TEST'] = (state, action) => Object.assign({}, defaultState, {})
+reducers['TEST'] = (state, action) => updateObject(defaultState, {})
 
 export default function reducer(state, action) {
   state = state || defaultState
