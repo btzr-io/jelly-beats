@@ -27,8 +27,7 @@
     "history": "^4.7.2",
     "preact": "^8.2.7",
     "preact-redux": "^2.0.3",
-    "redux": "^3.7.2",
-    "source-map-support": "^0.5.3"
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "babel-preset-react": "^6.24.1",
@@ -39,6 +38,7 @@
     "prettier": "^1.11.1",
     "pretty-quick": "^1.4.1",
     "universal-router": "^6.0.0",
+    "source-map-support": "^0.5.3",
     "webpack": "^3.11.0"
   }
 }
