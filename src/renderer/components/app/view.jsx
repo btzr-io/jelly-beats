@@ -7,12 +7,7 @@ class App extends Component {
 
   render() {
     const { children } = this.props
-    return (
-      <div id="window">
-        <h1>Title</h1>
-        {children[0]}
-      </div>
-    )
+    return <div id="window">{children[0]}</div>
   }
 }
 

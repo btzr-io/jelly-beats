@@ -1,9 +1,10 @@
 import { h } from 'preact'
+import Load from './views/load'
 
 const routes = [
   {
     path: '', // optional
-    action: () => <h1>Home</h1>,
+    action: () => <Load />,
   },
   {
     path: '/test',
