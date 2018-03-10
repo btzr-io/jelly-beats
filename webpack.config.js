@@ -1,7 +1,8 @@
 const path = require('path')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 // ELECTRON_RENDERER_PROCESS_ROOT
 const root = path.resolve(__dirname, 'src/renderer/')
-console.log(path.resolve(root, 'utils'))
 
 module.exports = {
   module: {
@@ -9,6 +10,18 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]',
+            },
+          },
+        ],
       },
     ],
   },

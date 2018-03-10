@@ -1,0 +1,9 @@
+.view {
+  text-align: center;
+  margin: 0;
+}
+
+.view h1 {
+  margin: 16px;
+  padding: 8px;
+}
