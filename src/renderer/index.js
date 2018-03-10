@@ -5,5 +5,5 @@ const container = document.getElementById('app')
 
 render(<Root />, container)
 
-var stateObj = { foo: 'bar' }
+// Init location:
 history.push({ hash: '' })

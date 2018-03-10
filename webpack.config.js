@@ -14,7 +14,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@utils': path.resolve(root, 'utils'),
+      '@root': path.resolve(root),
     },
     extensions: ['.js', '.jsx'],
   },

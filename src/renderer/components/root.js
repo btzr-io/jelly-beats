@@ -2,8 +2,8 @@ import { h } from 'preact'
 import { Provider } from 'preact-redux'
 import PropTypes from 'prop-types'
 
-import routes from '../routes'
-import store from '../store'
+import routes from '@root/routes'
+import store from '@root/store'
 
 import App from './app'
 import Router from './router'
