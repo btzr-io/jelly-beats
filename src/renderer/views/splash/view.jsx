@@ -4,7 +4,7 @@ import history from '@root/history'
 import Loader from '@root/components/loader'
 import style from './style.module.css'
 
-export class SplashScreen extends Component {
+export class View extends Component {
   constructor(props) {
     super(props)
 
@@ -16,21 +16,23 @@ export class SplashScreen extends Component {
 
   onProgressDone() {
     console.log('Ready to go!')
+    // Init location:
+    setTimeout(() => history.push({ hash: '/hello' }), 500)
   }
 
   componentDidMount() {
     // Test: Remove later!
-    for (let i = 0; i <= 100; i++) {
+    for (let i = 0; i <= 20; i++) {
+      let progress = i * 5
       setTimeout(() => {
-        let progress = i
-        let message = `Progress ${i}/100`
+        let message = `Progress ${progress}/100`
         this.setState({ progress, message })
         console.info('progress', progress)
 
         if (progress === 100) {
           this.onProgressDone()
         }
-      }, i * 75)
+      }, progress * 20)
     }
   }
 
@@ -46,4 +48,4 @@ export class SplashScreen extends Component {
   }
 }
 
-export default SplashScreen
+export default View

@@ -1,14 +1,15 @@
 import { h } from 'preact'
-import SplashScreen from './views/splash'
+import Hello from './views/hello'
+import Splash from './views/splash'
 
 const routes = [
   {
     path: '', // optional
-    action: () => <SplashScreen />,
+    action: () => <Splash />,
   },
   {
-    path: '/test',
-    action: () => <h1>Hello world!</h1>,
+    path: '/hello',
+    action: () => <Hello />,
   },
 ]
 

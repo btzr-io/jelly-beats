@@ -12,5 +12,5 @@
   width: 0;
   border-radius: 25px;
   background-color: white;
-  transition: width 0.3s linear;
+  transition: width 0.25s linear;
 }
