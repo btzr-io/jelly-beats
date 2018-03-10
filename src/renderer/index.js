@@ -1,27 +1,9 @@
-/**
- * app.js
- *
- * This is the entry file for the application, only setup and boilerplate
- * code.
- */
+import { h, render } from 'preact'
+import Root from './components/root'
+import history from './history'
+const container = document.getElementById('app')
 
-// Tell Babel to transform JSX into h() calls:
-/** @jsx h */
+render(<Root />, container)
 
-import { h, render, Component } from 'preact'
-
-import { Provider } from 'preact-redux'
-import UniversalRouter from 'universal-router'
-import history from 'history'
-import App from './components/app'
-import store from './store'
-
-const MOUNT_NODE = document.getElementById('app')
-
-// Render content
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  MOUNT_NODE
-)
+var stateObj = { foo: 'bar' }
+history.push({ hash: '' })

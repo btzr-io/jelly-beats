@@ -1,6 +1,4 @@
-// Tell Babel to transform JSX into h() calls:
-/** @jsx h */
-import { h, render, Component } from 'preact'
+import { h, Component } from 'preact'
 
 class App extends Component {
   constructor() {
@@ -8,9 +6,11 @@ class App extends Component {
   }
 
   render() {
+    const { children } = this.props
     return (
       <div id="window">
-        <h1>Electron-app</h1>
+        <h1>Title</h1>
+        {children[0]}
       </div>
     )
   }
