@@ -1,9 +1,21 @@
 .view {
   text-align: center;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
 }
 
 .view h1 {
   margin: 16px;
   padding: 8px;
+}
+
+.view h3 {
+  margin: 16px;
+  padding: 8px;
+  opacity: 0.5;
 }

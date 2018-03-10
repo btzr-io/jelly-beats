@@ -10,9 +10,7 @@ import Router from './router'
 
 const Root = () => (
   <Provider store={store}>
-    <App>
-      <Router routes={routes} />
-    </App>
+    <Router routes={routes} />
   </Provider>
 )
 

@@ -1,7 +1,8 @@
 .bar {
   margin: 16px auto;
   height: 5px;
-  width: 500px;
+  width: 420px;
+  max-width: 400px;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 25px;
 }

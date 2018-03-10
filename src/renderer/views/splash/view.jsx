@@ -2,7 +2,7 @@ import { h, Component } from 'preact'
 import UniversalRouter from 'universal-router'
 import history from '@root/history'
 import Loader from '@root/components/loader'
-import styles from './style.module.css'
+import style from './style.module.css'
 
 export class SplashScreen extends Component {
   constructor(props) {
@@ -36,11 +36,11 @@ export class SplashScreen extends Component {
 
   render() {
     return (
-      <div className={styles.view}>
-        <br />
-        <h2>{this.state.message}</h2>
-        <br />
+      <div className={style.view}>
+        <h1>Loadign</h1>
+
         <Loader progress={this.state.progress} />
+        <h3>{this.state.message}</h3>
       </div>
     )
   }
