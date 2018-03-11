@@ -1,2 +1,3 @@
 # hello-app
-A Boilerplate for Scalable Cross-Platform Desktop Apps with zero configuration.
+
+A minimal module to get started developing scalable cross-platform desktop apps with zero configuration.
