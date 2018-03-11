@@ -1,7 +1,7 @@
 import { h, Component } from 'preact'
 import UniversalRouter from 'universal-router'
 import Link from '@root/components/link'
-import style from './style.module.css'
+import styles from './styles.css'
 
 class View extends Component {
   constructor(props) {
@@ -10,10 +10,10 @@ class View extends Component {
 
   render() {
     return (
-      <div className={style.view}>
+      <div className={styles.layout}>
         <h1>Hello, world!</h1>
         <h3>Example application usign electron, preact and redux!</h3>
-        <Link href="/page-02"> Click bait!</Link>
+        <Link href="/page-02">Link to page #2</Link>
       </div>
     )
   }

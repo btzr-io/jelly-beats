@@ -2,7 +2,7 @@ import { h, Component } from 'preact'
 import UniversalRouter from 'universal-router'
 import history from '@root/history'
 import Loader from '@root/components/loader'
-import style from './style.module.css'
+import styles from './styles.css'
 
 export class View extends Component {
   constructor(props) {
@@ -22,23 +22,28 @@ export class View extends Component {
 
   componentDidMount() {
     // Test: Remove later!
-    for (let i = 0; i <= 20; i++) {
+    const speed = 20
+    let progress = 0
+    // Fake task
+    console.log('Startup task: running..')
+    // Fake progress
+    for (let i = 0; i <= speed; i++) {
       let progress = i * 5
       setTimeout(() => {
-        let message = `Progress ${progress}/100`
+        // Update state
+        let message = `Progress ${progress} / 100`
         this.setState({ progress, message })
-        console.info('progress', progress)
-
-        if (progress === 100) {
-          this.onProgressDone()
-        }
-      }, progress * 20)
+        // Log progress
+        console.log('Progress:', progress)
+        // Done!
+        progress === 100 && this.onProgressDone()
+      }, progress * speed)
     }
   }
 
   render() {
     return (
-      <div className={style.view}>
+      <div className={styles.layout}>
         <h1>Loadign</h1>
 
         <Loader progress={this.state.progress} />

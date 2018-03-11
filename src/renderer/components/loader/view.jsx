@@ -1,5 +1,5 @@
 import { h, Component } from 'preact'
-import style from './style.module.css'
+import styles from './styles.css'
 
 class Loader extends Component {
   constructor() {
@@ -9,10 +9,10 @@ class Loader extends Component {
   render() {
     const { children } = this.props
     const { progress } = this.props
-    const innerStyle = { width: `${progress}%` }
+    const innerStyles = { width: `${progress}%` }
     return (
-      <div className={style.bar}>
-        <div className={style.progress} style={innerStyle} />
+      <div className={styles.bar}>
+        <div className={styles.progress} style={innerStyles} />
       </div>
     )
   }
