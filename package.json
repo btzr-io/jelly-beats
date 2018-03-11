@@ -10,6 +10,9 @@
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
     "format": "pretty-quick"
   },
+  "bin": {
+    "hello-app": "./cli/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/btzr-io/jelly-beats.git"
