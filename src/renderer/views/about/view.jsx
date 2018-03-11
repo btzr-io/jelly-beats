@@ -12,7 +12,9 @@ class View extends Component {
     return (
       <div className={styles.layout}>
         <h1>About</h1>
-        <h3>Use yarn to install all dependencies, to build the app use yarn dev.</h3>
+        <h3>
+          Use yarn dev to run the application in development mode. <br />
+        </h3>
         <Link href="/hello">Go back!</Link>
       </div>
     )

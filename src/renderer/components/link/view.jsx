@@ -1,4 +1,5 @@
 import { h, Component } from 'preact'
+import history from '@root/history'
 
 export default class Link extends Component {
   constructor() {
@@ -19,15 +20,16 @@ export default class Link extends Component {
     }
     // Prevent page reload
     event.preventDefault()
-
-    // Execute onClick callback, if it exists
-    // this.props.onClick && onClick(event)
+    // Get href
+    const { href } = this.props
+    //Go to location:
+    href && history.push({ hash: href })
   }
 
   render() {
     const { href, children } = this.props
     return (
-      <a href={href} onClick={this.handleClick}>
+      <a href={href} onClick={event => this.handleClick(event)}>
         {children[0]}
       </a>
     )
