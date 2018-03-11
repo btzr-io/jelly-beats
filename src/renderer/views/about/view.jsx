@@ -11,9 +11,9 @@ class View extends Component {
   render() {
     return (
       <div className={styles.layout}>
-        <h1>Hello, world!</h1>
-        <h3>Example application usign electron, preact and redux!</h3>
-        <Link href="/about">Link to next page</Link>
+        <h1>About</h1>
+        <h3>Use yarn to install all dependencies, to build the app use yarn dev.</h3>
+        <Link href="/hello">Go back!</Link>
       </div>
     )
   }
