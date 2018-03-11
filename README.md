@@ -1,3 +1,6 @@
 # hello-app
+Create electron apps apps with no build configuration.
 
-A minimal module to get started developing scalable cross-platform desktop apps with zero configuration.
+### Bundle:
+- electron, electron-webpack, electron-build.
+- webpack, preact, redux, css-modules.
