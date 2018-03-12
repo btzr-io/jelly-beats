@@ -10,9 +10,6 @@
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
     "format": "pretty-quick"
   },
-  "bin": {
-    "hello-app": "./cli/index.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/btzr-io/jelly-beats.git"
@@ -26,27 +23,6 @@
     "url": "https://github.com/btzr-io/jelly-beats/issues"
   },
   "homepage": "https://github.com/btzr-io/jelly-beats#readme",
-  "dependencies": {
-    "history": "^4.7.2",
-    "preact": "^8.2.7",
-    "preact-redux": "^2.0.3",
-    "redux": "^3.7.2"
-  },
-  "devDependencies": {
-    "babel-preset-react": "^6.24.1",
-    "css-loader": "^0.28.10",
-    "electron": "^1.8.3",
-    "electron-builder": "^20.4.0",
-    "electron-webpack": "^1.13.0",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "husky": "^0.15.0-rc.8",
-    "postcss-loader": "^2.1.1",
-    "prettier": "^1.11.1",
-    "pretty-quick": "^1.4.1",
-    "prop-types": "^15.6.1",
-    "source-map-support": "^0.5.3",
-    "style-loader": "^0.20.3",
-    "universal-router": "^6.0.0",
-    "webpack": "^3.11.0"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }
