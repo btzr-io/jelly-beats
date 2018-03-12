@@ -1,0 +1,3 @@
+.layout {
+  composes: view from '@root/css/modules/view.css';
+}

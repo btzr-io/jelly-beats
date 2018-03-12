@@ -1,0 +1,36 @@
+.view {
+  text-align: center;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+  animation-name: show;
+  animation-duration: 0.3s;
+  animation-delay: 0.3s;
+  animation-fill-mode: both;
+  animation-timing-function: ease;
+}
+
+.view h1 {
+  margin: 16px;
+  padding: 8px;
+}
+
+.view h3 {
+  margin: 16px;
+  padding: 8px;
+  opacity: 0.75;
+  font-weight: normal;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

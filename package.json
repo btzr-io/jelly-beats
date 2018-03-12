@@ -4,10 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "electron-webpack dev",
-    "compile": "electron-webpack",
-    "dist": "yarn compile && electron-builder",
-    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
+    "dev": "electron-preact-app dev",
     "format": "pretty-quick"
   },
   "repository": {
@@ -24,5 +21,11 @@
   },
   "homepage": "https://github.com/btzr-io/jelly-beats#readme",
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "electron-preact-app": "https://github.com/btzr-io/electron-preact-app",
+    "husky": "^0.15.0-rc.8",
+    "postcss-loader": "^2.1.1",
+    "prettier": "^1.11.1",
+    "pretty-quick": "^1.4.1"
+  }
 }
