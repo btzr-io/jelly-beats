@@ -1,10 +1,13 @@
 {
-  "name": "electron-preact-app",
+  "name": "jelly-beats",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "electron-preact-app dev",
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "dist": "yarn compile && electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
     "format": "pretty-quick"
   },
   "repository": {
@@ -20,12 +23,32 @@
     "url": "https://github.com/btzr-io/jelly-beats/issues"
   },
   "homepage": "https://github.com/btzr-io/jelly-beats#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
+    "@fortawesome/react-fontawesome": "^0.1.0-11",
+    "history": "^4.7.2",
+    "lbry-redux": "https://github.com/lbryio/lbry-redux/",
+    "node-vibrant": "^3.0.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "universal-router": "^6.0.0",
+    "worker-loader": "^2.0.0"
+  },
   "devDependencies": {
-    "electron-preact-app": "https://github.com/btzr-io/electron-preact-app",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/preset-react": "^7.0.0-beta.51",
+    "css-loader": "^0.28.11",
+    "electron": "^2.0.3",
+    "electron-builder": "^20.4.0",
+    "electron-webpack": "^2.1.2",
     "husky": "^0.15.0-rc.8",
-    "postcss-loader": "^2.1.1",
     "prettier": "^1.11.1",
-    "pretty-quick": "^1.4.1"
+    "pretty-quick": "^1.4.1",
+    "prop-types": "^15.6.1",
+    "source-map-support": "^0.5.3",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.12.0"
   }
 }
