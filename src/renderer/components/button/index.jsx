@@ -5,8 +5,12 @@ import { Lbry } from 'lbry-redux'
 
 class Button extends React.Component {
   render() {
-    const { label } = this.props
-    return <button className={css.button}>{label}</button>
+    const { label, onClick } = this.props
+    return (
+      <button className={css.button} onClick={onClick}>
+        {label}
+      </button>
+    )
   }
 }
 

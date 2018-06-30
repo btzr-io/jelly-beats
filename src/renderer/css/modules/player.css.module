@@ -1,0 +1,21 @@
+.player {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    margin: auto;
+    z-index: 99;
+    display: inline-block;
+    background: rgba(23, 25, 31, 0.99);
+    padding: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+
+.player audio {
+    width: 80%;
+}

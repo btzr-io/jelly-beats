@@ -1,13 +1,12 @@
 .button {
     margin: 16px 0;
-    padding: 8px 24px;
+    padding: 12px 32px;
     border: 0;
     border-radius: 24px;
     background-color: #3498db;
     color: #FFF;
-    font-family: inherit;
     font-weight: bold;
-    font-size: 1.1em;
+    font-size: 0.9em;
     text-transform: uppercase;
     cursor: pointer;
 }
