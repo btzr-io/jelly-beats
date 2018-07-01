@@ -44,10 +44,11 @@
 }
 
 .tags {
-    margin: 16px 0;
+    margin: 8px 0;
 }
 
 .tag {
+    display: inline-block;
     padding: 4px 8px;
     margin-right: 8px;
     margin-bottom: 8px;

@@ -28,13 +28,13 @@ class RangeSlider extends React.Component {
   componentDidUpdate(prevProps) {
     const { value } = this.props
     const { shouldUpdate } = this.state
-    console.log(value)
     if (prevProps.value !== value) {
       shouldUpdate && this.setValue(value)
     }
   }
 
   render() {
+    const { max } = this.props
     return (
       <Slider
         className={css.seek}
@@ -45,6 +45,7 @@ class RangeSlider extends React.Component {
         onBeforeChange={this.stopUpdate.bind(this)}
         onChange={this.setValue.bind(this)}
         onAfterChange={this.update.bind(this)}
+        disabled={!max || max === 0}
       />
     )
   }

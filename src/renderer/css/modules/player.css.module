@@ -7,7 +7,7 @@
     z-index: 99;
     display: inline-block;
     background: rgba(44, 46, 52, 0.99);
-    padding: 16px 32px;
+    padding: 4px 32px 0 32px;
     transform: translateY(100%);
 }
 
@@ -29,7 +29,7 @@
 
 .player .controls {
     text-align: center;
-    margin: 0 auto;
+    margin: 18px auto;
 }
 
 .player .controls .button {
@@ -38,14 +38,14 @@
     display: inline-block;
     color: inherit;
     font-size: 1.5em;
-    padding: 4px;
-    margin: 4px 8px;
+    padding: 6px;
+    margin: 0 8px;
     opacity: 0.9;
     border-radius: 8px;
     transition: background 0.3s ease;
 }
 
-.player .controls .button:hover {
+.player .controls .button:hover:not(:disabled) {
     opacity: 0.9;
     background: rgba(255,255,255, 0.2);
 }
