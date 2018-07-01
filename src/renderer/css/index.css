@@ -1,10 +1,17 @@
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,latin-ext');
-
+@import url('./vars.css');
+@import url('./scrollbar.css');
 body {
   margin: 0;
   background-color: rgba(23, 25, 31, 0.99);
   color: white;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+a,
+button {
+  cursor: pointer;
+  outline: 0;
 }
 
 a {

@@ -6,16 +6,68 @@
     margin: auto;
     z-index: 99;
     display: inline-block;
-    background: rgba(23, 25, 31, 0.99);
-    padding: 8px;
+    background: rgba(44, 46, 52, 0.99);
+    padding: 16px 32px;
+    transform: translateY(100%);
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
+.player.active {
+    animation-name: show;
+    animation-duration: 0.3s;
+    animation-delay: 0.3s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+}
+
+.player .seek{
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.player .controls {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.player .controls .button {
+    border: 0;
+    background: transparent;
+    display: inline-block;
+    color: inherit;
+    font-size: 1.5em;
+    padding: 4px;
+    margin: 4px 8px;
+    opacity: 0.9;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.player .controls .button:hover {
+    opacity: 0.9;
+    background: rgba(255,255,255, 0.2);
+}
+
+.player .controls .button:active {
+    opacity: 1;
+}
+
+.player .controls .button:disabled {
+    opacity: 0.4;
 }
 
 
 .player audio {
-    width: 80%;
+    display: none;
+}
+
+@keyframes show {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0%);
+  }
 }

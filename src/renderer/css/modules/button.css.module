@@ -10,3 +10,7 @@
     text-transform: uppercase;
     cursor: pointer;
 }
+
+.button .icon {
+    margin-right: 16px;
+}

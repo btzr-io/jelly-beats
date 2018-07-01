@@ -38,7 +38,7 @@ class View extends React.Component {
               <h2>{metadata ? metadata.author : 'unknown'}</h2>
               {metadata && <Tags tags={metadata.tags} />}
             </div>
-            <Button label="Play Track" onClick={this.handlePlay.bind(this)} />
+            <Button label="Play Track" icon="play" onClick={this.handlePlay.bind(this)} />
           </div>
         </div>
         {fileSource && <Player fileSource={fileSource} />}

@@ -6,6 +6,6 @@
     margin: auto;
     z-index: 99;
     display: inline-block;
-    background: rgba(23, 25, 31, 0.99);
+    background: rgba(44, 46, 52, 0.99);
     padding: 8px;
 }

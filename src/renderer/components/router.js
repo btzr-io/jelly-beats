@@ -11,7 +11,6 @@ class Router extends React.Component {
     const options = {
       baseName: '/',
       resolveRoute(context, params) {
-        console.info(params)
         // Trigger route action
         return typeof context.route.action === 'function'
           ? context.route.action(context, params)
