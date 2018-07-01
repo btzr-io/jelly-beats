@@ -1,20 +1,17 @@
-# electron-preact-app
+# jelly-beats
 
-Create electron apps apps with no build configuration.
+### Development
 
-### Installation
-
-```Shell
-yarn add electron-preact-app --dev
-```
-
-### Usage
+Clone this repository
 
 ```Shell
-electron-preact-app create <app-name>
+git clone https://github.com/btzr-io/jelly-beats.git
 ```
 
-### What's inside the bundle?
+Use `yarn` command to install the dependencies,
 
-* electron, electron-webpack, electron-build.
-* webpack, preact, redux, css-modules.
+Now you can run the app:
+
+```Shell
+yarn dev
+```
