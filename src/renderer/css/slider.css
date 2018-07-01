@@ -28,21 +28,20 @@
 }
 .rc-slider-handle {
   position: absolute;
-  margin-left: -7px;
-  margin-top: -5px;
-  width: 14px;
-  height: 14px;
+  margin-left: -6px;
+  margin-top: -3px;
+  width: 12px;
+  height: 12px;
   cursor: pointer;
   cursor: -webkit-grab;
   cursor: grab;
   border-radius: 50%;
-  border: solid 2px #fff;
+  border: 0;
   background-color: #fff;
   -ms-touch-action: pan-x;
   touch-action: pan-x;
 }
 .rc-slider-handle:hover {
-  border-color: transparent;
 }
 .rc-slider-handle:active {
   /*
@@ -53,8 +52,6 @@
   cursor: grabbing;
 }
 .rc-slider-handle:focus {
-  border-color: #57c5f7;
-  box-shadow: 0 0 0 5px #96dbfa;
   outline: none;
 }
 .rc-slider-mark {

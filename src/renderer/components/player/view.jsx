@@ -99,7 +99,7 @@ class Player extends React.Component {
 
   componentWillUnmount() {
     const audio = this.audioElement.current
-    audio.reomoveEventListener('ended', this.handleEnded)
+    audio.removeEventListener('ended', this.handleEnded)
     audio.removeEventListener('loadstart', this.handleLoadStart)
     audio.removeEventListener('loadedmetadata', this.handleMetadata)
     audio.removeEventListener('timeupdate', this.updateTime)
