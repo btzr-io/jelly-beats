@@ -93,8 +93,13 @@ class Player extends React.Component {
     this.play()
   }
 
+  handleEnded = () => {
+    this.pause()
+  }
+
   componentWillUnmount() {
     const audio = this.audioElement.current
+    audio.reomoveEventListener('ended', this.handleEnded)
     audio.removeEventListener('loadstart', this.handleLoadStart)
     audio.removeEventListener('loadedmetadata', this.handleMetadata)
     audio.removeEventListener('timeupdate', this.updateTime)
@@ -103,6 +108,7 @@ class Player extends React.Component {
   componentDidMount() {
     const audio = this.audioElement.current
     //audio.addEventListener('error', err => {})
+    audio.addEventListener('ended', this.handleEnded)
     audio.addEventListener('loadstart', this.handleLoadStart)
     audio.addEventListener('loadedmetadata', this.handleMetadata)
     audio.addEventListener('timeupdate', this.updateTime)
