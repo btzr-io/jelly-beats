@@ -8,7 +8,7 @@
     background-size:contain;
     position: relative;
     overflow: hidden;
-    border-radius: 2px;
+    padding: 4px;
 }
 
 .overlay {

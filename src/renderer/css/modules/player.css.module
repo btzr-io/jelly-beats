@@ -29,7 +29,7 @@
 }
 
 .player .controls {
-  flex-grow: 0;
+  flex-grow: 1;
   text-align: center;
 }
 
@@ -96,6 +96,10 @@
   display: inline-block;
   margin-left: 16px;
   font-size: 0.8em;
+  flex-shrink: 2;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
 }
 
 .trackInfo p{
@@ -103,7 +107,9 @@
   line-height: 1.2;
   font-weight:bolder;
   overflow: hidden;
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .trackInfo .author {
