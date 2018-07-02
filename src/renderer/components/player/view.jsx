@@ -148,6 +148,14 @@ class Player extends React.Component {
     const { fileSource, author, title, thumbnail } = this.props.track
     const { currentTime, duration, paused } = this.state
 
+    const controls = [
+      { icon: 'step-backward', action: () => {} },
+      { icon: paused ? 'play' : 'pause', action: this.togglePlay },
+      { icon: 'step-forward', action: () => {} },
+    ]
+
+    const actions = [{ icon: 'ellipsis-v', disabled: true }]
+
     return (
       <div className={css.player + ' ' + (fileSource ? css.active : '')}>
         <audio ref={this.audioElement} {...playerOptions} />
@@ -155,9 +163,7 @@ class Player extends React.Component {
         <div className={css.container}>
           <ThumbCard src={thumbnail} author={author} title={title} />
           <div className={css.controls}>
-            <ControlButton icon={'step-backward'} disabled={true} />
-            <ControlButton icon={paused ? 'play' : 'pause'} action={this.togglePlay} />
-            <ControlButton icon={'step-forward'} disabled={true} />
+            {constrols.map((props, key) => <ControlButton {...props} key={key} />)}
           </div>
           <div className={css.actions}>
             <ControlButton icon={'heart'} disabled={true} />

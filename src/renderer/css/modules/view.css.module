@@ -16,19 +16,19 @@
 }
 
 .backdrop {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -2;
-    opacity: 0.2;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    filter: blur(8px);
-    transform: scale(1.1);
-    margin: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -2;
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  filter: blur(8px);
+  transform: scale(1.1);
+  margin: auto;
 }
 
 .view h1 {
@@ -44,45 +44,46 @@
 }
 
 .thumbnail {
-    height: 250px;
-    width: 250px;
-    flex-shrink: 0;
-    margin: 16px;
-    background-color: #555;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size:contain;
+  height: 250px;
+  width: 250px;
+  flex-shrink: 0;
+  margin: 16px;
+  background-color: #555;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .metadata {
-    margin-bottom: 32px;
-    text-align: left;
+  margin-bottom: 32px;
+  text-align: left;
 }
 
-.metadata h1, h2, p {
-    margin: 8px 0;
-    padding: 0;
+.metadata h1,
+h2,
+p {
+  margin: 8px 0;
+  padding: 0;
 }
 
 .metadata h1 {
-    font-size: 1.4em;
+  font-size: 1.4em;
 }
 
 .metadata h2 {
-    opacity: 0.7;
-    font-size: 1em;
-    text-transform: uppercase;
+  opacity: 0.7;
+  font-size: 1em;
+  text-transform: uppercase;
 }
 
 .container {
-    display: flex;
-    align-content: center;
-    justify-content: space-between;
-
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
 }
 
 .box {
-    margin: 16px;
+  margin: 16px;
 }
 
 @keyframes show {

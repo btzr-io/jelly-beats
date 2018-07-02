@@ -1,58 +1,58 @@
 .card {
-    width: 164px;
-    display: inline-block;
-    margin: 16px 8px;
-    text-align: left;
-    cursor: pointer;
-    vertical-align: top;
+  width: 164px;
+  display: inline-block;
+  margin: 16px 8px;
+  text-align: left;
+  cursor: pointer;
+  vertical-align: top;
 }
 
 .card .title {
-    margin: 8px 0;
-    font-size: 0.9em;
-    font-weight: bold;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  margin: 8px 0;
+  font-size: 0.9em;
+  font-weight: bold;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .card .subtitle {
-    margin: 8px 0;
-    opacity: 0.6;
-    width: 80%;
-    font-size: 0.8em;
-    font-weight: bold;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    text-transform: uppercase;
+  margin: 8px 0;
+  opacity: 0.6;
+  width: 80%;
+  font-size: 0.8em;
+  font-weight: bold;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-transform: uppercase;
 }
 
 .placeholder .title {
-    width: 75%;
-    height: 1.2em;
-    background: #282c37;
+  width: 75%;
+  height: 1.2em;
+  background: #282c37;
 }
 
 .placeholder .subtitle {
-    width: 25%;
-    height: 1.1em;
-    background: #414759;
-    opacity: 0.5;
+  width: 25%;
+  height: 1.1em;
+  background: #414759;
+  opacity: 0.5;
 }
 
 .tags {
-    margin: 8px 0;
+  margin: 8px 0;
 }
 
 .tag {
-    display: inline-block;
-    padding: 4px 8px;
-    margin-right: 8px;
-    margin-bottom: 8px;
-    background: #414759;
-    border-radius: 4px;
-    font-size: 0.8em;
+  display: inline-block;
+  padding: 4px 8px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  background: #414759;
+  border-radius: 4px;
+  font-size: 0.8em;
 }

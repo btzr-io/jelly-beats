@@ -1,11 +1,11 @@
 .header {
-    top: 0;
-    left: 0;
-    right: 0;
-    position: absolute;
-    margin: auto;
-    z-index: 99;
-    display: inline-block;
-    background: rgba(44, 46, 52, 0.99);
-    padding: 8px;
+  top: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  margin: auto;
+  z-index: 99;
+  display: inline-block;
+  background: rgba(44, 46, 52, 0.99);
+  padding: 8px;
 }

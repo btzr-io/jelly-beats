@@ -1,16 +1,16 @@
 .button {
-    margin: 16px 0;
-    padding: 12px 32px;
-    border: 0;
-    border-radius: 24px;
-    background-color: #3498db;
-    color: #FFF;
-    font-weight: bold;
-    font-size: 0.9em;
-    text-transform: uppercase;
-    cursor: pointer;
+  margin: 16px 0;
+  padding: 12px 32px;
+  border: 0;
+  border-radius: 24px;
+  background-color: #3498db;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .button .icon {
-    margin-right: 16px;
+  margin-right: 16px;
 }

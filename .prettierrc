@@ -1,6 +1,17 @@
 {
+  "semi": false,
   "trailingComma": "es5",
-  "printWidth": 100,
+  "printWidth": 90,
   "singleQuote": true,
-  "semi": false
+  "bracketSpacing": true,
+  "overrides": [
+    {
+      "files": [".prettierrc", ".huskyrc", ".babelrc"],
+      "options": { "parser": "json" }
+    },
+    {
+      "files": "**/*.css.module",
+      "options": { "parser": "css" }
+    }
+  ]
 }
