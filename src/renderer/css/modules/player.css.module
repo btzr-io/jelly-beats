@@ -7,7 +7,7 @@
     z-index: 99;
     display: inline-block;
     background: rgba(44, 46, 52, 0.99);
-    padding: 4px 32px 0 32px;
+    padding: 4px 0 0 0;
     transform: translateY(100%);
 }
 
@@ -19,6 +19,27 @@
     animation-timing-function: ease;
 }
 
+.player .container {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+}
+
+.player .controls {
+    flex-grow: 0;
+    text-align: center;
+}
+
+.player .actions {
+    flex-grow: 1;
+    flex-basis: 0;
+    text-align: right;
+    padding-right: 16px;
+}
+
 .player .seek{
     margin: 0 auto;
     position: absolute;
@@ -27,17 +48,19 @@
     right: 0;
 }
 
-.player .controls {
-    text-align: center;
-    margin: 18px auto;
+.player audio {
+    display: none;
 }
 
-.player .controls .button {
+
+/* Button */
+
+.button {
     border: 0;
     background: transparent;
     display: inline-block;
     color: inherit;
-    font-size: 1.5em;
+    font-size: 1.3em;
     padding: 6px;
     margin: 0 8px;
     opacity: 0.9;
@@ -45,22 +68,59 @@
     transition: background 0.3s ease;
 }
 
-.player .controls .button:hover:not(:disabled) {
+.button:hover:not(:disabled) {
     opacity: 0.9;
-    background: rgba(255,255,255, 0.2);
+    background: rgba(255,255,255, 0.15);
 }
 
-.player .controls .button:active {
+.button:active {
     opacity: 1;
 }
 
-.player .controls .button:disabled {
+.button:disabled {
     opacity: 0.4;
 }
 
+/* Metadata */
 
-.player audio {
-    display: none;
+.card  {
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0;
+    align-items: center;
+    align-content: center;
+    padding-right: 16px;
+}
+
+.card .trackInfo {
+    display: inline-block;
+    margin-left: 16px;
+    font-size: 0.8em;
+}
+
+.card .trackInfo p{
+  margin: 2px 0;
+  line-height: 1.2;
+  font-weight:bolder;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card .trackInfo .author {
+    flex-grow: 0;
+    opacity: 0.6;
+}
+
+.card .thumbnail {
+    flex-shrink: 0;
+    height: 64px;
+    width: 64px;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 0;
+    background-color: #282c37;
+    background-position: center;
+    background-repeat:no-repeat;
+    background-size:contain;
 }
 
 @keyframes show {

@@ -26,7 +26,7 @@
   position: absolute;
   left: 0;
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: var(--color-main);
   transition: width 0.2s ease;
 }
 
@@ -49,10 +49,6 @@
 .rc-slider-handle:hover {
 }
 .rc-slider-handle:active {
-  /*
-  border-color: #57c5f7;
-  box-shadow: 0 0 5px #57c5f7;
-  */
   cursor: -webkit-grabbing;
   cursor: grabbing;
 }

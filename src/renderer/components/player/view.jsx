@@ -15,6 +15,21 @@ const ControlButton = ({ icon, action, disabled }) => {
   )
 }
 
+const ThumbCard = ({ src, author, title }) => {
+  const thumbnailStyle = {
+    backgroundImage: src ? `url(${src})` : 'none',
+  }
+  return (
+    <div className={css.card}>
+      <div className={css.thumbnail} style={thumbnailStyle} />
+      <div className={css.trackInfo}>
+        <p>{title}</p>
+        <p className={css.author}>{author}</p>
+      </div>
+    </div>
+  )
+}
+
 function getCodec(name) {
   var extname = path.extname(name).toLowerCase()
   return {
@@ -31,18 +46,19 @@ class Player extends React.Component {
       paused: true,
       duration: 0,
       currentTime: 0,
+      currentTrack: null,
     }
   }
 
   loadSource() {
-    const { path } = this.props.fileSource
+    const { fileSource } = this.props.track
     const audio = this.audioElement.current
-    audio.src = 'file:' + path
+    audio.src = 'file:' + fileSource.path
     audio.load()
   }
 
   createStream() {
-    const { fileSource } = this.props
+    const { fileSource } = this.props.track
     const readable = fs.createReadStream(fileSource.path)
     const wrapper = new MediaElementWrapper(this.audioElement.current)
     // The correct mime type, including codecs, must be provided
@@ -112,7 +128,7 @@ class Player extends React.Component {
     audio.addEventListener('loadstart', this.handleLoadStart)
     audio.addEventListener('loadedmetadata', this.handleMetadata)
     audio.addEventListener('timeupdate', this.updateTime)
-    const { fileSource } = this.props
+    const { fileSource } = this.props.track
 
     // Stream file
     if (fileSource && fileSource.streaming) {
@@ -129,17 +145,24 @@ class Player extends React.Component {
       controls: true,
     }
 
-    const { fileSource } = this.props
+    const { fileSource, author, title, thumbnail } = this.props.track
     const { currentTime, duration, paused } = this.state
 
     return (
       <div className={css.player + ' ' + (fileSource ? css.active : '')}>
-        <Slider onChange={this.setCurrentTime} value={currentTime} max={duration} />
         <audio ref={this.audioElement} {...playerOptions} />
-        <div className={css.controls}>
-          <ControlButton icon={'step-backward'} disabled={true} />
-          <ControlButton icon={paused ? 'play' : 'pause'} action={this.togglePlay} />
-          <ControlButton icon={'step-forward'} disabled={true} />
+        <Slider onChange={this.setCurrentTime} value={currentTime} max={duration} />
+        <div className={css.container}>
+          <ThumbCard src={thumbnail} author={author} title={title} />
+          <div className={css.controls}>
+            <ControlButton icon={'step-backward'} disabled={true} />
+            <ControlButton icon={paused ? 'play' : 'pause'} action={this.togglePlay} />
+            <ControlButton icon={'step-forward'} disabled={true} />
+          </div>
+          <div className={css.actions}>
+            <ControlButton icon={'heart'} disabled={true} />
+            <ControlButton icon={'ellipsis-v'} disabled={true} />
+          </div>
         </div>
       </div>
     )

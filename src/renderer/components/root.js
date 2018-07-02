@@ -13,9 +13,20 @@ import {
   faStepBackward,
   faRandom,
   faHeadphones,
+  faHeart,
+  faEllipsisV,
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faPlay, faPause, faStepForward, faStepBackward, faRandom, faHeadphones)
+library.add(
+  faPlay,
+  faPause,
+  faStepForward,
+  faStepBackward,
+  faRandom,
+  faHeadphones,
+  faHeart,
+  faEllipsisV
+)
 
 const Root = () => (
   <Provider store={store}>

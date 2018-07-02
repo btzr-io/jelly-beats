@@ -25,23 +25,34 @@ class View extends React.Component {
   render() {
     const { fileSource } = this.state
     const { metadata, uri } = this.props.options
+    const { author, title, thumbnail, tags } = metadata || {}
+
     const thumbnailStyle = {
-      backgroundImage: metadata ? `url(${metadata.thumbnail})` : 'none',
+      backgroundImage: thumbnail ? `url(${thumbnail})` : 'none',
     }
+
+    const track = {
+      uri,
+      author,
+      title,
+      thumbnail,
+      fileSource,
+    }
+
     return (
       <div className={css.view}>
         <div className={css.container}>
           <div className={css.thumbnail} style={thumbnailStyle} />
           <div className={css.box}>
             <div className={css.metadata}>
-              <h1>{metadata ? metadata.title : 'unknown'}</h1>
-              <h2>{metadata ? metadata.author : 'unknown'}</h2>
-              {metadata && <Tags tags={metadata.tags} />}
+              <h1>{title || 'unknown'}</h1>
+              <h2>{author || 'unknown'}</h2>
+              <Tags tags={tags || []} />
             </div>
             <Button label="Play Track" icon="play" onClick={this.handlePlay.bind(this)} />
           </div>
         </div>
-        {fileSource && <Player fileSource={fileSource} />}
+        {fileSource && <Player track={track} />}
       </div>
     )
   }
