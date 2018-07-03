@@ -3,8 +3,8 @@ import fs from 'fs'
 import path from 'path'
 import MediaElementWrapper from 'mediasource'
 import Slider from './slider'
-import * as icon from '@/constants/icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Icon from '@/components/common/icon'
+import * as icons from '@/constants/icons'
 
 // Import CSS
 import '@/css/slider.css'
@@ -13,7 +13,7 @@ import css from '@/css/modules/player.css.module'
 const ControlButton = ({ icon, action, disabled }) => {
   return (
     <button className={css.button} onClick={action} disabled={disabled}>
-      <FontAwesomeIcon className={css.icon} size={'1x'} icon={['fas', icon]} fixedWidth />
+      <Icon className={css.icon} icon={icon} />
     </button>
   )
 }
@@ -153,17 +153,17 @@ class Player extends React.Component {
 
     const controls = [
       {
-        icon: icon.STEP_BACKWARD,
+        icon: icons.STEP_BACKWARD,
         action: () => {},
 
         disabled: true,
       },
       {
-        icon: paused ? icon.PLAY : icon.PAUSE,
+        icon: paused ? icons.PLAY : icons.PAUSE,
         action: this.togglePlay,
       },
       {
-        icon: icon.STEP_FORWARD,
+        icon: icons.STEP_FORWARD,
         action: () => {},
         disabled: true,
       },

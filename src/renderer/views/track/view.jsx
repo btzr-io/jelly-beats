@@ -4,7 +4,7 @@ import Button from '@/components/button'
 import Player from '@/components/player'
 import stream from '@/utils/stream'
 import css from '@/css/modules/view.css.module'
-import * as icon from '@/constants/icons'
+import * as icons from '@/constants/icons'
 
 class View extends React.Component {
   constructor(props) {
@@ -52,7 +52,7 @@ class View extends React.Component {
             </div>
             <Button
               label="Play Track"
-              icon={icon.PLAY}
+              icon={icons.PLAY}
               onClick={this.handlePlay.bind(this)}
             />
           </div>
