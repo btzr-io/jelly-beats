@@ -149,9 +149,20 @@ class Player extends React.Component {
     const { currentTime, duration, paused } = this.state
 
     const controls = [
-      { icon: 'step-backward', action: () => {} },
-      { icon: paused ? 'play' : 'pause', action: this.togglePlay },
-      { icon: 'step-forward', action: () => {} },
+      {
+        icon: 'step-backward',
+        action: () => {},
+        disabled: true,
+      },
+      {
+        icon: paused ? 'play' : 'pause',
+        action: this.togglePlay,
+      },
+      {
+        icon: 'step-forward',
+        action: () => {},
+        disabled: true,
+      },
     ]
 
     const actions = [{ icon: 'ellipsis-v', disabled: true }]
@@ -163,11 +174,12 @@ class Player extends React.Component {
         <div className={css.container}>
           <ThumbCard src={thumbnail} author={author} title={title} />
           <div className={css.controls}>
-            {constrols.map((props, key) => <ControlButton {...props} key={key} />)}
+            {/* Render controls */
+            controls.map((props, key) => <ControlButton {...props} key={key} />)}
           </div>
           <div className={css.actions}>
-            <ControlButton icon={'heart'} disabled={true} />
-            <ControlButton icon={'ellipsis-v'} disabled={true} />
+            {/* Render controls */
+            actions.map((props, key) => <ControlButton {...props} key={key} />)}
           </div>
         </div>
       </div>
