@@ -2,10 +2,13 @@ import React from 'react'
 import fs from 'fs'
 import path from 'path'
 import MediaElementWrapper from 'mediasource'
+import Slider from './slider'
+import * as icon from '@/constants/icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+// Import CSS
 import '@/css/slider.css'
 import css from '@/css/modules/player.css.module'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Slider from './slider'
 
 const ControlButton = ({ icon, action, disabled }) => {
   return (
@@ -150,16 +153,17 @@ class Player extends React.Component {
 
     const controls = [
       {
-        icon: 'step-backward',
+        icon: icon.STEP_BACKWARD,
         action: () => {},
+
         disabled: true,
       },
       {
-        icon: paused ? 'play' : 'pause',
+        icon: paused ? icon.PLAY : icon.PAUSE,
         action: this.togglePlay,
       },
       {
-        icon: 'step-forward',
+        icon: icon.STEP_FORWARD,
         action: () => {},
         disabled: true,
       },
@@ -178,7 +182,7 @@ class Player extends React.Component {
             controls.map((props, key) => <ControlButton {...props} key={key} />)}
           </div>
           <div className={css.actions}>
-            {/* Render controls */
+            {/* Render actions */
             actions.map((props, key) => <ControlButton {...props} key={key} />)}
           </div>
         </div>

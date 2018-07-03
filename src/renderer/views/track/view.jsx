@@ -4,6 +4,7 @@ import Button from '@/components/button'
 import Player from '@/components/player'
 import stream from '@/utils/stream'
 import css from '@/css/modules/view.css.module'
+import * as icon from '@/constants/icons'
 
 class View extends React.Component {
   constructor(props) {
@@ -49,7 +50,11 @@ class View extends React.Component {
               <h2>{author || 'unknown'}</h2>
               <Tags tags={tags || []} />
             </div>
-            <Button label="Play Track" icon="play" onClick={this.handlePlay.bind(this)} />
+            <Button
+              label="Play Track"
+              icon={icon.PLAY}
+              onClick={this.handlePlay.bind(this)}
+            />
           </div>
         </div>
         {fileSource && <Player track={track} />}

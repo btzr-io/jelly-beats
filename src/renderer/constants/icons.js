@@ -1,0 +1,5 @@
+export const PLAY = 'play'
+export const PAUSE = 'pause'
+export const HEART = 'heart'
+export const STEP_FORWARD = 'step-forward'
+export const STEP_BACKWARD = 'step-backward'
