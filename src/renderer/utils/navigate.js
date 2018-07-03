@@ -1,4 +1,4 @@
-import history from '@root/history'
+import history from '@/history'
 
 const navigate = (href, params = {}) => {
   //Go to location:

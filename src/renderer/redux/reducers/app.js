@@ -1,4 +1,4 @@
-import { updateObject } from '@root/utils'
+import { updateObject } from '@/utils'
 
 const defaultState = {
   count: 0,
