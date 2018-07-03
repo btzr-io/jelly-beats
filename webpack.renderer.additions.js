@@ -1,6 +1,5 @@
 const path = require('path')
 const source = path.resolve(__dirname, 'src')
-const root = path.resolve(source, 'renderer')
 
 module.exports = {
   module: {
@@ -22,9 +21,7 @@ module.exports = {
     ],
   },
   resolve: {
-    alias: {
-      '@root': root,
-    },
+    alias: {},
     extensions: ['.js', '.jsx'],
   },
 }

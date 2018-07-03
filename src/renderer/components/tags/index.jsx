@@ -1,5 +1,5 @@
 import React from 'react'
-import css from '@root/css/modules/card.css.module'
+import css from '@/css/modules/card.css.module'
 
 import { Lbry } from 'lbry-redux'
 

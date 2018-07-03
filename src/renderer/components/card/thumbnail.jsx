@@ -1,7 +1,7 @@
 import React from 'react'
-import css from '@root/css/modules/thumbnail.css.module'
-import navigate from '@root/utils/navigate'
 import Vibrant from 'node-vibrant'
+import css from '@/css/modules/thumbnail.css.module'
+import navigate from '@/utils/navigate'
 import { Lbry } from 'lbry-redux'
 
 class Card extends React.Component {

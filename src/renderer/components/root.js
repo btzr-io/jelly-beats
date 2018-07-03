@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect, Provider } from 'react-redux'
 import PropTypes from 'prop-types'
-import routes from '@root/routes'
-import store from '@root/store'
+import routes from '@/routes'
+import store from '@/store'
 import Router from './router'
 
 import { library } from '@fortawesome/fontawesome-svg-core'

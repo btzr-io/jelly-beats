@@ -1,9 +1,9 @@
 import React from 'react'
 import UniversalRouter from 'universal-router'
-import Link from '@root/components/link'
-import Card from '@root/components/card'
-import css from '@root/css/modules/view.css.module'
-import list from '@root/utils/api'
+import Link from '@/components/link'
+import Card from '@/components/card'
+import list from '@/utils/api'
+import css from '@/css/modules/view.css.module'
 
 class View extends React.Component {
   constructor(props) {

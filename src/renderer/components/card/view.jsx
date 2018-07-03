@@ -1,12 +1,10 @@
 import React from 'react'
-import css from '@root/css/modules/card.css.module'
-import navigate from '@root/utils/navigate'
-import { getTags } from '@root/utils/tags'
-import Vibrant from 'node-vibrant'
+import navigate from '@/utils/navigate'
+import Tags from '@/components/tags'
+import css from '@/css/modules/card.css.module'
 import Thumbnail from './thumbnail'
-import Tags from '../tags'
-
 import { Lbry } from 'lbry-redux'
+import { getTags } from '@/utils/tags'
 
 class Card extends React.Component {
   constructor(props) {

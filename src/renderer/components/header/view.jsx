@@ -1,7 +1,8 @@
 import React from 'react'
-import css from '@root/css/modules/header.css.module'
-import navigate from '@root/utils/navigate'
-import Link from '@root/components/link'
+import css from '@/css/modules/header.css.module'
+import navigate from '@/utils/navigate'
+import Link from '@/components/link'
+import Icon from '@/components/common/icon'
 
 class Header extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class Header extends React.Component {
   render() {
     return (
       <nav className={css.header}>
-        <Link href="/"> {'<'}</Link>
+        <Link href="/">{'< GO BACK'}</Link>
       </nav>
     )
   }

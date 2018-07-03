@@ -1,6 +1,6 @@
 import React from 'react'
 import UniversalRouter from 'universal-router'
-import history from '@root/history'
+import history from '@/history'
 import Header from '@/components/header'
 
 class Router extends React.Component {

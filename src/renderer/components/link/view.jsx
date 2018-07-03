@@ -1,5 +1,5 @@
 import React from 'react'
-import history from '@root/history'
+import history from '@/history'
 
 export default class Link extends React.Component {
   constructor() {
