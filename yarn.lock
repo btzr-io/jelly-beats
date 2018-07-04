@@ -4447,9 +4447,9 @@ humps@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/humps/-/humps-2.0.1.tgz#dd02ea6081bd0568dc5d073184463957ba9ef9aa"
 
-husky@^0.15.0-rc.8:
-  version "0.15.0-rc.9"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-0.15.0-rc.9.tgz#6f5f3b670f02acbe0cd8157820be4244d82a6ee6"
+husky@^0.15.0-rc.13:
+  version "0.15.0-rc.13"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-0.15.0-rc.13.tgz#a27550b7b51d2f472e284b48fc9257a6d6b3f681"
   dependencies:
     cosmiconfig "^4.0.0"
     execa "^0.9.0"

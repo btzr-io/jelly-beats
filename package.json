@@ -49,7 +49,7 @@
     "electron": "^2.0.4",
     "electron-builder": "^20.4.0",
     "electron-webpack": "^2.1.2",
-    "husky": "^0.15.0-rc.8",
+    "husky": "^0.15.0-rc.13",
     "prettier": "^1.13.7",
     "pretty-quick": "^1.6.0",
     "prop-types": "^15.6.2",
