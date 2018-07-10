@@ -55,6 +55,6 @@
     "prop-types": "^15.6.2",
     "source-map-support": "^0.5.3",
     "style-loader": "^0.21.0",
-    "webpack": "^4.15.0"
+    "webpack": "^4.15.1"
   }
 }
