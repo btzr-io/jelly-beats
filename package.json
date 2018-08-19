@@ -53,7 +53,7 @@
     "prettier": "^1.14.2",
     "pretty-quick": "^1.6.0",
     "prop-types": "^15.6.2",
-    "source-map-support": "^0.5.3",
+    "source-map-support": "^0.5.8",
     "style-loader": "^0.22.1",
     "webpack": "^4.15.1"
   }
