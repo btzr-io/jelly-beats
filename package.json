@@ -54,7 +54,7 @@
     "pretty-quick": "^1.6.0",
     "prop-types": "^15.6.2",
     "source-map-support": "^0.5.3",
-    "style-loader": "^0.21.0",
+    "style-loader": "^0.22.1",
     "webpack": "^4.15.1"
   }
 }
