@@ -46,7 +46,7 @@
     "@babel/preset-env": "^7.0.0-rc.1",
     "@babel/preset-react": "^7.0.0-rc.1",
     "css-loader": "^1.0.0",
-    "electron": "^2.0.7",
+    "electron": "^2.0.8",
     "electron-builder": "^20.28.1",
     "electron-webpack": "^2.1.2",
     "husky": "^0.15.0-rc.13",
