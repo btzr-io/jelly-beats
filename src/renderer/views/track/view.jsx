@@ -50,11 +50,7 @@ class View extends React.Component {
               <h2>{author || 'unknown'}</h2>
               <Tags tags={tags || []} />
             </div>
-            <Button
-              label="Play Track"
-              icon={icons.PLAY}
-              onClick={this.handlePlay.bind(this)}
-            />
+            <Button label="Play" icon={icons.PLAY} onClick={this.handlePlay.bind(this)} />
           </div>
         </div>
         {fileSource && <Player track={track} />}

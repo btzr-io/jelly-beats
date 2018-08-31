@@ -176,10 +176,6 @@
   dependencies:
     "@babel/types" "7.0.0-rc.1"
 
-"@babel/helper-plugin-utils@7.0.0-beta.51":
-  version "7.0.0-beta.51"
-  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-beta.51.tgz#0f6a5f2b6d1c6444413f8fab60940d79b63c2031"
-
 "@babel/helper-plugin-utils@7.0.0-rc.1":
   version "7.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.0.0-rc.1.tgz#3e277eae59818e7d4caf4174f58a7a00d441336e"
@@ -705,6 +701,14 @@
   dependencies:
     humps "^2.0.1"
     prop-types "^15.5.10"
+
+"@mdi/js@^2.6.95":
+  version "2.6.95"
+  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-2.6.95.tgz#c2c851e603da731657df0ef6cc0fca36b938d63c"
+
+"@mdi/react@^0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@mdi/react/-/react-0.8.1.tgz#cd30600556e757d11c7e7034b10a91a71e0a6b21"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"

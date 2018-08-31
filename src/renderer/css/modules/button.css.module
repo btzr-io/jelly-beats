@@ -1,6 +1,6 @@
 .button {
   margin: 16px 0;
-  padding: 12px 32px;
+  padding: 12px 24px;
   border: 0;
   border-radius: 24px;
   background-color: #3498db;
@@ -12,5 +12,12 @@
 }
 
 .button .icon {
-  margin-right: 16px;
+  margin-left: 0;
+  margin-right: 8px;
+}
+
+.busy {
+  composes: button;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: rgba(23, 25, 31, 0.99);
 }

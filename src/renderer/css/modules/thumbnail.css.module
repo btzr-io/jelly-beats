@@ -1,7 +1,7 @@
 .thumb {
   height: 164px;
   width: 164px;
-  margin: 16px 0;
+  margin: 0 0 8px 0;
   background-color: #282c37;
   background-position: center;
   background-repeat: no-repeat;

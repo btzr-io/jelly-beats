@@ -61,7 +61,6 @@ class Card extends React.Component {
           <Thumbnail className={css.thumb} src={metadata ? metadata.thumbnail : null} />
           <div className={css.title}>{metadata ? metadata.title : ''}</div>
           <div className={css.subtitle}>{metadata ? metadata.author : ''}</div>
-          {metadata && <Tags tags={metadata.tags} />}
         </div>
       )
     }

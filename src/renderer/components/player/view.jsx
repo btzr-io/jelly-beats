@@ -3,8 +3,18 @@ import fs from 'fs'
 import path from 'path'
 import MediaElementWrapper from 'mediasource'
 import Slider from './slider'
-import Icon from '@/components/common/icon'
-import * as icons from '@/constants/icons'
+// import Icon from '@/components/common/icon'
+// import * as icons from '@/constants/icons'
+import Icon from '@mdi/react'
+import {
+  mdiAccount,
+  mdiPlay,
+  mdiPause,
+  mdiSkipNext,
+  mdiSkipPrevious,
+  mdiShuffle,
+  mdiRepeat,
+} from '@mdi/js'
 
 // Import CSS
 import '@/css/slider.css'
@@ -13,7 +23,7 @@ import css from '@/css/modules/player.css.module'
 const ControlButton = ({ icon, action, disabled }) => {
   return (
     <button className={css.button} onClick={action} disabled={disabled}>
-      <Icon className={css.icon} icon={icon} />
+      <Icon className={css.icon} path={icon} size={1.2} color={'#FFFFFF'} />
     </button>
   )
 }
@@ -153,37 +163,53 @@ class Player extends React.Component {
 
     const controls = [
       {
-        icon: icons.STEP_BACKWARD,
+        icon: mdiSkipPrevious,
         action: () => {},
 
         disabled: true,
       },
       {
-        icon: paused ? icons.PLAY : icons.PAUSE,
+        icon: paused ? mdiPlay : mdiPause,
         action: this.togglePlay,
       },
       {
-        icon: icons.STEP_FORWARD,
+        icon: mdiSkipNext,
         action: () => {},
         disabled: true,
       },
     ]
 
-    const actions = [{ icon: 'ellipsis-v', disabled: true }]
+    const actions = [
+      {
+        icon: mdiShuffle,
+        action: () => {},
+        disabled: true,
+      },
+      {
+        icon: mdiRepeat,
+        action: () => {},
+        disabled: true,
+      },
+    ]
 
     return (
       <div className={css.player + ' ' + (fileSource ? css.active : '')}>
         <audio ref={this.audioElement} {...playerOptions} />
-        <Slider onChange={this.setCurrentTime} value={currentTime} max={duration} />
+
         <div className={css.container}>
           <ThumbCard src={thumbnail} author={author} title={title} />
           <div className={css.controls}>
-            {/* Render controls */
-            controls.map((props, key) => <ControlButton {...props} key={key} />)}
-          </div>
-          <div className={css.actions}>
-            {/* Render actions */
-            actions.map((props, key) => <ControlButton {...props} key={key} />)}
+            <div className={css.actions}>
+              {controls.map((props, key) => (
+                <ControlButton {...props} key={key} />
+              ))}
+            </div>
+            <Slider onChange={this.setCurrentTime} value={currentTime} max={duration} />
+            <div className={css.actions}>
+              {actions.map((props, key) => (
+                <ControlButton {...props} key={key + '_right'} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -7,16 +7,13 @@
   z-index: 99;
   display: inline-block;
   background: rgba(44, 46, 52, 0.99);
-  padding-top: 4px;
   transform: translateY(100%);
+  transition: transform 300ms ease;
+  will-change: transform;
 }
 
 .player.active {
-  animation-name: show;
-  animation-duration: 0.3s;
-  animation-delay: 0.3s;
-  animation-fill-mode: forwards;
-  animation-timing-function: ease;
+  transform: translateY(0%);
 }
 
 .player .container {
@@ -24,28 +21,25 @@
   align-items: center;
   align-content: center;
   justify-content: space-between;
-  width: 100%;
   margin: 0;
 }
 
 .player .controls {
-  flex-grow: 1;
+  flex: 2.5 0 0;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .player .actions {
-  flex-grow: 1;
-  flex-basis: 0;
-  text-align: right;
-  padding-right: 16px;
+  /* flex: 0 0 25%; */
+  margin: 0 16px;
 }
 
 .player .seek {
-  margin: 0 auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  flex-grow: 1;
+  margin: 0 8px;
 }
 
 .player audio {
@@ -59,12 +53,17 @@
   background: transparent;
   display: inline-block;
   color: inherit;
-  font-size: 1.3em;
-  padding: 6px;
-  margin: 0 8px;
-  opacity: 0.9;
-  border-radius: 8px;
+  font-size: 1em;
+  padding: 2px;
+  margin: 0 4px;
+  border-radius: 4px;
   transition: background 0.3s ease;
+}
+
+.button svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin: auto;
 }
 
 .button:hover:not(:disabled) {
@@ -84,28 +83,29 @@
 
 .card {
   display: flex;
-  flex-grow: 1;
-  flex-basis: 0;
   align-items: center;
   align-content: center;
-  padding-right: 16px;
+  padding: 8px;
+  flex: 1 0 0;
+  background: rgba(200, 200, 200, 0.1);
 }
 
 .trackInfo {
   display: inline-block;
   margin-left: 16px;
+  margin-right: 8px;
   font-size: 0.8em;
-  flex-shrink: 2;
+  flex-shrink: 1;
   display: flex;
   min-width: 0;
   flex-direction: column;
 }
 
 .trackInfo p {
-  margin: 2px 0;
+  margin: 0 0 4px 0;
   line-height: 1.2;
-  font-weight: bolder;
   overflow: hidden;
+  font-weight: bolder;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -118,21 +118,12 @@
 
 .thumbnail {
   flex-shrink: 0;
-  height: 64px;
-  width: 64px;
-  background: rgba(255, 255, 255, 0.5);
+  height: 50px;
+  width: 50px;
   margin: 0;
+  border-radius: 0;
   background-color: #282c37;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-}
-
-@keyframes show {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0%);
-  }
 }

@@ -1,31 +1,31 @@
 .card {
   width: 164px;
   display: inline-block;
-  margin: 16px 8px;
+  margin: 16px;
   text-align: left;
   cursor: pointer;
   vertical-align: top;
 }
 
 .card .title {
-  margin: 8px 0;
+  margin: 16px 0 0 0;
   font-size: 0.9em;
   font-weight: bold;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
 
 .card .subtitle {
-  margin: 8px 0;
-  opacity: 0.6;
+  margin: 4px 0 0 0;
+  opacity: 0.5;
   width: 80%;
-  font-size: 0.8em;
+  font-size: 0.72em;
   font-weight: bold;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   text-transform: uppercase;
 }
@@ -44,7 +44,7 @@
 }
 
 .tags {
-  margin: 8px 0;
+  margin: 8px 0 0 0;
 }
 
 .tag {
