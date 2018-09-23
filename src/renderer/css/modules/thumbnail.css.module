@@ -1,24 +1,47 @@
 .thumb {
-  height: 164px;
-  width: 164px;
+  height: 184px;
+  width: 184px ;
   margin: 0 0 8px 0;
-  background-color: #282c37;
+  overflow: hidden;
+  position: relative;
+}
+
+.picture {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
-  position: relative;
-  overflow: hidden;
-  padding: 4px;
+  background-size: cover;
+  z-index: 1;
+  filter: blur(0px);
+  transition: 0.3s ease;
 }
+
+.thumb:hover .picture{
+
+   /*
+   transform: scale(20);
+    filter: blur(2px);
+    transform: scale(1.1);
+   */
+}
+
+.thumb:hover .overlay {
+  opacity: 1;
+}
+
 
 .overlay {
   width: 100%;
   height: 100%;
+  opacity: 0;
   position: absolute;
   top: 0;
   left: 0;
   margin: auto;
-  background-color: #282c37;
-  transition: opacity 0.3s ease;
-  transition-delay: 0.3s;
+  background: rgba(18,18,20, 0.75);
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.9) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.9) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  transition: all 0.3s ease;
 }

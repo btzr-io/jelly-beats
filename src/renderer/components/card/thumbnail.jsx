@@ -35,15 +35,15 @@ class Card extends React.Component {
   render() {
     const { className, src } = this.props
     const { color, ready } = this.state
+
     const thumbnailStyle = {
       backgroundImage: src ? `url(${src})` : 'none',
     }
-    const overlayStyle = {
-      opacity: ready ? 0 : 1,
-    }
+
     return (
-      <div className={css.thumb} style={thumbnailStyle}>
-        <div className={css.overlay} style={overlayStyle} />
+      <div className={css.thumb}>
+        <div className={css.picture} style={thumbnailStyle} />
+        <div className={css.overlay}>{this.props.children}</div>
       </div>
     )
   }

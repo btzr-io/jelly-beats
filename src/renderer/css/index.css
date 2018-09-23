@@ -1,10 +1,15 @@
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,latin-ext');
 @import url('./vars.css');
 @import url('./scrollbar.css');
+html {
+  background: black;
+}
 body {
   margin: 0;
-  background-color: rgba(23, 25, 31, 0.99);
+  height: 100vh;
   color: white;
+  background-color: var(--bg-color);
+  overflow: hidden;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
@@ -17,9 +22,18 @@ button {
 a {
   color: inherit;
   text-decoration: none;
-  border-bottom: 1px dashed skyblue;
   color: skyblue;
-  padding: 5px 0;
+  padding: 4px;
+}
+
+.view {
+  width: 100%;
+  position: absolute;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
 }
 
 .label {

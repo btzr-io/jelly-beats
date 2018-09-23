@@ -6,11 +6,6 @@
   align-items: center;
   justify-content: center;
   align-content: center;
-  animation-name: show;
-  animation-duration: 0.3s;
-  animation-delay: 0.3s;
-  animation-fill-mode: both;
-  animation-timing-function: ease;
   overflow: hidden;
   position: relative;
 }
@@ -84,13 +79,4 @@ p {
 
 .box {
   margin: 16px;
-}
-
-@keyframes show {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }

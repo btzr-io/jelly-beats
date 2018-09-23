@@ -638,6 +638,14 @@
     humps "^2.0.1"
     prop-types "^15.5.10"
 
+"@mdi/js@^2.6.95":
+  version "2.6.95"
+  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-2.6.95.tgz#c2c851e603da731657df0ef6cc0fca36b938d63c"
+
+"@mdi/react@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@mdi/react/-/react-1.0.0.tgz#237d6daa392fbb09d3340fb13601f2578aeeca8e"
+
 "@posthtml/esm@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@posthtml/esm/-/esm-1.0.0.tgz#09bcb28a02438dcee22ad1970ca1d85a000ae0cf"

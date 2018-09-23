@@ -5,12 +5,12 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--scrollbar-track-bg);
-  margin: 0px;
+  background: transparent;
+  margin: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: var(--scrollbar-thumb-bg);
   transition: background-color 0.3s ease;
 }

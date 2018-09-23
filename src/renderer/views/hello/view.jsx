@@ -10,15 +10,14 @@ class View extends React.Component {
     super(props)
   }
 
-  //<Link href="/about">Link to next page</Link>
-
   render() {
     return (
       <div className={css.view}>
-        <h1>Jelly-beats</h1>
-        <div className={'label'}>Prototype / v-0.0.0</div>
-        <h3>Example application usign electron, react and redux + lbry!</h3>
-        <div>{list.map(uri => <Card uri={uri} key={uri} />)}</div>
+        <div>
+          {list.map(uri => (
+            <Card uri={uri} key={uri} />
+          ))}
+        </div>
       </div>
     )
   }

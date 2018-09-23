@@ -1,10 +1,13 @@
 import React from 'react'
 import navigate from '@/utils/navigate'
 import Tags from '@/components/tags'
+import Icon from '@mdi/react'
 import css from '@/css/modules/card.css.module'
 import Thumbnail from './thumbnail'
 import { Lbry } from 'lbry-redux'
 import { getTags } from '@/utils/tags'
+
+import { mdiPlaylistPlus, mdiHeartOutline, mdiDotsVertical } from '@mdi/js'
 
 class Card extends React.Component {
   constructor(props) {
@@ -61,6 +64,24 @@ class Card extends React.Component {
           <Thumbnail className={css.thumb} src={metadata ? metadata.thumbnail : null} />
           <div className={css.title}>{metadata ? metadata.title : ''}</div>
           <div className={css.subtitle}>{metadata ? metadata.author : ''}</div>
+          <div className={css.actions}>
+            <div className={css.action}>
+              <Icon
+                className={css.icon}
+                path={mdiHeartOutline}
+                size={0.85}
+                color={'#FFFFFF'}
+              />
+            </div>
+            <div className={css.action}>
+              <Icon
+                className={css.icon}
+                path={mdiPlaylistPlus}
+                size={0.85}
+                color={'#FFFFFF'}
+              />
+            </div>
+          </div>
         </div>
       )
     }
