@@ -1,7 +1,6 @@
 import React from 'react'
 import UniversalRouter from 'universal-router'
 import history from '@/history'
-import Header from '@/components/header'
 
 class Router extends React.Component {
   constructor(props) {
@@ -55,12 +54,7 @@ class Router extends React.Component {
   }
 
   render() {
-    return (
-      <React.Fragment>
-        <Header />
-        <div className="view">{this.state.page}</div>
-      </React.Fragment>
-    )
+    return <div className="view">{this.state.page}</div>
   }
 }
 

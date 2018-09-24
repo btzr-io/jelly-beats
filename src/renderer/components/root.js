@@ -1,13 +1,12 @@
 import React from 'react'
-import { connect, Provider } from 'react-redux'
 import PropTypes from 'prop-types'
-import routes from '@/routes'
+import { connect, Provider } from 'react-redux'
 import store from '@/store'
-import Router from './router'
+import App from '@/components/app'
 
 const Root = () => (
   <Provider store={store}>
-    <Router routes={routes} defaultRoute={'/'} />
+    <App />
   </Provider>
 )
 
