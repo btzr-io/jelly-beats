@@ -37,7 +37,7 @@
     "lbry-redux": "https://github.com/lbryio/lbry-redux/",
     "mediasource": "^2.2.1",
     "node-vibrant": "^3.0.0",
-    "rc-slider": "^8.6.1",
+    "rc-slider": "^8.6.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
