@@ -78,26 +78,3 @@
   align-items: center;
   padding: 2px 0px;
 }
-
-.action {
-  display: flex;
-  justify-content:center;
-  align-items: center;
-  align-content: center;
-  vertical-align: middle;
-  padding: 2px;
-  margin: 0 4px;
-  opacity: 0.6;
-}
-
-.action:hover {
-  opacity:1;
-  /* background: #525255; */
-}
-
-.action svg {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0;
-  padding: 0;
-}

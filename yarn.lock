@@ -615,6 +615,20 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@bem-react/classname@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@bem-react/classname/-/classname-1.0.0.tgz#a2f818ba76a6e33daaf5ffcf3c003949052f7b7a"
+  dependencies:
+    "@bem/sdk.naming.entity.stringify" "1.1.1"
+
+"@bem/sdk.naming.entity.stringify@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@bem/sdk.naming.entity.stringify/-/sdk.naming.entity.stringify-1.1.1.tgz#4c4defea657350b5c103b3eae1a0ccd773ef12ce"
+
+"@bem/sdk.naming.presets@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@bem/sdk.naming.presets/-/sdk.naming.presets-0.2.2.tgz#8f5e76ef72deeb73c01675d47a2460bf7cb44665"
+
 "@fortawesome/fontawesome-common-types@^0.2.0-9":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.0.tgz#6bcf6481030f59e7ffd1a40a67cd464d47780f6a"

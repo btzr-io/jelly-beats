@@ -1,6 +1,7 @@
 import React from 'react'
 import navigate from '@/utils/navigate'
 import Tags from '@/components/tags'
+import Button from '@/components/button'
 import Icon from '@mdi/react'
 import css from '@/css/modules/card.css.module'
 import Thumbnail from './thumbnail'
@@ -64,12 +65,18 @@ class Card extends React.Component {
           <div className={css.title}>{metadata ? metadata.title : ''}</div>
           <div className={css.subtitle}>{metadata ? metadata.author : ''}</div>
           <div className={css.actions}>
-            <div className={css.action}>
-              <Icon path={icons.HEART} size={0.85} color={'#FFFFFF'} />
-            </div>
-            <div className={css.action}>
-              <Icon path={icons.PLAYLIST_PLUS} size={0.85} color={'#FFFFFF'} />
-            </div>
+            <Button
+              icon={icons.HEART}
+              size="small"
+              type="card-action"
+              onClick={() => null}
+            />
+            <Button
+              icon={icons.PLAYLIST_PLUS}
+              size="small"
+              type="card-action"
+              onClick={() => null}
+            />
           </div>
         </div>
       )

@@ -13,7 +13,7 @@ import css from '@/css/modules/player.css.module'
 const ControlButton = ({ icon, action, disabled }) => {
   return (
     <button className={css.button} onClick={action} disabled={disabled}>
-      <Icon className={css.icon} path={icon} size={1.2} color={'#FFFFFF'} />
+      <Icon path={icon} size={1.2} color={'#FFFFFF'} />
     </button>
   )
 }
