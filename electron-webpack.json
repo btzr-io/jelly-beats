@@ -1,6 +1,6 @@
 {
   "main": {
-    "extraEntries": ["./node_modules/node-vibrant/lib/bundle.worker.js"]
+    "extraEntries": []
   },
   "renderer": {
     "webpackConfig": "webpack.renderer.additions.js"

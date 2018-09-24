@@ -1,5 +1,4 @@
 import React from 'react'
-import Vibrant from 'node-vibrant'
 import css from '@/css/modules/thumbnail.css.module'
 import navigate from '@/utils/navigate'
 import { Lbry } from 'lbry-redux'
@@ -7,22 +6,9 @@ import { Lbry } from 'lbry-redux'
 class Card extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      ready: false,
-      color: '#282c37',
-    }
+    this.state = { ready: false }
   }
-  /*
-  getMainColor(thumbnail) {
-    Vibrant.from(thumbnail)
-      .getPalette()
-      .then(palette => {
-        const { Vibrant, LightMuted } = console.log(palette)
-        const color = Vibrant ? Vibrant.getHex() : 'none'
-        this.setState({ color, ready: true })
-      })
-  }
-*/
+
   componentDidMount() {
     const { src } = this.props
     const thumbnail = new Image()
@@ -34,7 +20,7 @@ class Card extends React.Component {
 
   render() {
     const { className, src } = this.props
-    const { color, ready } = this.state
+    const { ready } = this.state
 
     const thumbnailStyle = {
       backgroundImage: src ? `url(${src})` : 'none',

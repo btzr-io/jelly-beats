@@ -5,29 +5,6 @@ import routes from '@/routes'
 import store from '@/store'
 import Router from './router'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import {
-  faPlay,
-  faPause,
-  faStepForward,
-  faStepBackward,
-  faRandom,
-  faHeadphones,
-  faHeart,
-  faEllipsisV,
-} from '@fortawesome/free-solid-svg-icons'
-
-library.add(
-  faPlay,
-  faPause,
-  faStepForward,
-  faStepBackward,
-  faRandom,
-  faHeadphones,
-  faHeart,
-  faEllipsisV
-)
-
 const Root = () => (
   <Provider store={store}>
     <Router routes={routes} defaultRoute={'/'} />
