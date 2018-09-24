@@ -3,18 +3,8 @@ import fs from 'fs'
 import path from 'path'
 import MediaElementWrapper from 'mediasource'
 import Slider from './slider'
-// import Icon from '@/components/common/icon'
-// import * as icons from '@/constants/icons'
+import * as icons from '@/constants/icons'
 import Icon from '@mdi/react'
-import {
-  mdiAccount,
-  mdiPlay,
-  mdiPause,
-  mdiSkipNext,
-  mdiSkipPrevious,
-  mdiShuffle,
-  mdiRepeat,
-} from '@mdi/js'
 
 // Import CSS
 import '@/css/slider.css'
@@ -163,17 +153,17 @@ class Player extends React.Component {
 
     const controls = [
       {
-        icon: mdiSkipPrevious,
+        icon: icons.SKIP_PREVIOUS,
         action: () => {},
 
         disabled: true,
       },
       {
-        icon: paused ? mdiPlay : mdiPause,
+        icon: paused ? icons.PLAY : icons.PAUSE,
         action: this.togglePlay,
       },
       {
-        icon: mdiSkipNext,
+        icon: icons.SKIP_NEXT,
         action: () => {},
         disabled: true,
       },
@@ -181,12 +171,12 @@ class Player extends React.Component {
 
     const actions = [
       {
-        icon: mdiShuffle,
+        icon: icons.SHUFFLE,
         action: () => {},
         disabled: true,
       },
       {
-        icon: mdiRepeat,
+        icon: icons.REPEAT,
         action: () => {},
         disabled: true,
       },

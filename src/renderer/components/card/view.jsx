@@ -6,8 +6,7 @@ import css from '@/css/modules/card.css.module'
 import Thumbnail from './thumbnail'
 import { Lbry } from 'lbry-redux'
 import { getTags } from '@/utils/tags'
-
-import { mdiPlaylistPlus, mdiHeartOutline, mdiDotsVertical } from '@mdi/js'
+import * as icons from '@/constants/icons'
 
 class Card extends React.Component {
   constructor(props) {
@@ -66,20 +65,10 @@ class Card extends React.Component {
           <div className={css.subtitle}>{metadata ? metadata.author : ''}</div>
           <div className={css.actions}>
             <div className={css.action}>
-              <Icon
-                className={css.icon}
-                path={mdiHeartOutline}
-                size={0.85}
-                color={'#FFFFFF'}
-              />
+              <Icon path={icons.HEART} size={0.85} color={'#FFFFFF'} />
             </div>
             <div className={css.action}>
-              <Icon
-                className={css.icon}
-                path={mdiPlaylistPlus}
-                size={0.85}
-                color={'#FFFFFF'}
-              />
+              <Icon path={icons.PLAYLIST_PLUS} size={0.85} color={'#FFFFFF'} />
             </div>
           </div>
         </div>
