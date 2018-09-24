@@ -1,0 +1,56 @@
+.button {
+  background-color: var(--button-bg-color);
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  font-size: 0.9em;
+  font-weight: bold;
+  padding: 0;
+  text-transform: uppercase;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+/* Default button */
+
+.button--normal {
+  background-color: #3498db;
+  border-radius: 24px;
+  color: #fff;
+  margin: 16px 0;
+  padding: 8px 16px;
+}
+
+/* Card action button */
+
+.button--card-action {
+  padding: 6px;
+  margin-right: 4px;
+  opacity: 0.64;
+  border-radius: 50px;
+  background: transparent;
+}
+
+.button--card-action:hover {
+  opacity: 1;
+  background: var(--button-bg-color);
+}
+
+/* Button elements */
+
+.button_icon {
+  margin: 0;
+}
+
+.button_icon svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+
+.button_icon + .button_label {
+  margin: 0 8px;
+}
