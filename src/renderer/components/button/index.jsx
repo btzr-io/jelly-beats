@@ -20,15 +20,13 @@ class Button extends React.Component {
 
     const buttonClass = classnames('button', `button--${type}`)
 
-    const buttonIcon = icon ? (
-      <div className={'button_icon'}>
-        <Icon path={icon} color={'#FFFFFF'} size={iconSizes[size]} />
-      </div>
-    ) : null
-
     return (
       <button className={buttonClass} onClick={onClick}>
-        {buttonIcon}
+        {icon && (
+          <div className={'button_icon'}>
+            <Icon path={icon} color={'#FFFFFF'} size={iconSizes[size]} />
+          </div>
+        )}
         {label && <span className={'button_label'}>{label}</span>}
       </button>
     )

@@ -11,11 +11,11 @@
 }
 
 .card:hover {
-/*  background: #42424A; */
+  /*  background: #42424A; */
 }
 
 .card .title {
-  margin:  12px 8px 4px 8px;
+  margin: 12px 8px 4px 8px;
   font-size: 0.78em;
   font-weight: bold;
   overflow: hidden;
@@ -41,11 +41,11 @@
 .placeholder .title {
   width: 64%;
   opacity: 0.25;
-  margin:  8px 8px;
+  margin: 8px 8px;
   margin-top: 16px;
   height: 0.74em;
   border-radius: 1em;
-  background: #FFF;
+  background: #fff;
 }
 
 .placeholder .subtitle {
@@ -55,7 +55,7 @@
   margin: 8px 8px;
   margin-bottom: 16px;
   border-radius: 1em;
-  background: #FFF;
+  background: #fff;
 }
 
 .tags {

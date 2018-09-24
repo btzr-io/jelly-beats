@@ -6,7 +6,7 @@
   margin: auto;
   z-index: 99;
   display: inline-block;
-  background: #2C2E34;
+  background: #2c2e34;
   transform: translateY(100%);
   transition: transform 300ms ease;
   will-change: transform;
@@ -87,7 +87,7 @@
   align-content: center;
   padding: 8px;
   flex: 1 0 0;
-  background: #42444B;
+  background: #42444b;
 }
 
 .trackInfo {
