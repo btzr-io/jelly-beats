@@ -1,8 +1,7 @@
 import React from 'react'
-import css from '@/css/modules/header.css.module'
-import navigate from '@/utils/navigate'
-import Link from '@/components/link'
 import Icon from '@mdi/react'
+import navigate from '@/utils/navigate'
+import Button from '@/components/button'
 import * as icons from '@/constants/icons'
 
 class Header extends React.Component {
@@ -12,13 +11,14 @@ class Header extends React.Component {
 
   render() {
     return (
-      <nav className={css.header}>
-        <Link href="/">
-          <Icon path={icons.LEFT} size={0.85} color={'#FFFFFF'} />
-        </Link>
-        <Link href="/">
-          <Icon path={icons.RIGHT} size={0.85} color={'#FFFFFF'} />
-        </Link>
+      <nav className={'header'}>
+        <Button
+          type={'header-nav'}
+          size={'normal'}
+          icon={icons.LEFT}
+          onClick={() => navigate('/')}
+        />
+        <Button type={'header-nav'} size={'normal'} icon={icons.RIGHT} disabled />
       </nav>
     )
   }

@@ -13,6 +13,12 @@
   transition: all 0.3s ease;
 }
 
+.button:disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
 /* Default button */
 
 .button--normal {
@@ -34,6 +40,21 @@
 }
 
 .button--card-action:hover {
+  opacity: 1;
+  background: var(--button-bg-color);
+}
+
+/* Card action button */
+
+.button--header-nav {
+  padding: 2px;
+  margin: 0 4px;
+  opacity: 0.75;
+  border-radius: 50px;
+  background: transparent;
+}
+
+.button--header-nav:hover {
   opacity: 1;
   background: var(--button-bg-color);
 }

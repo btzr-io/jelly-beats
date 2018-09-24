@@ -10,7 +10,7 @@ class Button extends React.Component {
   }
 
   render() {
-    const { type, icon, size, label, onClick } = this.props
+    const { type, icon, size, label, disabled, onClick } = this.props
 
     const iconSizes = {
       small: 0.85,
@@ -21,7 +21,7 @@ class Button extends React.Component {
     const buttonClass = classnames('button', `button--${type}`)
 
     return (
-      <button className={buttonClass} onClick={onClick}>
+      <button className={buttonClass} onClick={onClick} disabled={disabled}>
         {icon && (
           <div className={'button_icon'}>
             <Icon path={icon} color={'#FFFFFF'} size={iconSizes[size]} />
