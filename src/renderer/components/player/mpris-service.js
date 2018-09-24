@@ -1,3 +1,4 @@
+/*
 var PlayerService = require('mpris-service')
 
 var player = PlayerService({
@@ -48,3 +49,5 @@ setTimeout(function() {
 
   console.log('Now playing: Lolol - Adele - 21')
 }, 3000)
+
+*/

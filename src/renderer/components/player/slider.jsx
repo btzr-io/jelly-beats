@@ -1,11 +1,7 @@
 import React from 'react'
 import Slider from 'rc-slider'
 import css from '@/css/modules/player.css.module'
-/*
-max={this.state.duration}
-value={this.state.currentTime}
-onBeforeChange={this.stopTimeUpdate}
-*/
+
 class RangeSlider extends React.Component {
   constructor(props) {
     super(props)
