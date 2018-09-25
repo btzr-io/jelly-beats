@@ -1,13 +1,8 @@
 import React from 'react'
-import Progress from './view'
-import { connect } from 'react-redux'
+import Header from './view'
+import { connect } from 'unistore/react'
 
-const select = (state, props) => ({
-  // defaultState: ...
-})
-
-const perform = dispatch => ({
-  // ActionName: params => dispatch(Action(params))
-})
-
-export default connect(state => state)(Progress)
+export default connect(
+  null,
+  null
+)(Header)

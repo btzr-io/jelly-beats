@@ -34,8 +34,8 @@
     "rc-slider": "^8.6.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-redux": "^5.0.7",
-    "redux": "^4.0.0",
+    "stockroom": "^1.0.1",
+    "unistore": "^3.1.0",
     "universal-router": "^6.0.0",
     "worker-loader": "^2.0.0"
   },

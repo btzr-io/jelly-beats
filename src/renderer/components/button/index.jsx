@@ -1,7 +1,6 @@
 import React from 'react'
 import Icon from '@mdi/react'
 import classnames from 'classnames'
-// import bemClass from '@/utils/classnames'
 
 class Button extends React.Component {
   static defaultProps = {

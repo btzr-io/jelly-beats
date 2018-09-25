@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect, Provider } from 'react-redux'
+import { Provider, connect } from 'unistore/react'
 import store from '@/store'
 import App from '@/components/app'
 

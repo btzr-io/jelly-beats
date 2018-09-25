@@ -1,6 +1,9 @@
-import { createStore, combineReducers } from 'redux'
-import reducerList from './redux/reducers'
+import createStore from 'stockroom'
+import StoreWorker from '@/store.worker'
 
-const reducers = combineReducers(reducerList)
-const store = createStore(reducers, { app: null })
+const store = createStore(new StoreWorker())
+
+// Simple debug
+store.subscribe(console.log)
+
 export default store
