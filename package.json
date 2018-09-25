@@ -32,7 +32,7 @@
     "lbry-redux": "https://github.com/lbryio/lbry-redux/",
     "mediasource": "^2.2.1",
     "rc-slider": "^8.6.3",
-    "react": "^16.4.1",
+    "react": "^16.5.2",
     "react-dom": "^16.4.1",
     "stockroom": "^1.0.1",
     "unistore": "^3.1.0",
