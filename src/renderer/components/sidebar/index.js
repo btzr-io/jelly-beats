@@ -1,5 +1,5 @@
 import React from 'react'
+import SideBar from './view'
 import { connect } from 'unistore/react'
-import App from './view'
 
-export default connect()(App)
+export default connect()(SideBar)

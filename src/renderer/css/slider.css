@@ -28,7 +28,7 @@
   height: 3px;
   opacity: 1;
   border-radius: 10px;
-  background-color: var(--color-main);
+  background-color: var(--main-color);
   transition: width 0.2s ease;
 }
 
@@ -42,7 +42,7 @@
   cursor: -webkit-grab;
   cursor: grab;
   border-radius: 16px;
-  background-color: var(--color-main);
+  background-color: var(--main-color);
   -ms-touch-action: pan-x;
   touch-action: pan-x;
   transition: left 0.2s;

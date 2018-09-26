@@ -10,8 +10,10 @@ import {
   mdiPlaylistPlus,
   mdiHeartOutline,
   mdiDotsVertical,
+  mdiHome,
 } from '@mdi/js'
 
+export const HOME = mdiHome
 export const LEFT = mdiChevronLeft
 export const RIGHT = mdiChevronRight
 export const HEART = mdiHeartOutline

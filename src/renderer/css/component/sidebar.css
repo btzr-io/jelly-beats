@@ -1,0 +1,42 @@
+.sidebar {
+  height: 100%;
+  margin: auto;
+  min-width: var(--sidebar-width);
+  background: var(--card-bg-color);
+  flex-grow: 2;
+}
+
+.nav__links {
+  margin: 16px 0;
+}
+
+.nav__link {
+  font-size: 1em;
+  font-weight: 600;
+  padding: 8px 16px;
+  margin: 8px 16px;
+  opacity: 0.75;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.nav__link:hover,
+.nav__link--active {
+  opacity: 1;
+  background: var(--button-bg-color);
+}
+
+svg.link__icon {
+  font-size: 1.2em;
+}
+
+.link__icon,
+.link__label {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.link__icon + .link__label {
+  margin-left: 16px;
+}

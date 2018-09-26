@@ -1,13 +1,11 @@
 .header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   margin: auto;
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: flex-start;
   background: var(--card-bg-color);
+  border-bottom: 1px solid var(--bg-color);
   height: var(--header-height);
-  z-index: 2;
+  z-index: 1;
 }

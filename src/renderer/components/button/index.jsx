@@ -22,8 +22,8 @@ class Button extends React.Component {
     return (
       <button className={buttonClass} onClick={onClick} disabled={disabled}>
         {icon && (
-          <div className={'button_icon'}>
-            <Icon path={icon} color={'#FFFFFF'} size={iconSizes[size]} />
+          <div className="button_icon">
+            <Icon path={icon} size={iconSizes[size]} className="icon" />
           </div>
         )}
         {label && <span className={'button_label'}>{label}</span>}

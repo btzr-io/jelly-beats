@@ -1,6 +1,9 @@
 :root {
-  --color-main: #3498db;
+  --main-color: #3498db;
   --bg-color: rgba(18, 18, 20, 0.99);
+
+  --text-color: #fff;
+
   --button-bg-color: #3f3f43;
   --card-bg-color: #2a2a2f;
 
@@ -8,4 +11,6 @@
   --scrollbar-track-bg: rgba(23, 25, 31, 0.99);
 
   --header-height: 48px;
+
+  --sidebar-width: 240px;
 }

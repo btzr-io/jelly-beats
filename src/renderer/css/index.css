@@ -5,6 +5,7 @@
 @import url('./scrollbar.css');
 @import url('./component/header.css');
 @import url('./component/button.css');
+@import url('./component/sidebar.css');
 
 html {
   background: black;
@@ -12,7 +13,7 @@ html {
 body {
   margin: 0;
   height: 100vh;
-  color: white;
+  color: var(--text-color);
   background-color: var(--bg-color);
   overflow: hidden;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -31,14 +32,31 @@ a {
   padding: 4px;
 }
 
-.view {
-  width: 100%;
+svg.icon {
+  width: 1em;
+}
+
+svg.icon path {
+  fill: var(--text-color);
+}
+
+#window {
+  margin: auto;
   position: absolute;
   top: var(--header-height);
   left: 0;
   right: 0;
   bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 0;
+}
+
+.view {
+  height: 100%;
   overflow: auto;
+  flex-grow: 0;
 }
 
 .label {
