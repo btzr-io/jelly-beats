@@ -47,7 +47,7 @@
     "electron": "^2.0.8",
     "electron-builder": "^20.28.4",
     "electron-webpack": "^2.3.1",
-    "husky": "^0.15.0-rc.13",
+    "husky": "^1.0.1",
     "prettier": "^1.14.3",
     "pretty-quick": "^1.7.0",
     "prop-types": "^15.6.2",
