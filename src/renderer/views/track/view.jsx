@@ -18,7 +18,7 @@ class View extends React.Component {
     this.setState({ fileSource })
   }
 
-  handlePlay(event) {
+  handlePlay = event => {
     const { uri } = this.props.options
     uri && stream(uri, this.handleStream.bind(this))
   }
@@ -50,7 +50,7 @@ class View extends React.Component {
               <h2>{author || 'unknown'}</h2>
               <Tags tags={tags || []} />
             </div>
-            <Button label="Play" icon={icons.PLAY} onClick={this.handlePlay.bind(this)} />
+            <Button label="Play" icon={icons.PLAY} onClick={this.handlePlay} />
           </div>
         </div>
         {fileSource && <Player track={track} />}

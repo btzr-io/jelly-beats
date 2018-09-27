@@ -2,4 +2,4 @@ import React from 'react'
 import { connect } from 'unistore/react'
 import App from './view'
 
-export default connect()(App)
+export default connect('currentPage, currentQuery')(App)

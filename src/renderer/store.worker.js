@@ -1,11 +1,15 @@
 import createStore from 'stockroom/worker'
 
 let store = createStore({
-  count: 0,
+  currentPage: '/',
+  currentQuery: {},
 })
 
 store.registerActions(store => ({
-  // increment: ({ count }) => ({ count: count+1 })
+  doNavigate: ({ currentPage }, path, query) => ({
+    currentPage: path,
+    currentQuery: query,
+  }),
 }))
 
 export default store

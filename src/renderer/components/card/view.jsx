@@ -1,5 +1,4 @@
 import React from 'react'
-import navigate from '@/utils/navigate'
 import Tags from '@/components/tags'
 import Button from '@/components/button'
 import Icon from '@mdi/react'
@@ -19,9 +18,9 @@ class Card extends React.Component {
   }
 
   handleClick() {
-    const { uri } = this.props
+    const { uri, doNavigate } = this.props
     const { metadata } = this.state
-    navigate('/track', { uri, metadata })
+    doNavigate('/track', { uri, metadata })
   }
 
   getMetadata(certificate, claim) {

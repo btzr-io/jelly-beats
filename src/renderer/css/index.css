@@ -56,7 +56,7 @@ svg.icon path {
 .view {
   height: 100%;
   overflow: auto;
-  flex-grow: 0;
+  flex-grow: 1;
 }
 
 .label {

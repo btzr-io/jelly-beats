@@ -4,5 +4,5 @@ import { connect } from 'unistore/react'
 
 export default connect(
   null,
-  null
+  { doNavigate: 'doNavigate' }
 )(Header)

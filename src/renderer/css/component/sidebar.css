@@ -1,9 +1,10 @@
 .sidebar {
   height: 100%;
   margin: auto;
-  min-width: var(--sidebar-width);
+  width: var(--sidebar-width);
+
   background: var(--card-bg-color);
-  flex-grow: 2;
+  flex-shrink: 0;
 }
 
 .nav__links {
@@ -18,11 +19,15 @@
   opacity: 0.75;
   cursor: pointer;
   border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 .nav__link:hover,
 .nav__link--active {
   opacity: 1;
+}
+
+.nav__link--active {
   background: var(--button-bg-color);
 }
 
