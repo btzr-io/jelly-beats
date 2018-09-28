@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "win": "yarn install --ignore-optional",
     "dev": "electron-webpack dev",
     "compile": "electron-webpack",
     "dist": "yarn compile && electron-builder",
@@ -54,8 +55,5 @@
     "source-map-support": "^0.5.9",
     "style-loader": "^0.23.0",
     "webpack": "^4.20.1"
-  },
-  "optionalDependencies": {
-    "mpris-service": "^1.1.3"
   }
 }

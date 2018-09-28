@@ -2072,12 +2072,6 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-dbus@^0.2.11:
-  version "0.2.23"
-  resolved "https://registry.yarnpkg.com/dbus/-/dbus-0.2.23.tgz#13764779ca3c081e75086d821636fc215bd9bc01"
-  dependencies:
-    nan "^2.1.0"
-
 debug@2.6.9, debug@^2.1.2, debug@^2.1.3, debug@^2.2.0, debug@^2.3.3, debug@^2.6.6, debug@^2.6.8:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -4255,12 +4249,6 @@ move-concurrently@^1.0.1:
     rimraf "^2.5.4"
     run-queue "^1.0.3"
 
-mpris-service@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/mpris-service/-/mpris-service-1.1.3.tgz#194ba9f2fdfe56c820dd8bdb14c77c454a03aa58"
-  dependencies:
-    dbus "^0.2.11"
-
 mri@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/mri/-/mri-1.1.0.tgz#5c0a3f29c8ccffbbb1ec941dcec09d71fa32f36a"
@@ -4284,7 +4272,7 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-nan@^2.1.0, nan@^2.9.2:
+nan@^2.9.2:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
 
