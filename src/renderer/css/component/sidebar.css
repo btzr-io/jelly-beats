@@ -12,10 +12,10 @@
 }
 
 .nav__link {
-  font-size: 0.94em;
+  font-size: 0.86em;
   font-weight: 600;
   padding: 8px;
-  margin: 8px 16px;
+  margin: 6px 16px;
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.3s ease;
@@ -33,7 +33,7 @@
 }
 
 svg.link__icon {
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 .link__badge {

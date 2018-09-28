@@ -1,0 +1,30 @@
+.empty-state {
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+}
+
+.empty-state__title {
+  margin: 8px;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.empty-state__icon {
+  width: 4em;
+  margin: 16px;
+  opacity: 0.4;
+}
+
+.empty-state__message {
+  opacity: 0.75;
+}

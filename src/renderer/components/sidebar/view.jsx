@@ -36,8 +36,19 @@ class SideBar extends React.Component {
             icon={icons.HOME}
             active={currentPage == '/'}
           />
-          <NavLink label="Playlists" icon={icons.PLAYLIST_PLUS} />
-          <NavLink label="Favorites" icon={icons.HEART} badge={3} />
+          <NavLink
+            label="Playlists"
+            badge={3}
+            action={() => doNavigate('/playlists')}
+            icon={icons.PLAYLIST_PLUS}
+            active={currentPage == '/playlists'}
+          />
+          <NavLink
+            action={() => doNavigate('/favorites')}
+            label="Favorites"
+            icon={icons.HEART}
+            active={currentPage == '/favorites'}
+          />
         </div>
       </div>
     )

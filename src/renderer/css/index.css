@@ -6,6 +6,7 @@
 @import url('./component/header.css');
 @import url('./component/button.css');
 @import url('./component/sidebar.css');
+@import url('./component/empty-state.css');
 
 html {
   background: black;
@@ -32,11 +33,11 @@ a {
   padding: 4px;
 }
 
-svg.icon {
+.icon {
   width: 1em;
 }
 
-svg.icon path {
+.icon path {
   fill: var(--text-color);
 }
 
@@ -57,6 +58,13 @@ svg.icon path {
   height: 100%;
   overflow: auto;
   flex-grow: 1;
+  position: relative;
+}
+
+.page {
+  min-height: 100%;
+  margin: 0 16px;
+  position: relative;
 }
 
 .label {
