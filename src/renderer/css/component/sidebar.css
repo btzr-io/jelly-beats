@@ -12,19 +12,20 @@
 }
 
 .nav__link {
-  font-size: 1em;
+  font-size: 0.94em;
   font-weight: 600;
-  padding: 8px 16px;
+  padding: 8px;
   margin: 8px 16px;
-  opacity: 0.75;
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .nav__link:hover,
 .nav__link--active {
-  opacity: 1;
 }
 
 .nav__link--active {
@@ -32,14 +33,27 @@
 }
 
 svg.link__icon {
-  font-size: 1.2em;
+  font-size: 1em;
+}
+
+.link__badge {
+  line-height: 0.74em;
+  font-size: 0.74em;
+  font-weight: inherit;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 16px;
+  background-color: #ee5253;
+  min-width: 1em;
+  padding: 4px 6px;
 }
 
 .link__icon,
 .link__label {
   display: inline-block;
   vertical-align: middle;
-  margin: 0;
 }
 
 .link__icon + .link__label {
