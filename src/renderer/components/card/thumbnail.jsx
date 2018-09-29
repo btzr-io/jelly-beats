@@ -29,7 +29,9 @@ class Card extends React.Component {
     return (
       <div className={css.thumb}>
         <div className={css.picture} style={thumbnailStyle} />
-        <div className={css.overlay}>{this.props.children}</div>
+        <div className={css.overlay}>
+          <div className={css.metadata}>{this.props.children}</div>
+        </div>
       </div>
     )
   }

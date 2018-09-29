@@ -12,7 +12,7 @@
 }
 
 .nav__link {
-  font-size: 0.86em;
+  font-size: 0.9em;
   font-weight: 600;
   padding: 8px;
   margin: 6px 16px;
@@ -24,22 +24,27 @@
   justify-content: space-between;
 }
 
-.nav__link:hover,
-.nav__link--active {
+.nav__link:hover .link__body,
+.nav__link--active .link__body {
+  opacity: 1;
 }
 
 .nav__link--active {
   background: var(--button-bg-color);
 }
 
-svg.link__icon {
+.link__body {
+  opacity: 0.64;
+}
+
+.link__icon {
   font-size: 1.2em;
 }
 
 .link__badge {
   line-height: 0.74em;
   font-size: 0.74em;
-  font-weight: inherit;
+  font-weight: 600;
   display: inline-block;
   vertical-align: middle;
   margin: 0 auto;

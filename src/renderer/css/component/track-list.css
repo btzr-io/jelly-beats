@@ -1,0 +1,41 @@
+.track-list {
+  margin: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.track-list__title {
+  margin: 32px 0;
+}
+
+.track-list .item {
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 75%;
+}
+
+.item__thumbnail {
+  height: 94px;
+  width: 94px;
+  background: #424249;
+  margin: 0;
+}
+
+.item__metadata {
+  margin: 16px;
+}
+
+.item__title {
+  font-size: 0.94em;
+  font-weight: bold;
+  margin: 0 8px;
+}
+
+.item__artist {
+  font-size: 0.84em;
+  margin: 8px 8px;
+  opacity: 0.6;
+}

@@ -2,8 +2,8 @@ import React from 'react'
 import UniversalRouter from 'universal-router'
 import Link from '@/components/link'
 import Card from '@/components/card'
+import TrackList from '@/components/trackList'
 import list from '@/utils/api'
-import css from '@/css/modules/view.css.module'
 
 class View extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class View extends React.Component {
 
   render() {
     return (
-      <div className={css.view}>
+      <div className="page">
         <div>
           {list.map(uri => (
             <Card uri={uri} key={uri} />

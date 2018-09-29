@@ -1,7 +1,7 @@
 .card {
   width: 184px;
   display: inline-block;
-  margin: 12px;
+  margin: 16px;
   text-align: left;
   cursor: pointer;
   vertical-align: top;
@@ -15,27 +15,26 @@
 }
 
 .card .title {
-  margin: 12px 8px 4px 8px;
-  font-size: 0.78em;
-  font-weight: bold;
+  margin-top: 8px;
+  font-size: 0.84em;
+  font-weight: 600;
   overflow: hidden;
   display: -webkit-box;
-  line-height: 1.3;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
 
 .card .subtitle {
-  margin: 0 8px 12px 8px;
+  margin: 0px;
   opacity: 0.5;
   width: 80%;
-  font-size: 0.7em;
-  font-weight: bold;
+  font-size: 0.84em;
+  font-weight: 600;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-  text-transform: uppercase;
+
 }
 
 .placeholder .title {
@@ -76,5 +75,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 8px;
   padding: 2px 0px;
 }

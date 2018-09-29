@@ -8,7 +8,7 @@ class EmptyState extends React.Component {
     const { icon, title, message } = this.props
     return (
       <div className="empty-state">
-        {icon && <Icon className="icon empty-state__icon" path={icon} />}
+        {icon && <Icon className="empty-state__icon icon" path={icon} />}
         {title && <div className="empty-state__title">{title}</div>}
         {message && <div className="empty-state__message">{message}</div>}
       </div>

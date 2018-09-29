@@ -15,11 +15,11 @@
 
 .empty-state__title {
   margin: 8px;
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: 600;
 }
 
-.empty-state__icon {
+.icon.empty-state__icon {
   width: 4em;
   margin: 16px;
   opacity: 0.4;

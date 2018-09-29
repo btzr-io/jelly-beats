@@ -32,8 +32,8 @@
 /* Card action button */
 
 .button--card-action {
-  padding: 6px;
-  margin-right: 4px;
+  padding: 0;
+  margin-right: 16px;
   opacity: 0.64;
   border-radius: 50px;
   background: transparent;
@@ -41,7 +41,6 @@
 
 .button--card-action:hover {
   opacity: 1;
-  background: var(--button-bg-color);
 }
 
 /* Card action button */

@@ -11,11 +11,13 @@ const NavLink = ({ icon, label, active, action, badge }) => {
       onClick={action}
       className={classnames('nav__link', { 'nav__link--active': active })}
     >
-      <div>
+      <div className="link__body">
         {icon && <Icon className="icon link__icon" path={icon} />}
         {label && <span className="link__label">{label}</span>}
       </div>
-      <div>{badge && <div className="link__badge">{badge}</div>}</div>
+      <div className="link__actions">
+        {badge && <div className="link__badge">{badge}</div>}
+      </div>
     </div>
   )
 }
@@ -38,7 +40,6 @@ class SideBar extends React.Component {
           />
           <NavLink
             label="Playlists"
-            badge={3}
             action={() => doNavigate('/playlists')}
             icon={icons.PLAYLIST_PLUS}
             active={currentPage == '/playlists'}
