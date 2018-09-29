@@ -11,6 +11,7 @@
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
     "format": "pretty-quick && yarn format:css",
     "format:css": "npx prettier --config ./.prettierrc --write **/*.css.module"
+    "postinstall": "electron-builder install-app-deps"
   },
   "repository": {
     "type": "git",
