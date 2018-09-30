@@ -11,21 +11,15 @@ class Button extends React.Component {
   render() {
     const { type, icon, size, label, disabled, onClick } = this.props
 
-    const iconSizes = {
-      small: 0.85,
-      large: 1.2,
-      normal: 1,
-    }
-
     const buttonClass = classnames('button', `button--${type}`)
+
+    const iconClass = classnames('icon', 'button_icon', {
+      [`icon--${size}`]: size !== 'normal',
+    })
 
     return (
       <button className={buttonClass} onClick={onClick} disabled={disabled}>
-        {icon && (
-          <div className="button_icon">
-            <Icon path={icon} size={iconSizes[size]} className="icon" />
-          </div>
-        )}
+        {icon && <Icon path={icon} className={iconClass} />}
         {label && <span className={'button_label'}>{label}</span>}
       </button>
     )

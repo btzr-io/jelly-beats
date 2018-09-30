@@ -14,11 +14,11 @@ class Header extends React.Component {
       <nav className={'header'}>
         <Button
           type={'header-nav'}
-          size={'normal'}
+          size={'large'}
           icon={icons.LEFT}
           onClick={() => doNavigate('/')}
         />
-        <Button type={'header-nav'} size={'normal'} icon={icons.RIGHT} disabled />
+        <Button type={'header-nav'} size={'large'} icon={icons.RIGHT} disabled />
       </nav>
     )
   }

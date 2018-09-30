@@ -61,10 +61,6 @@
 /* Button elements */
 
 .button_icon {
-  margin: 0;
-}
-
-.button_icon svg {
   display: inline-block;
   vertical-align: middle;
   margin: 0;

@@ -38,6 +38,14 @@ a {
   width: 1em;
 }
 
+.icon--small {
+  width: 0.9em;
+}
+
+.icon--large {
+  width: 1.2em;
+}
+
 .icon path {
   fill: var(--text-color);
 }

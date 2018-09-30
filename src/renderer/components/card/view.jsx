@@ -66,13 +66,13 @@ class Card extends React.Component {
           <div className={css.actions}>
             <Button
               icon={icons.HEART}
-              size="small"
               type="card-action"
+              size="large"
               onClick={() => null}
             />
             <Button
               icon={icons.PLAYLIST_PLUS}
-              size="small"
+              size="large"
               type="card-action"
               onClick={() => null}
             />
