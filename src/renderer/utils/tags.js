@@ -1,4 +1,4 @@
-const tags = ['rock', 'folk', 'pop', 'ambient', 'electronic']
+const tags = ['rock', 'folk', 'pop', 'ambient', 'electronic', 'psychedelic']
 
 const topics = ['indie', 'summer', 'hybrid', 'dog']
 
