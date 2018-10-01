@@ -43,6 +43,13 @@
   opacity: 1;
 }
 
+.button--active {
+  animation-name: pulsate;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease;
+}
+
 /* Card action button */
 
 .button--header-nav {

@@ -1,0 +1,21 @@
+@-webkit-keyframes pulsate {
+  0% {
+    -webkit-transform: scale(0.5, 0.5);
+    opacity: 0;
+  }
+
+  50% {
+    -webkit-transform: scale(1.25, 1.25);
+    opacity: 1;
+  }
+
+  75% {
+    -webkit-transform: scale(0.75, 0.75);
+    opacity: 1;
+  }
+
+  100% {
+    -webkit-transform: scale(1, 1);
+    opacity: 1;
+  }
+}
