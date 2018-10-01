@@ -9,9 +9,11 @@ class Button extends React.Component {
   }
 
   render() {
-    const { type, icon, size, label, disabled, onClick } = this.props
+    const { type, toggle, icon, iconColor, size, label, disabled, onClick } = this.props
 
-    const buttonClass = classnames('button', `button--${type}`)
+    const buttonClass = classnames('button', `button--${type}`, {
+      'button--active': toggle,
+    })
 
     const iconClass = classnames('icon', 'button_icon', {
       [`icon--${size}`]: size !== 'normal',
@@ -19,7 +21,7 @@ class Button extends React.Component {
 
     return (
       <button className={buttonClass} onClick={onClick} disabled={disabled}>
-        {icon && <Icon path={icon} className={iconClass} />}
+        {icon && <Icon path={icon} className={iconClass} color={iconColor} />}
         {label && <span className={'button_label'}>{label}</span>}
       </button>
     )

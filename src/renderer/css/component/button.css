@@ -32,13 +32,13 @@
 /* Card action button */
 
 .button--card-action {
-  padding: 0;
-  margin-right: 16px;
+  margin-right: 8px;
   opacity: 0.64;
   border-radius: 50px;
   background: transparent;
+  transition: all 0.3s ease;
 }
-
+.button--active,
 .button--card-action:hover {
   opacity: 1;
 }

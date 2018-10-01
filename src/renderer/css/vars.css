@@ -1,9 +1,8 @@
 :root {
+  --color-red: #fc5c65;
   --main-color: #3498db;
   --bg-color: rgba(18, 18, 20, 0.99);
-
   --text-color: #fff;
-
   --button-bg-color: #3f3f43;
   --card-bg-color: #2a2a2f;
 

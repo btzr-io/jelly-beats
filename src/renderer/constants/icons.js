@@ -8,6 +8,7 @@ import {
   mdiChevronLeft,
   mdiChevronRight,
   mdiPlaylistPlus,
+  mdiHeart,
   mdiHeartBroken,
   mdiHeartOutline,
   mdiDotsVertical,
@@ -17,7 +18,8 @@ import {
 export const HOME = mdiHome
 export const LEFT = mdiChevronLeft
 export const RIGHT = mdiChevronRight
-export const HEART = mdiHeartOutline
+export const HEART = mdiHeart
+export const HEART_OUTLINE = mdiHeartOutline
 export const HEART_BROKEN = mdiHeartBroken
 export const MENU_DOTS = mdiDotsVertical
 export const PLAYLIST_PLUS = mdiPlaylistPlus

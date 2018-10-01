@@ -5,15 +5,16 @@
   text-align: left;
   cursor: pointer;
   vertical-align: top;
-  /* background: #2a2a2f; */
   border-radius: 0;
   overflow: hidden;
 }
 
-.card:hover {
-  /*  background: #42424A; */
+.card .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 84px;
 }
-
 .card .title {
   margin-top: 8px;
   font-size: 0.84em;
@@ -22,19 +23,20 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  flex-shrink: 0;
 }
 
 .card .subtitle {
-  margin: 0px;
   opacity: 0.5;
   width: 80%;
-  font-size: 0.84em;
+  margin-top: 2px;
+  font-size: 0.8em;
   font-weight: 600;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-
+  flex-shrink: 0;
 }
 
 .placeholder .title {
@@ -75,6 +77,5 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-top: 8px;
-  padding: 2px 0px;
+  flex-shrink: 0;
 }

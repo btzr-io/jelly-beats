@@ -1,7 +1,7 @@
 .thumb {
   height: 184px;
   width: 100%;
-  margin: 0 0 8px 0;
+  margin: 0;
   overflow: hidden;
   position: relative;
 }
@@ -15,10 +15,11 @@
   background-size: cover;
   z-index: 1;
   filter: blur(0px);
-
 }
 
-.overlay:hover{ opacity: 1; }
+.overlay:hover {
+  opacity: 1;
+}
 
 .overlay {
   width: 100%;
@@ -46,10 +47,9 @@
   transition: all 0.3s ease;
 }
 
-
 .metadata {
   padding: 16px;
   position: absolute;
   bottom: 0;
-  left:0;
+  left: 0;
 }
