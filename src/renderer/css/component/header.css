@@ -7,5 +7,6 @@
   background: var(--card-bg-color);
   border-bottom: 1px solid var(--bg-color);
   height: var(--header-height);
+  padding: 0 16px;
   z-index: 1;
 }

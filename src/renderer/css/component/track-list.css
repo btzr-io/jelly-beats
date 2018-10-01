@@ -1,41 +1,43 @@
 .track-list {
-  margin: 16px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
 }
 
-.track-list__title {
-  margin: 32px 0;
-}
-
-.track-list .item {
-  margin: 16px 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  max-width: 75%;
-}
-
-.item__thumbnail {
-  height: 94px;
-  width: 94px;
-  background: #424249;
-  margin: 0;
-}
-
-.item__metadata {
+table {
+  word-wrap: break-word;
+  text-align: left;
+  border-collapse: collapse;
   margin: 16px;
 }
 
-.item__title {
-  font-size: 0.94em;
-  font-weight: bold;
-  margin: 0 8px;
-}
-
-.item__artist {
+thead th {
+  border-bottom: 1px solid var(--card-bg-color);
   font-size: 0.84em;
-  margin: 8px 8px;
-  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+th,
+td {
+  position: relative;
+  padding: 16px;
+}
+
+tr {
+  border-bottom: 1px solid var(--card-bg-color);
+}
+
+.row_item {
+  position: relative;
+}
+
+tr:hover .button--table-action--overlay {
+  opacity: 1;
+}
+
+/*
+tr:hover .button--table-action--overlay + .row_label  {
+  opacity: 0;
+}
+*/
+
+.row_label {
+  opacity: 0.64;
 }

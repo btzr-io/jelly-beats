@@ -50,7 +50,7 @@
   margin: 0 auto;
   text-align: center;
   border-radius: 16px;
-  background-color: #ee5253;
+  background-color: var(--color-red);
   min-width: 1em;
   padding: 4px 6px;
 }
