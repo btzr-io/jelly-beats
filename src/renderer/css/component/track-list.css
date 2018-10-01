@@ -39,5 +39,6 @@ tr:hover .button--table-action--overlay + .row_label  {
 */
 
 .row_label {
+  font-size: 0.96em;
   opacity: 0.64;
 }

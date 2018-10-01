@@ -7,44 +7,18 @@ import * as icons from '@/constants/icons'
 class TrackList extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      ready: false,
-      metadata: {
-        title: '...',
-        artist: '...',
-      },
-    }
-  }
-
-  componentDidMount() {
-    const { uri } = this.props
-    Lbry.resolve({ uri })
-      .then(res => {
-        const { certificate, claim } = res
-        this.getMetadata(certificate, claim)
-      })
-      .catch(err => {
-        // Handle error
-      })
-  }
-
-  getMetadata(certificate, claim) {
-    const { metadata } = claim.value.stream
-    const { author, title, name, description } = metadata
-    const channel = certificate ? certificate.name : 'unknown'
-    console.info(channel)
-    this.setState({
-      ready: true,
-      metadata: {
-        title: title || name,
-        artist: author || channel,
-      },
-    })
   }
 
   render() {
     const { index } = this.props
-    const { artist, title } = this.state.metadata
+    const { certificate, claim } = this.props.claim
+    const { metadata } = claim.value.stream
+    const { author, title, name, description } = metadata
+    const channel = certificate ? certificate.name : 'unknown'
+
+    const artist = author || channel
+    const trackTitle = title || name
+
     return (
       <tr>
         <td>
@@ -69,7 +43,7 @@ class TrackList extends React.Component {
         </td>
 
         <td>
-          <span className="row_label">{title}</span>
+          <span className="row_label">{trackTitle}</span>
         </td>
 
         <td>

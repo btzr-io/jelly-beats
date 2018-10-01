@@ -12,10 +12,23 @@ class TrackList extends React.Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      currentList: {},
+    }
+  }
+
+  componentDidMount() {
+    Lbry.resolve({ uris: this.props.list })
+      .then(res => {
+        this.setState({ currentList: res })
+      })
+      .catch(err => {
+        // Handle error
+      })
   }
 
   render() {
-    const { list } = this.props
+    const { currentList } = this.state
     return (
       <table className="track-list">
         <thead>
@@ -28,8 +41,8 @@ class TrackList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {list.map((uri, index) => (
-            <TrackListItem uri={uri} index={index + 1} key={uri} />
+          {Object.entries(currentList).map(([key, value], index) => (
+            <TrackListItem key={key} uri={key} claim={value} index={index + 1} />
           ))}
         </tbody>
       </table>

@@ -41,22 +41,22 @@
 
 .placeholder .title {
   width: 64%;
-  opacity: 0.25;
+  opacity: 0.4;
   margin: 8px 0;
   margin-top: 16px;
   height: 0.74em;
   border-radius: 1em;
-  background: #fff;
+  background: var(--text-color);
 }
 
 .placeholder .subtitle {
   width: 35%;
   height: 0.7em;
-  opacity: 0.1;
+  opacity: 0.2;
   margin: 8px 0;
   margin-bottom: 16px;
   border-radius: 1em;
-  background: #fff;
+  background: var(--text-color);
 }
 
 .tags {
