@@ -47,7 +47,7 @@ class SideBar extends React.Component {
           <NavLink
             action={() => doNavigate('/favorites')}
             label="Favorites"
-            icon={icons.HEART}
+            icon={icons.HEART_OUTLINE}
             active={currentPage == '/favorites'}
           />
         </div>
