@@ -1,3 +1,12 @@
+.animated--pulse {
+  animation-name: pulse;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+  animation-direction: alternate-reverse;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+
 @-webkit-keyframes pulsate {
   0% {
     -webkit-transform: scale(1, 1);
@@ -13,5 +22,25 @@
 
   100% {
     -webkit-transform: scale(1, 1);
+  }
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-transform: scale(0.8, 0.8);
+    opacity: 0.2;
+  }
+
+  45% {
+    -webkit-transform: scale(1.2, 1.2);
+  }
+
+  64% {
+    -webkit-transform: scale(0.8, 0.8);
+  }
+
+  100% {
+    -webkit-transform: scale(1, 1);
+    opacity: 0.4;
   }
 }

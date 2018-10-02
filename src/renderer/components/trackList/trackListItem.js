@@ -1,6 +1,5 @@
 import React from 'react'
 import navigate from '@/utils/navigate'
-import { Lbry } from 'lbry-redux'
 import Button from '@/components/button'
 import * as icons from '@/constants/icons'
 
@@ -48,10 +47,6 @@ class TrackList extends React.Component {
 
         <td>
           <span className="row_label">{artist}</span>
-        </td>
-
-        <td>
-          <span className="row_label">...</span>
         </td>
       </tr>
     )

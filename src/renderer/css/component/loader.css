@@ -1,0 +1,26 @@
+.loader {
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon.loader__icon {
+  width: 4em;
+  margin: 16px;
+  opacity: 0.4;
+}
+
+.loader__message {
+  font-size: 1em;
+  margin: 8px;
+  opacity: 0.64;
+  font-weight: bold;
+}

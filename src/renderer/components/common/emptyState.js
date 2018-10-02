@@ -1,7 +1,6 @@
 import React from 'react'
 import Icon from '@mdi/react'
 import classnames from 'classnames'
-import * as icons from '@/constants/icons'
 
 class EmptyState extends React.Component {
   render() {

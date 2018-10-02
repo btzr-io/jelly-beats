@@ -1,7 +1,6 @@
 import React from 'react'
 import css from '@/css/modules/thumbnail.css.module'
 import navigate from '@/utils/navigate'
-import { Lbry } from 'lbry-redux'
 
 class Card extends React.Component {
   constructor(props) {
