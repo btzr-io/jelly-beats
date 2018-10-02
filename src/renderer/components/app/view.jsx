@@ -5,18 +5,23 @@ import Header from '@/components/header'
 import SideBar from '@/components/sidebar'
 import navigate from '@/utils/navigate'
 
-class App extends React.Component {
+class App extends React.PureComponent {
   constructor() {
     super()
   }
 
   componentDidUpdate(prevProps) {
     // Get current page
-    const { currentPage, currentQuery } = this.props
-    const query = currentQuery !== prevProps.query ? currentQuery : {}
-    // Handle navigation
+    const { currentPage, currentQuery } = this.props.navigation
 
-    if (currentPage !== prevProps.currentPage) {
+    // Get previous navigation
+    const prevNavigation = prevProps.navigation || {}
+
+    // Get query
+    const query = currentQuery !== prevNavigation.currentQuery ? currentQuery : {}
+
+    // Handle navigation
+    if (currentPage !== prevNavigation.currentPage) {
       navigate(currentPage, query)
     }
   }

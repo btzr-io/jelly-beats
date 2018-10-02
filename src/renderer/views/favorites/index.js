@@ -1,4 +1,4 @@
 import { connect } from 'unistore/react'
 import View from './view'
 
-export default connect()(View)
+export default connect('favorites')(View)

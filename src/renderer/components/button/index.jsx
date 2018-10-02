@@ -2,17 +2,26 @@ import React from 'react'
 import Icon from '@mdi/react'
 import classnames from 'classnames'
 
-class Button extends React.Component {
+class Button extends React.PureComponent {
   static defaultProps = {
     type: 'normal',
     size: 'normal',
+    onClick: () => {},
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      animated: false,
+    }
   }
 
   render() {
     const { type, toggle, icon, iconColor, size, label, disabled, onClick } = this.props
+    const { animated } = this.state
 
     const buttonClass = classnames('button', `button--${type}`, {
-      'button--active': toggle,
+      'button--toggle': toggle,
     })
 
     const iconClass = classnames('icon', 'button_icon', {

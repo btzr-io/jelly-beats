@@ -2,7 +2,7 @@ import React from 'react'
 import Icon from '@mdi/react'
 import classnames from 'classnames'
 
-class Loader extends React.Component {
+class Loader extends React.PureComponent {
   render() {
     const { icon, message, animation } = this.props
 

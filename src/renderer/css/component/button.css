@@ -43,9 +43,10 @@
   opacity: 1;
 }
 
-.button--active {
+.button--toggle {
+  opacity: 1;
   animation-name: pulsate;
-  animation-duration: 0.3s;
+  animation-duration: 0.4s;
   animation-fill-mode: forwards;
   animation-timing-function: ease;
 }
@@ -60,11 +61,13 @@
 .button--table-action--overlay {
   text-align: center;
   position: absolute;
-  left: -50%;
+  left: -8px;
   padding: 4px;
   z-index: 1;
   border-radius: 16px;
   opacity: 0;
+  background-color: #525257;
+  transition: none !important;
 }
 
 .button--active.button--table-action--overlay {

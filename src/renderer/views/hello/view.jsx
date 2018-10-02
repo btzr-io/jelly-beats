@@ -5,7 +5,7 @@ import Card from '@/components/card'
 import TrackList from '@/components/trackList'
 import list from '@/utils/api'
 
-class View extends React.Component {
+class View extends React.PureComponent {
   constructor(props) {
     super(props)
   }
@@ -13,7 +13,7 @@ class View extends React.Component {
   render() {
     return (
       <div className="page">
-        <div>
+        <div class="grid">
           {list.map(uri => (
             <Card uri={uri} key={uri} />
           ))}

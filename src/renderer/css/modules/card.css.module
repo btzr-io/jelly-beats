@@ -13,11 +13,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 84px;
+  height: 100px;
 }
 .card .title {
-  margin-top: 8px;
-  font-size: 0.84em;
+  margin-top: 12px;
+  font-size: 0.96em;
   font-weight: 600;
   overflow: hidden;
   display: -webkit-box;
@@ -29,8 +29,8 @@
 .card .subtitle {
   opacity: 0.5;
   width: 80%;
-  margin-top: 2px;
-  font-size: 0.8em;
+  margin-top: 8px;
+  font-size: 0.84em;
   font-weight: 600;
   overflow: hidden;
   display: -webkit-box;
@@ -74,6 +74,7 @@
 }
 
 .actions {
+  margin-top: 8px;
   display: flex;
   justify-content: flex-start;
   align-items: center;

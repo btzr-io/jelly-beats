@@ -3,10 +3,9 @@ import * as icons from '@/constants/icons'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
 import TrackList from '@/components/trackList'
-import list from '@/utils/api'
 import { Lbry } from 'lbry-redux'
 
-class View extends React.Component {
+class View extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -16,16 +15,25 @@ class View extends React.Component {
   }
 
   componentDidMount() {
-    Lbry.resolve({ uris: list })
-      .then(res => {
-        this.setState({
-          favorites: Object.entries(res),
-          fetchingData: false,
+    const { favorites } = this.props
+    // List is empty
+    if (favorites.length === 0) {
+      // Stop loading data
+      this.setState({ fetchingData: false })
+    } else {
+      // Resolve uris
+      Lbry.resolve({ uris: favorites })
+        .then(res => {
+          this.setState({
+            favorites: Object.entries(res),
+            fetchingData: false,
+          })
         })
-      })
-      .catch(err => {
-        this.setState({ fetchingData: false })
-      })
+        // Handle errors
+        .catch(err => {
+          this.setState({ fetchingData: false })
+        })
+    }
   }
 
   render() {

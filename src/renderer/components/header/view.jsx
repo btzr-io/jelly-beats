@@ -3,7 +3,7 @@ import Icon from '@mdi/react'
 import Button from '@/components/button'
 import * as icons from '@/constants/icons'
 
-class Header extends React.Component {
+class Header extends React.PureComponent {
   constructor(props) {
     super(props)
   }

@@ -1,7 +1,7 @@
 import React from 'react'
 import history from '@/history'
 
-export default class Link extends React.Component {
+export default class Link extends React.PureComponent {
   constructor() {
     super()
   }

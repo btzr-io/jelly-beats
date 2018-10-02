@@ -1,5 +1,5 @@
 /* FIX THIS */
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');
 
 @import url('./vars.css');
 @import url('./animations.css');
@@ -37,15 +37,15 @@ a {
 }
 
 .icon {
-  width: 1em;
+  width: 1.2em;
 }
 
 .icon--small {
-  width: 0.9em;
+  width: 1em;
 }
 
 .icon--large {
-  width: 1.2em;
+  width: 1.4em;
 }
 
 .icon path {
@@ -74,8 +74,9 @@ a {
 
 .page {
   min-height: 100%;
-  margin: 0 16px;
+  margin: 32px;
   position: relative;
+  text-align: center;
 }
 
 .label {
@@ -86,4 +87,12 @@ a {
   border-radius: 5px;
   margin: 8px;
   display: inline-block;
+}
+
+.grid {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: auto;
+  width: 100%;
 }

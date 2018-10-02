@@ -2,7 +2,7 @@ import React from 'react'
 import Icon from '@mdi/react'
 import classnames from 'classnames'
 
-class EmptyState extends React.Component {
+class EmptyState extends React.PureComponent {
   render() {
     const { icon, title, message } = this.props
     return (

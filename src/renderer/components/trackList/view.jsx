@@ -2,7 +2,7 @@ import React from 'react'
 import navigate from '@/utils/navigate'
 import TrackListItem from './trackListItem'
 
-class TrackList extends React.Component {
+class TrackList extends React.PureComponent {
   static defaultProps = {
     list: [],
   }

@@ -22,13 +22,14 @@ const NavLink = ({ icon, label, active, action, badge }) => {
   )
 }
 
-class SideBar extends React.Component {
+class SideBar extends React.PureComponent {
   constructor(props) {
     super(props)
   }
 
   render() {
-    const { doNavigate, currentPage } = this.props
+    const { doNavigate, navigation, favorites } = this.props
+    const { currentPage } = navigation || {}
     return (
       <div className="sidebar">
         <div className="nav__links">
@@ -47,7 +48,7 @@ class SideBar extends React.Component {
           <NavLink
             action={() => doNavigate('/favorites')}
             label="Favorites"
-            badge="3"
+            badge={favorites && favorites.length > 0 ? favorites.length : false}
             icon={icons.HEART_OUTLINE}
             active={currentPage == '/favorites'}
           />

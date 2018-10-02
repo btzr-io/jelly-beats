@@ -6,7 +6,7 @@ import stream from '@/utils/stream'
 import css from '@/css/modules/view.css.module'
 import * as icons from '@/constants/icons'
 
-class View extends React.Component {
+class View extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {

@@ -2,7 +2,7 @@ import React from 'react'
 import UniversalRouter from 'universal-router'
 import history from '@/history'
 
-class Router extends React.Component {
+class Router extends React.PureComponent {
   constructor(props) {
     super(props)
     const { routes, defaultRoute, errorRouter } = this.props

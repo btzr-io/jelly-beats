@@ -2,7 +2,7 @@ import React from 'react'
 import css from '@/css/modules/thumbnail.css.module'
 import navigate from '@/utils/navigate'
 
-class Card extends React.Component {
+class Card extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = { ready: false }

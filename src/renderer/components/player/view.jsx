@@ -41,7 +41,7 @@ function getCodec(name) {
   }[extname]
 }
 
-class Player extends React.Component {
+class Player extends React.PureComponent {
   constructor(props) {
     super(props)
     this.audioElement = React.createRef()
