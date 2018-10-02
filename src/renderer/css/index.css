@@ -74,7 +74,7 @@ a {
 
 .page {
   min-height: 100%;
-  margin: 32px;
+  margin: 0 32px;
   position: relative;
   text-align: center;
 }

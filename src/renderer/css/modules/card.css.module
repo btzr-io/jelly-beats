@@ -16,7 +16,7 @@
   height: 100px;
 }
 .card .title {
-  margin-top: 12px;
+  margin-top: 8px;
   font-size: 0.96em;
   font-weight: 600;
   overflow: hidden;
@@ -29,7 +29,7 @@
 .card .subtitle {
   opacity: 0.5;
   width: 80%;
-  margin-top: 8px;
+  margin-top: 4px;
   font-size: 0.84em;
   font-weight: 600;
   overflow: hidden;
