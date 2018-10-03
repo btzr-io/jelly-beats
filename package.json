@@ -56,6 +56,6 @@
     "prop-types": "^15.6.2",
     "style-loader": "^0.23.0",
     "webpack": "^4.20.1",
-    "preact": "^8.3.1",
+    "preact": "^8.3.1"
   }
 }
