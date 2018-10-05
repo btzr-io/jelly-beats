@@ -1,9 +1,16 @@
-export const user = {
-  favorites: [],
-}
+const initialState = {}
 
-export const navigation = {
+initialState.navigation = {
   stack: [],
   currentPage: '/',
   currentQuery: {},
 }
+
+initialState.player = {
+  isPlaying: false,
+  currentTrack: {},
+}
+
+initialState.favorites = []
+
+export default initialState

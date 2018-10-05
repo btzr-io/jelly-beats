@@ -13,7 +13,7 @@ class View extends React.PureComponent {
   render() {
     return (
       <div className="page">
-        <div class="grid">
+        <div className="grid">
           {list.map(uri => (
             <Card uri={uri} key={uri} />
           ))}

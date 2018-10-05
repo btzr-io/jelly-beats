@@ -1,5 +1,5 @@
 /* FIX THIS */
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700');
 
 @import url('./vars.css');
 @import url('./animations.css');
@@ -37,7 +37,11 @@ a {
 }
 
 .icon {
-  width: 1.2em;
+  width: 1em;
+}
+
+.icon--small-x {
+  width: 1em;
 }
 
 .icon--small {
@@ -46,6 +50,10 @@ a {
 
 .icon--large {
   width: 1.4em;
+}
+
+.icon--large-x {
+  width: 1.8em;
 }
 
 .icon path {
@@ -58,7 +66,7 @@ a {
   top: var(--header-height);
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: var(--player-height);
   display: flex;
   align-items: center;
   justify-content: space-between;

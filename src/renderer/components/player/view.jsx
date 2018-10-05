@@ -1,38 +1,38 @@
 import React from 'react'
 import fs from 'fs'
 import path from 'path'
+import stream from '@/utils/stream'
 import MediaElementWrapper from 'mediasource'
-import Slider from './slider'
-import * as icons from '@/constants/icons'
 import Icon from '@mdi/react'
+import * as icons from '@/constants/icons'
+
+import Slider from './slider'
 
 // Import CSS
 import '@/css/slider.css'
 import css from '@/css/modules/player.css.module'
 
-const ControlButton = ({ icon, action, disabled }) => {
+const ControlButton = ({ icon, action, size, disabled }) => {
   return (
     <button className={css.button} onClick={action} disabled={disabled}>
-      <Icon path={icon} size={1.2} color={'#FFFFFF'} />
+      <Icon path={icon} className={`icon icon--${size || 'large'}`} />
     </button>
   )
 }
 
-const ThumbCard = ({ src, author, title }) => {
+const StackButton = ({ thumbnail, stack }) => {
   const thumbnailStyle = {
-    backgroundImage: src ? `url(${src})` : 'none',
+    backgroundImage: thumbnail ? `url(${thumbnail})` : 'none',
   }
   return (
-    <div className={css.card}>
-      <div className={css.thumbnail} style={thumbnailStyle} />
-      <div className={css.trackInfo}>
-        <p>{title}</p>
-        <p className={css.author}>{author}</p>
-      </div>
+    <div className={css.stack}>
+      <div className={css.stackThumb} style={thumbnailStyle} />
+      <div className={css.stackLabel}>{'Empty'}</div>
     </div>
   )
 }
 
+// Move to static or utils
 function getCodec(name) {
   var extname = path.extname(name).toLowerCase()
   return {
@@ -42,6 +42,10 @@ function getCodec(name) {
 }
 
 class Player extends React.PureComponent {
+  static defaultProps = {
+    track: {},
+  }
+
   constructor(props) {
     super(props)
     this.audioElement = React.createRef()
@@ -49,19 +53,20 @@ class Player extends React.PureComponent {
       paused: true,
       duration: 0,
       currentTime: 0,
+      fileSource: null,
       currentTrack: null,
     }
   }
 
   loadSource() {
-    const { fileSource } = this.props.track
+    const { fileSource } = this.state
     const audio = this.audioElement.current
     audio.src = 'file:' + fileSource.path
     audio.load()
   }
 
   createStream() {
-    const { fileSource } = this.props.track
+    const { fileSource } = this.state
     const readable = fs.createReadStream(fileSource.path)
     const wrapper = new MediaElementWrapper(this.audioElement.current)
     // The correct mime type, including codecs, must be provided
@@ -116,6 +121,15 @@ class Player extends React.PureComponent {
     this.pause()
   }
 
+  handleStream = fileSource => {
+    this.setState({ fileSource, pause: false })
+  }
+
+  handlePlay = () => {
+    const { uri } = this.props.track
+    uri && stream(uri, this.handleStream.bind(this))
+  }
+
   componentWillUnmount() {
     const audio = this.audioElement.current
     audio.removeEventListener('ended', this.handleEnded)
@@ -131,14 +145,25 @@ class Player extends React.PureComponent {
     audio.addEventListener('loadstart', this.handleLoadStart)
     audio.addEventListener('loadedmetadata', this.handleMetadata)
     audio.addEventListener('timeupdate', this.updateTime)
-    const { fileSource } = this.props.track
+  }
 
-    // Stream file
-    if (fileSource && fileSource.streaming) {
-      this.createStream()
-    } else if (fileSource) {
-      // load file
-      this.loadSource()
+  componentDidUpdate(prevProps, prevState) {
+    // New track selected
+    if (prevProps.track.uri !== this.props.track.uri) {
+      this.handlePlay()
+    } else {
+      // Get file
+      const { fileSource } = this.state
+      // If source exist
+      if (fileSource) {
+        // Get previous path
+        const prevPath = prevState.fileSource ? prevState.fileSource.path : null
+        // If file path change
+        if (fileSource.path !== prevPath) {
+          // Start steam or load file
+          fileSource.streaming ? this.createStream() : this.loadSource()
+        }
+      }
     }
   }
 
@@ -148,19 +173,20 @@ class Player extends React.PureComponent {
       controls: true,
     }
 
-    const { fileSource, author, title, thumbnail } = this.props.track
-    const { currentTime, duration, paused } = this.state
+    const { uri, title, artist, thumbnail } = this.props.track
+    const { fileSource, currentTime, duration, paused } = this.state
 
     const controls = [
       {
         icon: icons.SKIP_PREVIOUS,
         action: () => {},
-
         disabled: true,
       },
       {
+        size: 'large-x',
         icon: paused ? icons.PLAY : icons.PAUSE,
         action: this.togglePlay,
+        disabled: !fileSource,
       },
       {
         icon: icons.SKIP_NEXT,
@@ -180,26 +206,47 @@ class Player extends React.PureComponent {
         action: () => {},
         disabled: true,
       },
+      {
+        icon: icons.HEART_OUTLINE,
+        action: () => {},
+        disabled: true,
+      },
     ]
 
     return (
-      <div className={css.player + ' ' + (fileSource ? css.active : '')}>
+      <div className={css.player + ' ' + css.active}>
         <audio ref={this.audioElement} {...playerOptions} />
 
         <div className={css.container}>
-          <ThumbCard src={thumbnail} author={author} title={title} />
           <div className={css.controls}>
             <div className={css.actions}>
               {controls.map((props, key) => (
                 <ControlButton {...props} key={key} />
               ))}
             </div>
-            <Slider onChange={this.setCurrentTime} value={currentTime} max={duration} />
+
+            <div className={css.trackData}>
+              {title ? (
+                <p>
+                  <span className={css.trackTitle}>{title}</span>
+                  <span className={css.divider}>&bull;</span>
+                  <span className={css.trackArtist}>{artist}</span>
+                </p>
+              ) : (
+                <p>
+                  <span className={css.divider}>No track selected</span>
+                </p>
+              )}
+              <Slider onChange={this.setCurrentTime} value={currentTime} max={duration} />
+            </div>
+
             <div className={css.actions}>
               {actions.map((props, key) => (
                 <ControlButton {...props} key={key + '_right'} />
               ))}
             </div>
+
+            <StackButton thumbnail={thumbnail} />
           </div>
         </div>
       </div>

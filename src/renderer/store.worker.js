@@ -1,10 +1,7 @@
 import createStore from 'stockroom/worker'
-import { navigation } from '@/unistore/initialState'
+import initialState from '@/unistore/initialState'
 
-let store = createStore({
-  navigation,
-  favorites: [],
-})
+let store = createStore({ ...initialState })
 
 store.registerActions(store => ({
   doNavigate(state, path, query) {
@@ -30,6 +27,18 @@ store.registerActions(store => ({
     const index = favorites.indexOf(uri)
     index > -1 && favorites.splice(index, 1)
     return { favorites }
+  },
+
+  setTrack(state, { uri, title, artist, thumbnail }) {
+    const player = Object.assign({}, state.player)
+    // Update track
+    player.currentTrack = {
+      uri,
+      title,
+      artist,
+      thumbnail,
+    }
+    return { player }
   },
 }))
 

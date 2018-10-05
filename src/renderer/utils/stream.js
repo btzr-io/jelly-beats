@@ -4,14 +4,21 @@ function stream(uri, fallback) {
   Lbry.get({ uri })
     .then(streamInfo => {
       const timeout =
-        streamInfo === null || typeof streamInfo !== 'object' || streamInfo.error === 'Timeout'
+        streamInfo === null ||
+        typeof streamInfo !== 'object' ||
+        streamInfo.error === 'Timeout'
 
       if (timeout) {
         // LOADING_VIDEO_FAILED,
         console.error('timeout', streamInfo)
       } else {
         // SUCCESS
-        const { download_path: path, file_name: name, mime_type: mimeType } = streamInfo
+        const {
+          download_path: path,
+          file_name: name,
+          mime_type: mimeType,
+          metadata,
+        } = streamInfo
         // fileSource
         const streaming = !streamInfo.completed
         fallback({ path, name, mimeType, streaming })

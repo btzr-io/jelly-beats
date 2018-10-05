@@ -5,6 +5,7 @@ import { connect } from 'unistore/react'
 export default connect(
   'favorites',
   {
+    play: 'setTrack',
     doNavigate: 'doNavigate',
     addToFavorites: 'addToFavorites',
     removefromFavorites: 'removefromFavorites',

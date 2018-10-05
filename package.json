@@ -29,7 +29,6 @@
   "dependencies": {
     "@mdi/js": "^2.8.94",
     "@mdi/react": "^1.0.1",
-    "asar": "^0.14.3",
     "classnames": "^2.2.6",
     "history": "^4.7.2",
     "lbry-redux": "https://github.com/lbryio/lbry-redux/",

@@ -2,6 +2,7 @@ import React from 'react'
 import routes from '@/routes'
 import Router from '@/components/router'
 import Header from '@/components/header'
+import Player from '@/components/player'
 import SideBar from '@/components/sidebar'
 import navigate from '@/utils/navigate'
 
@@ -27,13 +28,16 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const { children } = this.props
+    const { children, player } = this.props
+    const currentTrack = player && player.currentTrack
+
     return (
       <React.Fragment>
         <Header />
         <div id="window">
           <SideBar />
           <Router routes={routes} defaultRoute={'/'} />
+          <Player track={currentTrack} />
         </div>
       </React.Fragment>
     )

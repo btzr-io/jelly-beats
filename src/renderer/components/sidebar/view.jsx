@@ -48,7 +48,6 @@ class SideBar extends React.PureComponent {
           <NavLink
             action={() => doNavigate('/favorites')}
             label="Favorites"
-            badge={favorites && favorites.length > 0 ? favorites.length : false}
             icon={icons.HEART_OUTLINE}
             active={currentPage == '/favorites'}
           />

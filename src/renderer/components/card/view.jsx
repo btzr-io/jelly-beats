@@ -13,17 +13,17 @@ class Card extends React.PureComponent {
     super(props)
     this.state = {
       ready: false,
-      metadata: null,
-      favorite: false,
+      track: {},
     }
   }
 
   toggleFavorite = () => {
     const { addToFavorites, removefromFavorites, uri } = this.props
     this.setState(prevState => {
-      !prevState.favorite ? addToFavorites(uri) : removefromFavorites(uri)
-
-      return { favorite: !prevState.favorite }
+      !prevState.track.isFavorite ? addToFavorites(uri) : removefromFavorites(uri)
+      const track = Object.assign({}, prevState.track)
+      track.isFavorite = !track.isFavorite
+      return { track }
     })
   }
 
@@ -39,17 +39,17 @@ class Card extends React.PureComponent {
 
     const { metadata } = claim.value.stream
     const { thumbnail, author, title, description } = metadata
-    const channel = certificate ? certificate.name : 'unknown'
-    const tags = getTags(description) || []
+    const artist = author || (certificate ? certificate.name : 'unknown')
+    // const tags = getTags(description) || []
 
     this.setState({
       ready: true,
-      favorite: isFavorite,
-      metadata: {
+      track: {
+        uri,
         title,
-        tags,
-        author: author || channel,
+        artist,
         thumbnail,
+        isFavorite,
       },
     })
   }
@@ -67,21 +67,24 @@ class Card extends React.PureComponent {
   }
 
   render() {
-    const { ready, metadata, favorite } = this.state
-
+    const { ready, track } = this.state
+    const { title, artist, thumbnail, isFavorite } = track || {}
     return (
-      <div className={css.card + ' ' + (ready ? '' : css.placeholder)}>
-        <Thumbnail className={css.thumb} src={metadata ? metadata.thumbnail : null} />
+      <div
+        className={css.card + ' ' + (ready ? '' : css.placeholder)}
+        onClick={() => ready && this.props.play(track)}
+      >
+        <Thumbnail className={css.thumb} src={thumbnail} />
         <div className={css.content}>
           <div className={css.metadata}>
-            <div className={css.title}>{metadata ? metadata.title : ''}</div>
-            <div className={css.subtitle}>{metadata ? metadata.author : ''}</div>
+            <div className={css.title}>{title}</div>
+            <div className={css.subtitle}>{artist}</div>
           </div>
           <div className={css.actions}>
             <Button
-              toggle={favorite}
-              iconColor={favorite ? 'var(--color-red)' : ''}
-              icon={favorite ? icons.HEART : icons.HEART_OUTLINE}
+              toggle={isFavorite}
+              iconColor={isFavorite ? 'var(--color-red)' : ''}
+              icon={isFavorite ? icons.HEART : icons.HEART_OUTLINE}
               type="card-action"
               size="large"
               onClick={this.toggleFavorite}
