@@ -1,6 +1,6 @@
 import React from 'react'
 import Tags from '@/components/tags'
-import Button from '@/components/button'
+import Button from '@/components/common/button'
 import Player from '@/components/player'
 import stream from '@/utils/stream'
 import css from '@/css/modules/view.css.module'

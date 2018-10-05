@@ -2,7 +2,7 @@ import React from 'react'
 import Icon from '@mdi/react'
 import classnames from 'classnames'
 import navigate from '@/utils/navigate'
-import Button from '@/components/button'
+import Button from '@/components/common/button'
 import * as icons from '@/constants/icons'
 
 const NavLink = ({ icon, label, active, action, badge }) => {

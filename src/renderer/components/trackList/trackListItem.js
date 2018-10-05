@@ -1,6 +1,6 @@
 import React from 'react'
 import navigate from '@/utils/navigate'
-import Button from '@/components/button'
+import Button from '@/components/common/button'
 import * as icons from '@/constants/icons'
 
 class TrackList extends React.Component {

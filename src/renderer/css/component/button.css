@@ -4,13 +4,16 @@
   margin: 0;
   cursor: pointer;
   display: flex;
-  font-size: 0.9em;
-  font-weight: bold;
+  font-size: 1em;
+  font-weight: 700;
+  word-spacing: 4px;
   padding: 0;
   text-transform: uppercase;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  color: inherit;
+  font-family: inherit;
 }
 
 .button:disabled {
@@ -27,6 +30,20 @@
   color: #fff;
   margin: 16px 0;
   padding: 8px 16px;
+}
+
+.button--empty-state {
+  margin: 32px;
+  padding: 8px 18px;
+  border-radius: 32px;
+  border: 2px solid var(--main-color);
+  background-color: transparent;
+  color: var(--main-color);
+}
+
+.button--empty-state:hover {
+  color: inherit;
+  background-color: var(--main-color);
 }
 
 /* Card action button */

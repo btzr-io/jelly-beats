@@ -10,11 +10,7 @@ class View extends React.PureComponent {
   render() {
     return (
       <div className="page">
-        <EmptyState
-          icon={icons.PLAYLIST_PLUS}
-          title="Playlists empty"
-          message="( Add message... )"
-        />
+        <EmptyState title="No playlists" message="( Coming soon )" />
       </div>
     )
   }

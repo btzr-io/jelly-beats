@@ -1,5 +1,6 @@
 import React from 'react'
 import * as icons from '@/constants/icons'
+import Icon from '@mdi/react'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
 import TrackList from '@/components/trackList'
@@ -46,9 +47,16 @@ class View extends React.PureComponent {
       ) : (
         // List is empty
         <EmptyState
-          icon={icons.HEART_BROKEN}
-          title="Favorites empty"
-          message="( Add message... )"
+          title="No favorites"
+          message={
+            <p>
+              <span>{'Press'}</span>
+              <span>
+                <Icon className="icon icon--small-x" path={icons.HEART} />
+              </span>
+              <span>{'to add a song to favorites'}</span>
+            </p>
+          }
         />
       )
 

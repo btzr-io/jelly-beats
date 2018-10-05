@@ -14,17 +14,24 @@
 }
 
 .empty-state__title {
-  margin: 8px;
-  font-size: 1.4em;
+  margin: 4px;
+  font-size: 1.6em;
   font-weight: 600;
 }
 
 .icon.empty-state__icon {
-  width: 4em;
+  width: 5em;
   margin: 16px;
   opacity: 0.4;
 }
 
 .empty-state__message {
   opacity: 0.75;
+  margin: 4px;
+}
+
+.empty-state__message span {
+  margin: 4px;
+  vertical-align: middle;
+  display: inline-block;
 }

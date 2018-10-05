@@ -1,6 +1,6 @@
 import React from 'react'
 import Icon from '@mdi/react'
-import Button from '@/components/button'
+import Button from '@/components/common/button'
 import * as icons from '@/constants/icons'
 
 class Header extends React.PureComponent {

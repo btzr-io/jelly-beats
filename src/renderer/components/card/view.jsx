@@ -1,6 +1,6 @@
 import React from 'react'
 import Tags from '@/components/tags'
-import Button from '@/components/button'
+import Button from '@/components/common/button'
 import Icon from '@mdi/react'
 import css from '@/css/modules/card.css.module'
 import Thumbnail from './thumbnail'
