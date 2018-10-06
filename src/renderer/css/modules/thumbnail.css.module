@@ -1,9 +1,23 @@
 .thumb {
   height: 184px;
   width: 100%;
-  margin: 0;
   overflow: hidden;
   position: relative;
+  margin: 0;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.3s ease;
+}
+
+.thumb img,
+.thumbReady img {
+  display: none;
+}
+
+.thumbReady {
+  composes: thumb;
+  transform: scale(1);
+  opacity: 1;
 }
 
 .picture {

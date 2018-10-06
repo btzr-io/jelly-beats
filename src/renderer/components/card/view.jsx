@@ -12,7 +12,7 @@ class Card extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      ready: false,
+      isReady: false,
       track: {},
     }
   }
@@ -44,7 +44,7 @@ class Card extends React.PureComponent {
     storeTrack(uri, { thumbnail, title, artist, isFavorite, isAvailable: true })
 
     this.setState({
-      ready: true,
+      isReady: true,
       track: {
         uri,
         title,
@@ -56,25 +56,38 @@ class Card extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { uri } = this.props
-    Lbry.resolve({ uri })
-      .then(res => {
-        const { certificate, claim } = res
-        this.getMetadata(certificate, claim)
+    const { uri, cache, favorites } = this.props
+    cache[uri] &&
+      this.setState({
+        track: {
+          ...cache[uri],
+          isFavorite: favorites.indexOf(uri) > -1,
+        },
+        isReady: true,
       })
-      .catch(err => {
-        // Handle error
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { cache, uri } = this.props
+    const prevTrack = prevProps.cache[prevProps.uri] || {}
+    const track = cache[uri]
+    if (track && track.uri != prevTrack.uri) {
+      this.setState({
+        track,
+        isReady: true,
       })
+    }
   }
 
   render() {
     const { uri } = this.props
-    const { ready, track } = this.state
+    const { isReady, track } = this.state
     const { title, artist, thumbnail, isFavorite } = track || {}
+
     return (
       <div
-        className={css.card + ' ' + (ready ? '' : css.placeholder)}
-        onClick={() => ready && this.props.play(uri)}
+        className={css.card + ' ' + (isReady ? '' : css.placeholder)}
+        onClick={() => isReady && this.props.play(uri)}
       >
         <Thumbnail className={css.thumb} src={thumbnail} />
         <div className={css.content}>

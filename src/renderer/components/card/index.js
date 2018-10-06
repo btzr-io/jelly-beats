@@ -3,7 +3,7 @@ import Progress from './view'
 import { connect } from 'unistore/react'
 
 export default connect(
-  'favorites',
+  'cache, favorites',
   {
     play: 'setTrack',
     doNavigate: 'doNavigate',

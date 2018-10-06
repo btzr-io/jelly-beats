@@ -8,25 +8,26 @@ class Card extends React.PureComponent {
     this.state = { ready: false }
   }
 
+  handleLoad = () => {
+    this.setState({ ready: true })
+  }
+
   componentDidMount() {
     const { src } = this.props
-    const thumbnail = new Image()
-    thumbnail.src = src
-    thumbnail.onload = event => {
-      this.setState({ ready: true })
-    }
   }
 
   render() {
     const { className, src } = this.props
     const { ready } = this.state
+    console.info(ready)
 
     const thumbnailStyle = {
       backgroundImage: src ? `url(${src})` : 'none',
     }
 
     return (
-      <div className={css.thumb}>
+      <div className={!ready ? css.thumb : css.thumbReady}>
+        <img src={src} onLoad={this.handleLoad} />
         <div className={css.picture} style={thumbnailStyle} />
         <div className={css.overlay}>
           <div className={css.metadata}>{this.props.children}</div>
