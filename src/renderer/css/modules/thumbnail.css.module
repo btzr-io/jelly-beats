@@ -5,8 +5,7 @@
   position: relative;
   margin: 0;
   opacity: 0;
-  transform: scale(0.9);
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease 0.2s;
 }
 
 .thumb img,
@@ -16,14 +15,13 @@
 
 .thumbReady {
   composes: thumb;
-  transform: scale(1);
   opacity: 1;
 }
 
 .picture {
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

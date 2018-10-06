@@ -9,6 +9,9 @@
   overflow: hidden;
 }
 
+.placeholder {
+}
+
 .card .content {
   display: flex;
   flex-direction: column;
