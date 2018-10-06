@@ -13,6 +13,7 @@ import {
   mdiHeartOutline,
   mdiDotsVertical,
   mdiHome,
+  mdiLoading,
 } from '@mdi/js'
 
 export const HOME = mdiHome
@@ -30,3 +31,5 @@ export const REPEAT = mdiRepeat
 export const SHUFFLE = mdiShuffle
 export const SKIP_NEXT = mdiSkipNext
 export const SKIP_PREVIOUS = mdiSkipPrevious
+
+export const SPINNER = mdiLoading

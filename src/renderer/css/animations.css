@@ -7,6 +7,15 @@
   animation-iteration-count: infinite;
 }
 
+.animated--spin {
+  animation-name: spin;
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+  animation-direction: alternate-reverse;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+
 @-webkit-keyframes pulsate {
   0% {
     -webkit-transform: scale(1, 1);
@@ -42,5 +51,14 @@
   100% {
     -webkit-transform: scale(1, 1);
     opacity: 0.4;
+  }
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
   }
 }

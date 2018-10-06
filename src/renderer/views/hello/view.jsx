@@ -1,9 +1,9 @@
 import React from 'react'
-import UniversalRouter from 'universal-router'
-import Link from '@/components/link'
 import Card from '@/components/card'
-import TrackList from '@/components/trackList'
+import Loader from '@/components/common/loader'
 import list from '@/utils/api'
+import * as icons from '@/constants/icons'
+import Icon from '@mdi/react'
 import { Lbry } from 'lbry-redux'
 
 class View extends React.PureComponent {
@@ -55,12 +55,14 @@ class View extends React.PureComponent {
     const { fetchingData } = this.state
     return (
       <div className="page">
-        {!fetchingData && (
+        {!fetchingData ? (
           <div className="grid">
             {list.map((uri, index) => (
               <Card key={uri} uri={uri} index={index} />
             ))}
           </div>
+        ) : (
+          <Loader icon={icons.SPINNER} animation="spin" />
         )}
       </div>
     )
