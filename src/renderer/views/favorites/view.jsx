@@ -16,7 +16,7 @@ class View extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { favorites } = this.props
+    const { cache, favorites } = this.props
     // List is empty
     if (favorites.length === 0) {
       // Stop loading data

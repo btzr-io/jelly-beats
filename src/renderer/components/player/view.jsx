@@ -5,7 +5,7 @@ import stream from '@/utils/stream'
 import MediaElementWrapper from 'mediasource'
 import Icon from '@mdi/react'
 import * as icons from '@/constants/icons'
-
+import classnames from 'classnames'
 import Slider from './slider'
 
 // Import CSS
@@ -50,6 +50,7 @@ class Player extends React.PureComponent {
     super(props)
     this.audioElement = React.createRef()
     this.state = {
+      ready: false,
       paused: true,
       duration: 0,
       currentTime: 0,
@@ -78,9 +79,6 @@ class Player extends React.PureComponent {
   play = () => {
     const audio = this.audioElement.current
     audio.play()
-
-    // Update state
-    this.setState({ paused: audio.paused })
   }
 
   pause = () => {
@@ -89,6 +87,19 @@ class Player extends React.PureComponent {
 
     // Update state
     this.setState({ paused: audio.paused })
+  }
+
+  reset = () => {
+    const audio = this.audioElement.current
+    audio.pause()
+    audio.currentTime = 0
+
+    this.setState({
+      ready: false,
+      paused: audio.paused,
+      fileSource: null,
+      currentTrack: null,
+    })
   }
 
   togglePlay = () => {
@@ -117,22 +128,39 @@ class Player extends React.PureComponent {
     this.play()
   }
 
+  handlePlaying = () => {
+    // Update state
+    const audio = this.audioElement.current
+    this.setState({ paused: audio.paused })
+  }
+
   handleEnded = () => {
     this.pause()
   }
 
   handleStream = fileSource => {
-    this.setState({ fileSource, pause: false })
+    this.setState({ fileSource, ready: true })
   }
 
   handlePlay = () => {
     const { uri } = this.props.track
-    uri && stream(uri, this.handleStream.bind(this))
+    // Remove conflicts with previous source
+    this.reset()
+    // Try to stream the file
+    uri && stream(uri, this.handleStream, this.handleError)
+  }
+
+  handleError = () => {
+    const { updateTrackStatus } = this.props
+    const { uri } = this.props.track
+    // Can't play file
+    updateTrackStatus(uri, false)
   }
 
   componentWillUnmount() {
     const audio = this.audioElement.current
     audio.removeEventListener('ended', this.handleEnded)
+    audio.removeEventListener('playing', this.handlePlaying)
     audio.removeEventListener('loadstart', this.handleLoadStart)
     audio.removeEventListener('loadedmetadata', this.handleMetadata)
     audio.removeEventListener('timeupdate', this.updateTime)
@@ -142,14 +170,15 @@ class Player extends React.PureComponent {
     const audio = this.audioElement.current
     //audio.addEventListener('error', err => {})
     audio.addEventListener('ended', this.handleEnded)
+    audio.addEventListener('playing', this.handlePlaying)
     audio.addEventListener('loadstart', this.handleLoadStart)
     audio.addEventListener('loadedmetadata', this.handleMetadata)
     audio.addEventListener('timeupdate', this.updateTime)
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // New track selected
-    if (prevProps.track.uri !== this.props.track.uri) {
+    const prevTrack = prevProps.track || {}
+    if (prevTrack.uri !== this.props.track.uri) {
       this.handlePlay()
     } else {
       // Get file
@@ -174,7 +203,7 @@ class Player extends React.PureComponent {
     }
 
     const { uri, title, artist, thumbnail } = this.props.track
-    const { fileSource, currentTime, duration, paused } = this.state
+    const { fileSource, currentTime, duration, paused, ready } = this.state
 
     const controls = [
       {
@@ -186,7 +215,7 @@ class Player extends React.PureComponent {
         size: 'large-x',
         icon: paused ? icons.PLAY : icons.PAUSE,
         action: this.togglePlay,
-        disabled: !fileSource,
+        disabled: !ready,
       },
       {
         icon: icons.SKIP_NEXT,
@@ -226,7 +255,7 @@ class Player extends React.PureComponent {
             </div>
 
             <div className={css.trackData}>
-              {title ? (
+              {ready ? (
                 <p>
                   <span className={css.trackTitle}>{title}</span>
                   <span className={css.divider}>&bull;</span>
@@ -237,7 +266,12 @@ class Player extends React.PureComponent {
                   <span className={css.divider}>No track selected</span>
                 </p>
               )}
-              <Slider onChange={this.setCurrentTime} value={currentTime} max={duration} />
+              <Slider
+                onChange={this.setCurrentTime}
+                value={currentTime}
+                max={duration}
+                disabled={!ready}
+              />
             </div>
 
             <div className={css.actions}>
@@ -246,7 +280,7 @@ class Player extends React.PureComponent {
               ))}
             </div>
 
-            <StackButton thumbnail={thumbnail} />
+            <StackButton thumbnail={ready ? thumbnail : false} />
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { Lbry } from 'lbry-redux'
 
-function stream(uri, fallback) {
-  Lbry.get({ uri })
+function stream(uri, fallback, handleError) {
+  Lbry.get({ uri, timeout: 15 })
     .then(streamInfo => {
       const timeout =
         streamInfo === null ||
@@ -11,6 +11,7 @@ function stream(uri, fallback) {
       if (timeout) {
         // LOADING_VIDEO_FAILED,
         console.error('timeout', streamInfo)
+        handleError()
       } else {
         // SUCCESS
         const {
@@ -29,6 +30,7 @@ function stream(uri, fallback) {
       console.error(
         `Failed to download ${uri}, please try again. If this problem persists, visit https://lbry.io/faq/support for support.`
       )
+      handleError()
     })
 }
 

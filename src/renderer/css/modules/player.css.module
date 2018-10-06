@@ -30,18 +30,18 @@
 }
 
 .player .controls {
-  flex: 2.5 0 0;
+  width: 100%;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 0 16px;
+  margin: 0;
 }
 
 .player .actions {
-  /* flex: 0 0 25%; */
   margin: 0 16px;
   display: inline-block;
+  flex-shrink: 0;
 }
 
 .player .seek {
@@ -132,9 +132,18 @@
 
 .trackData {
   flex-grow: 1;
-  margin: 0 16px;
+  margin: 0 8px;
+  padding: 0 8px;
   position: relative;
   text-align: left;
+  overflow: hidden;
+}
+
+.trackData p {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+
 }
 
 .trackData .trackArtist {

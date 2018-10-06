@@ -34,13 +34,14 @@ class Card extends React.PureComponent {
   }
 
   getMetadata(certificate, claim) {
-    const { uri, favorites } = this.props
+    const { uri, favorites, storeTrack } = this.props
     const isFavorite = favorites.indexOf(uri) > -1
 
     const { metadata } = claim.value.stream
     const { thumbnail, author, title, description } = metadata
     const artist = author || (certificate ? certificate.name : 'unknown')
-    // const tags = getTags(description) || []
+
+    storeTrack(uri, { thumbnail, title, artist, isFavorite, isAvailable: true })
 
     this.setState({
       ready: true,
@@ -67,12 +68,13 @@ class Card extends React.PureComponent {
   }
 
   render() {
+    const { uri } = this.props
     const { ready, track } = this.state
     const { title, artist, thumbnail, isFavorite } = track || {}
     return (
       <div
         className={css.card + ' ' + (ready ? '' : css.placeholder)}
-        onClick={() => ready && this.props.play(track)}
+        onClick={() => ready && this.props.play(uri)}
       >
         <Thumbnail className={css.thumb} src={thumbnail} />
         <div className={css.content}>

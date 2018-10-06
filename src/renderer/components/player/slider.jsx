@@ -30,7 +30,7 @@ class RangeSlider extends React.Component {
   }
 
   render() {
-    const { max } = this.props
+    const { max, disabled } = this.props
     return (
       <Slider
         className={css.seek}
@@ -41,7 +41,7 @@ class RangeSlider extends React.Component {
         onBeforeChange={this.stopUpdate.bind(this)}
         onChange={this.setValue.bind(this)}
         onAfterChange={this.update.bind(this)}
-        disabled={!max || max === 0}
+        disabled={disabled || !max || max === 0}
       />
     )
   }

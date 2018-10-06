@@ -11,6 +11,8 @@ initialState.player = {
   currentTrack: {},
 }
 
+initialState.cache = {}
+
 initialState.favorites = []
 
 export default initialState
