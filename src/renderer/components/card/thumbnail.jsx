@@ -19,7 +19,6 @@ class Card extends React.PureComponent {
   render() {
     const { className, src } = this.props
     const { ready } = this.state
-    console.info(ready)
 
     const thumbnailStyle = {
       backgroundImage: src ? `url(${src})` : 'none',

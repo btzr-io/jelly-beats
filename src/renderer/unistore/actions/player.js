@@ -1,6 +1,5 @@
-export default {
+const actions = {
   setTrack(state, uri) {
-    console.info(state.cache[uri])
     return {
       player: {
         ...state.player,
@@ -9,3 +8,5 @@ export default {
     }
   },
 }
+
+export default actions

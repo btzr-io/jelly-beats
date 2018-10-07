@@ -47,14 +47,14 @@ class View extends React.PureComponent {
       ) : (
         // List is empty
         <EmptyState
-          title="No favorites"
+          title="No favorites?"
           message={
             <p>
               <span>{'Press'}</span>
               <span>
                 <Icon className="icon icon--small-x" path={icons.HEART} />
               </span>
-              <span>{'to add a song to favorites'}</span>
+              <span>{'to add something you like'}</span>
             </p>
           }
         />

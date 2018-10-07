@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from '@/components/card'
 import Loader from '@/components/common/loader'
+import EmptyState from '@/components/common/emptyState'
 import list from '@/utils/api'
 import * as icons from '@/constants/icons'
 import Icon from '@mdi/react'
@@ -10,6 +11,7 @@ class View extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
+      error: false,
       fetchingData: true,
       feature: [],
     }
@@ -33,36 +35,50 @@ class View extends React.PureComponent {
       // Resolve uris
       Lbry.resolve({ uris: list })
         .then(res => {
-          console.info(res)
           Object.entries(res).map(([uri, value], index) => {
-            console.info(index)
             const { claim, certificate } = value
             this.storeMetadata(uri, certificate, claim)
           })
 
           this.setState({
+            error: false,
             fetchingData: false,
           })
         })
         // Handle errors
         .catch(err => {
-          this.setState({ fetchingData: false })
+          this.setState({
+            fetchingData: false,
+            error: true,
+          })
         })
     }
   }
 
   render() {
-    const { fetchingData } = this.state
+    const { fetchingData, error } = this.state
     return (
       <div className="page">
-        {!fetchingData ? (
-          <div className="grid">
-            {list.map((uri, index) => (
-              <Card key={uri} uri={uri} index={index} />
-            ))}
-          </div>
-        ) : (
-          <Loader icon={icons.SPINNER} animation="spin" />
+        {!error &&
+          (!fetchingData ? (
+            <div className="grid">
+              {list.map((uri, index) => (
+                <Card key={uri} uri={uri} index={index} />
+              ))}
+            </div>
+          ) : (
+            <Loader icon={icons.SPINNER} animation="spin" />
+          ))}
+        {error && (
+          // Error ocurred!
+          <EmptyState
+            title="Sorry"
+            message={
+              <p>
+                <span>{' We’re having trouble getting awesome content'}</span>
+              </p>
+            }
+          />
         )}
       </div>
     )

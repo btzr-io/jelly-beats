@@ -12,8 +12,8 @@ class Card extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      isReady: false,
       track: {},
+      isReady: false,
     }
   }
 
