@@ -143,6 +143,8 @@
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
+  display: inline;
+  margin: 0;
 }
 
 .trackData .trackArtist {

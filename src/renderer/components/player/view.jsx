@@ -178,7 +178,7 @@ class Player extends React.PureComponent {
   }
 
   render() {
-    const { player } = this.props
+    const { player, downloads } = this.props
     const { ready, paused, duration, currentTime } = this.state
 
     const { uri, title, artist, thumbnail } = player ? player.currentTrack : {}
@@ -225,6 +225,9 @@ class Player extends React.PureComponent {
       },
     ]
 
+    const fileSource = (downloads && downloads[uri]) || {}
+    const { isDownloading } = fileSource
+
     return (
       <div className={css.player + ' ' + css.active}>
         <audio ref={this.audioElement} {...playerOptions} />
@@ -246,7 +249,9 @@ class Player extends React.PureComponent {
                 </p>
               ) : (
                 <p>
-                  <span className={css.divider}>No track selected</span>
+                  <span className={css.divider}>
+                    {isDownloading ? 'Loading...' : 'No track selected'}
+                  </span>
                 </p>
               )}
               <Slider
