@@ -15,4 +15,6 @@ initialState.cache = {}
 
 initialState.favorites = []
 
+initialState.downloads = {}
+
 export default initialState

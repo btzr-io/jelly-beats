@@ -3,7 +3,7 @@ import Player from './view'
 import { connect } from 'unistore/react'
 
 export default connect(
-  null,
+  'player, cache, downloads',
   {
     updateTrackStatus: 'updateTrackStatus',
   }

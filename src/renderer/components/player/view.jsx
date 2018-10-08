@@ -1,7 +1,5 @@
 import React from 'react'
 import fs from 'fs'
-import path from 'path'
-import stream from '@/utils/stream'
 import MediaElementWrapper from 'mediasource'
 import Icon from '@mdi/react'
 import * as icons from '@/constants/icons'
@@ -32,15 +30,6 @@ const StackButton = ({ thumbnail, stack }) => {
   )
 }
 
-// Move to static or utils
-function getCodec(name) {
-  var extname = path.extname(name).toLowerCase()
-  return {
-    '.m4a': 'audio/mp4; codecs="mp4a.40.5"',
-    '.mp3': 'audio/mpeg',
-  }[extname]
-}
-
 class Player extends React.PureComponent {
   static defaultProps = {
     track: {},
@@ -54,19 +43,11 @@ class Player extends React.PureComponent {
       paused: true,
       duration: 0,
       currentTime: 0,
-      fileSource: null,
-      currentTrack: null,
     }
   }
 
-  loadSource() {
-    const { fileSource } = this.state
-    const audio = this.audioElement.current
-    audio.src = 'file:' + fileSource.path
-    audio.load()
-  }
-
   createStream() {
+    /*
     const { fileSource } = this.state
     const readable = fs.createReadStream(fileSource.path)
     const wrapper = new MediaElementWrapper(this.audioElement.current)
@@ -74,6 +55,13 @@ class Player extends React.PureComponent {
     const writable = wrapper.createWriteStream(getCodec(fileSource.name))
     // Pipe stream
     readable.pipe(writable)
+    */
+  }
+
+  loadSource = fileSource => {
+    const audio = this.audioElement.current
+    audio.src = 'file:' + fileSource.path
+    audio.load()
   }
 
   play = () => {
@@ -90,15 +78,16 @@ class Player extends React.PureComponent {
   }
 
   reset = () => {
+    console.info('Clear state!')
     const audio = this.audioElement.current
+    // Reset time
     audio.pause()
     audio.currentTime = 0
-
+    // Reset state
     this.setState({
       ready: false,
       paused: audio.paused,
-      fileSource: null,
-      currentTrack: null,
+      currentTime: audio.currentTime,
     })
   }
 
@@ -124,7 +113,9 @@ class Player extends React.PureComponent {
 
   handleLoadStart = () => {
     const audio = this.audioElement.current
-    audio.removeEventListener('loadstart', this.handleLoadStart)
+    // ready to play
+    console.info('New track loaded!')
+    this.setState({ ready: true })
     this.play()
   }
 
@@ -136,25 +127,6 @@ class Player extends React.PureComponent {
 
   handleEnded = () => {
     this.pause()
-  }
-
-  handleStream = fileSource => {
-    this.setState({ fileSource, ready: true })
-  }
-
-  handlePlay = () => {
-    const { uri } = this.props.track
-    // Remove conflicts with previous source
-    this.reset()
-    // Try to stream the file
-    uri && stream(uri, this.handleStream, this.handleError)
-  }
-
-  handleError = () => {
-    const { updateTrackStatus } = this.props
-    const { uri } = this.props.track
-    // Can't play file
-    updateTrackStatus(uri, false)
   }
 
   componentWillUnmount() {
@@ -177,33 +149,44 @@ class Player extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const prevTrack = prevProps.track || {}
-    if (prevTrack.uri !== this.props.track.uri) {
-      this.handlePlay()
-    } else {
-      // Get file
-      const { fileSource } = this.state
-      // If source exist
-      if (fileSource) {
-        // Get previous path
-        const prevPath = prevState.fileSource ? prevState.fileSource.path : null
-        // If file path change
-        if (fileSource.path !== prevPath) {
-          // Start steam or load file
-          fileSource.streaming ? this.createStream() : this.loadSource()
+    const { downloads, player } = this.props
+    const { uri } = player ? player.currentTrack : {}
+    const prevTrack = prevProps.player ? prevProps.player.currentTrack : {}
+    const fileSource = downloads[uri]
+    // If source exist
+    if (fileSource) {
+      // Get previous path
+      const prevSource = prevProps.downloads[prevTrack.uri] || {}
+      // If file path change or Download completed
+      if (
+        fileSource.path !== prevSource.path ||
+        prevSource.completed != fileSource.completed
+      ) {
+        // Start steam or load file
+        if (fileSource.completed) {
+          // Track is ready
+          this.loadSource(fileSource)
+        } else {
+          // Loading track
+          this.reset()
         }
       }
+    } else if (uri !== prevTrack.uri) {
+      // Load new track
+      this.reset()
     }
   }
 
   render() {
+    const { player } = this.props
+    const { ready, paused, duration, currentTime } = this.state
+
+    const { uri, title, artist, thumbnail } = player ? player.currentTrack : {}
+
     const playerOptions = {
       autoPlay: true,
       controls: true,
     }
-
-    const { uri, title, artist, thumbnail } = this.props.track
-    const { fileSource, currentTime, duration, paused, ready } = this.state
 
     const controls = [
       {

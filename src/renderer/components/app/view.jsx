@@ -37,7 +37,7 @@ class App extends React.PureComponent {
         <div id="window">
           <SideBar />
           <Router routes={routes} defaultRoute={'/'} />
-          <Player track={currentTrack} />
+          <Player />
         </div>
       </React.Fragment>
     )

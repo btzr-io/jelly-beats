@@ -1,6 +1,7 @@
 import createStore from 'stockroom/worker'
 import initialState from '@/unistore/initialState'
 import cacheActions from '@/unistore/actions/cache'
+import streamActions from '@/unistore/actions/stream'
 import playerActions from '@/unistore/actions/player'
 import favoritesActions from '@/unistore/actions/favorites'
 import navigationActions from '@/unistore/actions/navigation'
@@ -13,5 +14,7 @@ store.registerActions(store => ({
   ...favoritesActions,
   ...navigationActions,
 }))
+
+store.registerActions(streamActions)
 
 export default store

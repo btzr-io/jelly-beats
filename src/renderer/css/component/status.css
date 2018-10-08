@@ -1,0 +1,23 @@
+.status {
+  display: none;
+  margin-right: 8px;
+  height: 0.54em;
+  width: 0.54em;
+  border-radius: 1em;
+  background: #555;
+}
+
+.status--good {
+  display: inline-block;
+  background-color: #1dd1a1;
+}
+
+.status--bad {
+  display: inline-block;
+  background-color: #e74c3c;
+}
+
+.status--busy {
+  display: inline-block;
+  background-color: #555;
+}

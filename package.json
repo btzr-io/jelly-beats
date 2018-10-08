@@ -33,6 +33,7 @@
     "history": "^4.7.2",
     "lbry-redux": "https://github.com/lbryio/lbry-redux/",
     "mediasource": "^2.2.1",
+    "proxy-polyfill": "^0.3.0",
     "rc-slider": "^8.6.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
@@ -50,11 +51,11 @@
     "electron-builder": "^20.28.4",
     "electron-webpack": "^2.3.1",
     "husky": "^1.0.1",
+    "preact": "^8.3.1",
     "prettier": "^1.14.3",
     "pretty-quick": "^1.7.0",
     "prop-types": "^15.6.2",
     "style-loader": "^0.23.0",
-    "webpack": "^4.20.1",
-    "preact": "^8.3.1"
+    "webpack": "^4.20.1"
   }
 }

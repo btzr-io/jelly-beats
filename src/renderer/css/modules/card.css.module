@@ -9,6 +9,11 @@
   overflow: hidden;
 }
 
+.block {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
 .card .content {
   display: flex;
   flex-direction: column;

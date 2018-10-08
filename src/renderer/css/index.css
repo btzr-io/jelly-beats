@@ -4,6 +4,7 @@
 @import url('./vars.css');
 @import url('./animations.css');
 @import url('./scrollbar.css');
+@import url('./component/status.css');
 @import url('./component/loader.css');
 @import url('./component/header.css');
 @import url('./component/button.css');

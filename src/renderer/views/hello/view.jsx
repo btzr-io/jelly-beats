@@ -17,13 +17,33 @@ class View extends React.PureComponent {
     }
   }
 
-  storeMetadata(uri, certificate, claim) {
+  parseMetadata(uri, certificate, claim) {
     const { favorites, storeTrack } = this.props
+
     const isFavorite = favorites.indexOf(uri) > -1
+
+    const { txid, nout } = claim
+
     const { metadata } = claim.value.stream
-    const { thumbnail, author, title, description } = metadata
-    const artist = author || (certificate ? certificate.name : 'unknown')
-    storeTrack(uri, { thumbnail, title, artist, isFavorite, isAvailable: true })
+
+    const { thumbnail, author, title, description, fee } = metadata
+
+    // Get creator
+    const artist = author || (certificate && certificate.name)
+
+    // Generate claim outpoint
+    const outpoint = `${txid}:${nout}`
+
+    // Cache data
+    storeTrack(uri, {
+      fee,
+      title,
+      artist,
+      outpoint,
+      thumbnail,
+      isFavorite,
+      description,
+    })
   }
 
   componentDidMount() {
@@ -37,7 +57,7 @@ class View extends React.PureComponent {
         .then(res => {
           Object.entries(res).map(([uri, value], index) => {
             const { claim, certificate } = value
-            this.storeMetadata(uri, certificate, claim)
+            this.parseMetadata(uri, certificate, claim)
           })
 
           this.setState({
@@ -48,8 +68,8 @@ class View extends React.PureComponent {
         // Handle errors
         .catch(err => {
           this.setState({
-            fetchingData: false,
             error: true,
+            fetchingData: false,
           })
         })
     }
@@ -70,7 +90,6 @@ class View extends React.PureComponent {
             <Loader icon={icons.SPINNER} animation="spin" />
           ))}
         {error && (
-          // Error ocurred!
           <EmptyState
             title="Sorry"
             message={
