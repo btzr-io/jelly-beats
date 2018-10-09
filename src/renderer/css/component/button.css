@@ -2,12 +2,12 @@
   background-color: var(--button-bg-color);
   border: 0;
   margin: 0;
+  padding: 0;
   cursor: pointer;
   display: flex;
   font-size: 1em;
   font-weight: 700;
   word-spacing: 4px;
-  padding: 0;
   text-transform: uppercase;
   justify-content: center;
   align-items: center;
@@ -68,29 +68,6 @@
   animation-timing-function: ease;
 }
 
-/* Card action button */
-.button--table-action {
-  padding: 4px;
-  border-radius: 16px;
-  background: transparent;
-}
-
-.button--table-action--overlay {
-  text-align: center;
-  position: absolute;
-  left: -8px;
-  padding: 4px;
-  z-index: 1;
-  border-radius: 16px;
-  opacity: 0;
-  background-color: #525257;
-  transition: none !important;
-}
-
-.button--active.button--table-action--overlay {
-  opacity: 1;
-}
-
 .button--header-nav {
   padding: 2px;
   margin: 0 4px;
@@ -102,6 +79,100 @@
 .button--header-nav:hover {
   opacity: 1;
   background: var(--button-bg-color);
+}
+
+/* Card action button #525257 */
+
+.button--table-action {
+  padding: 4px;
+  border-radius: 16px;
+  background: transparent;
+}
+
+.button--table-action--overlay {
+  text-align: center;
+  position: absolute;
+  padding: 4px;
+  top: -25%;
+  left: -8px;
+  z-index: 1;
+  border-radius: 32px;
+  background-color: var(--button-bg-color);
+  transition: none;
+}
+
+.button--toggle.button--table-action--overlay {
+  opacity: 1;
+  background: var(--color-primary);
+  transition: none;
+}
+
+.button--table-action--overlay.button--toggle::before {
+  border-radius: 50%;
+  background: var(--color-primary);
+  width: 100%;
+  height: 100%;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -2;
+  /* wave animation */
+  animation-name: wave;
+  animation-duration: 0.6s;
+  animation-delay: 0.4s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.button--card-action--overlay {
+  padding: 0;
+  border-radius: 32px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 4em;
+  height: 4em;
+  background: rgba(0, 0, 0, 0.9);
+  display: inline-block;
+}
+
+.button--card-action--overlay svg.icon {
+  font-size: 1.4em;
+}
+
+.button--card-action--overlay.button--toggle {
+  /* background: var(--color-primary); */
+  background: var(--color-primary);
+}
+.button--card-action--overlay.button--toggle::before {
+  border-radius: 50%;
+  background: var(--color-primary);
+  width: 4em;
+  height: 4em;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -2;
+  opacity: 0.4;
+  /* wave animation */
+  animation-name: wave;
+  animation-duration: 0.6s;
+  animation-delay: 0.4s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 /* Button elements */

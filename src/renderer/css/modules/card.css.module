@@ -3,15 +3,13 @@
   display: inline-block;
   margin: 16px;
   text-align: left;
-  cursor: pointer;
   vertical-align: top;
-  border-radius: 0;
   overflow: hidden;
 }
 
 .block {
   pointer-events: none;
-  opacity: 0.4;
+  opacity: 0.2;
 }
 
 .card .content {

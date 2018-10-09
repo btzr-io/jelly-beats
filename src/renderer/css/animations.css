@@ -10,9 +10,9 @@
 .animated--spin {
   animation-name: spin;
   animation-duration: 0.6s;
-  animation-fill-mode: both;
-  animation-direction: alternate-reverse;
-  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-direction: normal;
+  animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 
@@ -51,6 +51,18 @@
   100% {
     -webkit-transform: scale(1, 1);
     opacity: 0.4;
+  }
+}
+
+@-webkit-keyframes wave {
+  0% {
+    -webkit-transform: scale(1, 1);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: scale(1.6, 1.6);
+    opacity: 0;
   }
 }
 

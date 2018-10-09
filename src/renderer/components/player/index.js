@@ -5,6 +5,6 @@ import { connect } from 'unistore/react'
 export default connect(
   'player, cache, downloads',
   {
-    updateTrackStatus: 'updateTrackStatus',
+    updatePlayerStatus: 'updatePlayerStatus',
   }
 )(Player)

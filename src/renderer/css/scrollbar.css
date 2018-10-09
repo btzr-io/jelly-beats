@@ -15,10 +15,10 @@
   transition: background-color 0.3s ease;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--scrollbar-thumb-hover-bg);
-}
-
 ::-webkit-scrollbar-thumb:active {
   background-color: var(--scrollbar-thumb-active-bg);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
 }

@@ -7,7 +7,8 @@ initialState.navigation = {
 }
 
 initialState.player = {
-  isPlaying: false,
+  paused: null,
+  loading: null,
   currentTrack: {},
 }
 

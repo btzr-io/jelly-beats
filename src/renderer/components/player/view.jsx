@@ -70,25 +70,28 @@ class Player extends React.PureComponent {
   }
 
   pause = () => {
+    const { updatePlayerStatus } = this.props
     const audio = this.audioElement.current
     audio.pause()
 
     // Update state
     this.setState({ paused: audio.paused })
+    updatePlayerStatus({ paused: audio.paused })
   }
 
   reset = () => {
     console.info('Clear state!')
+    const { updatePlayerStatus } = this.props
     const audio = this.audioElement.current
     // Reset time
-    audio.pause()
+    this.pause()
     audio.currentTime = 0
     // Reset state
     this.setState({
       ready: false,
-      paused: audio.paused,
       currentTime: audio.currentTime,
     })
+    updatePlayerStatus({ isLoading: true })
   }
 
   togglePlay = () => {
@@ -112,17 +115,21 @@ class Player extends React.PureComponent {
   }
 
   handleLoadStart = () => {
+    const { updatePlayerStatus } = this.props
     const audio = this.audioElement.current
     // ready to play
     console.info('New track loaded!')
     this.setState({ ready: true })
+    updatePlayerStatus({ isLoading: false })
     this.play()
   }
 
   handlePlaying = () => {
     // Update state
+    const { updatePlayerStatus } = this.props
     const audio = this.audioElement.current
     this.setState({ paused: audio.paused })
+    updatePlayerStatus({ paused: audio.paused })
   }
 
   handleEnded = () => {

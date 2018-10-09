@@ -1,7 +1,7 @@
 import React from 'react'
-import Tags from '@/components/tags'
-import Health from '@/components/common/health'
 import Button from '@/components/common/button'
+import Health from '@/components/common/health'
+import Loader from '@/components/common/loader'
 import Icon from '@mdi/react'
 import css from '@/css/modules/card.css.module'
 import Thumbnail from './thumbnail'
@@ -46,7 +46,7 @@ class Card extends React.PureComponent {
 
   render() {
     // Get props
-    const { uri, cache, downloads, favorites } = this.props
+    const { uri, cache, downloads, favorites, player } = this.props
 
     // Get state
     const { isReady } = this.state
@@ -55,10 +55,15 @@ class Card extends React.PureComponent {
     const { title, artist, thumbnail } = cache[uri] || {}
 
     //Get stream status
-    const { completed, isPlaying, isAvailable, isDownloading } = downloads[uri] || {}
+    const { completed, isAvailable, isDownloading } = downloads[uri] || {}
 
+    //Get player status
+    const { paused, isLoading, currentTrack } = player || {}
+    const isActive = (currentTrack ? currentTrack.uri === uri : false) || isDownloading
+    const isPlaying = !paused && isActive
     // Favorite selector
     const isFavorite = favorites.indexOf(uri) > -1
+    const showOverlay = !(isAvailable === false) && (isPlaying || isDownloading)
 
     return (
       <div
@@ -68,9 +73,20 @@ class Card extends React.PureComponent {
           (isReady ? '' : css.placeholder) +
           (isAvailable === false ? css.block : '')
         }
-        onClick={() => isReady && this.attempPlay()}
       >
-        <Thumbnail className={css.thumb} src={thumbnail} />
+        <Thumbnail className={css.thumb} src={thumbnail} showOverlay={showOverlay}>
+          {!isDownloading && !(isAvailable === false) ? (
+            <Button
+              icon={!isPlaying ? icons.PLAY : icons.PAUSE}
+              type="card-action--overlay"
+              size="large-x"
+              toggle={isPlaying}
+              onClick={() => isReady && this.attempPlay()}
+            />
+          ) : (
+            !(isAvailable === false) && <Loader icon={icons.SPINNER} animation="spin" />
+          )}
+        </Thumbnail>
         <div className={css.content}>
           <div className={css.metadata}>
             <div className={css.title}>

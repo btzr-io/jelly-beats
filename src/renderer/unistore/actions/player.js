@@ -7,6 +7,16 @@ const actions = {
       },
     }
   },
+
+  updatePlayerStatus(state, { paused, isLoading }) {
+    const status = { paused, isLoading }
+    return {
+      player: {
+        ...state.player,
+        ...status,
+      },
+    }
+  },
 }
 
 export default actions

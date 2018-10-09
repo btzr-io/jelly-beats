@@ -11,8 +11,17 @@ class TrackList extends React.PureComponent {
     super(props)
   }
 
+  attempPlay = uri => {
+    const { setTrack, purchase } = this.props
+    setTrack(uri)
+    purchase(uri)
+  }
+
   render() {
-    const { list } = this.props
+    const { list, player } = this.props
+    const { currentTrack, isLoading, paused } = player || {}
+    const isPlaying = !paused && !isLoading
+
     return (
       <table className="track-list">
         <thead>
@@ -24,9 +33,21 @@ class TrackList extends React.PureComponent {
           </tr>
         </thead>
         <tbody>
-          {list.map(([key, value], index) => (
-            <TrackListItem key={key} uri={key} claim={value} index={index + 1} />
-          ))}
+          {list.map(([uri, value], index) => {
+            const isActive = currentTrack ? currentTrack.uri === uri : false
+            return (
+              <TrackListItem
+                key={uri}
+                uri={uri}
+                index={index + 1}
+                claim={value}
+                active={isActive}
+                isLoading={isLoading}
+                isPlaying={isPlaying && isActive}
+                onClick={() => this.attempPlay(uri)}
+              />
+            )
+          })}
         </tbody>
       </table>
     )

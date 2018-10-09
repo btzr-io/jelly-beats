@@ -1,4 +1,5 @@
 import React from 'react'
+import classnames from 'classnames'
 import navigate from '@/utils/navigate'
 import Button from '@/components/common/button'
 import * as icons from '@/constants/icons'
@@ -9,7 +10,7 @@ class TrackList extends React.Component {
   }
 
   render() {
-    const { index } = this.props
+    const { index, active, onClick, isPlaying, isLoading } = this.props
     const { certificate, claim } = this.props.claim
     const { metadata } = claim.value.stream
     const { author, title, name, description } = metadata
@@ -19,14 +20,17 @@ class TrackList extends React.Component {
     const trackTitle = title || name
 
     return (
-      <tr>
+      <tr
+        className={classnames('row', { 'row--active': active })}
+        onClick={() => onClick()}
+      >
         <td>
           <div className="row_item">
             <Button
-              icon={icons.PLAY}
+              icon={!isPlaying ? icons.PLAY : icons.PAUSE}
               type="table-action--overlay"
               size="large"
-              toggle={index === 1}
+              toggle={isPlaying}
             />
             <span className="row_label">{index}</span>
           </div>

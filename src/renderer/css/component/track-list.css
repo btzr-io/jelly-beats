@@ -1,12 +1,12 @@
 .track-list {
-  width: calc(100% - 32px);
+  width: calc(100% - 16px);
 }
 
 table {
   word-wrap: break-word;
   text-align: left;
   border-collapse: collapse;
-  margin: 16px;
+  margin: 16px auto;
 }
 
 thead th {
@@ -18,35 +18,45 @@ thead th {
 th,
 td {
   position: relative;
-  padding: 16px;
+  padding: 16px 32px;
 }
 
-tr {
+tbody tr {
   border-bottom: 1px solid var(--card-bg-color);
-  transition: background 0.2s ease;
+  transition: 0;
 }
 
-tr:hover {
-  background: #212125;
+.row {
+  border-radius: 4px;
+}
+
+.row--active {
+  background-color: var(--card-bg-color);
+}
+
+.row--active .row_label {
+  opacity: 1;
 }
 
 .row_item {
-  width: 100%;
   position: relative;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
 }
 
-tr:hover .button--table-action--overlay {
+.row .button--table-action--overlay {
+  opacity: 0;
+}
+
+.row:hover .button--table-action--overlay,
+.row--active .button--table-action--overlay {
   opacity: 1;
   transition: none;
 }
 
-tr:hover .button--table-action--overlay + .row_label {
+.row:hover .button--table-action--overlay + .row_label {
   opacity: 0;
 }
-tr:hover .row_label {
+
+.row:hover .row_label {
   opacity: 1;
 }
 

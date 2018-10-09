@@ -132,6 +132,7 @@ export default function(store) {
             // Success!
             else {
               // Update downloads
+              console.info(claim.fee)
               store.action(actions.updateLoadStatus)(uri, claimOutpoint)
             }
           }
@@ -141,8 +142,9 @@ export default function(store) {
           }
           // No download yet
           else if (!fileInfo) {
-            // Only free stuff for testing
-            if (claim && !claim.fee) store.action(actions.loadSource)(uri, claimOutpoint)
+            // Only free or below 1 usd for testing
+            if (!claim.fee || (claim.fee && claim.fee.amount < 1))
+              store.action(actions.loadSource)(uri, claimOutpoint)
           }
         }
       )

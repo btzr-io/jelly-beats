@@ -1,8 +1,15 @@
 import React from 'react'
+import classnames from 'classnames'
+import Loader from '@/components/common/loader'
 import css from '@/css/modules/thumbnail.css.module'
 import navigate from '@/utils/navigate'
 
 class Card extends React.PureComponent {
+  static defaultProps = {
+    src: null,
+    showOverlay: false,
+  }
+
   constructor(props) {
     super(props)
     this.state = { ready: false }
@@ -12,12 +19,8 @@ class Card extends React.PureComponent {
     this.setState({ ready: true })
   }
 
-  componentDidMount() {
-    const { src } = this.props
-  }
-
   render() {
-    const { className, src } = this.props
+    const { src, showOverlay } = this.props
     const { ready } = this.state
 
     const thumbnailStyle = {
@@ -28,8 +31,8 @@ class Card extends React.PureComponent {
       <div className={!ready ? css.thumb : css.thumbReady}>
         <img src={src} onLoad={this.handleLoad} />
         <div className={css.picture} style={thumbnailStyle} />
-        <div className={css.overlay}>
-          <div className={css.metadata}>{this.props.children}</div>
+        <div className={classnames(css.overlay, { [css.overlayShow]: showOverlay })}>
+          {this.props.children}
         </div>
       </div>
     )
