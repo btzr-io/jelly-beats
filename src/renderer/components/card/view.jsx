@@ -81,7 +81,7 @@ class Card extends React.PureComponent {
         </Thumbnail>
         <div className={css.content}>
           <div className={css.metadata}>
-            <div className={css.title}>
+            <div className={css.title} onClick={() => isReady && this.attempPlay()}>
               <Health status={{ completed, isAvailable, isDownloading }} />
               {title}
             </div>

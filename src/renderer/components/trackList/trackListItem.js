@@ -72,7 +72,10 @@ class TrackList extends React.Component {
         </td>
 
         <td>
-          <span className="row_label">
+          <span
+            className="row_label row_label--link"
+            onClick={() => !isDownloading && triggerPlay()}
+          >
             <Health status={{ completed, isAvailable, isDownloading }} />
             {trackTitle}
           </span>

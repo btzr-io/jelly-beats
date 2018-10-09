@@ -29,6 +29,11 @@
   flex-shrink: 0;
 }
 
+.card .title:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .card .subtitle {
   opacity: 0.5;
   width: 80%;

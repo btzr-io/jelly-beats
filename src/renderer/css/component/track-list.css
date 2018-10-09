@@ -77,3 +77,8 @@ tbody tr {
   font-size: 0.96em;
   opacity: 0.64;
 }
+.row_label--link:hover {
+  opacity: 1;
+  cursor: pointer;
+  text-decoration: underline;
+}
