@@ -17,11 +17,22 @@ class Button extends React.PureComponent {
   }
 
   render() {
-    const { type, toggle, icon, iconColor, size, label, disabled, onClick } = this.props
+    const {
+      type,
+      toggle,
+      icon,
+      iconColor,
+      size,
+      label,
+      disabled,
+      onClick,
+      animation,
+    } = this.props
     const { animated } = this.state
 
     const buttonClass = classnames('button', `button--${type}`, {
       'button--toggle': toggle,
+      [`animated--${animation}`]: animation,
     })
 
     const iconClass = classnames('icon', 'button_icon', {

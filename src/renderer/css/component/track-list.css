@@ -30,6 +30,11 @@ tbody tr {
   border-radius: 4px;
 }
 
+.row--disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
 .row--active {
   background-color: var(--card-bg-color);
 }
@@ -45,11 +50,15 @@ tbody tr {
 .row .button--table-action--overlay {
   opacity: 0;
 }
-
 .row:hover .button--table-action--overlay,
 .row--active .button--table-action--overlay {
   opacity: 1;
   transition: none;
+}
+
+.row--busy .button--table-action--overlay {
+  opacity: 1;
+  background-color: var(--bg-color);
 }
 
 .row--active .button--table-action--overlay:not(.button--toggle) {

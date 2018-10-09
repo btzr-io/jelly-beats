@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import navigate from '@/utils/navigate'
 import Button from '@/components/common/button'
+import Health from '@/components/common/health'
 import * as icons from '@/constants/icons'
 
 class TrackList extends React.Component {
@@ -13,13 +14,14 @@ class TrackList extends React.Component {
     const {
       uri,
       index,
-      triggerPlay,
-      toggleFavorite,
       isActive,
-      isAvailable,
+      completed,
       isPlaying,
-      isDownloading,
+      isAvailable,
       isFavorite,
+      triggerPlay,
+      isDownloading,
+      toggleFavorite,
     } = this.props
     const { certificate, claim } = this.props.claim
     const { metadata } = claim.value.stream
@@ -29,21 +31,31 @@ class TrackList extends React.Component {
     const artist = author || channel
     const trackTitle = title || name
 
-    const showButton = !isDownloading && !(isAvailable === false)
+    const disabled = isAvailable === false
+    const buttonIcon = isDownloading
+      ? icons.SPINNER
+      : !isPlaying
+        ? icons.PLAY
+        : icons.PAUSE
 
     return (
-      <tr className={classnames('row', { 'row--active': isActive })}>
+      <tr
+        className={classnames('row', {
+          'row--active': isActive,
+          'row--busy': isDownloading,
+          'row--disabled': disabled,
+        })}
+      >
         <td>
           <div className="row_item">
-            {showButton && (
-              <Button
-                icon={!isPlaying ? icons.PLAY : icons.PAUSE}
-                type="table-action--overlay"
-                size="large"
-                toggle={isPlaying}
-                onClick={() => triggerPlay()}
-              />
-            )}
+            <Button
+              icon={buttonIcon}
+              type="table-action--overlay"
+              size="large"
+              toggle={isPlaying && !isDownloading}
+              animation={isDownloading && 'spin'}
+              onClick={() => !isDownloading && triggerPlay()}
+            />
             <span className="row_label">{index}</span>
           </div>
         </td>
@@ -60,7 +72,10 @@ class TrackList extends React.Component {
         </td>
 
         <td>
-          <span className="row_label">{trackTitle}</span>
+          <span className="row_label">
+            <Health status={{ completed, isAvailable, isDownloading }} />
+            {trackTitle}
+          </span>
         </td>
 
         <td>

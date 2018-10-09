@@ -37,8 +37,7 @@ class TrackList extends React.PureComponent {
             const { completed, isAvailable, isDownloading } = downloads[uri] || {}
             //Get player status
             const { paused, isLoading, currentTrack } = player || {}
-            const isActive =
-              (currentTrack ? currentTrack.uri === uri : false) || isDownloading
+            const isActive = currentTrack ? currentTrack.uri === uri : false
             const isPlaying = !paused && isActive
 
             return (
@@ -48,6 +47,7 @@ class TrackList extends React.PureComponent {
                 index={index + 1}
                 claim={value}
                 isActive={isActive}
+                completed={completed}
                 isAvailable={isAvailable}
                 isDownloading={isDownloading}
                 isPlaying={isPlaying}
