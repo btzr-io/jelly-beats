@@ -8,6 +8,7 @@ export default connect(
     purchase: 'purchase',
     setTrack: 'setTrack',
     doNavigate: 'doNavigate',
+    togglePlay: 'triggerTogglePlay',
     toggleFavorite: 'toggleFavorite',
   }
 )(Progress)

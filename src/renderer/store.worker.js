@@ -10,10 +10,9 @@ let store = createStore({ ...initialState })
 
 store.registerActions(store => ({
   ...cacheActions,
-  ...playerActions,
   ...navigationActions,
 }))
-
+store.registerActions(playerActions)
 store.registerActions(streamActions)
 store.registerActions(favoritesActions)
 

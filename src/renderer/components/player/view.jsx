@@ -40,7 +40,6 @@ class Player extends React.PureComponent {
     this.audioElement = React.createRef()
     this.state = {
       ready: false,
-      paused: true,
       duration: 0,
       currentTime: 0,
     }
@@ -67,16 +66,18 @@ class Player extends React.PureComponent {
   play = () => {
     const audio = this.audioElement.current
     audio.play()
+    console.info('PLAYING')
   }
 
   pause = () => {
     const { updatePlayerStatus } = this.props
     const audio = this.audioElement.current
     audio.pause()
-
-    // Update state
-    this.setState({ paused: audio.paused })
-    updatePlayerStatus({ paused: audio.paused })
+    updatePlayerStatus({
+      paused: audio.paused,
+      syncPaused: audio.paused,
+    })
+    console.info('PAUSED')
   }
 
   reset = () => {
@@ -84,7 +85,7 @@ class Player extends React.PureComponent {
     const { updatePlayerStatus } = this.props
     const audio = this.audioElement.current
     // Reset time
-    this.pause()
+    audio.pause()
     audio.currentTime = 0
     // Reset state
     this.setState({
@@ -92,11 +93,6 @@ class Player extends React.PureComponent {
       currentTime: audio.currentTime,
     })
     updatePlayerStatus({ isLoading: true })
-  }
-
-  togglePlay = () => {
-    const audio = this.audioElement.current
-    audio.paused ? this.play() : this.pause()
   }
 
   updateTime = () => {
@@ -128,8 +124,7 @@ class Player extends React.PureComponent {
     // Update state
     const { updatePlayerStatus } = this.props
     const audio = this.audioElement.current
-    this.setState({ paused: audio.paused })
-    updatePlayerStatus({ paused: audio.paused })
+    updatePlayerStatus({ paused: audio.paused, syncPaused: audio.paused })
   }
 
   handleEnded = () => {
@@ -156,10 +151,12 @@ class Player extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { downloads, player } = this.props
+    // OPTIMIZE AND IMPROVE THIS MESS!
+    const { downloads, player, togglePlay } = this.props
     const { uri } = player ? player.currentTrack : {}
     const prevTrack = prevProps.player ? prevProps.player.currentTrack : {}
     const fileSource = downloads[uri]
+
     // If source exist
     if (fileSource) {
       // Get previous path
@@ -174,21 +171,45 @@ class Player extends React.PureComponent {
           // Track is ready
           this.loadSource(fileSource)
         } else {
-          // Loading track
           this.reset()
         }
       }
-    } else if (uri !== prevTrack.uri) {
+
+      if (uri && player) {
+        const audio = this.audioElement.current
+        const isActive = player.currentTrack.uri === uri
+        const isPlaying = isActive && !player.paused
+        // Player status desynchronized:
+        // It means that the user requested a trigger action
+        if (
+          audio &&
+          player.syncPaused !== player.paused &&
+          player.syncPaused !== prevProps.player.syncPaused
+        ) {
+          // Try to sync back
+          console.log({
+            isActive,
+            isPlaying,
+            testNextSync: player.syncPaused,
+          })
+          // Try to play
+          if (!player.syncPaused && !isPlaying) this.play()
+          else if (player.syncPaused && isPlaying) this.pause()
+        }
+      }
+    }
+
+    if (uri !== prevTrack.uri) {
       // Load new track
       this.reset()
     }
   }
 
   render() {
-    const { player, downloads } = this.props
-    const { ready, paused, duration, currentTime } = this.state
-
-    const { uri, title, artist, thumbnail } = player ? player.currentTrack : {}
+    const { ready, duration, currentTime } = this.state
+    const { player, downloads, togglePlay } = this.props
+    const { paused, syncPaused, currentTrack } = player || {}
+    const { uri, title, artist, thumbnail } = currentTrack || {}
 
     const playerOptions = {
       autoPlay: true,
@@ -204,7 +225,7 @@ class Player extends React.PureComponent {
       {
         size: 'large-x',
         icon: paused ? icons.PLAY : icons.PAUSE,
-        action: this.togglePlay,
+        action: () => togglePlay(),
         disabled: !ready,
       },
       {

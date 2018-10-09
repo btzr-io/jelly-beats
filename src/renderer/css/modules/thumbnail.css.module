@@ -39,13 +39,14 @@
   margin: auto;
 
   background: rgba(33, 33, 37, 0.6);
+  transition: opacity 0.3s ease 0.3s;
 
-  transition: all 0.3s ease;
 }
 
 .overlayShow,
 .overlay:hover {
   opacity: 1;
+  transition: opacity 0.3s ease 0s;
 }
 
 .metadata {

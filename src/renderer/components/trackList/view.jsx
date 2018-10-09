@@ -12,9 +12,18 @@ class TrackList extends React.PureComponent {
   }
 
   attempPlay = uri => {
-    const { setTrack, purchase } = this.props
-    setTrack(uri)
-    purchase(uri)
+    const { player, downloads, setTrack, purchase, togglePlay } = this.props
+    //Get player status
+    const { paused, isLoading, currentTrack } = player || {}
+    //Get stream status
+    const { isAvailable, isDownloading } = downloads[uri] || {}
+    const shouldTogglePlay = currentTrack ? currentTrack.uri === uri : false
+    if (shouldTogglePlay) {
+      !isDownloading && !isLoading && togglePlay()
+    } else if (uri) {
+      setTrack(uri)
+      purchase(uri)
+    }
   }
 
   render() {

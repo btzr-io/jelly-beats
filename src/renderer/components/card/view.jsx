@@ -16,9 +16,18 @@ class Card extends React.PureComponent {
   }
 
   attempPlay = () => {
-    const { uri, setTrack, purchase } = this.props
-    setTrack(uri)
-    purchase(uri)
+    const { uri, player, downloads, setTrack, purchase, togglePlay } = this.props
+    //Get player status
+    const { paused, isLoading, currentTrack } = player || {}
+    //Get stream status
+    const { isAvailable, isDownloading } = downloads[uri] || {}
+    const shouldTogglePlay = currentTrack ? currentTrack.uri === uri : false
+    if (shouldTogglePlay) {
+      !isDownloading && !isLoading && togglePlay()
+    } else if (uri) {
+      setTrack(uri)
+      purchase(uri)
+    }
   }
 
   componentDidMount() {
@@ -51,11 +60,17 @@ class Card extends React.PureComponent {
 
     //Get player status
     const { paused, isLoading, currentTrack } = player || {}
-    const isActive = (currentTrack ? currentTrack.uri === uri : false) || isDownloading
+    const isActive = currentTrack ? currentTrack.uri === uri : false
     const isPlaying = !paused && isActive
     // Favorite selector
     const isFavorite = favorites.indexOf(uri) > -1
     const showOverlay = !(isAvailable === false) && (isPlaying || isDownloading)
+
+    const buttonIcon = isDownloading
+      ? icons.SPINNER
+      : !isPlaying
+        ? icons.PLAY
+        : icons.PAUSE
 
     return (
       <div
@@ -67,16 +82,15 @@ class Card extends React.PureComponent {
         }
       >
         <Thumbnail className={css.thumb} src={thumbnail} showOverlay={showOverlay}>
-          {!isDownloading && !(isAvailable === false) ? (
+          {!(isAvailable === false) && (
             <Button
-              icon={!isPlaying ? icons.PLAY : icons.PAUSE}
+              icon={buttonIcon}
               type="card-action--overlay"
               size="large-x"
-              toggle={isPlaying}
-              onClick={() => isReady && this.attempPlay()}
+              toggle={isPlaying && !isDownloading}
+              animation={isDownloading && 'spin'}
+              onClick={() => !isDownloading && this.attempPlay()}
             />
-          ) : (
-            !(isAvailable === false) && <Loader icon={icons.SPINNER} animation="spin" />
           )}
         </Thumbnail>
         <div className={css.content}>
