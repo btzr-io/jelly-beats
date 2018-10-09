@@ -10,6 +10,7 @@ const claims = [
   'lbry://ms-summertime-is-here#727c8e3497a2b290e1ce4629210a924ef55f806a',
   'lbry://piano#f13c81bf0bc0bfbb608ac59d53e3112377e92919',
   'lbry://freemusic#d6bc54d741f11f41d71d34dbb573ca1b3e1ce6b9',
+  'lbry://@Madiator2011-Gaming#2b89981a12926260d15cd11af264cf13252b9721/DeskaklizmMiraculumParodiaDespacito',
 ]
 
 export default claims
