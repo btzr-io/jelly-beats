@@ -3,10 +3,11 @@ import Progress from './view'
 import { connect } from 'unistore/react'
 
 export default connect(
-  'player',
+  'player, favorites, downloads',
   {
     purchase: 'purchase',
     setTrack: 'setTrack',
     doNavigate: 'doNavigate',
+    toggleFavorite: 'toggleFavorite',
   }
 )(Progress)

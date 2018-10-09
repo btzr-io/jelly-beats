@@ -52,6 +52,10 @@ tbody tr {
   transition: none;
 }
 
+.row--active .button--table-action--overlay:not(.button--toggle) {
+  background-color: #545454;
+}
+
 .row:hover .button--table-action--overlay + .row_label {
   opacity: 0;
 }

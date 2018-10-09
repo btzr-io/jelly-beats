@@ -11,10 +11,10 @@ let store = createStore({ ...initialState })
 store.registerActions(store => ({
   ...cacheActions,
   ...playerActions,
-  ...favoritesActions,
   ...navigationActions,
 }))
 
 store.registerActions(streamActions)
+store.registerActions(favoritesActions)
 
 export default store

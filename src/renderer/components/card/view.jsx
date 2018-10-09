@@ -15,14 +15,6 @@ class Card extends React.PureComponent {
     this.state = { isReady: false }
   }
 
-  toggleFavorite = () => {
-    const { uri, favorites, addToFavorites, removefromFavorites } = this.props
-    // Favorite selector
-    const isFavorite = favorites.indexOf(uri) > -1
-    // Toggle favorite
-    !isFavorite ? addToFavorites(uri) : removefromFavorites(uri)
-  }
-
   attempPlay = () => {
     const { uri, setTrack, purchase } = this.props
     setTrack(uri)
@@ -46,7 +38,7 @@ class Card extends React.PureComponent {
 
   render() {
     // Get props
-    const { uri, cache, downloads, favorites, player } = this.props
+    const { uri, cache, downloads, favorites, player, toggleFavorite } = this.props
 
     // Get state
     const { isReady } = this.state
@@ -102,7 +94,7 @@ class Card extends React.PureComponent {
               icon={isFavorite ? icons.HEART : icons.HEART_OUTLINE}
               type="card-action"
               size="large"
-              onClick={this.toggleFavorite}
+              onClick={() => uri && toggleFavorite(uri)}
             />
             <Button
               icon={icons.PLAYLIST_PLUS}

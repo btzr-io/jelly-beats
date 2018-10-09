@@ -9,7 +9,6 @@ export default connect(
     setTrack: 'setTrack',
     storeTrack: 'storeTrack',
     doNavigate: 'doNavigate',
-    addToFavorites: 'addToFavorites',
-    removefromFavorites: 'removefromFavorites',
+    toggleFavorite: 'toggleFavorite',
   }
 )(Progress)

@@ -87,6 +87,11 @@
   padding: 4px;
   border-radius: 16px;
   background: transparent;
+  opacity: 0.64;
+}
+
+.button--toggle.button--table-action {
+  opacity: 1;
 }
 
 .button--table-action--overlay {
@@ -97,7 +102,7 @@
   left: -8px;
   z-index: 1;
   border-radius: 32px;
-  background-color: var(--button-bg-color);
+  background-color: var(--button-bg);
   transition: none;
 }
 

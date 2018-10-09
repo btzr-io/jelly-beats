@@ -18,9 +18,7 @@ class TrackList extends React.PureComponent {
   }
 
   render() {
-    const { list, player } = this.props
-    const { currentTrack, isLoading, paused } = player || {}
-    const isPlaying = !paused && !isLoading
+    const { list, player, favorites, toggleFavorite, downloads } = this.props
 
     return (
       <table className="track-list">
@@ -34,17 +32,28 @@ class TrackList extends React.PureComponent {
         </thead>
         <tbody>
           {list.map(([uri, value], index) => {
-            const isActive = currentTrack ? currentTrack.uri === uri : false
+            const isFavorite = favorites.indexOf(uri) > -1
+            //Get stream status
+            const { completed, isAvailable, isDownloading } = downloads[uri] || {}
+            //Get player status
+            const { paused, isLoading, currentTrack } = player || {}
+            const isActive =
+              (currentTrack ? currentTrack.uri === uri : false) || isDownloading
+            const isPlaying = !paused && isActive
+
             return (
               <TrackListItem
                 key={uri}
                 uri={uri}
                 index={index + 1}
                 claim={value}
-                active={isActive}
-                isLoading={isLoading}
-                isPlaying={isPlaying && isActive}
-                onClick={() => this.attempPlay(uri)}
+                isActive={isActive}
+                isAvailable={isAvailable}
+                isDownloading={isDownloading}
+                isPlaying={isPlaying}
+                isFavorite={isFavorite}
+                triggerPlay={() => this.attempPlay(uri)}
+                toggleFavorite={() => toggleFavorite(uri)}
               />
             )
           })}

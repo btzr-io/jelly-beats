@@ -10,7 +10,17 @@ class TrackList extends React.Component {
   }
 
   render() {
-    const { index, active, onClick, isPlaying, isLoading } = this.props
+    const {
+      uri,
+      index,
+      triggerPlay,
+      toggleFavorite,
+      isActive,
+      isAvailable,
+      isPlaying,
+      isDownloading,
+      isFavorite,
+    } = this.props
     const { certificate, claim } = this.props.claim
     const { metadata } = claim.value.stream
     const { author, title, name, description } = metadata
@@ -19,29 +29,33 @@ class TrackList extends React.Component {
     const artist = author || channel
     const trackTitle = title || name
 
+    const showButton = !isDownloading && !(isAvailable === false)
+
     return (
-      <tr
-        className={classnames('row', { 'row--active': active })}
-        onClick={() => onClick()}
-      >
+      <tr className={classnames('row', { 'row--active': isActive })}>
         <td>
           <div className="row_item">
-            <Button
-              icon={!isPlaying ? icons.PLAY : icons.PAUSE}
-              type="table-action--overlay"
-              size="large"
-              toggle={isPlaying}
-            />
+            {showButton && (
+              <Button
+                icon={!isPlaying ? icons.PLAY : icons.PAUSE}
+                type="table-action--overlay"
+                size="large"
+                toggle={isPlaying}
+                onClick={() => triggerPlay()}
+              />
+            )}
             <span className="row_label">{index}</span>
           </div>
         </td>
 
         <td>
           <Button
-            iconColor={'var(--color-red)'}
-            icon={icons.HEART}
+            iconColor={isFavorite ? 'var(--color-red)' : ''}
+            icon={isFavorite ? icons.HEART : icons.HEART_OUTLINE}
             type="table-action"
             size="large"
+            toggle={isFavorite}
+            onClick={() => toggleFavorite()}
           />
         </td>
 
