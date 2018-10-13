@@ -154,16 +154,16 @@
   margin: 0 8px;
   padding: 0 8px;
   position: relative;
-  text-align: left;
-  overflow: hidden;
+  text-align: center;
 }
 
 .trackData p {
   width: 100%;
+  margin: 4px 0;
   overflow: hidden;
-  white-space: nowrap;
-  display: inline;
-  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .trackData .trackArtist {
