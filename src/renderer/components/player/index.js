@@ -6,6 +6,7 @@ export default connect(
   'player, cache, downloads',
   {
     togglePlay: 'triggerTogglePlay',
+    updateStreamInfo: 'updateStreamInfo',
     updatePlayerStatus: 'updatePlayerStatus',
   }
 )(Player)

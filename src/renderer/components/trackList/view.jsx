@@ -37,13 +37,15 @@ class TrackList extends React.PureComponent {
             <th>{/* Favorite */}</th>
             <th>Track</th>
             <th>Artist</th>
+            <th>Duration</th>
           </tr>
         </thead>
         <tbody>
           {list.map(([uri, value], index) => {
             const isFavorite = favorites.indexOf(uri) > -1
             //Get stream status
-            const { completed, isAvailable, isDownloading } = downloads[uri] || {}
+            const { duration, completed, isAvailable, isDownloading } =
+              downloads[uri] || {}
             //Get player status
             const { paused, isLoading, currentTrack } = player || {}
             const isActive = currentTrack ? currentTrack.uri === uri : false
@@ -55,6 +57,7 @@ class TrackList extends React.PureComponent {
                 uri={uri}
                 index={index + 1}
                 claim={value}
+                duration={duration}
                 isActive={isActive}
                 completed={completed}
                 isAvailable={isAvailable}

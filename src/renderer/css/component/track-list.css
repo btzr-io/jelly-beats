@@ -18,7 +18,17 @@ thead th {
 th,
 td {
   position: relative;
-  padding: 16px 32px;
+  padding: 16px 8px;
+}
+
+th:first-child,
+td:first-child {
+  padding-left: 32px;
+}
+
+th:last-child,
+td:last-child {
+  padding-right: 32px;
 }
 
 tbody tr {

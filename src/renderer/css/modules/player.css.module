@@ -46,6 +46,25 @@
 
 .player .seek {
   margin: 12px 0;
+  flex-grow: 1;
+}
+
+.player .seekBar {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  width: 100%;
+}
+
+.player .seekBar .currentTime {
+  margin-right: 16px;
+  opacity: 0.64;
+}
+
+.player .seekBar .duration {
+  margin-left: 16px;
+  opacity: 0.64;
 }
 
 .player audio {

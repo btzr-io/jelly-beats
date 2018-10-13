@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import classnames from 'classnames'
 import navigate from '@/utils/navigate'
 import Button from '@/components/common/button'
@@ -14,11 +15,12 @@ class TrackList extends React.Component {
     const {
       uri,
       index,
+      duration,
       isActive,
       completed,
       isPlaying,
-      isAvailable,
       isFavorite,
+      isAvailable,
       triggerPlay,
       isDownloading,
       toggleFavorite,
@@ -83,6 +85,12 @@ class TrackList extends React.Component {
 
         <td>
           <span className="row_label">{artist}</span>
+        </td>
+
+        <td>
+          <span className="row_label">
+            {duration && moment.utc(duration * 1000).format('mm:ss')}
+          </span>
         </td>
       </tr>
     )

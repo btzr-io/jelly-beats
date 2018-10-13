@@ -1,10 +1,13 @@
-import React from 'react'
 import fs from 'fs'
+import React from 'react'
+import moment from 'moment'
 import MediaElementWrapper from 'mediasource'
 import Icon from '@mdi/react'
 import * as icons from '@/constants/icons'
 import classnames from 'classnames'
 import Slider from './slider'
+
+const formatTime = (seconds = 0) => moment.utc(seconds * 1000).format('mm:ss')
 
 // Import CSS
 import '@/css/slider.css'
@@ -106,8 +109,16 @@ class Player extends React.PureComponent {
   }
 
   handleMetadata = () => {
+    // Get audio duration
     const audio = this.audioElement.current
-    this.setState({ duration: audio.duration })
+    const duration = audio.duration
+
+    const { player, updateStreamInfo } = this.props
+    const { uri } = player ? player.currentTrack : {}
+
+    // Store duration
+    this.setState({ duration })
+    updateStreamInfo(uri, { duration })
   }
 
   handleLoadStart = () => {
@@ -206,7 +217,7 @@ class Player extends React.PureComponent {
   }
 
   render() {
-    const { ready, duration, currentTime } = this.state
+    const { ready, currentTime } = this.state
     const { player, downloads, togglePlay } = this.props
     const { paused, syncPaused, currentTrack } = player || {}
     const { uri, title, artist, thumbnail } = currentTrack || {}
@@ -254,7 +265,7 @@ class Player extends React.PureComponent {
     ]
 
     const fileSource = (downloads && downloads[uri]) || {}
-    const { isDownloading } = fileSource
+    const { duration, isDownloading } = fileSource
 
     return (
       <div className={css.player + ' ' + css.active}>
@@ -282,12 +293,17 @@ class Player extends React.PureComponent {
                   </span>
                 </p>
               )}
-              <Slider
-                onChange={this.setCurrentTime}
-                value={currentTime}
-                max={duration}
-                disabled={!ready}
-              />
+
+              <div className={css.seekBar}>
+                <span className={css.currentTime}>{formatTime(currentTime)}</span>
+                <Slider
+                  onChange={this.setCurrentTime}
+                  value={currentTime}
+                  max={duration}
+                  disabled={!ready}
+                />
+                <span className={css.duration}>{formatTime(duration)}</span>
+              </div>
             </div>
 
             <div className={css.actions}>
