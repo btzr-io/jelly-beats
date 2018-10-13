@@ -56,6 +56,6 @@
     "pretty-quick": "^1.7.0",
     "prop-types": "^15.6.2",
     "style-loader": "^0.23.1",
-    "webpack": "^4.20.1"
+    "webpack": "^4.20.2"
   }
 }
