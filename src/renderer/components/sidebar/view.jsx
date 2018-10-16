@@ -27,7 +27,7 @@ class SideBar extends React.PureComponent {
     super(props)
   }
 
-  getNavLink = ({ path, label, icon }) => {
+  getNavLink = ({ path, label, icon, idx }) => {
     const { doNavigate, navigation } = this.props
     const { currentPage } = navigation || {}
     return (
@@ -36,6 +36,7 @@ class SideBar extends React.PureComponent {
         label={label}
         icon={icon}
         active={currentPage == path}
+        key={`${idx}_navLink`}
       />
     )
   }
@@ -61,7 +62,7 @@ class SideBar extends React.PureComponent {
     return (
       <div className="sidebar">
         <div className="nav__links">
-          {navLinks.map((item, idx) => this.getNavLink({ ...item }))}
+          {navLinks.map((item, idx) => this.getNavLink({ ...item, idx }))}
         </div>
       </div>
     )
