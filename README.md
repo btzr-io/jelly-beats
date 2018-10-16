@@ -1,3 +1,4 @@
+
 <img src="https://user-images.githubusercontent.com/39308480/43605302-e794780c-9665-11e8-9e25-7abefc7a3092.png" alt="jelly-beats" width="54%">
 
 # Decentralized music streaming platform [![David](https://img.shields.io/david/btzr-io/jelly-beats.svg?style=flat-square)](https://david-dm.org/btzr-io/jelly-beats)[![GitHub license](https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=flat-square)](https://github.com/btzr-io/electron-preact-app/blob/master/LICENSE)
@@ -8,6 +9,10 @@ How? We are developing an open source desktop application using the electron fra
 We don’t intend to develop a real working product that can compete or replace other centralized platforms such as soundcloud, spotify, deezer (At least not right now).
 Our main goal right now it’s to develop a simple but functional application to showcase the current potential of the lbry-protocol for media distribution and discovery using simple web technologies.
 
+### Prebuild binaries
+|                       | Windows                                      | macOS                                        | Linux                                        
+| --------------------- | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
+| Latest Release | [Download](https://github.com/btzr-io/jelly-beats/blob/new-readme/releases/jelly-beats%20Setup%200.0.0.exe)     | [Download](https://github.com/btzr-io/jelly-beats/blob/new-readme/releases/jelly-beats-0.0.0.dmg)     | [Download](https://github.com/btzr-io/jelly-beats)
 
 
 ### Development
