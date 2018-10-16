@@ -1,4 +1,4 @@
-## Contributing [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+## Contributing [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/btzr-io/jelly-beats/issues)
 
 Thank you for considering contributing to Jelly Beats!
 
