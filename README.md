@@ -29,7 +29,7 @@ Install dependencies.
  
 
 > All operating systems requires runing LBRY daemon. You can easily start daemon by runing LBRY Desktop App or by runing separate daemon. [Click here to download latest daemon](https://github.com/lbryio/lbry/releases).
-> Guide for daemon can be found [here](https://github.com/lbryio/lbry) 
+> Guide for running daemon can be found [here](https://github.com/lbryio/lbry) 
 
 Clone this repository.
 
