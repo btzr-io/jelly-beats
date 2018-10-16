@@ -54,7 +54,7 @@
     "husky": "^1.1.2",
     "preact": "^8.3.1",
     "prettier": "^1.14.3",
-    "pretty-quick": "^1.7.0",
+    "pretty-quick": "^1.8.0",
     "prop-types": "^15.6.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.20.2"
