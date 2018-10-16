@@ -142,23 +142,23 @@ class Player extends React.PureComponent {
     this.pause()
   }
 
-  componentWillUnmount() {
+  toggleEventListeners(type) {
     const audio = this.audioElement.current
-    audio.removeEventListener('ended', this.handleEnded)
-    audio.removeEventListener('playing', this.handlePlaying)
-    audio.removeEventListener('loadstart', this.handleLoadStart)
-    audio.removeEventListener('loadedmetadata', this.handleMetadata)
-    audio.removeEventListener('timeupdate', this.updateTime)
+    const action = type === 'add' ? 'addEventListener' : 'removeEventListener'
+    audio[action]('ended', this.handleEnded)
+    audio[action]('playing', this.handlePlaying)
+    audio[action]('loadstart', this.handleLoadStart)
+    audio[action]('loadedmetadata', this.handleMetadata)
+    audio[action]('timeupdate', this.updateTime)
+  }
+
+  componentWillUnmount() {
+    this.toggleEventListeners('remove')
   }
 
   componentDidMount() {
-    const audio = this.audioElement.current
     //audio.addEventListener('error', err => {})
-    audio.addEventListener('ended', this.handleEnded)
-    audio.addEventListener('playing', this.handlePlaying)
-    audio.addEventListener('loadstart', this.handleLoadStart)
-    audio.addEventListener('loadedmetadata', this.handleMetadata)
-    audio.addEventListener('timeupdate', this.updateTime)
+    this.toggleEventListeners('add')
   }
 
   componentDidUpdate(prevProps, prevState) {
