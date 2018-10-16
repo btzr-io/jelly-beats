@@ -9,12 +9,6 @@ How? We are developing an open source desktop application using the electron fra
 We don’t intend to develop a real working product that can compete or replace other centralized platforms such as soundcloud, spotify, deezer (At least not right now).
 Our main goal right now it’s to develop a simple but functional application to showcase the current potential of the lbry-protocol for media distribution and discovery using simple web technologies.
 
-### Prebuild binaries
-|                       | Windows                                      | macOS                                        | Linux                                        
-| --------------------- | -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| Latest Release | [Download](https://github.com/btzr-io/jelly-beats/blob/new-readme/releases/jelly-beats%20Setup%200.0.0.exe)     | [Download](https://github.com/btzr-io/jelly-beats/blob/new-readme/releases/jelly-beats-0.0.0.dmg)     | [Download](https://github.com/btzr-io/jelly-beats)
-
-
 ### Development
 
 Install dependencies.
