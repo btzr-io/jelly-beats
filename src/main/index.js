@@ -4,6 +4,16 @@ import { format as formatUrl } from 'url'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
+//localhost url
+const localURL = `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`;
+
+//production url
+const formattedURL = formatUrl({
+  pathname: path.join(__dirname, 'index.html'),
+  protocol: 'file',
+  slashes: true,
+})
+
 // global reference to mainWindow (necessary to prevent window from being garbage collected)
 let mainWindow
 
@@ -14,17 +24,11 @@ function createMainWindow() {
     },
   })
 
+  //open the Dev tools only if the environment is not production
   isDevelopment && window.webContents.openDevTools();
 
-  isDevelopment
-    ? window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
-    : window.loadURL(
-      formatUrl({
-        pathname: path.join(__dirname, 'index.html'),
-        protocol: 'file',
-        slashes: true,
-      })
-    )
+  //pick url based on the deployment environment
+  window.loadURL(isDevelopment ? localURL : formattedURL);
 
   window.on('closed', () => {
     mainWindow = null
