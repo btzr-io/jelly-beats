@@ -14,21 +14,17 @@ function createMainWindow() {
     },
   })
 
-  if (isDevelopment) {
-    window.webContents.openDevTools()
-  }
+  isDevelopment && window.webContents.openDevTools();
 
-  if (isDevelopment) {
-    window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
-  } else {
-    window.loadURL(
+  isDevelopment
+    ? window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`)
+    : window.loadURL(
       formatUrl({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file',
         slashes: true,
       })
     )
-  }
 
   window.on('closed', () => {
     mainWindow = null
