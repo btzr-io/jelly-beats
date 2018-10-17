@@ -11,6 +11,7 @@
 @import url('./component/sidebar.css');
 @import url('./component/track-list.css');
 @import url('./component/empty-state.css');
+@import url('./component/tooltip.css');
 
 html {
   background: black;
