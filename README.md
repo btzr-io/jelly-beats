@@ -12,9 +12,16 @@ In order to run this app you need to install all these dependencies:
 - [Yarn](https://yarnpkg.com/)
 - [LBRY Daemon](https://github.com/lbryio/lbry)
 
+
  > **Only for Linux**
  >
  > You may also require make tools. For example, on Debian you can install [Build-essentials](https://packages.debian.org/stretch/build-essential) package.
+
+
+## The lbry protocol
+
+[LBRY](https://github.com/lbryio/lbry) is an open-source protocol providing distribution, discovery, and purchase of digital content via a decentralized network. We use this protocol to discover and stream music and other audio files such as podcasts.
+
 
 ## How to run
 ```sh
