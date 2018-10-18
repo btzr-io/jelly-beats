@@ -2,7 +2,7 @@ import React from 'react'
 
 class Tooltip extends React.PureComponent {
   render() {
-    const { text, placement = 'top', children } = this.props
+    const { text, placement, children } = this.props
 
     return (
       <div className="tooltip">
@@ -11,6 +11,10 @@ class Tooltip extends React.PureComponent {
       </div>
     )
   }
+}
+
+Tooltip.defaultProps = {
+  placement: 'top',
 }
 
 export default Tooltip
