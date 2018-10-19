@@ -127,7 +127,7 @@ class Player extends React.PureComponent {
     // ready to play
     console.info('New track loaded!')
     this.setState({ ready: true })
-    updatePlayerStatus({ isLoading: false })
+    updatePlayerStatus({ isLoading: false, showPlayer: true })
     this.play()
   }
 
@@ -219,7 +219,7 @@ class Player extends React.PureComponent {
   render() {
     const { ready, currentTime } = this.state
     const { player, downloads, togglePlay } = this.props
-    const { paused, syncPaused, currentTrack } = player || {}
+    const { paused, syncPaused, currentTrack, showPlayer } = player || {}
     const { uri, title, artist, thumbnail } = currentTrack || {}
 
     const playerOptions = {
@@ -268,7 +268,7 @@ class Player extends React.PureComponent {
     const { duration, isDownloading } = fileSource
 
     return (
-      <div className={css.player + ' ' + css.active}>
+      <div className={css.player + ' ' + (showPlayer ? css.active : '')}>
         <audio ref={this.audioElement} {...playerOptions} />
 
         <div className={css.container}>

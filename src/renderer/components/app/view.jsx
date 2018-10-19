@@ -29,12 +29,12 @@ class App extends React.PureComponent {
 
   render() {
     const { children, player } = this.props
-    const currentTrack = player && player.currentTrack
+    const { showPlayer } = player || {}
 
     return (
       <React.Fragment>
         <Header />
-        <div id="window">
+        <div id="window" className={showPlayer ? 'short' : ''}>
           <SideBar />
           <Router routes={routes} defaultRoute={'/'} />
           <Player />
