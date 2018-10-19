@@ -4,10 +4,10 @@
 
 <p align="center">
  <a href=https://david-dm.org/btzr-io/jelly-beats>                
-   <img src=https://img.shields.io/david/btzr-io/jelly-beats.svg?style=flat-square />
+   <img src="https://img.shields.io/david/btzr-io/jelly-beats.svg?style=flat-square" alt="dependencies"/>
  </a>
  <a src="https://github.com/btzr-io/electron-preact-app/blob/master/LICENSE">
-   <img src="https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=flat-square" />
+   <img src="https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=flat-square" alt="license" />
   </a>
 </p>
 
