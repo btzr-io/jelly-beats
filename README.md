@@ -2,7 +2,7 @@
   <img src="https://user-images.githubusercontent.com/39308480/43605302-e794780c-9665-11e8-9e25-7abefc7a3092.png" alt="jelly-              beats" width="54%">
 </h1>
 
-<p align="center">
+<h1 align="center">
  <a href=https://david-dm.org/btzr-io/jelly-beats>                
    <img src="https://img.shields.io/david/btzr-io/jelly-beats.svg?style=for-the-badge" alt="dependencies"/>
  </a>
@@ -12,7 +12,10 @@
  <a src="https://github.com/btzr-io/electron-preact-app/blob/master/LICENSE">
    <img src="https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=for-the-badge" alt="license" />
   </a>
-</p>
+</h1>
+
+ <img src="https://user-images.githubusercontent.com/14793624/47196971-9b235b80-d320-11e8-85a7-307f9a33476f.png" alt="screenshot"/>
+<br/>
 
 ## What's this?
 
