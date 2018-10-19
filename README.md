@@ -17,7 +17,7 @@
  <img src="https://user-images.githubusercontent.com/14793624/47196971-9b235b80-d320-11e8-85a7-307f9a33476f.png" alt="screenshot"/>
  
  > ### :information_source:  Note
- > This project is on early stages of development, we don't recommend to install, build or use it if you don't know what are you doing. Pease expect bugs and missing features.
+ > This project is on early stages of development, we don't recommend to install, build or use it if you don't understand what you are doing. Pease expect bugs and missing features.
   
 ## What's this?
 
