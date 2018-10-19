@@ -1,7 +1,15 @@
-<img src="https://user-images.githubusercontent.com/39308480/43605302-e794780c-9665-11e8-9e25-7abefc7a3092.png" alt="jelly-beats" width="54%">
+<h1 align=center>
+  <img src="https://user-images.githubusercontent.com/39308480/43605302-e794780c-9665-11e8-9e25-7abefc7a3092.png" alt="jelly-              beats" width="54%">
+</h1>
 
-[![David](https://img.shields.io/david/btzr-io/jelly-beats.svg?style=flat-square)](https://david-dm.org/btzr-io/jelly-beats)
-[![GitHub license](https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=flat-square)](https://github.com/btzr-io/electron-preact-app/blob/master/LICENSE)
+<p align="center">
+ <a href=https://david-dm.org/btzr-io/jelly-beats>                
+   <img src=https://img.shields.io/david/btzr-io/jelly-beats.svg?style=flat-square />
+ </a>
+ <a src="https://github.com/btzr-io/electron-preact-app/blob/master/LICENSE">
+   <img src="https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=flat-square" />
+  </a>
+</p>
 
 ## What's this?
 
