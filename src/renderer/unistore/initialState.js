@@ -14,6 +14,12 @@ initialState.player = {
   currentTrack: {},
 }
 
+initialState.tooltip = {
+  text: '',
+  show: false,
+  position: null,
+}
+
 initialState.cache = {}
 
 initialState.favorites = []
