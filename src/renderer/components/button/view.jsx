@@ -40,9 +40,9 @@ class Button extends React.PureComponent {
   }
 
   handleClick = () => {
-    const { onClick, hideTooltip } = this.props
+    const { tooltip, hideTooltip, onClick } = this.props
     onClick()
-    hideTooltip()
+    tooltip && hideTooltip()
   }
 
   toggleEventListeners(type) {
@@ -53,7 +53,7 @@ class Button extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { tooltip } = props
+    const { tooltip } = this.props
 
     if (tooltip && tooltip.text) {
       this.toggleEventListeners('add')
@@ -61,7 +61,7 @@ class Button extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    const { tooltip } = props
+    const { tooltip } = this.props
     tooltip && this.toggleEventListeners('remove')
   }
 
