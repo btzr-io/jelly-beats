@@ -1,16 +1,19 @@
 .thumb {
-  height: 184px;
-  width: 100%;
+  padding-top: 100%;
+  height: auto;
+  width: auto;
   overflow: hidden;
   position: relative;
   margin: 0;
   opacity: 0;
+
   transition: opacity 0.3s ease 0.3s;
 }
 
 .thumb img,
 .thumbReady img {
   display: none;
+  width: 100%;
 }
 
 .thumbReady {
@@ -19,6 +22,8 @@
 }
 
 .picture {
+  position: absolute;
+  top: 0;
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.2);
@@ -55,3 +60,5 @@
   bottom: 0;
   left: 0;
 }
+
+
