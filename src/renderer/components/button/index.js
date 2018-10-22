@@ -3,7 +3,7 @@ import { connect } from 'unistore/react'
 import Button from './view'
 
 export default connect(
-  'tooltip',
+  null,
   {
     hideTooltip: 'hideTooltip',
     showTooltip: 'showTooltip',

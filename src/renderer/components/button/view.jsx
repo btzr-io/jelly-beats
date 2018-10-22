@@ -17,24 +17,24 @@ class Button extends React.PureComponent {
     this.buttonElement = React.createRef()
   }
 
-  handleMouseEnter = event => {
-    const { showTooltip } = this.props
+  handleMouseEnter = () => {
+    const { tooltip, showTooltip } = this.props
+    // Get target position
     const button = this.buttonElement.current
+    const target = button.getBoundingClientRect()
+    // Get parent position
     const container = document.getElementById('view')
-
+    const parent = container.getBoundingClientRect()
+    // Get scroll data
     const scroll = {
       top: container.scrollTop,
       left: container.scrollLeft,
-      height: button.scrollHeight,
     }
-
-    const target = button.getBoundingClientRect()
-    const parent = container.getBoundingClientRect()
-
-    showTooltip({ text: 'Help', target, parent, scroll, placement: 'top' })
+    // Create and show tooltip
+    showTooltip({ target, parent, scroll, ...tooltip })
   }
 
-  handleMouseLeave = event => {
+  handleMouseLeave = () => {
     const { hideTooltip } = this.props
     hideTooltip()
   }
@@ -43,6 +43,26 @@ class Button extends React.PureComponent {
     const { onClick, hideTooltip } = this.props
     onClick()
     hideTooltip()
+  }
+
+  toggleEventListeners(type) {
+    const button = this.buttonElement.current
+    const action = `${type}EventListener`
+    button[action]('mouseenter', this.handleMouseEnter)
+    button[action]('mouseleave', this.handleMouseLeave)
+  }
+
+  componentDidMount() {
+    const { tooltip } = props
+
+    if (tooltip && tooltip.text) {
+      this.toggleEventListeners('add')
+    }
+  }
+
+  componentWillUnmount() {
+    const { tooltip } = props
+    tooltip && this.toggleEventListeners('remove')
   }
 
   render() {
@@ -73,8 +93,6 @@ class Button extends React.PureComponent {
         className={buttonClass}
         onClick={this.handleClick}
         disabled={disabled}
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
         ref={this.buttonElement}
       >
         {icon && <Icon path={icon} className={iconClass} color={iconColor} />}
