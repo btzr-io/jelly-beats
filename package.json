@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/btzr-io/jelly-beats#readme",
   "dependencies": {
-    "@mdi/js": "^2.8.94",
+    "@mdi/js": "^3.0.39",
     "@mdi/react": "^1.0.1",
     "classnames": "^2.2.6",
     "history": "^4.7.2",
