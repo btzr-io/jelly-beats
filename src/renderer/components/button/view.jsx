@@ -31,7 +31,7 @@ class Button extends React.PureComponent {
     const target = button.getBoundingClientRect()
     const parent = container.getBoundingClientRect()
 
-    showTooltip({ text: 'Help', target, parent, scroll, placement: 'right' })
+    showTooltip({ text: 'Help', target, parent, scroll, placement: 'top' })
   }
 
   handleMouseLeave = event => {

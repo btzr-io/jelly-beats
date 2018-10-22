@@ -54,26 +54,33 @@
   border-color: transparent transparent #3f3f43 transparent;
 }
 
-.tooltip-top,
+.tooltip-top {
+  transform: translate(-50%, -100%);
+}
+
 .tooltip-bottom {
   transform: translate(-50%, 0);
 }
+
 .tooltip-top.show {
-  transform: translate(-50%, -150%);
+  transform: translate(-50%, calc(-100% - 12px));
 }
 .tooltip-bottom.show {
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, 12px);
 }
 
-.tooltip-left,
+.tooltip-left {
+  transform: translate(-100%, -50%);
+}
+
 .tooltip-right {
   transform: translate(0, -50%);
 }
 
-.tooltip-left {
-  transform: translate(-125%, -50%);
+.tooltip-left.show {
+  transform: translate(calc(-100% - 12px), -50%);
 }
 
-.tooltip-right {
-  transform: translate(25%, -50%);
+.tooltip-right.show {
+  transform: translate(12px, -50%);
 }
