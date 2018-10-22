@@ -1,61 +1,29 @@
 .tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip .tooltip-text {
   position: absolute;
-  width: 120px;
+  margin: 0;
   background-color: #3f3f43;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
   border-radius: 6px;
   z-index: 1;
-  transition: opacity 0.3s;
-  display: none;
+  padding: 4px 12px;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  transform: translate(0, 0);
+  transition-property: opacity, transform;
 }
 
-.tooltip-text.show {
-  display: block;
+.tooltip.show {
+  opacity: 1;
 }
 
-.tooltip-text::after {
+.tooltip::after {
   content: '';
   position: absolute;
   border-width: 5px;
   border-style: solid;
-}
-
-.tooltip-left {
-  bottom: auto;
-  right: 128%;
-}
-
-.tooltip-left::after {
-  top: 50%;
-  left: 100%;
-  margin-top: -5px;
-  border-color: transparent transparent transparent #3f3f43;
-}
-
-.tooltip-bottom {
-  top: 135%;
-  left: 50%;
-  margin-left: -60px;
-}
-
-.tooltip-bottom::after {
-  bottom: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-color: transparent transparent #3f3f43 transparent;
-}
-
-.tooltip-top {
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
 }
 
 .tooltip-top::after {
@@ -65,8 +33,11 @@
   border-color: #3f3f43 transparent transparent transparent;
 }
 
-.tooltip-right {
-  left: 125%;
+.tooltip-left::after {
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-color: transparent transparent transparent #3f3f43;
 }
 
 .tooltip-right::after {
@@ -74,4 +45,35 @@
   right: 100%;
   margin-top: -5px;
   border-color: transparent #3f3f43 transparent transparent;
+}
+
+.tooltip-bottom::after {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-color: transparent transparent #3f3f43 transparent;
+}
+
+.tooltip-top,
+.tooltip-bottom {
+  transform: translate(-50%, 0);
+}
+.tooltip-top.show {
+  transform: translate(-50%, -150%);
+}
+.tooltip-bottom.show {
+  transform: translate(-50%, 50%);
+}
+
+.tooltip-left,
+.tooltip-right {
+  transform: translate(0, -50%);
+}
+
+.tooltip-left {
+  transform: translate(-125%, -50%);
+}
+
+.tooltip-right {
+  transform: translate(25%, -50%);
 }

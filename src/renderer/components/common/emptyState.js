@@ -1,6 +1,6 @@
 import React from 'react'
 import Icon from '@mdi/react'
-import Button from './button'
+import Button from '@/components/button'
 import classnames from 'classnames'
 
 class EmptyState extends React.PureComponent {

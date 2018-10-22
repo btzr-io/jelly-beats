@@ -56,7 +56,7 @@ class Router extends React.PureComponent {
 
   render() {
     return (
-      <div className="view">
+      <div id="view" className="view">
         {this.state.page}
         <Tooltip />
       </div>

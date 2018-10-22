@@ -17,7 +17,7 @@ initialState.player = {
 initialState.tooltip = {
   text: '',
   show: false,
-  position: null,
+  position: { left: 0, top: 0 },
 }
 
 initialState.cache = {}

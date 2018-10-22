@@ -11,10 +11,18 @@ class Tooltip extends React.PureComponent {
 
   render() {
     const { tooltip } = this.props
-    const { show, text, placement } = tooltip
+    const { show, text, position, placement } = tooltip
+
+    const tooltipStyle = {
+      ...position,
+    }
+
     return (
-      <div className={classnames('tooltip', { show })}>
-        <div className={`tooltip-text tooltip-${placement}`}>{text}</div>
+      <div
+        className={classnames('tooltip', `tooltip-${placement}`, { show })}
+        style={tooltipStyle}
+      >
+        {text}
       </div>
     )
   }

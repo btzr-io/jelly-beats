@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '@/components/common/button'
+import Button from '@/components/button'
 import Health from '@/components/common/health'
 import Loader from '@/components/common/loader'
 import Icon from '@mdi/react'
