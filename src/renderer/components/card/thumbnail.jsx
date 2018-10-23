@@ -29,11 +29,11 @@ class Card extends React.PureComponent {
 
     return (
       <div className={!ready ? css.thumb : css.thumbReady}>
-        <img src={src} onLoad={this.handleLoad} />
-        <div className={css.picture} style={thumbnailStyle} />
         <div className={classnames(css.overlay, { [css.overlayShow]: showOverlay })}>
           {this.props.children}
         </div>
+        <div className={css.picture} style={thumbnailStyle} />
+        <img src={src} onLoad={this.handleLoad} />
       </div>
     )
   }
