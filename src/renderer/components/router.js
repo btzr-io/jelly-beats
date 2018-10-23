@@ -1,5 +1,6 @@
 import React from 'react'
 import UniversalRouter from 'universal-router'
+import Tooltip from '@/components/tooltip'
 import history from '@/history'
 
 class Router extends React.PureComponent {
@@ -54,7 +55,12 @@ class Router extends React.PureComponent {
   }
 
   render() {
-    return <div className="view">{this.state.page}</div>
+    return (
+      <div id="view" className="view">
+        {this.state.page}
+        <Tooltip />
+      </div>
+    )
   }
 }
 

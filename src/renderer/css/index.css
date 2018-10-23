@@ -88,10 +88,10 @@ a {
 }
 
 .page {
-  min-height: 100%;
   margin: 0 32px;
   position: relative;
   text-align: center;
+  height: 100%;
 }
 
 .label {

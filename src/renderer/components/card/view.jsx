@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from '@/components/common/button'
+import Button from '@/components/button'
 import Health from '@/components/common/health'
 import Loader from '@/components/common/loader'
 import Icon from '@mdi/react'
@@ -108,6 +108,7 @@ class Card extends React.PureComponent {
               icon={isFavorite ? icons.HEART : icons.HEART_OUTLINE}
               type="card-action"
               size="large"
+              tooltip={{ text: `${isFavorite ? 'Remove from' : 'Add to'} favorites` }}
               onClick={() => uri && toggleFavorite(uri)}
             />
             <Button

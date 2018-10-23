@@ -1,35 +1,38 @@
 .tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip .tooltip-text {
   position: absolute;
-  width: 120px;
+  margin: 0;
   background-color: #3f3f43;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
   border-radius: 6px;
   z-index: 1;
-  transition: opacity 0.3s;
-  display: none;
+  padding: 4px 8px;
+  opacity: 0;
+  white-space: wrap;
+  max-width: 140px;
+  pointer-events: none;
+  transform: translate(0, 0);
+  font-size: 0.86em;
+  transition: all 0.2s ease;
+  transition-property: opacity, transform;
 }
 
-.tooltip:hover .tooltip-text {
-  display: block;
+.tooltip.show {
+  opacity: 1;
 }
 
-.tooltip-text::after {
+.tooltip::after {
   content: '';
   position: absolute;
   border-width: 5px;
   border-style: solid;
 }
 
-.tooltip-left {
-  bottom: auto;
-  right: 128%;
+.tooltip-top::after {
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-color: #3f3f43 transparent transparent transparent;
 }
 
 .tooltip-left::after {
@@ -39,10 +42,11 @@
   border-color: transparent transparent transparent #3f3f43;
 }
 
-.tooltip-bottom {
-  top: 135%;
-  left: 50%;
-  margin-left: -60px;
+.tooltip-right::after {
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-color: transparent #3f3f43 transparent transparent;
 }
 
 .tooltip-bottom::after {
@@ -53,25 +57,32 @@
 }
 
 .tooltip-top {
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
+  transform: translate(-50%, -100%);
 }
 
-.tooltip-top::after {
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-color: #3f3f43 transparent transparent transparent;
+.tooltip-bottom {
+  transform: translate(-50%, 0);
+}
+
+.tooltip-top.show {
+  transform: translate(-50%, calc(-100% - 12px));
+}
+.tooltip-bottom.show {
+  transform: translate(-50%, 12px);
+}
+
+.tooltip-left {
+  transform: translate(-100%, -50%);
 }
 
 .tooltip-right {
-  left: 125%;
+  transform: translate(0, -50%);
 }
 
-.tooltip-right::after {
-  top: 50%;
-  right: 100%;
-  margin-top: -5px;
-  border-color: transparent #3f3f43 transparent transparent;
+.tooltip-left.show {
+  transform: translate(calc(-100% - 12px), -50%);
+}
+
+.tooltip-right.show {
+  transform: translate(12px, -50%);
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import classnames from 'classnames'
 import navigate from '@/utils/navigate'
-import Button from '@/components/common/button'
+import Button from '@/components/button'
 import Health from '@/components/common/health'
 import * as icons from '@/constants/icons'
 
@@ -69,6 +69,7 @@ class TrackList extends React.Component {
             type="table-action"
             size="large"
             toggle={isFavorite}
+            tooltip={{ text: `${isFavorite ? 'Remove from' : 'Add to'} favorites` }}
             onClick={() => toggleFavorite()}
           />
         </td>

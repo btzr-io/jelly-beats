@@ -1,20 +1,31 @@
 import React from 'react'
+import classnames from 'classnames'
 
 class Tooltip extends React.PureComponent {
+  static defaultProps = {
+    tooltip: {
+      show: false,
+      placement: 'top',
+    },
+  }
+
   render() {
-    const { text, placement, children } = this.props
+    const { tooltip } = this.props
+    const { show, text, position, placement } = tooltip
+
+    const tooltipStyle = {
+      ...position,
+    }
 
     return (
-      <div className="tooltip">
-        <span className={`tooltip-text tooltip-${placement}`}>{text}</span>
-        {children}
+      <div
+        className={classnames('tooltip', `tooltip-${placement}`, { show })}
+        style={tooltipStyle}
+      >
+        {text}
       </div>
     )
   }
-}
-
-Tooltip.defaultProps = {
-  placement: 'top',
 }
 
 export default Tooltip
