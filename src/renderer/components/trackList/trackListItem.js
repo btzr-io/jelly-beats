@@ -69,6 +69,7 @@ class TrackList extends React.Component {
             type="table-action"
             size="large"
             toggle={isFavorite}
+            tooltip={{ text: `${isFavorite ? 'Remove from' : 'Add to'} favorites` }}
             onClick={() => toggleFavorite()}
           />
         </td>
