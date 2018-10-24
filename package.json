@@ -11,7 +11,8 @@
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
     "format": "pretty-quick && yarn format:css",
     "format:css": "npx prettier --config ./.prettierrc --write **/*.css.module",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "docs": "node generate-docs.js"
   },
   "repository": {
     "type": "git",
@@ -52,6 +53,8 @@
     "electron-builder": "^20.28.4",
     "electron-webpack": "^2.3.1",
     "husky": "^1.1.2",
+    "markdown-magic": "^0.1.25",
+    "markdown-magic-github-contributors": "^0.0.3",
     "preact": "^8.3.1",
     "prettier": "^1.14.3",
     "pretty-quick": "^1.8.0",

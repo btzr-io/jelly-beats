@@ -64,3 +64,27 @@ $ yarn dist
 - On Linux you will get .deb file inside dist folder.
 - On Windows you will get .exe file inside dist folder.
 - On MacOS you will get .dmg file inside dist folder.
+
+## Contributor list
+
+<!-- ⛔️ AUTO-GENERATED-CONTENT:START (CONTRIBUTORS) -->
+
+| **Commits** | **Contributor**                                       |
+| ----------- | ----------------------------------------------------- |
+| 204         | [btzr-io](https://github.com/btzr-io)                 |
+| 49          | [dependabot-bot](https://github.com/dependabot-bot)   |
+| 13          | [kodxana](https://github.com/kodxana)                 |
+| 3           | [tomrimk](https://github.com/tomrimk)                 |
+| 2           | [guastallaigor](https://github.com/guastallaigor)     |
+| 2           | [izamglima](https://github.com/izamglima)             |
+| 2           | [KumarManoj-S](https://github.com/KumarManoj-S)       |
+| 2           | [micaelsbno](https://github.com/micaelsbno)           |
+| 1           | [aestevens](https://github.com/aestevens)             |
+| 1           | [gcarlosr](https://github.com/gcarlosr)               |
+| 1           | [julianxhokaxhiu](https://github.com/julianxhokaxhiu) |
+| 1           | [michaelsanford](https://github.com/michaelsanford)   |
+| 1           | [theonlymikeever](https://github.com/theonlymikeever) |
+| 1           | [robotenique](https://github.com/robotenique)         |
+| 1           | [rogelio-o](https://github.com/rogelio-o)             |
+
+<!-- ⛔️ AUTO-GENERATED-CONTENT:END -->
