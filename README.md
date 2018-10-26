@@ -29,17 +29,20 @@ A Decentralized music streaming platform.
 
 ## Dependencies required
 
-In order to run this app you need to install all these dependencies:
+In order to run this app you need to install **all**  these dependencies.
 
-- [Git](https://git-scm.com/)
-- [Node.js LTS](https://nodejs.org/)
-- [Yarn](https://yarnpkg.com/)
-- [LBRY Daemon](https://lbry.io/quickstart/install)
+| #       |  Install  |
+| ------------- | :-----|
+| 1     |[Git](https://git-scm.com/) |
+| 2   |[Node.js LTS](https://nodejs.org/)|
+| 3  | [Yarn](https://yarnpkg.com/)|
+| 4  |[LBRY Daemon](https://github.com/lbryio/lbry)|
 
-> **Only for Linux**
->
-> You may also require make tools. For example, on Debian you can install [Build-essentials](https://packages.debian.org/stretch/build-essential) package.
-
+ > **Only for Linux**
+  
+ > You may also require **``  Make ``** tools. 
+ > 
+ > For example, on Debian you can install the [Build-essentials](https://packages.debian.org/stretch/build-essential) package.
 ## How to run
 
 ```sh
@@ -61,9 +64,12 @@ $ yarn dev
 $ yarn dist
 ```
 
-- On Linux you will get .deb file inside dist folder.
-- On Windows you will get .exe file inside dist folder.
-- On MacOS you will get .dmg file inside dist folder.
+<<<<<<< HEAD
+| OS      |  File  |
+| ------------- | :-----|
+| **Linux**   |**.deb** -    Inside dist folder. |
+| **Windows**  |**.exe** -   Inside dist folder.|
+| **MacOS** |**.dmg** -      Inside dist folder. |
 
 ## Contributor list
 
