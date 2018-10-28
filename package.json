@@ -12,7 +12,8 @@
     "format": "pretty-quick && yarn format:css",
     "format:css": "npx prettier --config ./.prettierrc --write **/*.css.module",
     "postinstall": "electron-builder install-app-deps",
-    "docs": "node generate-docs.js"
+    "contributors:add": "all-contributors add",
+    "contributors:addAll": "node addContributors.js && all-contributors generate"
   },
   "repository": {
     "type": "git",
@@ -48,17 +49,19 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "all-contributors-cli": "^5.4.1",
     "css-loader": "^1.0.0",
     "electron": "^3.0.5",
     "electron-builder": "^20.28.4",
     "electron-webpack": "^2.3.1",
+    "github-contributors": "^0.4.1",
+    "github-url-from-git": "^1.5.0",
     "husky": "^1.1.2",
-    "markdown-magic": "^0.1.25",
-    "markdown-magic-github-contributors": "^0.0.3",
     "preact": "^8.3.1",
     "prettier": "^1.14.3",
     "pretty-quick": "^1.8.0",
     "prop-types": "^15.6.2",
+    "remote-origin-url": "^1.0.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.22.0"
   }
