@@ -31,12 +31,12 @@ A Decentralized music streaming platform.
 
 In order to run this app you need to install **all**  these dependencies.
 
-| #       |  Install  |
-| ------------- | :-----|
-| 1     |[Git](https://git-scm.com/) |
-| 2   |[Node.js LTS](https://nodejs.org/)|
-| 3  | [Yarn](https://yarnpkg.com/)|
-| 4  |[LBRY Daemon](https://github.com/lbryio/lbry)|
+|  Install  |
+ | :-----|
+|[Git](https://git-scm.com/) |
+|[Node.js LTS](https://nodejs.org/)|
+| [Yarn](https://yarnpkg.com/)|
+|[LBRY Daemon](https://github.com/lbryio/lbry)|
 
  > **Only for Linux**
   
