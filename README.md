@@ -64,7 +64,6 @@ $ yarn dev
 $ yarn dist
 ```
 
-<<<<<<< HEAD
 | OS      |  File  |
 | ------------- | :-----|
 | **Linux**   |**.deb** -    Inside dist folder. |
