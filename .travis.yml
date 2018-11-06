@@ -1,0 +1,55 @@
+matrix:
+  include:
+  - os: osx
+    env: TARGET=mac
+    osx_image: xcode9.2
+    language: node_js
+    node_js: '9'
+  - os: linux
+    env: TARGET=windows
+    services: docker
+    language: node_js
+    node_js: '9'
+  - os: linux
+    env: TARGET=linux
+    language: node_js
+    node_js: '9'
+cache: false
+before_install:
+- |
+  unset TRAVIS_COMMIT_MESSAGE;
+  if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+    mkdir -p /tmp/git-lfs && curl -L https://github.com/github/git-lfs/releases/download/v2.3.1/git-lfs-$([ "$TRAVIS_OS_NAME" == "linux" ] && echo "linux" || echo "darwin")-amd64-2.3.1.tar.gz | tar -xz -C /tmp/git-lfs --strip-components 1
+    export PATH="/tmp/git-lfs:$PATH"
+  else
+    sudo apt-get -qq update
+    sudo apt-get install -y libsecret-1-dev
+    sudo apt-get install --no-install-recommends -y gcc-multilib g++-multilib
+    curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.6.0
+    export PATH="$HOME/.yarn/bin:$PATH"
+  fi
+before_script:
+- git lfs pull
+script:
+- |
+  if [ "$TARGET" == "windows" ]; then
+    # Remove any special characters before adding to our list of ENVs
+    # https://github.com/electron-userland/electron-builder/issues/2450#issuecomment-421788155
+    ENVS=`env | grep -iE '(DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|_TOKEN|_KEY|AWS_|STRIP|BUILD_|TARGET)([A-Z]|_)*=' | sed -n '/^[^\t]/s/=.*//p' | sed '/^$/d' | sed 's/^/-e /g' | tr '\n' ' '`
+    docker run $ENVS --rm \
+      -v ${PWD}:/project \
+      electronuserland/builder:wine \
+      /bin/bash -c "env | grep -v '\r' | grep -iE 'DEBUG|TARGET|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|GH_|GITHUB_|BT_|AWS_|STRIP|BUILD_|WIN_' && yarn --link-duplicates --pure-lockfile && yarn dist --win --publish onTag";
+  fi
+- if [ "$TARGET" == "mac" ]; then yarn dist --publish onTag; fi
+- if [ "$TARGET" == "linux" ]; then yarn
+  dist --linux --publish onTag; fi
+
+addons:
+  artifacts:
+    working_dir: dist
+    paths:
+    - $(git ls-files -o dist/{*.dmg,*.exe,*.deb} | tr "\n" ":")
+    target_paths:
+    - "/app/build-${TRAVIS_BUILD_NUMBER}_commit-${TRAVIS_COMMIT:0:7}$([ ! -z ${TRAVIS_TAG}
+      ] && echo _tag-${TRAVIS_TAG})"
