@@ -50,7 +50,7 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "all-contributors-cli": "^5.4.1",
-    "css-loader": "^1.0.0",
+    "css-loader": "^2.0.0",
     "electron": "^3.0.8",
     "electron-builder": "^20.33.2",
     "electron-webpack": "^2.4.0",
