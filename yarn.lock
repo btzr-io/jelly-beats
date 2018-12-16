@@ -6246,10 +6246,10 @@ posthtml@^0.11.2, posthtml@^0.11.3:
     posthtml-parser "^0.3.3"
     posthtml-render "^1.1.0"
 
-preact@^8.3.1:
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-8.3.1.tgz#ed34f79d09edc5efd32a378a3416ef5dc531e3ac"
-  integrity sha512-s8H1Y8O9e+mOBo3UP1jvWqArPmjCba2lrrGLlq/0kN1XuIINUbYtf97iiXKxCuG3eYwmppPKnyW2DBrNj/TuTg==
+preact@^8.4.1:
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-8.4.1.tgz#d1909072a336c6d11da0320bdbd83f79e8245f35"
+  integrity sha512-42xy7+9MIDFc1XJrTfesW0I0DnEqylKJbK6/p+jqBqGPoYAAngShTVbJfex5kJPvC1jDvDhy84o+uZDo1sdSjw==
 
 prepend-http@^1.0.0, prepend-http@^1.0.1:
   version "1.0.4"
