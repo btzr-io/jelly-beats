@@ -728,10 +728,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@mdi/js@^3.0.39":
-  version "3.0.39"
-  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-3.0.39.tgz#ef12d603d6ee7c34fad6d08c37dfc0376944b269"
-  integrity sha512-GGsJowaILwU+RrAEuOCdh2WOmVXmNYuhNECotKxDyUR2L4+0w2JaYhy8lRJzHBkjejpA+kk/xJLzlDA+gNOGKg==
+"@mdi/js@^3.2.89":
+  version "3.2.89"
+  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-3.2.89.tgz#71310ff0890cd161ef56407120dda36dbcf1a427"
+  integrity sha512-IpW8oz3HL7rJYCQZUe6Pq4keuzluIQzFSM8yM/dzhPrwF2gM1ZyVo+MSXkP6U5JtGW9r2pFSWyQzeW4Y+R5zIQ==
 
 "@mdi/react@^1.0.1":
   version "1.0.1"
