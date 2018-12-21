@@ -1,5 +1,14 @@
 const initialState = {}
 
+initialState.account = {
+  currentChannel: {
+    name: 'Anonymous',
+    author: '',
+    thumbnail: 'url',
+  },
+  channels: [],
+}
+
 initialState.navigation = {
   stack: [],
   currentPage: '/',

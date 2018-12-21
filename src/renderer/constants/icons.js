@@ -5,6 +5,7 @@ import {
   mdiSkipNext,
   mdiSkipPrevious,
   mdiShuffle,
+  mdiChevronDown,
   mdiChevronLeft,
   mdiChevronRight,
   mdiPlaylistPlus,
@@ -14,14 +15,17 @@ import {
   mdiDotsVertical,
   mdiHome,
   mdiLoading,
+  mdiPencil,
 } from '@mdi/js'
 
+export const EDIT = mdiPencil
 export const HOME = mdiHome
 export const LEFT = mdiChevronLeft
 export const RIGHT = mdiChevronRight
 export const HEART = mdiHeart
 export const HEART_OUTLINE = mdiHeartOutline
 export const HEART_BROKEN = mdiHeartBroken
+export const MENU_DOWN = mdiChevronDown
 export const MENU_DOTS = mdiDotsVertical
 export const PLAYLIST_PLUS = mdiPlaylistPlus
 

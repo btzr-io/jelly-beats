@@ -2,10 +2,12 @@
   --color-red: #fc5c65;
   --color-primary: #778beb;
   --main-color: #778beb;
-  --bg-color: rgba(18, 18, 20, 0.99);
+  --bg-color: #050506;
   --text-color: #fff;
+  --subtext-color: #bcbcbc;
   --button-bg-color: #3f3f43;
   --card-bg-color: #212125;
+  --card-dark-bg-color: #151518;
   --card-alt-bg-color: #2a2a2f /* #2a2a2f */;
 
   --scrollbar-thumb-bg: #2a2a2f;

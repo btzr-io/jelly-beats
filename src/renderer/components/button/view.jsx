@@ -6,6 +6,8 @@ class Button extends React.PureComponent {
   static defaultProps = {
     type: 'normal',
     size: 'normal',
+    active: false,
+    toggle: false,
     onClick: () => {},
   }
 
@@ -67,12 +69,15 @@ class Button extends React.PureComponent {
 
   render() {
     const {
+      children,
       type,
       toggle,
       icon,
+      iconRight,
       iconColor,
       size,
       label,
+      active,
       disabled,
       onClick,
       animation,
@@ -80,6 +85,7 @@ class Button extends React.PureComponent {
     const { animated } = this.state
 
     const buttonClass = classnames('button', `button--${type}`, {
+      'button--active': active,
       'button--toggle': toggle,
       [`animated--${animation}`]: animation,
     })
@@ -97,6 +103,8 @@ class Button extends React.PureComponent {
       >
         {icon && <Icon path={icon} className={iconClass} color={iconColor} />}
         {label && <span className={'button_label'}>{label}</span>}
+        {children}
+        {iconRight && <Icon path={iconRight} className={iconClass} color={iconColor} />}
       </button>
     )
   }

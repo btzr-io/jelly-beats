@@ -7,8 +7,8 @@ import SideBar from '@/components/sidebar'
 import navigate from '@/utils/navigate'
 
 class App extends React.PureComponent {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
   }
 
   componentDidUpdate(prevProps) {
