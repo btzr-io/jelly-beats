@@ -34,7 +34,14 @@ class DropMenu extends React.PureComponent {
         />
         <span className={'profile-label'}>{'btzr'}</span>
         <div className={'drop-menu'}>
-          <div className={'drop-item'} onClick={() => doNavigate('/profile')}>
+          <div
+            className={'drop-item'}
+            onClick={() =>
+              doNavigate('/profile', {
+                uri: '@vicentebalderas#b4969eb15b0fe0cb538d7ea3c88089230cd0f8cc',
+              })
+            }
+          >
             Profile
           </div>
           <div className={'drop-item'}>Switch channel</div>

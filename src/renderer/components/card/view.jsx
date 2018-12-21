@@ -47,7 +47,15 @@ class Card extends React.PureComponent {
 
   render() {
     // Get props
-    const { uri, cache, downloads, favorites, player, toggleFavorite } = this.props
+    const {
+      uri,
+      cache,
+      downloads,
+      favorites,
+      player,
+      toggleFavorite,
+      doNavigate,
+    } = this.props
 
     // Get state
     const { isReady } = this.state
@@ -69,8 +77,8 @@ class Card extends React.PureComponent {
     const buttonIcon = isDownloading
       ? icons.SPINNER
       : !isPlaying
-        ? icons.PLAY
-        : icons.PAUSE
+      ? icons.PLAY
+      : icons.PAUSE
 
     return (
       <div
@@ -99,7 +107,14 @@ class Card extends React.PureComponent {
               <Health status={{ completed, isAvailable, isDownloading }} />
               {title}
             </div>
-            <div className={css.subtitle}>{artist}</div>
+            {artist && (
+              <div
+                className={css.subtitle}
+                onClick={() => doNavigate('/profile', { uri: artist.channelUri })}
+              >
+                {artist.channelName}
+              </div>
+            )}
           </div>
           <div className={css.actions}>
             <Button

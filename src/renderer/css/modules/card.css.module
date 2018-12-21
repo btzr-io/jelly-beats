@@ -42,10 +42,15 @@
   font-size: 0.84em;
   font-weight: 600;
   overflow: hidden;
+  cursor: pointer;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   flex-shrink: 0;
+}
+
+.card .subtitle:hover {
+  text-decoration: underline;
 }
 
 .placeholder .title {

@@ -1,10 +1,11 @@
 import React from 'react'
+import Icon from '@mdi/react'
+import * as icons from '@/constants/icons'
+import list from '@/utils/api'
+import fetchChannel from '@/api/channel'
 import Card from '@/components/card'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
-import list from '@/utils/api'
-import * as icons from '@/constants/icons'
-import Icon from '@mdi/react'
 import { Lbry } from 'lbry-redux'
 
 class View extends React.PureComponent {
@@ -29,7 +30,10 @@ class View extends React.PureComponent {
     const { thumbnail, author, title, description, fee } = metadata
 
     // Get creator
-    const artist = author || (certificate && certificate.name)
+    const artist = {
+      channelUri: certificate ? certificate.permanent_url : null,
+      channelName: certificate ? certificate.name : author,
+    }
 
     // Generate claim outpoint
     const outpoint = `${txid}:${nout}`
@@ -46,6 +50,14 @@ class View extends React.PureComponent {
     })
   }
 
+  getChannelData(claim) {
+    const { storeChannel } = this.props
+
+    fetchChannel(claim, channel => {
+      storeChannel(channel)
+    })
+  }
+
   componentDidMount() {
     // List is empty
     if (list.length === 0) {
@@ -57,6 +69,7 @@ class View extends React.PureComponent {
         .then(res => {
           Object.entries(res).map(([uri, value], index) => {
             const { claim, certificate } = value
+            certificate && this.getChannelData(certificate)
             this.parseMetadata(uri, certificate, claim)
           })
 
