@@ -218,7 +218,7 @@ class Player extends React.PureComponent {
 
   render() {
     const { ready, currentTime } = this.state
-    const { player, downloads, togglePlay } = this.props
+    const { player, downloads, togglePlay, doNavigate } = this.props
     const { paused, syncPaused, currentTrack, showPlayer } = player || {}
     const { uri, title, artist, thumbnail } = currentTrack || {}
 
@@ -284,7 +284,14 @@ class Player extends React.PureComponent {
                 <p>
                   <span className={css.trackTitle}>{title}</span>
                   <span className={css.divider}>&bull;</span>
-                  <span className={css.trackArtist}>{artist}</span>
+                  {artist && (
+                    <span
+                      className={css.trackArtist}
+                      onClick={() => doNavigate('/profile', { uri: artist.channelUri })}
+                    >
+                      {artist.channelName}
+                    </span>
+                  )}
                 </p>
               ) : (
                 <p>

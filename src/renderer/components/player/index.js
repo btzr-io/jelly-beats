@@ -5,6 +5,7 @@ import { connect } from 'unistore/react'
 export default connect(
   'player, cache, downloads',
   {
+    doNavigate: 'doNavigate',
     togglePlay: 'triggerTogglePlay',
     updateStreamInfo: 'updateStreamInfo',
     updatePlayerStatus: 'updatePlayerStatus',

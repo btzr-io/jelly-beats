@@ -168,6 +168,11 @@
 
 .trackData .trackArtist {
   opacity: 0.64;
+  cursor: pointer;
+}
+
+.trackData .trackArtist:hover {
+  text-decoration: underline;
 }
 
 .trackData .divider {
