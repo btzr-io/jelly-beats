@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import * as icons from '@/constants/icons'
 import Icon from '@mdi/react'
 import Loader from '@/components/common/loader'
@@ -37,10 +38,10 @@ class View extends React.PureComponent {
     const channelEvents = success
       ? [
           {
-            author: null,
-            action: 'published',
-            date: 'jun 12',
-            content: '@Beethoven/moonlight',
+            author: channelData.nickname,
+            action: 'joined',
+            block: channelData.block,
+            content: null,
           },
         ]
       : []

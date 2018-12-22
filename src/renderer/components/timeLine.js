@@ -1,5 +1,6 @@
 import React from 'react'
 import * as icons from '@/constants/icons'
+import DateTime from '@/components/dateTime'
 import Icon from '@mdi/react'
 
 const thumbnail =
@@ -34,7 +35,7 @@ class TimeEvent extends React.PureComponent {
   }
 
   render() {
-    const { action, author, date, content } = this.props
+    const { action, author, block, content } = this.props
     return (
       <div className="event">
         <div className="event--header">
@@ -42,7 +43,9 @@ class TimeEvent extends React.PureComponent {
             <span className="event--author">{author}</span>
             <span className="event-action">{action}</span>
           </div>
-          <div className="event--date">{date}</div>
+          <div className="event--date">
+            <DateTime blockHeight={block} />
+          </div>
           <div className="event--point" />
         </div>
         {content && <div className="event--description" />}

@@ -1,3 +1,4 @@
+// @flow
 import 'proxy-polyfill'
 
 const CHECK_DAEMON_STARTED_TRY_NUMBER = 200
@@ -23,7 +24,7 @@ function checkAndParse(response) {
   })
 }
 
-function apiCall(method, params, resolve, reject) {
+function apiCall(method, params = {}, resolve, reject) {
   const counter = new Date().getTime()
   const options = {
     method: 'POST',
@@ -75,17 +76,16 @@ Lbry.claim_list_by_channel = (params = {}) =>
   daemonCallWithResult('claim_list_by_channel', params)
 
 // wallet
-Lbry.wallet_balance = (params = {}) => daemonCallWithResult('wallet_balance', params)
-Lbry.wallet_decrypt = () => daemonCallWithResult('wallet_decrypt', {})
-Lbry.wallet_encrypt = (params = {}) => daemonCallWithResult('wallet_encrypt', params)
-Lbry.wallet_is_address_mine = (params = {}) =>
-  daemonCallWithResult('wallet_is_address_mine', params)
+Lbry.account_balance = (params = {}) => daemonCallWithResult('account_balance', params)
+Lbry.account_decrypt = () => daemonCallWithResult('account_decrypt', {})
+Lbry.account_encrypt = (params = {}) => daemonCallWithResult('account_encrypt', params)
+Lbry.address_is_mine = (params = {}) => daemonCallWithResult('address_is_mine', params)
 Lbry.wallet_lock = () => daemonCallWithResult('wallet_lock', {})
-Lbry.wallet_new_address = (params = {}) =>
-  daemonCallWithResult('wallet_new_address', params)
+Lbry.address_unused = (params = {}) => daemonCallWithResult('address_unused', params)
 Lbry.wallet_send = (params = {}) => daemonCallWithResult('wallet_send', params)
-Lbry.wallet_unlock = (params = {}) => daemonCallWithResult('wallet_unlock', params)
-Lbry.wallet_unused_address = () => daemonCallWithResult('wallet_unused_address', {})
+Lbry.account_unlock = (params = {}) => daemonCallWithResult('account_unlock', params)
+Lbry.address_unused = () => daemonCallWithResult('address_unused', {})
+Lbry.claim_tip = (params = {}) => daemonCallWithResult('claim_tip', params)
 
 // transactions
 Lbry.transaction_list = (params = {}) => daemonCallWithResult('transaction_list', params)

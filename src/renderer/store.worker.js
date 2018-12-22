@@ -1,6 +1,7 @@
 import createStore from 'stockroom/worker'
 import initialState from '@/unistore/initialState'
 import cacheActions from '@/unistore/actions/cache'
+import walletActions from '@/unistore/actions/wallet'
 import streamActions from '@/unistore/actions/stream'
 import playerActions from '@/unistore/actions/player'
 import tooltipActions from '@/unistore/actions/tooltip'
@@ -13,6 +14,8 @@ store.registerActions(store => ({
   ...cacheActions,
   ...navigationActions,
 }))
+
+store.registerActions(walletActions)
 store.registerActions(playerActions)
 store.registerActions(streamActions)
 store.registerActions(tooltipActions)

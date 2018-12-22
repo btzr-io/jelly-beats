@@ -48,7 +48,7 @@ export default function fetchChannel(data, callback) {
     id: claim_id,
     uri: permanent_url,
     tags: [],
-    date: height,
+    block: height,
     name: name.substring(1),
     nickname: name,
     outpoint: `${txid}:${nout}`,

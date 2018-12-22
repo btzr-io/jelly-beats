@@ -35,4 +35,6 @@ initialState.favorites = []
 
 initialState.downloads = {}
 
+initialState.latestBlock = 0
+
 export default initialState

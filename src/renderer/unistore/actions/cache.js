@@ -17,16 +17,17 @@ export default {
     }
   },
 
-  storeChannel(state, { id, uri, name, nickname, tags, date, outpoint, thumbnail }) {
+  storeChannel(state, { id, uri, name, nickname, tags, outpoint, thumbnail, block }) {
     // Previous data from cache
     const prevChannel = state.cache[uri] || {}
+
     // New channel data
     const channel = {
       id,
       uri,
       tags,
-      date,
       name,
+      block,
       nickname,
       outpoint,
       thumbnail,
