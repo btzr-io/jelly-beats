@@ -51,7 +51,7 @@
     "@babel/preset-react": "^7.0.0",
     "all-contributors-cli": "^5.4.1",
     "css-loader": "^2.0.0",
-    "electron": "^3.0.8",
+    "electron": "^4.0.1",
     "electron-builder": "^20.38.3",
     "electron-webpack": "^2.4.0",
     "github-contributors": "^0.4.1",
