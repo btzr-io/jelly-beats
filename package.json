@@ -47,7 +47,7 @@
     "worker-loader": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.2.1",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "all-contributors-cli": "^5.6.1",
     "css-loader": "^2.1.0",
