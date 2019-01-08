@@ -743,10 +743,10 @@
   resolved "https://registry.yarnpkg.com/@posthtml/esm/-/esm-1.0.0.tgz#09bcb28a02438dcee22ad1970ca1d85a000ae0cf"
   integrity sha512-dEVG+ITnvqKGa4v040tP+n8LOKOqr94qjLva7bE5pnfm2KHJwsKz69J4KMxgWLznbpBJzy8vQfCayEk3vLZnZQ==
 
-"@types/node@^8.0.24":
-  version "8.10.20"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.20.tgz#fe674ea52e13950ab10954433a7824438aabbcac"
-  integrity sha512-M7x8+5D1k/CuA6jhiwuSCmE8sbUWJF0wYsjcig9WrXvwUI5ArEoUBdOXpV4JcEMrLp02/QbDjw+kI+vQeKyQgg==
+"@types/node@^10.12.18":
+  version "10.12.18"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
+  integrity sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
 
 "@types/webpack-env@^1.13.6":
   version "1.13.6"
@@ -2873,12 +2873,12 @@ electron-webpack@^2.4.0:
     webpack-merge "^4.1.4"
     yargs "^12.0.2"
 
-electron@^3.0.8:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-3.0.8.tgz#7905806ebaead4c693531e11cda6568c32efa7bb"
-  integrity sha512-UVj+K59lYU/vH/7TxrmDidPssFwGQZ6Ljuupugdr9h6ipMuhwgk3WRO+OlJ2TsyhKhJ6tp3AcJunuN4mprblhQ==
+electron@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-4.0.1.tgz#c41eaee9e081c2e5e4a4a4a761b7577a77d2eb18"
+  integrity sha512-kBWDLn1Vq8Tm6+/HpQc8gkjX7wJyQI8v/lf2kAirfi0Q4cXh6vBjozFvV1U/9gGCbyKnIDM+m8/wpyJIjg4w7g==
   dependencies:
-    "@types/node" "^8.0.24"
+    "@types/node" "^10.12.18"
     electron-download "^4.1.0"
     extract-zip "^1.0.3"
 
