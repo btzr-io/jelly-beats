@@ -3,6 +3,22 @@ import * as icons from '@/constants/icons'
 import DateTime from '@/components/dateTime'
 import Icon from '@mdi/react'
 
+/*
+const channelEvents = success
+  ? [
+      {
+        author: channelData.nickname,
+        action: 'joined',
+        block: channelData.block,
+        content: null,
+      },
+    ]
+  : []
+
+  */
+
+// <TimeLine events={channelEvents} />
+
 const thumbnail =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Beethoven_Piano_Sonata_14_-_title_page_1802.jpg/800px-Beethoven_Piano_Sonata_14_-_title_page_1802.jpg'
 

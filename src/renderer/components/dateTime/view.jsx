@@ -21,6 +21,7 @@ export default class DateTime extends React.PureComponent {
   }
 
   render() {
-    return <span>{this.state.date && this.state.date.toString()}</span>
+    const { date } = this.state
+    return <span>{date && date.toString()}</span>
   }
 }

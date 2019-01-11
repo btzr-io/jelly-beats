@@ -1,12 +1,14 @@
 import React from 'react'
 import moment from 'moment'
 import * as icons from '@/constants/icons'
+import { fetchClaimsByChannel } from '@/utils/chainquery'
 import Icon from '@mdi/react'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
 import Button from '@/components/button'
 import TimeLine from '@/components/timeLine'
 import { Lbry } from 'lbry-redux'
+import TrackList from '@/components/trackList-test'
 
 class View extends React.PureComponent {
   constructor(props) {
@@ -15,7 +17,40 @@ class View extends React.PureComponent {
       success: null,
       channelData: null,
       fetchingData: true,
+      uris: [],
     }
+  }
+
+  parseMetadata(channelData, claimData) {
+    const { favorites, storeTrack } = this.props
+
+    const { name, claim_id } = claimData
+
+    const uri = name + '#' + claim_id
+
+    const isFavorite = favorites.indexOf(uri) > -1
+
+    const { thumbnail, author, title, description, fee } = claimData
+
+    // Get creator
+    const artist = {
+      channelUri: channelData ? channelData.uri : null,
+      channelName: channelData ? channelData.nickname : author,
+    }
+
+    // Cache data
+    storeTrack(uri, {
+      fee,
+      title,
+      artist,
+      thumbnail,
+      isFavorite,
+      description,
+    })
+
+    this.setState(prevState => ({
+      uris: [...prevState.uris, uri],
+    }))
   }
 
   componentDidMount() {
@@ -23,8 +58,16 @@ class View extends React.PureComponent {
 
     if (options) {
       const { uri } = options
-      const channelData = uri ? cache[uri] : null
-      channelData && this.setState({ fetchingData: false, success: true, channelData })
+      const channel = uri ? cache[uri] : null
+      if (channel) {
+        fetchClaimsByChannel(channel.id).then(claims => {
+          claims.map(claim => {
+            this.parseMetadata(channel, claim)
+          })
+        })
+
+        this.setState({ fetchingData: false, success: true, channelData: channel })
+      }
     }
   }
 
@@ -35,19 +78,7 @@ class View extends React.PureComponent {
       backgroundImage: `url(${channelData && channelData.thumbnail})`,
     }
 
-    const channelEvents = success
-      ? [
-          {
-            author: channelData.nickname,
-            action: 'joined',
-            block: channelData.block,
-            content: null,
-          },
-        ]
-      : []
-
     const content = success ? (
-      // Render profile
       <div>
         <div className={'profile-box'}>
           <div className={'avatar'} style={avatarImage} />
@@ -66,12 +97,13 @@ class View extends React.PureComponent {
 
         <div className="profile-bar">
           <div className="tabs">
-            <div className="tab active">Activity</div>
-            <div className="tab">Tracks</div>
+            <div className="tab active">Tracks</div>
           </div>
-          <Button label="SUBSCRIBE" />
+          {/* Button label="SUBSCRIBE" /> */}
         </div>
-        <TimeLine events={channelEvents} />
+        <div className="tabs-panel">
+          <TrackList list={this.state.uris} />
+        </div>
       </div>
     ) : (
       // List is empty
