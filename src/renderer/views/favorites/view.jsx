@@ -25,8 +25,9 @@ class View extends React.PureComponent {
       // Resolve uris
       Lbry.resolve({ uris: favorites })
         .then(res => {
+          const list = Object.entries(res).filter(([key, value]) => !value.error)
           this.setState({
-            favorites: Object.entries(res),
+            favorites: list,
             fetchingData: false,
           })
         })

@@ -26,8 +26,11 @@ class View extends React.PureComponent {
       // Resolve uris
       Lbry.resolve({ uris })
         .then(res => {
+          // Remove unresolved claims
+          const list = Object.entries(res).filter(([key, value]) => !value.error)
+          // Update state
           this.setState({
-            downloads: Object.entries(res),
+            downloads: list,
             fetchingData: false,
           })
         })
