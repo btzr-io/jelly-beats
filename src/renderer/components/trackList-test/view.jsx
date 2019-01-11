@@ -5,6 +5,7 @@ import TrackListItem from './trackListItem'
 class TrackList extends React.PureComponent {
   static defaultProps = {
     list: [],
+    showHeader: true,
   }
 
   constructor(props) {
@@ -35,19 +36,22 @@ class TrackList extends React.PureComponent {
       toggleFavorite,
       downloads,
       doNavigate,
+      showHeader,
     } = this.props
 
     return (
       <table className="track-list">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>{/* Favorite */}</th>
-            <th>Track</th>
-            <th>Artist</th>
-            <th>Duration</th>
-          </tr>
-        </thead>
+        {showHeader && (
+          <thead>
+            <tr>
+              {showIndex && <th>#</th>}
+              <th>{/* Favorite */}</th>
+              <th>Track</th>
+              <th>Artist</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+        )}
         <tbody>
           {list.map((uri, index) => {
             const isFavorite = favorites.indexOf(uri) > -1

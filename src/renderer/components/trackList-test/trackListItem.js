@@ -95,7 +95,7 @@ class TrackListItem extends React.Component {
 
         <td>
           <span className="row_label">
-            {duration && moment.utc(duration * 1000).format('mm:ss')}
+            {duration ? moment.utc(duration * 1000).format('mm:ss') : 'N/A'}
           </span>
         </td>
       </tr>

@@ -30,7 +30,19 @@ class View extends React.PureComponent {
 
     const isFavorite = favorites.indexOf(uri) > -1
 
-    const { thumbnail, author, title, description, fee } = claimData
+    const {
+      thumbnail,
+      author,
+      title,
+      description,
+      fee,
+      vout,
+      transaction_hash_id: txid,
+      vout: nout,
+    } = claimData
+
+    // Generate claim outpoint
+    const outpoint = `${txid}:${nout}`
 
     // Get creator
     const artist = {
@@ -43,6 +55,7 @@ class View extends React.PureComponent {
       fee,
       title,
       artist,
+      outpoint,
       thumbnail,
       isFavorite,
       description,
@@ -102,7 +115,7 @@ class View extends React.PureComponent {
           {/* Button label="SUBSCRIBE" /> */}
         </div>
         <div className="tabs-panel">
-          <TrackList list={this.state.uris} />
+          <TrackList list={this.state.uris} showIndex={false} showHeader={false} />
         </div>
       </div>
     ) : (
