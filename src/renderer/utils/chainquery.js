@@ -1,15 +1,15 @@
 const CHAINQUERY_API = 'https://chainquery.lbry.io/api/sql?query='
 
-export function fetchClaimsByChannel(id) {
-  const channel = `publisher_id="${id}"`
-  const filter = 'content_type LIKE "audio%"'
-  const query = encodeURIComponent(`SELECT * FROM claim WHERE ${channel} AND ${filter}`)
+export function chainquery(sqlQuery) {
+  const limit = 10
+  const pageIndex = 0
+  const paginate = ` LIMIT ${limit} OFFSET ${limit * pageIndex}`
   const promise = new Promise(resolve => {
     // Get all claims ( audio files only ) from a channel
-    fetch(CHAINQUERY_API + query)
+    fetch(encodeURI(CHAINQUERY_API + sqlQuery + paginate))
       .then(response => {
         const contentType = response.headers.get('content-type')
-        console.info(response)
+
         if (
           response.ok &&
           contentType &&
@@ -33,4 +33,18 @@ export function fetchClaimsByChannel(id) {
       })
   })
   return promise
+}
+
+export function fetchClaimsByChannel(id) {
+  const channel = `publisher_id="${id}"`
+  const filter = 'content_type LIKE "audio%"'
+  const query = `SELECT * FROM claim WHERE ${channel} AND ${filter}`
+  return chainquery(query)
+}
+
+export function fetchNewClaims() {
+  const order = 'ORDER BY created_at DESC'
+  const filter = 'content_type LIKE "audio%"'
+  const query = `SELECT * FROM claim WHERE ${filter} ${order}`
+  return chainquery(query)
 }
