@@ -16,6 +16,7 @@ import {
   mdiHome,
   mdiLoading,
   mdiPencil,
+  mdiArrowDownBoldCircleOutline,
 } from '@mdi/js'
 
 export const EDIT = mdiPencil
@@ -37,3 +38,4 @@ export const SKIP_NEXT = mdiSkipNext
 export const SKIP_PREVIOUS = mdiSkipPrevious
 
 export const SPINNER = mdiLoading
+export const DOWNLOAD_OUTLINE = mdiArrowDownBoldCircleOutline
