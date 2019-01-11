@@ -6,7 +6,7 @@ table {
   word-wrap: break-word;
   text-align: left;
   border-collapse: collapse;
-  margin: 16px auto;
+  margin: 0;
 }
 
 thead th {
