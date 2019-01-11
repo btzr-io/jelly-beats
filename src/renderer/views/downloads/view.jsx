@@ -17,14 +17,13 @@ class View extends React.PureComponent {
 
   componentDidMount() {
     const { cache, downloads } = this.props
+    const uris = Object.keys(downloads)
     // List is empty
-    if (downloads.length === 0) {
+    if (uris.length === 0) {
       // Stop loading data
       this.setState({ fetchingData: false })
     } else {
       // Resolve uris
-      const uris = Object.keys(downloads)
-
       Lbry.resolve({ uris })
         .then(res => {
           this.setState({
@@ -64,7 +63,11 @@ class View extends React.PureComponent {
 
     return (
       <div className="page">
-        {!fetchingData ? content : <Loader icon={icons.HEART} animation="pulse" />}
+        {!fetchingData ? (
+          content
+        ) : (
+          <Loader icon={icons.DOWNLOAD_OUTLINE} animation="pulse" />
+        )}
       </div>
     )
   }
