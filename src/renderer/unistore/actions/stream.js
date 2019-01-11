@@ -142,9 +142,8 @@ export default function(store) {
           }
           // No download yet
           else if (!fileInfo) {
-            // Only free or below 1 usd for testing
-            if (!claim.fee || (claim.fee && claim.fee.amount < 1))
-              store.action(actions.loadSource)(uri, claimOutpoint)
+            // Todo add flag to protect purchase
+            store.action(actions.loadSource)(uri, claimOutpoint)
           }
         }
       )
