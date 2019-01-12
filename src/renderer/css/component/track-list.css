@@ -1,12 +1,12 @@
 .track-list {
-  width: calc(100% - 16px);
+  width: 100%;
 }
 
 table {
   word-wrap: break-word;
   text-align: left;
   border-collapse: collapse;
-  margin: 0;
+  margin: 0 auto;
 }
 
 thead th {

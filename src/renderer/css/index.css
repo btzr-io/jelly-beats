@@ -94,6 +94,11 @@ a {
   height: 100%;
 }
 
+.page section {
+  text-align: left;
+  margin: 16px 0;
+}
+
 .label {
   border: 2px solid #aaa;
   color: #aaa;
