@@ -61,10 +61,10 @@ class Card extends React.PureComponent {
     const { isReady } = this.state
 
     // Get metadata
-    const { title, artist, thumbnail } = cache[uri] || {}
+    const { title, artist, thumbnail } = (cache && cache[uri]) || {}
 
     //Get stream status
-    const { completed, isAvailable, isDownloading } = downloads[uri] || {}
+    const { completed, isAvailable, isDownloading } = (downloads && downloads[uri]) || {}
 
     //Get player status
     const { paused, isLoading, currentTrack } = player || {}

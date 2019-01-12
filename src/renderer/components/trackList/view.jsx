@@ -27,7 +27,7 @@ class TrackList extends React.PureComponent {
   }
 
   render() {
-    const { list, player, favorites, toggleFavorite, downloads } = this.props
+    const { list, player, favorites, toggleFavorite, doNavigate, downloads } = this.props
 
     return (
       <table className="track-list">
@@ -64,6 +64,7 @@ class TrackList extends React.PureComponent {
                 isDownloading={isDownloading}
                 isPlaying={isPlaying}
                 isFavorite={isFavorite}
+                doNavigate={doNavigate}
                 triggerPlay={() => this.attempPlay(uri)}
                 toggleFavorite={() => toggleFavorite(uri)}
               />

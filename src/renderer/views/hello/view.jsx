@@ -14,7 +14,9 @@ class View extends React.PureComponent {
     super(props)
     this.state = {
       error: false,
+      errorLatest: false,
       fetchingData: true,
+      fetchingLatest: true,
       latest: [],
       feature: [],
     }
@@ -23,30 +25,26 @@ class View extends React.PureComponent {
   parseMetadata(uri, { channelData, claimData }) {
     const { favorites, storeTrack } = this.props
 
-    let outpoint = null
-    let claimUri = uri
-
     // Extract metadata:
     // If uri is missing from args it means that claimData and ChannelData
     // is coming from chainquery and has a different structure.
-
-    const metadata = !claimUri ? claimData : claimData.value.stream.metadata
+    const metadata = !uri && claimData ? claimData : claimData.value.stream.metadata
     const { author, title, name, description, fee } = metadata
     const thumbnail = metadata.thumbnail || metadata.thumbnail_url
 
-    // Get creator
+    // Channel
     const artist = {
       channelUri: null,
       channelName: author,
     }
 
+    let outpoint = null
+    let claimUri = uri
+
     // Chainquery
     if (!claimUri) {
       // Block claims (Remove this):
-      // - Not free
-      // - Withouth thumbnails
-      if (!thumbnail || (fee && (fee.amount > 0 || fee > 0))) return false
-
+      // if (!thumbnail || (fee && (fee.amount > 0 || fee > 0))) return false
       const { claim_id, vout: nout, transaction_hash_id: txid } = claimData
 
       // Generate claim uri
@@ -85,12 +83,6 @@ class View extends React.PureComponent {
       isFavorite,
       description,
     })
-
-    // TODO: REMOVE THIS!
-    !uri &&
-      this.setState(prevState => ({
-        latest: [...prevState.latest, claimUri],
-      }))
   }
 
   getChannelData(claim) {
@@ -109,11 +101,49 @@ class View extends React.PureComponent {
     } else {
       // Latest content
       fetchNewClaims({ limit: 10, page: 0 }).then(res => {
-        console.info(res)
-        res.map(claimData => {
-          this.parseMetadata(null, { claimData })
-        })
+        const latestUris = res.map(claimData => `${claimData.name}#${claimData.claim_id}`)
+
+        // Featured content
+        Lbry.resolve({ uris: latestUris })
+          .then(res => {
+            Object.entries(res).map(([uri, value], index) => {
+              const { claim, certificate, error } = value
+              console.info(value)
+              // Filter errors
+              if (error || !certificate) return null
+
+              // Extract channel data
+              certificate && this.getChannelData(certificate)
+
+              // Extract data and cache data from claim
+              this.parseMetadata(uri, {
+                channelData: certificate,
+                claimData: claim,
+              })
+
+              // Update state: Done!
+              this.setState(prevState => ({
+                latest: [...prevState.latest, uri],
+              }))
+            })
+
+            // Update state: Done!
+            this.setState({
+              errorLatest: false,
+              fetchingLatest: false,
+            })
+          })
+
+          // Handle errors
+          .catch(err => {
+            console.info(this.state.latest, err)
+            this.setState({
+              errorLatest: true,
+              fetchingLatest: false,
+            })
+          })
       })
+
       // Featured content
       Lbry.resolve({ uris: list })
         .then(res => {
@@ -144,11 +174,11 @@ class View extends React.PureComponent {
   }
 
   render() {
-    const { fetchingData, error, latest } = this.state
+    const { fetchingData, fetchingLatest, error, errorLatest, latest } = this.state
     return (
       <div className="page">
-        {!error &&
-          (!fetchingData && latest && latest.length ? (
+        {!errorLatest &&
+          (!fetchingLatest ? (
             <section>
               <h1>Latest</h1>
               <div className="grid">
@@ -157,9 +187,7 @@ class View extends React.PureComponent {
                 ))}
               </div>
             </section>
-          ) : (
-            <Loader icon={icons.SPINNER} animation="spin" />
-          ))}
+          ) : null)}
         {!error &&
           (!fetchingData ? (
             <section>
@@ -173,7 +201,7 @@ class View extends React.PureComponent {
           ) : (
             <Loader icon={icons.SPINNER} animation="spin" />
           ))}
-        {error && (
+        {error && errorLatest && (
           <EmptyState
             title="Sorry"
             message={

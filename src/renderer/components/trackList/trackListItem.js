@@ -6,7 +6,7 @@ import Button from '@/components/button'
 import Health from '@/components/common/health'
 import * as icons from '@/constants/icons'
 
-class TrackList extends React.Component {
+class TrackListItem extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -21,14 +21,16 @@ class TrackList extends React.Component {
       isPlaying,
       isFavorite,
       isAvailable,
-      triggerPlay,
       isDownloading,
+      doNavigate,
+      triggerPlay,
       toggleFavorite,
     } = this.props
     const { certificate, claim } = this.props.claim
     const { metadata } = claim.value.stream
     const { author, title, name, description } = metadata
     const channel = certificate ? certificate.name : 'unknown'
+    const channelUri = certificate ? certificate.permanent_url : 'name'
 
     const artist = author || channel
     const trackTitle = title || name
@@ -37,8 +39,8 @@ class TrackList extends React.Component {
     const buttonIcon = isDownloading
       ? icons.SPINNER
       : !isPlaying
-        ? icons.PLAY
-        : icons.PAUSE
+      ? icons.PLAY
+      : icons.PAUSE
 
     return (
       <tr
@@ -85,12 +87,19 @@ class TrackList extends React.Component {
         </td>
 
         <td>
-          <span className="row_label">{artist}</span>
+          {artist && (
+            <span
+              className="row_label row_label--link"
+              onClick={() => channelUri && doNavigate('/profile', { uri: channelUri })}
+            >
+              {artist}
+            </span>
+          )}
         </td>
 
         <td>
           <span className="row_label">
-            {duration && moment.utc(duration * 1000).format('mm:ss')}
+            {duration ? moment.utc(duration * 1000).format('mm:ss') : 'N / A'}
           </span>
         </td>
       </tr>
@@ -98,4 +107,4 @@ class TrackList extends React.Component {
   }
 }
 
-export default TrackList
+export default TrackListItem
