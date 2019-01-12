@@ -57,6 +57,10 @@ class Card extends React.PureComponent {
       doNavigate,
     } = this.props
 
+    // Temp fix for:
+    // Store properties undefined on "first render" #287
+    if (!cache || !downloads || !favorites) return null
+
     // Get state
     const { isReady } = this.state
 

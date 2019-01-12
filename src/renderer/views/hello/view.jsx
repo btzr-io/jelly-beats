@@ -108,7 +108,7 @@ class View extends React.PureComponent {
           .then(res => {
             Object.entries(res).map(([uri, value], index) => {
               const { claim, certificate, error } = value
-              console.info(value)
+
               // Filter errors
               if (error || !certificate) return null
 
