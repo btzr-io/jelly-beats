@@ -59,7 +59,10 @@ class Card extends React.PureComponent {
 
     // Temp fix for:
     // Store properties undefined on "first render" #287
-    if (!cache || !downloads || !favorites) return null
+    if (!cache) return null
+
+    // Remove unresolved claims
+    if (cache && !cache[uri]) return null
 
     // Get state
     const { isReady } = this.state

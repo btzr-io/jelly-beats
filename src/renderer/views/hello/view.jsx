@@ -14,9 +14,7 @@ class View extends React.PureComponent {
     super(props)
     this.state = {
       error: false,
-      errorLatest: false,
       fetchingData: true,
-      fetchingLatest: true,
       latest: [],
       feature: [],
     }
@@ -24,13 +22,14 @@ class View extends React.PureComponent {
 
   parseMetadata(uri, { channelData, claimData }) {
     const { favorites, storeTrack } = this.props
+    const { txid, nout, value } = claimData
 
-    // Extract metadata:
-    // If uri is missing from args it means that claimData and ChannelData
-    // is coming from chainquery and has a different structure.
-    const metadata = !uri && claimData ? claimData : claimData.value.stream.metadata
-    const { author, title, name, description, fee } = metadata
-    const thumbnail = metadata.thumbnail || metadata.thumbnail_url
+    // Extract metadata
+    const metadata = value.stream.metadata
+    const { fee, name, title, author, thumbnail, description } = metadata
+
+    // Generate claim outpoint
+    const outpoint = `${txid}:${nout}`
 
     // Channel
     const artist = {
@@ -38,44 +37,18 @@ class View extends React.PureComponent {
       channelName: author,
     }
 
-    let outpoint = null
-    let claimUri = uri
-
-    // Chainquery
-    if (!claimUri) {
-      // Block claims (Remove this):
-      // if (!thumbnail || (fee && (fee.amount > 0 || fee > 0))) return false
-      const { claim_id, vout: nout, transaction_hash_id: txid } = claimData
-
-      // Generate claim uri
-      claimUri = name + '#' + claim_id
-
-      // Generate claim outpoint
-      outpoint = `${txid}:${nout}`
-
-      // Get creator
-      if (channelData) {
-        artist.channelUri = channelData.uri
-        artist.channelName = channelData.nickname
-      }
-    } else {
-      // Generate claim outpoint
-      const { txid, nout } = claimData
-      outpoint = `${txid}:${nout}`
-
-      // Get creator
-      if (channelData) {
-        artist.channelUri = channelData.permanent_url
-        artist.channelName = channelData.name
-      }
+    // Get creator
+    if (channelData) {
+      artist.channelUri = channelData.permanent_url
+      artist.channelName = channelData.name
     }
 
     // Check if claim is marked as favorite
-    const isFavorite = claimUri && favorites && favorites.indexOf(claimUri) > -1
+    const isFavorite = uri && favorites && favorites.indexOf(uri) > -1
 
     // Cache data
-    storeTrack(claimUri, {
-      fee: fee || 0,
+    storeTrack(uri, {
+      fee,
       title: title || name,
       artist,
       outpoint,
@@ -102,9 +75,11 @@ class View extends React.PureComponent {
       // Latest content
       fetchNewClaims({ limit: 10, page: 0 }).then(res => {
         const latestUris = res.map(claimData => `${claimData.name}#${claimData.claim_id}`)
+        // Update state: Done!
+        this.setState(prevState => ({ latest: [...prevState.latest, ...latestUris] }))
 
         // Featured content
-        Lbry.resolve({ uris: latestUris })
+        Lbry.resolve({ uris: [...list, ...latestUris] })
           .then(res => {
             Object.entries(res).map(([uri, value], index) => {
               const { claim, certificate, error } = value
@@ -120,56 +95,22 @@ class View extends React.PureComponent {
                 channelData: certificate,
                 claimData: claim,
               })
-
-              // Update state: Done!
-              this.setState(prevState => ({
-                latest: [...prevState.latest, uri],
-              }))
             })
-
             // Update state: Done!
             this.setState({
-              errorLatest: false,
-              fetchingLatest: false,
+              error: false,
+              fetchingData: false,
             })
           })
-
           // Handle errors
           .catch(err => {
-            console.info(this.state.latest, err)
+            console.error(err)
             this.setState({
-              errorLatest: true,
-              fetchingLatest: false,
+              error: true,
+              fetchingData: false,
             })
           })
       })
-
-      // Featured content
-      Lbry.resolve({ uris: list })
-        .then(res => {
-          Object.entries(res).map(([uri, value], index) => {
-            const { claim, certificate } = value
-            // Extract channel data
-            certificate && this.getChannelData(certificate)
-            // Extract data and cache data from claim
-            this.parseMetadata(uri, {
-              channelData: certificate,
-              claimData: claim,
-            })
-          })
-          // Update state: Done!
-          this.setState({
-            error: false,
-            fetchingData: false,
-          })
-        })
-        // Handle errors
-        .catch(err => {
-          this.setState({
-            error: true,
-            fetchingData: false,
-          })
-        })
     }
   }
 
@@ -177,8 +118,8 @@ class View extends React.PureComponent {
     const { fetchingData, fetchingLatest, error, errorLatest, latest } = this.state
     return (
       <div className="page">
-        {!errorLatest &&
-          (!fetchingLatest ? (
+        {!error &&
+          (!fetchingData ? (
             <section>
               <h1>Latest</h1>
               <div className="grid">
@@ -201,7 +142,7 @@ class View extends React.PureComponent {
           ) : (
             <Loader icon={icons.SPINNER} animation="spin" />
           ))}
-        {error && errorLatest && (
+        {error && (
           <EmptyState
             title="Sorry"
             message={
