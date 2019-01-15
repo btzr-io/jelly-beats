@@ -13,7 +13,7 @@
     "format:css": "npx prettier --config ./.prettierrc --write **/*.css.module",
     "postinstall": "electron-builder install-app-deps",
     "contributors:add": "all-contributors add",
-    "contributors:addAll": "node addContributors.js && all-contributors generate"
+    "contributors:addAll": "node ./scripts/addContributors.js && all-contributors generate"
   },
   "repository": {
     "type": "git",
