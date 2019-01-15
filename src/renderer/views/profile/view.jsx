@@ -7,7 +7,7 @@ import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
 import Button from '@/components/button'
 import TimeLine from '@/components/timeLine'
-import { Lbry } from 'lbry-redux'
+import Lbry from '@/utils/lbry'
 import TrackList from '@/components/trackList-test'
 
 class View extends React.PureComponent {

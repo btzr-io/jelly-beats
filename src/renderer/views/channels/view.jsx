@@ -3,7 +3,7 @@ import * as icons from '@/constants/icons'
 import Icon from '@mdi/react'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
-import { Lbry } from 'lbry-redux'
+import Lbry from '@/utils/lbry'
 
 function getProfileData(res) {
   const { claim } = res

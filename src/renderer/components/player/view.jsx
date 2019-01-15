@@ -6,6 +6,7 @@ import Icon from '@mdi/react'
 import * as icons from '@/constants/icons'
 import classnames from 'classnames'
 import Slider from './slider'
+import { ipcRenderer } from 'electron'
 
 const formatTime = (seconds = 0) => moment.utc(seconds * 1000).format('mm:ss')
 
@@ -69,7 +70,15 @@ class Player extends React.PureComponent {
   play = () => {
     const audio = this.audioElement.current
     audio.play()
-    console.info('PLAYING')
+
+    const { currentTrack } = this.props.player || {}
+
+    if (currentTrack) {
+      const { duration, currentTime } = this.state
+      currentTrack.duration = duration || 0
+      currentTrack.currentTime = currentTime || 0
+      ipcRenderer.send('update-discord-presence', currentTrack)
+    }
   }
 
   pause = () => {

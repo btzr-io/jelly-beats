@@ -1,4 +1,4 @@
-import { Lbry } from 'lbry-redux'
+import Lbry from '@/utils/lbry'
 
 function getMultipleValues(str) {
   str = str.replace(/\s+/g, '')

@@ -4,7 +4,7 @@ import Icon from '@mdi/react'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
 import TrackList from '@/components/trackList'
-import { Lbry } from 'lbry-redux'
+import Lbry from '@/utils/lbry'
 
 class View extends React.PureComponent {
   constructor(props) {
