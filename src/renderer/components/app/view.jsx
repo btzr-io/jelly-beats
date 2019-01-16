@@ -15,7 +15,7 @@ class App extends React.PureComponent {
 
   componentDidUpdate(prevProps) {
     // Get current page
-    const { currentPage, currentQuery } = this.props.navigation
+    const { currentPage, currentQuery } = this.props.navigation || {}
 
     // Get previous navigation
     const prevNavigation = prevProps.navigation || {}
@@ -24,7 +24,7 @@ class App extends React.PureComponent {
     const query = currentQuery !== prevNavigation.currentQuery ? currentQuery : {}
 
     // Handle navigation
-    if (currentPage !== prevNavigation.currentPage) {
+    if (currentPage && currentPage !== prevNavigation.currentPage) {
       navigate(currentPage, query)
     }
   }

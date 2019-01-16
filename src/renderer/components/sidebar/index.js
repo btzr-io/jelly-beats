@@ -4,5 +4,7 @@ import { connect } from 'unistore/react'
 
 export default connect(
   'navigation, favorites',
-  { doNavigate: 'doNavigate' }
+  {
+    doNavigate: 'doNavigate',
+  }
 )(SideBar)

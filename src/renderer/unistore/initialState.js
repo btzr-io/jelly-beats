@@ -10,8 +10,7 @@ initialState.account = {
 }
 
 initialState.navigation = {
-  stack: [],
-  currentPage: '/',
+  currentPage: '',
   currentQuery: {},
 }
 
@@ -30,6 +29,11 @@ initialState.tooltip = {
 }
 
 initialState.cache = {}
+
+initialState.history = {
+  stack: [],
+  forward: [],
+}
 
 initialState.favorites = []
 

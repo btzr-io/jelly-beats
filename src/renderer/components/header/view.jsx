@@ -57,7 +57,14 @@ class Header extends React.PureComponent {
   }
 
   render() {
-    const { doNavigate } = this.props
+    const {
+      doNavigate,
+      doNavigateForward,
+      doNavigateBackward,
+      backwardNavigation,
+      forwardNavigation,
+    } = this.props
+
     return (
       <nav className={'header'}>
         <div>
@@ -65,9 +72,16 @@ class Header extends React.PureComponent {
             type={'header-nav'}
             size={'large'}
             icon={icons.LEFT}
-            onClick={() => doNavigate('/')}
+            onClick={() => doNavigateBackward()}
+            disabled={!backwardNavigation}
           />
-          <Button type={'header-nav'} size={'large'} icon={icons.RIGHT} disabled />
+          <Button
+            type={'header-nav'}
+            size={'large'}
+            icon={icons.RIGHT}
+            onClick={() => doNavigateForward()}
+            disabled={!forwardNavigation}
+          />
         </div>
         <div>
           <DropMenu doNavigate={doNavigate} />

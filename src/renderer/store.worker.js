@@ -12,7 +12,6 @@ let store = createStore({ ...initialState })
 
 store.registerActions(store => ({
   ...cacheActions,
-  ...navigationActions,
 }))
 
 store.registerActions(walletActions)
@@ -20,5 +19,6 @@ store.registerActions(playerActions)
 store.registerActions(streamActions)
 store.registerActions(tooltipActions)
 store.registerActions(favoritesActions)
+store.registerActions(navigationActions)
 
 export default store
