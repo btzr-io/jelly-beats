@@ -1,10 +1,19 @@
 export default function(store) {
   const actions = {
     doNavigate(state, path, query) {
-      const { currentPage } = state.navigation
+      const { currentPage, currentQuery } = state.navigation
+      const params = Object.entries(currentQuery)
+      let equalQuery = true
+
+      // Compare query params
+      if (query && params.length > 0) {
+        params.map(([key, value]) => {
+          equalQuery = query[key] === value
+        })
+      }
 
       // Prevent history duplication
-      if (currentPage === path && !query) return state
+      if (currentPage === path && equalQuery) return state
 
       // Generate page data
       const page = { currentPage: path, currentQuery: query || {} }
