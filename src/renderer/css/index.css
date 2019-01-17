@@ -12,6 +12,9 @@
 @import url('./component/track-list.css');
 @import url('./component/empty-state.css');
 @import url('./component/tooltip.css');
+@import url('./component/profile.css');
+@import url('./component/time-line.css');
+@import url('./component/dropdown.css');
 
 html {
   background: black;

@@ -1,0 +1,29 @@
+.profile-thumbnail {
+  border: 1px solid var(--button-bg-color);
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  padding: 4px;
+  margin: 0;
+}
+
+.profile-label {
+  margin: 0 32px 0px 8px;
+}
+
+.profile-box {
+  text-align: center;
+  position: relative;
+  padding: 16px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.profile-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 16px 0;
+}

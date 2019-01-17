@@ -1,0 +1,97 @@
+.drop-menu {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  margin: 0;
+  font-size: 0.9em;
+  opacity: 0;
+  height: 0;
+  transition: opacity 0s ease;
+}
+
+.drop-item {
+  padding: 6px 12px;
+  border-bottom: 1px solid #19191c;
+  background: var(--card-alt-bg-color);
+  color: var(--subtext-color);
+  text-align: left;
+}
+
+.drop-item:hover {
+  background: var(--button-bg-color);
+  color: var(--text-color);
+}
+
+.drop-item:first-child {
+  border-top: 1px solid #19191c;
+}
+
+.drop-item:last-child {
+  border-bottom: 0;
+  border-radius: 0 0 4px 4px;
+}
+
+.avatar {
+  padding: 8px;
+  border-radius: 50%;
+  margin: 16px;
+
+  -webkit-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.25);
+  -moz-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.25);
+  box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.25);
+
+  height: 120px;
+  width: 120px;
+
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.profile-data {
+  margin: 16px;
+  text-align: left;
+  font-size: 1.24em;
+}
+.name {
+  margin: 8px 0;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.nickname {
+  font-size: 0.8em;
+  opacity: 0.64;
+}
+
+.tags-container {
+  margin: 32px 0;
+}
+
+.tag {
+  background-color: var(--card-bg-color);
+  padding: 4px 12px;
+  border-radius: 16px;
+  display: inline-block;
+  margin: 16px 8px 0 0;
+  text-transform: lowercase;
+  font-size: 0.64em;
+}
+
+.tabs {
+}
+
+.tabs .tab {
+  display: inline-block;
+  margin-right: 16px;
+  padding: 8px 0px;
+  border-bottom: 2px solid transparent;
+  opacity: 0.64;
+  font-weight: bold;
+}
+
+.tabs .tab.active {
+  opacity: 1;
+  border-color: var(--text-color);
+}
