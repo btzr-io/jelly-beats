@@ -7,7 +7,7 @@
   height: var(--player-height);
   border-top: 1px solid var(--bg-color);
   display: inline-block;
-  background: var(--card-bg-color);
+  background: var(--sidebar-bg-color);
   transform: translateY(100%);
   transition: transform 300ms ease;
   will-change: transform;

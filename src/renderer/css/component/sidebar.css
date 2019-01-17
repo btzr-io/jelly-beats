@@ -2,7 +2,7 @@
   height: 100%;
   margin: auto;
   width: var(--sidebar-width);
-  background: var(--card-bg-color);
+  background: var(--sidebar-bg-color);
   flex-shrink: 0;
 }
 
@@ -29,7 +29,7 @@
 }
 
 .nav__link--active {
-  background: var(--button-bg-color);
+  background: var(--card-alt-bg-color);
 }
 
 .link__body {

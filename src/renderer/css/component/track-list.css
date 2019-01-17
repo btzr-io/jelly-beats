@@ -10,7 +10,6 @@ table {
 }
 
 thead th {
-  border-bottom: 1px solid var(--card-bg-color);
   font-size: 0.96em;
   text-transform: uppercase;
   padding-bottom: 16px;
@@ -19,26 +18,32 @@ thead th {
 th,
 td {
   position: relative;
-  padding: 8px 16px;
+  padding: 12px 16px;
 }
 
 th:first-child,
 td:first-child {
+  border-radius: 6px 0 0 6px;
   padding-left: 24px;
 }
 
 th:last-child,
 td:last-child {
+  border-radius: 0 6px 6px 0;
   padding-right: 24px;
 }
 
 tbody tr {
-  border-bottom: 1px solid var(--card-bg-color);
+  border-top: 1px solid var(--card-bg-color);
   transition: 0;
 }
 
-.row {
-  border-radius: 4px;
+.row:last-child {
+  border-bottom: 1px solid var(--card-bg-color);
+}
+
+.row--active + tr {
+  border-color: transparent;
 }
 
 .row--disabled {
@@ -46,8 +51,10 @@ tbody tr {
   opacity: 0.4;
 }
 
-.row--active {
-  background-color: var(--card-bg-color);
+.row--active,
+.row--active:last-child {
+  border-color: transparent;
+  background-color: var(--card-alt-bg-color);
 }
 
 .row--active .row_label {

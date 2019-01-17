@@ -4,7 +4,7 @@
   position: relative;
   align-items: center;
   justify-content: space-between;
-  background: var(--card-bg-color);
+  background: var(--sidebar-bg-color);
   border-bottom: 1px solid var(--bg-color);
   height: var(--header-height);
   padding: 0 16px;
@@ -35,14 +35,14 @@
   width: 100%;
   margin: 0;
   font-size: 0.9em;
-  transform: translateY(-25%);
   opacity: 0;
-  transition: all 0s ease;
+  height: 0;
+  transition: opacity 0s ease;
 }
 
 .drop-item {
   padding: 6px 12px;
-  border-bottom: 1px solid var(--bg-color);
+  border-bottom: 1px solid #19191c;
   background: var(--card-alt-bg-color);
   color: var(--subtext-color);
   text-align: left;
@@ -54,7 +54,7 @@
 }
 
 .drop-item:first-child {
-  border-top: 1px solid var(--bg-color);
+  border-top: 1px solid #19191c;
 }
 
 .drop-item:last-child {
@@ -64,13 +64,11 @@
 .profile-box {
   text-align: center;
   position: relative;
-  background: #050506;
   padding: 16px;
   margin: 0;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  border-bottom: 1px solid var(--card-bg-color);
 }
 
 .profile-bar {
@@ -78,7 +76,7 @@
   align-items: center;
   justify-content: space-between;
   margin: 0;
-  padding: 16px;
+  padding: 16px 0;
 }
 
 .avatar {
@@ -121,8 +119,8 @@
 
 .tag {
   background-color: var(--card-bg-color);
-  padding: 2px 8px;
-  border-radius: 4px;
+  padding: 4px 12px;
+  border-radius: 16px;
   display: inline-block;
   margin: 16px 8px 0 0;
   text-transform: lowercase;
