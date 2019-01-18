@@ -43,7 +43,7 @@
     "source-map-support": "^0.5.9",
     "stockroom": "^1.0.1",
     "unistore": "^3.2.1",
-    "universal-router": "^7.0.0",
+    "universal-router": "^8.0.0",
     "worker-loader": "^2.0.0"
   },
   "devDependencies": {
