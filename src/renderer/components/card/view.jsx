@@ -130,7 +130,8 @@ class Card extends React.PureComponent {
               icon={isFavorite ? icons.HEART : icons.HEART_OUTLINE}
               type="card-action"
               size="large"
-              tooltip={{ text: `${isFavorite ? 'Remove from' : 'Add to'} favorites` }}
+              // TODO: FIX IT!
+              // tooltip={{ text: `${isFavorite ? 'Remove from' : 'Add to'} favorites` }}
               onClick={() => uri && toggleFavorite(uri)}
             />
             <Button

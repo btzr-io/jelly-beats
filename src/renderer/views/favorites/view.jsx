@@ -11,23 +11,42 @@ class View extends React.PureComponent {
     super(props)
     this.state = {
       fetchingData: true,
-      favorites: [],
     }
   }
 
+  getChannelData(claim) {
+    const { storeChannel } = this.props
+
+    fetchChannel(claim, channel => {
+      storeChannel(channel)
+    })
+  }
+
   componentDidMount() {
-    const { cache, favorites } = this.props
+    const { cache, favorites, setPlaylist } = this.props
     // List is empty
     if (favorites.length === 0) {
       // Stop loading data
       this.setState({ fetchingData: false })
     } else {
+      const { storeTrack } = this.props
       // Resolve uris
       Lbry.resolve({ uris: favorites })
         .then(res => {
           const list = Object.entries(res).filter(([key, value]) => !value.error)
+
+          const { claim: claimData, certificate: channelData, error } = value
+
+          // Filter errors
+          if (error || !channelData) return
+
+          // Extract channel data
+          channelData && this.getChannelData(channelData)
+
+          // Cache track data
+          storeTrack(uri, { channelData, claimData })
+
           this.setState({
-            favorites: list,
             fetchingData: false,
           })
         })
@@ -39,12 +58,13 @@ class View extends React.PureComponent {
   }
 
   render() {
-    const { fetchingData, favorites } = this.state
+    const { favorites } = this.props
+    const { fetchingData } = this.state
 
     const content =
       favorites.length > 0 ? (
         // Render list
-        <TrackList list={favorites} />
+        <TrackList list={favorites} name={'favorites'} />
       ) : (
         // List is empty
         <EmptyState

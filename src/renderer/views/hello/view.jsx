@@ -20,44 +20,6 @@ class View extends React.PureComponent {
     }
   }
 
-  parseMetadata(uri, { channelData, claimData }) {
-    const { favorites, storeTrack } = this.props
-    const { txid, nout, value } = claimData
-
-    // Extract metadata
-    const metadata = value.stream.metadata
-    const { fee, name, title, author, thumbnail, description } = metadata
-
-    // Generate claim outpoint
-    const outpoint = `${txid}:${nout}`
-
-    // Channel
-    const artist = {
-      channelUri: null,
-      channelName: author,
-    }
-
-    // Get creator
-    if (channelData) {
-      artist.channelUri = channelData.permanent_url
-      artist.channelName = channelData.name
-    }
-
-    // Check if claim is marked as favorite
-    const isFavorite = uri && favorites && favorites.indexOf(uri) > -1
-
-    // Cache data
-    storeTrack(uri, {
-      fee,
-      title: title || name,
-      artist,
-      outpoint,
-      thumbnail,
-      isFavorite,
-      description,
-    })
-  }
-
   getChannelData(claim) {
     const { storeChannel } = this.props
 
@@ -72,6 +34,7 @@ class View extends React.PureComponent {
       // Stop loading data
       this.setState({ fetchingData: false })
     } else {
+      const { storeTrack } = this.props
       // Latest content
       fetchNewClaims({ limit: 10, page: 0 }).then(res => {
         const latestUris = res.map(claimData => `${claimData.name}#${claimData.claim_id}`)
@@ -82,20 +45,18 @@ class View extends React.PureComponent {
         Lbry.resolve({ uris: [...list, ...latestUris] })
           .then(res => {
             Object.entries(res).map(([uri, value], index) => {
-              const { claim, certificate, error } = value
+              const { claim: claimData, certificate: channelData, error } = value
 
               // Filter errors
-              if (error || !certificate) return null
+              if (error || !channelData) return
 
               // Extract channel data
-              certificate && this.getChannelData(certificate)
+              channelData && this.getChannelData(channelData)
 
-              // Extract data and cache data from claim
-              this.parseMetadata(uri, {
-                channelData: certificate,
-                claimData: claim,
-              })
+              // Cache track data
+              storeTrack(uri, { channelData, claimData })
             })
+
             // Update state: Done!
             this.setState({
               error: false,

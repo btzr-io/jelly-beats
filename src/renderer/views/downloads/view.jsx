@@ -30,7 +30,6 @@ class View extends React.PureComponent {
           const list = Object.entries(res).filter(([key, value]) => !value.error)
           // Update state
           this.setState({
-            downloads: list,
             fetchingData: false,
           })
         })
@@ -42,12 +41,14 @@ class View extends React.PureComponent {
   }
 
   render() {
-    const { fetchingData, downloads } = this.state
+    const { downloads } = this.props
+    const { fetchingData } = this.state
+    const uris = Object.keys(downloads)
 
     const content =
-      downloads.length > 0 ? (
+      uris.length > 0 ? (
         // Render list
-        <TrackList list={downloads} />
+        <TrackList list={uris} name={'downloads'} />
       ) : (
         // List is empty
         <EmptyState

@@ -1,12 +1,14 @@
 .card {
-  width: 46%;
+  width: 14.2%;
   max-width: 13em;
   display: inline-block;
   margin-right: 2%;
-  padding: 2% 0;
+  margin-bottom: 2%;
+  padding: 0;
   text-align: left;
   vertical-align: top;
   overflow: hidden;
+  white-space: normal;
 }
 
 .block {
@@ -98,18 +100,5 @@
 
 @media (min-width: 768px) {
   .card {
-    width: 29.3%;
-  }
-}
-
-@media (min-width: 1000px) {
-  .card {
-    width: 22%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .card {
-    width: 14.5%;
   }
 }

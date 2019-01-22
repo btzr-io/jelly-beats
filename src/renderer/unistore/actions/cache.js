@@ -1,16 +1,45 @@
 export default {
-  storeTrack(state, uri, { fee, title, artist, outpoint, thumbnail }) {
+  storeTrack(state, uri, { claimData, channelData }) {
+    const { favorites } = state.collections
+    const { txid, nout, value } = claimData
+
+    // Extract metadata
+    const metadata = value.stream.metadata
+    const { fee, name, title, author, thumbnail, description } = metadata
+
+    // Generate claim outpoint
+    const outpoint = `${txid}:${nout}`
+
+    // Channel
+    const artist = {
+      channelUri: null,
+      channelName: author,
+    }
+
+    // Get creator
+    if (channelData) {
+      artist.channelUri = channelData.permanent_url
+      artist.channelName = channelData.name
+    }
+
+    // Check if claim is marked as favorite
+    const isFavorite = uri && favorites && favorites.indexOf(uri) > -1
+
     // Previous data from cache
     const prevTrack = state.cache[uri] || {}
+
     // New track data
     const track = {
       fee,
       uri,
-      title,
+      // Fallback for track title
+      title: title || name,
       artist,
       outpoint,
       thumbnail,
+      description,
     }
+
     // Update cache
     return {
       cache: { ...state.cache, [uri]: { ...track } },
@@ -32,6 +61,7 @@ export default {
       outpoint,
       thumbnail,
     }
+
     // Update cache
     return {
       cache: { ...state.cache, [uri]: { ...channel } },

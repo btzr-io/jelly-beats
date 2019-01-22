@@ -2,84 +2,88 @@ import React from 'react'
 import moment from 'moment'
 import * as icons from '@/constants/icons'
 import { fetchClaimsByChannel } from '@/utils/chainquery'
+import fetchChannel from '@/api/channel'
 import Icon from '@mdi/react'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
 import Button from '@/components/button'
 import TimeLine from '@/components/timeLine'
 import Lbry from '@/utils/lbry'
-import TrackList from '@/components/trackList-test'
+import TrackList from '@/components/trackList'
 
 class View extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
+      uris: [],
       success: null,
       channelData: null,
       fetchingData: true,
-      uris: [],
+      fetchChannelData: true,
     }
   }
 
-  parseMetadata(channelData, claimData) {
-    const { favorites, storeTrack } = this.props
+  getChannelData(claim) {
+    const { storeChannel } = this.props
 
-    const { name, claim_id } = claimData
-
-    const uri = name + '#' + claim_id
-
-    const isFavorite = favorites.indexOf(uri) > -1
-
-    const {
-      thumbnail,
-      author,
-      title,
-      description,
-      fee,
-      vout,
-      transaction_hash_id: txid,
-      vout: nout,
-    } = claimData
-
-    // Generate claim outpoint
-    const outpoint = `${txid}:${nout}`
-
-    // Get creator
-    const artist = {
-      channelUri: channelData ? channelData.uri : null,
-      channelName: channelData ? channelData.nickname : author,
-    }
-
-    // Cache data
-    storeTrack(uri, {
-      fee,
-      title,
-      artist,
-      outpoint,
-      thumbnail,
-      isFavorite,
-      description,
+    fetchChannel(claim, channel => {
+      storeChannel(channel)
     })
-
-    this.setState(prevState => ({
-      uris: [...prevState.uris, uri],
-    }))
   }
 
   componentDidMount() {
-    const { cache, options } = this.props
+    const { cache, options, storeTrack } = this.props
 
     if (options) {
       const { uri } = options
       const channel = uri ? cache[uri] : null
       if (channel) {
-        fetchClaimsByChannel(channel.id).then(claims => {
-          claims.map(claim => {
-            this.parseMetadata(channel, claim)
-          })
+        fetchClaimsByChannel(channel.id, { limit: 20, page: 0 }).then(claims => {
+          const channelTracks = claims.map(
+            claimData => `${claimData.name}#${claimData.claim_id}`
+          )
+          // Featured content
+          Lbry.resolve({ uris: channelTracks })
+            .then(res => {
+              const tracks = Object.entries(res)
+                .map(([uri, value], index) => {
+                  const { claim: claimData, certificate: channelData, error } = value
+
+                  // Filter errors
+                  if (error || !channelData) return null
+
+                  // Extract channel data
+                  channelData && this.getChannelData(channelData)
+
+                  // Cache track data
+                  storeTrack(uri, { channelData, claimData })
+
+                  return uri
+                })
+                .filter(uri => uri && uri != null)
+
+              // Update state: Done!
+              this.setState({
+                uris: tracks,
+                error: false,
+                fetchingData: false,
+              })
+            })
+            // Handle errors
+            .catch(err => {
+              console.error(err)
+              this.setState({
+                error: true,
+                fetchingData: false,
+              })
+            })
         })
 
-        this.setState({ fetchingData: false, success: true, channelData: channel })
+        this.setState({
+          fetchingChannelData: !channel,
+          success: true,
+          channelData: channel,
+        })
       }
     }
   }
@@ -115,7 +119,12 @@ class View extends React.PureComponent {
           {/* Button label="SUBSCRIBE" /> */}
         </div>
         <div className="tabs-panel">
-          <TrackList list={this.state.uris} showIndex={false} showHeader={false} />
+          <TrackList
+            list={this.state.uris}
+            name={channelData.nickname}
+            showIndex={false}
+            showHeader={false}
+          />
         </div>
       </div>
     ) : (

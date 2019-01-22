@@ -20,6 +20,12 @@ initialState.player = {
   showPlayer: false,
   syncPaused: true,
   currentTrack: {},
+  currentPlaylist: {
+    name: null,
+    index: 0,
+    totalTracks: 0,
+    skippedTracks: 0,
+  },
 }
 
 initialState.tooltip = {
@@ -35,9 +41,10 @@ initialState.history = {
   forward: [],
 }
 
-initialState.favorites = []
-
-initialState.downloads = {}
+initialState.collections = {
+  favorites: [],
+  downloads: {},
+}
 
 initialState.latestBlock = 0
 

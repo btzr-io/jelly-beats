@@ -5,43 +5,69 @@ import TrackListItem from './trackListItem'
 class TrackList extends React.PureComponent {
   static defaultProps = {
     list: [],
+    name: '',
+    showHeader: true,
   }
 
   constructor(props) {
     super(props)
   }
 
-  attempPlay = uri => {
-    const { player, downloads, setTrack, purchase, togglePlay } = this.props
+  attempPlay = (uri, index) => {
+    const {
+      name,
+      player,
+      downloads,
+      setTrack,
+      setPlaylist,
+      purchase,
+      togglePlay,
+    } = this.props
+
     //Get player status
     const { paused, isLoading, currentTrack } = player || {}
     //Get stream status
     const { isAvailable, isDownloading } = downloads[uri] || {}
     const shouldTogglePlay = currentTrack ? currentTrack.uri === uri : false
+
     if (shouldTogglePlay) {
-      !isDownloading && !isLoading && togglePlay()
+      if (!isDownloading && !isLoading) {
+        togglePlay()
+        setPlaylist({ name, index })
+      }
     } else if (uri) {
-      setTrack(uri)
+      setTrack(uri, { name, index })
       purchase(uri)
     }
   }
 
   render() {
-    const { list, player, favorites, toggleFavorite, doNavigate, downloads } = this.props
+    const {
+      list,
+      cache,
+      player,
+      favorites,
+      toggleFavorite,
+      downloads,
+      doNavigate,
+      showHeader,
+    } = this.props
 
     return (
       <table className="track-list">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>{/* Favorite */}</th>
-            <th>Track</th>
-            <th>Artist</th>
-            <th>Duration</th>
-          </tr>
-        </thead>
+        {showHeader && (
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>{/* Favorite */}</th>
+              <th>Track</th>
+              <th>Artist</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+        )}
         <tbody>
-          {list.map(([uri, value], index) => {
+          {list.map((uri, index) => {
             const isFavorite = favorites.indexOf(uri) > -1
             //Get stream status
             const { duration, completed, isAvailable, isDownloading } =
@@ -51,12 +77,19 @@ class TrackList extends React.PureComponent {
             const isActive = currentTrack ? currentTrack.uri === uri : false
             const isPlaying = !paused && isActive
 
-            return (
+            const claim = cache[uri]
+
+            if (isPlaying) {
+              const { name, setPlaylist } = this.props
+              setPlaylist({ name, index })
+            }
+
+            return claim ? (
               <TrackListItem
                 key={uri}
                 uri={uri}
                 index={index + 1}
-                claim={value}
+                claim={claim}
                 duration={duration}
                 isActive={isActive}
                 completed={completed}
@@ -65,10 +98,10 @@ class TrackList extends React.PureComponent {
                 isPlaying={isPlaying}
                 isFavorite={isFavorite}
                 doNavigate={doNavigate}
-                triggerPlay={() => this.attempPlay(uri)}
+                triggerPlay={() => this.attempPlay(uri, index)}
                 toggleFavorite={() => toggleFavorite(uri)}
               />
-            )
+            ) : null
           })}
         </tbody>
       </table>

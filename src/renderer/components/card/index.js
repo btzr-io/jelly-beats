@@ -3,7 +3,11 @@ import Progress from './view'
 import { connect } from 'unistore/react'
 
 export default connect(
-  'cache, favorites, downloads, player',
+  (state, props) => {
+    const { cache, player, collections } = state
+    const { favorites, downloads } = collections || {}
+    return { cache, player, favorites, downloads }
+  },
   {
     purchase: 'purchase',
     setTrack: 'setTrack',

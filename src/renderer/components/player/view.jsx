@@ -22,14 +22,18 @@ const ControlButton = ({ icon, action, size, disabled }) => {
   )
 }
 
-const StackButton = ({ thumbnail, stack }) => {
+const StackButton = ({ thumbnail, stack, playlist }) => {
+  const { name, totalTracks } = playlist || {}
+  const label = name + (totalTracks ? ` (${totalTracks})` : '')
+
   const thumbnailStyle = {
     backgroundImage: thumbnail ? `url(${thumbnail})` : 'none',
   }
+
   return (
     <div className={css.stack}>
       <div className={css.stackThumb} style={thumbnailStyle} />
-      <div className={css.stackLabel}>{'Empty'}</div>
+      <div className={css.stackLabel}>{label}</div>
     </div>
   )
 }
@@ -227,7 +231,17 @@ class Player extends React.PureComponent {
 
   render() {
     const { ready, currentTime } = this.state
-    const { player, downloads, togglePlay, doNavigate } = this.props
+    const {
+      player,
+      downloads,
+      playNext,
+      playPrev,
+      togglePlay,
+      doNavigat,
+      canPlayPrev,
+      canPlayNext,
+      currentPlaylist,
+    } = this.props
     const { paused, syncPaused, currentTrack, showPlayer } = player || {}
     const { uri, title, artist, thumbnail } = currentTrack || {}
 
@@ -239,8 +253,8 @@ class Player extends React.PureComponent {
     const controls = [
       {
         icon: icons.SKIP_PREVIOUS,
-        action: () => {},
-        disabled: true,
+        action: () => playPrev(),
+        disabled: !canPlayPrev,
       },
       {
         size: 'large-x',
@@ -250,8 +264,8 @@ class Player extends React.PureComponent {
       },
       {
         icon: icons.SKIP_NEXT,
-        action: () => {},
-        disabled: true,
+        action: () => playNext(),
+        disabled: !canPlayNext,
       },
     ]
 
@@ -328,7 +342,10 @@ class Player extends React.PureComponent {
               ))}
             </div>
 
-            <StackButton thumbnail={ready ? thumbnail : false} />
+            <StackButton
+              playlist={currentPlaylist}
+              thumbnail={ready ? thumbnail : false}
+            />
           </div>
         </div>
       </div>

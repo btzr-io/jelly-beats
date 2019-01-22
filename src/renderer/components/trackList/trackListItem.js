@@ -15,25 +15,21 @@ class TrackListItem extends React.Component {
     const {
       uri,
       index,
+      claim,
       duration,
       isActive,
       completed,
       isPlaying,
       isFavorite,
       isAvailable,
-      isDownloading,
       doNavigate,
       triggerPlay,
+      isDownloading,
       toggleFavorite,
     } = this.props
-    const { certificate, claim } = this.props.claim
-    const { metadata } = claim.value.stream
-    const { author, title, name, description } = metadata
-    const channel = certificate ? certificate.name : 'unknown'
-    const channelUri = certificate ? certificate.permanent_url : 'name'
 
-    const artist = author || channel
-    const trackTitle = title || name
+    const { artist, title } = claim
+    const trackTitle = title
 
     const disabled = isAvailable === false
     const buttonIcon = isDownloading
@@ -71,7 +67,8 @@ class TrackListItem extends React.Component {
             type="table-action"
             size="large"
             toggle={isFavorite}
-            tooltip={{ text: `${isFavorite ? 'Remove from' : 'Add to'} favorites` }}
+            // TODO: FIX IT!
+            // tooltip={{ text: `${isFavorite ? 'Remove from' : 'Add to'} favorites` }}
             onClick={() => toggleFavorite()}
           />
         </td>
@@ -89,10 +86,10 @@ class TrackListItem extends React.Component {
         <td>
           {artist && (
             <span
-              className="row_label row_label--link"
-              onClick={() => channelUri && doNavigate('/profile', { uri: channelUri })}
+              className="row_label"
+              onClick={() => doNavigate('/profile', { uri: artist.channelUri })}
             >
-              {artist}
+              {artist.channelName}
             </span>
           )}
         </td>

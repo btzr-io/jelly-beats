@@ -113,9 +113,20 @@ a {
 }
 
 .grid {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
+  display: block;
   margin: auto;
   width: 100%;
+  /* white-space: nowrap; */
+  overflow: auto;
+  position: relative;
+  padding: 16px 0;
+  /*
+  scroll-snap-type: mandatory;
+  scroll-snap-points-y: repeat(300px);
+  scroll-snap-type: y mandatory;
+  */
+}
+
+.grid::-webkit-scrollbar {
+  display: none;
 }

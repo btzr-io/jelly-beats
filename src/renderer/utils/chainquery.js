@@ -35,11 +35,11 @@ export function chainquery(sqlQuery, queryOpts) {
   return promise
 }
 
-export function fetchClaimsByChannel(id) {
+export function fetchClaimsByChannel(id, queryOpts) {
   const channel = `publisher_id="${id}"`
   const filter = 'content_type LIKE "audio%"'
   const query = `SELECT * FROM claim WHERE ${channel} AND ${filter}`
-  return chainquery(query)
+  return chainquery(query, queryOpts)
 }
 
 export function fetchNewClaims(queryOpts) {
