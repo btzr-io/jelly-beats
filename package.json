@@ -32,7 +32,7 @@
     "@mdi/js": "^3.3.92",
     "@mdi/react": "^1.0.1",
     "classnames": "^2.2.6",
-    "discord-rich-presence": "^0.0.7",
+    "discord-rich-presence": "^0.0.8",
     "history": "^4.7.2",
     "mediasource": "^2.2.1",
     "moment": "^2.22.2",
