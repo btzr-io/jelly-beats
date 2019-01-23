@@ -1,14 +1,15 @@
-export const selectPlaylistStack = ({ collections, playlists }, uri) => {
+export const selectPlaylistQueue = ({ collections, playlists }, uri) => {
   let playlist = []
   let collection = collections[uri]
+  const isArray = Array.isArray(collection)
 
-  // Transform object to array
-  if (collection && !Array.isArray(collection)) {
+  if (collection && !isArray) {
     playlist = Object.keys(collection)
-  } else {
-    playlist = playlists[uri] && playlists[uri].list
+  } else if (collection && isArray) {
+    playlist = collection
+  } else if (playlists[uri]) {
+    playlist = playlists[uri].list
   }
-
   return playlist
 }
 

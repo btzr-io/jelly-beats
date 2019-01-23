@@ -1,6 +1,6 @@
 import Lbry from '@/utils/lbry'
 import { selectCalimByUri } from '@/unistore/selectors/cache'
-import { selectPlaylistStack } from '@/unistore/selectors/player'
+import { selectPlaylistQueue } from '@/unistore/selectors/player'
 
 const DOWNLOAD_TIMEOUT = 20
 const DOWNLOAD_POLL_INTERVAL = 250
@@ -212,7 +212,7 @@ export default function(store) {
       const { currentPlaylist } = player
       const { uri, name, index, skippedTracks } = currentPlaylist
       const jump = index + steeps
-      const tracks = selectPlaylistStack(state, uri || name)
+      const tracks = selectPlaylistQueue(state, uri || name)
       const direction = steeps > 0 ? 'Next' : 'Previous'
 
       const limit = jump < tracks.length && jump > -1
@@ -311,7 +311,7 @@ export default function(store) {
       const jump = index + steeps
       const direction = steeps > 0 ? 'Next' : 'Previous'
 
-      const tracks = selectPlaylistStack(state, uri || name)
+      const tracks = selectPlaylistQueue(state, uri || name)
       const limit = jump < tracks.length - 1 && jump > 0
 
       // Reached last item

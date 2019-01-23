@@ -1,7 +1,7 @@
 import React from 'react'
 import Player from './view'
 import { connect } from 'unistore/react'
-import { selectPlaylistStack } from '@/unistore/selectors/player'
+import { selectPlaylistQueue } from '@/unistore/selectors/player'
 
 export default connect(
   (state, props) => {
@@ -11,7 +11,7 @@ export default connect(
     if (!player) return {}
     const { favorites, downloads } = collections
     const { uri, name, index } = player.currentPlaylist
-    const tracks = selectPlaylistStack(state, uri || name) || []
+    const tracks = selectPlaylistQueue(state, uri || name) || []
     const totalTracks = tracks.length
     const canPlayPrev = tracks.length > 1 && index > 0
     const canPlayNext = tracks.length > 1 && index < tracks.length - 1

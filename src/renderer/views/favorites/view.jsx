@@ -64,7 +64,7 @@ class View extends React.PureComponent {
     const content =
       favorites.length > 0 ? (
         // Render list
-        <TrackList list={favorites} name={'favorites'} />
+        <TrackList list={favorites} uri={'favorites'} name={'favorites'} />
       ) : (
         // List is empty
         <EmptyState

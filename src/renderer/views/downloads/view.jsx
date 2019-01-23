@@ -48,7 +48,7 @@ class View extends React.PureComponent {
     const content =
       uris.length > 0 ? (
         // Render list
-        <TrackList list={uris} name={'downloads'} />
+        <TrackList list={uris} uri={'downloads'} name={'downloads'} />
       ) : (
         // List is empty
         <EmptyState

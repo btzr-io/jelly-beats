@@ -86,7 +86,7 @@ class TrackListItem extends React.Component {
         <td>
           {artist && (
             <span
-              className="row_label"
+              className="row_label row_label--link"
               onClick={() => doNavigate('/profile', { uri: artist.channelUri })}
             >
               {artist.channelName}
