@@ -69,6 +69,8 @@ class View extends React.PureComponent {
                 fetchingData: false,
               })
 
+              console.info(tracks.length)
+
               // store playlist from channel
               storePlaylist(channel.uri, { name: channel.nickname, list: tracks })
             })
@@ -123,6 +125,7 @@ class View extends React.PureComponent {
         </div>
         <div className="tabs-panel">
           <TrackList
+            uri={channelData.uri}
             list={this.state.uris}
             name={channelData.nickname}
             showIndex={false}

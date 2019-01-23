@@ -48,7 +48,7 @@ export default {
 
   storePlaylist(state, uri, { name, list }) {
     return {
-      playlist: { ...state.playlists, [uri]: { name, list } },
+      playlists: { ...state.playlists, [uri]: { name, list } },
     }
   },
 

@@ -1,6 +1,6 @@
 import Lbry from '@/utils/lbry'
 import { selectCalimByUri } from '@/unistore/selectors/cache'
-import { selectPlaylistByName } from '@/unistore/selectors/player'
+import { selectPlaylistStack } from '@/unistore/selectors/player'
 
 const DOWNLOAD_TIMEOUT = 20
 const DOWNLOAD_POLL_INTERVAL = 250
@@ -173,7 +173,7 @@ export default function(store) {
       playlist && store.action(playerActions.setPlaylist)(playlist)
     },
 
-    setPlaylist(state, { name, index }) {
+    setPlaylist(state, { uri, name, index }) {
       const playlist = state.player.currentPlaylist
 
       // Only update data if is necessary
@@ -181,7 +181,7 @@ export default function(store) {
         return {
           player: {
             ...state.player,
-            currentPlaylist: { ...playlist, name, index },
+            currentPlaylist: { ...playlist, uri, name, index },
           },
         }
       }
@@ -210,9 +210,9 @@ export default function(store) {
       const { cache, player, collections } = state
       const { downloads } = collections
       const { currentPlaylist } = player
-      const { name, index, skippedTracks } = currentPlaylist
+      const { uri, name, index, skippedTracks } = currentPlaylist
       const jump = index + steeps
-      const tracks = selectPlaylistByName(state, name)
+      const tracks = selectPlaylistStack(state, uri || name)
       const direction = steeps > 0 ? 'Next' : 'Previous'
 
       const limit = jump < tracks.length && jump > -1
@@ -307,11 +307,11 @@ export default function(store) {
 
     triggerSkipTrack(state, steeps) {
       const { currentPlaylist } = state.player
-      const { name, index, skippedTracks } = currentPlaylist
+      const { uri, name, index, skippedTracks } = currentPlaylist
       const jump = index + steeps
       const direction = steeps > 0 ? 'Next' : 'Previous'
 
-      const tracks = selectPlaylistByName(state, name)
+      const tracks = selectPlaylistStack(state, uri || name)
       const limit = jump < tracks.length - 1 && jump > 0
 
       // Reached last item
@@ -348,8 +348,6 @@ export default function(store) {
     },
 
     triggerSkipNextTrack(state) {
-      const { currentPlaylist } = state.player
-      const tracks = selectPlaylistByName(state, currentPlaylist.name)
       store.action(playerActions.triggerSkipTrack)(1)
     },
 

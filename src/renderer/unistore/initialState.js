@@ -21,6 +21,7 @@ initialState.player = {
   syncPaused: true,
   currentTrack: {},
   currentPlaylist: {
+    uri: null,
     name: null,
     index: 0,
     totalTracks: 0,
@@ -36,7 +37,7 @@ initialState.tooltip = {
 
 initialState.cache = {}
 
-initialState.playlist = {}
+initialState.playlists = {}
 
 initialState.history = {
   stack: [],

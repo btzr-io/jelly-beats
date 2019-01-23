@@ -4,8 +4,9 @@ import TrackListItem from './trackListItem'
 
 class TrackList extends React.PureComponent {
   static defaultProps = {
-    list: [],
+    uri: '',
     name: '',
+    list: [],
     showHeader: true,
   }
 
@@ -54,8 +55,8 @@ class TrackList extends React.PureComponent {
             const claim = cache[uri]
 
             if (isPlaying) {
-              const { name, setPlaylist } = this.props
-              setPlaylist({ name, index })
+              const { uri, name, setPlaylist } = this.props
+              setPlaylist({ uri, name, index })
             }
 
             return claim ? (
