@@ -32,7 +32,7 @@ class View extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { cache, options, storeTrack } = this.props
+    const { cache, options, storeTrack, storePlaylist } = this.props
 
     if (options) {
       const { uri } = options
@@ -68,6 +68,9 @@ class View extends React.PureComponent {
                 error: false,
                 fetchingData: false,
               })
+
+              // store playlist from channel
+              storePlaylist(channel.uri, { name: channel.nickname, list: tracks })
             })
             // Handle errors
             .catch(err => {

@@ -44,12 +44,14 @@ export default function(store) {
     updateLoadStatus(state, uri, outpoint) {
       Lbry.file_list({ outpoint, full_status: true }).then(([fileInfo]) => {
         // Get stream relevant data
-        const streamInfo = {
-          path: fileInfo.download_path,
-          name: fileInfo.file_name,
-          mimeType: fileInfo.mime_type,
-          completed: fileInfo.completed,
-        }
+        const streamInfo = fileInfo
+          ? {
+              path: fileInfo.download_path,
+              name: fileInfo.file_name,
+              mimeType: fileInfo.mime_type,
+              completed: fileInfo.completed,
+            }
+          : {}
 
         // Download completed:
         if (fileInfo && fileInfo.completed) {
@@ -68,7 +70,11 @@ export default function(store) {
             isDownloading: false,
           })
         }
-        // Downloading..
+        // Download stopped ?
+        else if (fileInfo && fileInfo.stopped) {
+          store.action(streamActions.handleStreamError)(uri)
+        }
+        // Downlading...
         else if (fileInfo) {
           // Debug
           console.info('Downloaing!')
@@ -86,7 +92,7 @@ export default function(store) {
 
           // Next update
           setTimeout(() => {
-            actions.updateLoadStatus(state, uri, outpoint)
+            store.action(streamActions.updateLoadStatus)(uri, outpoint)
           }, DOWNLOAD_POLL_INTERVAL)
         }
       })
@@ -106,11 +112,11 @@ export default function(store) {
         .then(streamInfo => {
           const timeout = !streamInfo || streamInfo.error === 'Timeout'
           timeout
-            ? actions.handleStreamError(state, uri)
-            : actions.purchase(state, uri, streamInfo.outpoint)
+            ? store.action(streamActions.handleStreamError)(uri)
+            : store.action(streamActions.purchase)(uri, streamInfo.outpoint)
         })
         .catch(() => {
-          actions.handleStreamError(state, uri)
+          store.action(streamActions.handleStreamError)(uri)
         })
     },
 
@@ -118,7 +124,6 @@ export default function(store) {
       //...
       const claim = selectCalimByUri(state, uri)
       const claimOutpoint = outpoint || (claim && claim.outpoint)
-
       // Claim missing from cache
       if (!claim || !claimOutpoint) return state
 
@@ -131,12 +136,12 @@ export default function(store) {
             // file manually on their file system, so we need to dispatch a
             // do loadSource action to reconstruct the file from the blobs
             if (!fileInfo.written_bytes) {
+              console.error(fileInfo)
               store.action(streamActions.loadSource)(uri, claimOutpoint)
             }
             // Success!
             else {
               // Update downloads
-              console.info(claim.fee)
               store.action(streamActions.updateLoadStatus)(uri, claimOutpoint)
             }
           }
@@ -172,15 +177,13 @@ export default function(store) {
       const playlist = state.player.currentPlaylist
 
       // Only update data if is necessary
-      if (name != playlist.name) {
+      if (name != playlist.name || index != playlist.index) {
         return {
           player: {
             ...state.player,
-            currentPlaylist: { ...playlist, name, index: index || 0 },
+            currentPlaylist: { ...playlist, name, index },
           },
         }
-      } else if (index && index != playlist.index) {
-        playlist && store.action(playerActions.setPlaylistIndex)(index)
       }
     },
 
@@ -203,6 +206,55 @@ export default function(store) {
       }
     },
 
+    playlistNavigation(state, steeps) {
+      const { cache, player, collections } = state
+      const { downloads } = collections
+      const { currentPlaylist } = player
+      const { name, index, skippedTracks } = currentPlaylist
+      const jump = index + steeps
+      const tracks = selectPlaylistByName(state, name)
+      const direction = steeps > 0 ? 'Next' : 'Previous'
+
+      const limit = jump < tracks.length && jump > -1
+
+      // Last track is current index
+      if (tracks && limit) {
+        // Get claim uri
+        const uri = tracks[jump]
+        const stream = downloads[uri]
+        const isFree = cache[uri] && !cache[uri].fee
+
+        const { isAvailable } = stream || {}
+
+        const shouldAttempPurchase = (!uri || !stream) && isFree
+
+        if (shouldAttempPurchase) {
+          store.action(playerActions.triggerAttempPlay)(uri, { name, index: jump })
+        } else if (!isAvailable || !isFree) {
+          // Skip track if there is no source to play
+          store.action(playerActions[`triggerSkip${direction}Track`])()
+        } else {
+          if (skippedTracks > 0) {
+            // TODO: Notify user
+            console.info('skipped-tracks:', skippedTracks)
+          }
+
+          // Update playlist index
+          return {
+            player: {
+              ...state.player,
+              currentTrack: cache[uri],
+              currentPlaylist: {
+                ...currentPlaylist,
+                index: jump,
+                skippedTracks: 0,
+              },
+            },
+          }
+        }
+      }
+    },
+
     triggerAttempPlay(state, uri, playlist) {
       const { cache, player, collections } = state
 
@@ -214,7 +266,8 @@ export default function(store) {
 
       //Get stream status
       const { isAvailable, isDownloading } = collections.downloads[uri] || {}
-      const shouldTogglePlay = currentTrack ? currentTrack.uri === uri : false
+      const shouldTogglePlay =
+        isAvailable && (currentTrack ? currentTrack.uri === uri : false)
 
       if (shouldTogglePlay) {
         // Try to play content
@@ -235,88 +288,11 @@ export default function(store) {
     },
 
     triggerPlayNext(state) {
-      const { cache, player } = state
-      const { currentPlaylist } = player
-      const { name, index, skippedTracks } = currentPlaylist
-      const next = index + 1
-      const tracks = selectPlaylistByName(state, name)
-
-      // Last track is current index
-      if (!tracks || next > tracks.length) return
-
-      // Get claim uri
-      const uri = tracks[next]
-
-      // Skip track:
-      // if there is no source to play
-      if (!uri || !state.collections.downloads[uri] || next === tracks.length) {
-        if (cache[uri] && !cache[uri].fee) {
-          store.action(playerActions.triggerAttempPlay)(uri, { name, index: next })
-        } else {
-          store.action(playerActions.triggerSkipNextTrack)()
-        }
-      } else {
-        if (skippedTracks > 0) {
-          // TODO: Notify user
-          console.info('skipped-tracks:', skippedTracks)
-        }
-
-        // Update playlist index
-        return {
-          player: {
-            ...state.player,
-            currentTrack: state.cache[uri],
-            currentPlaylist: {
-              ...currentPlaylist,
-              index: next,
-              skippedTracks: 0,
-            },
-          },
-        }
-      }
+      store.action(playerActions.playlistNavigation)(1)
     },
 
     triggerPlayPrevious(state) {
-      const { cache, player } = state
-      const { currentPlaylist } = player
-      const { name, index, skippedTracks } = currentPlaylist
-      const prev = index - 1
-
-      const tracks = selectPlaylistByName(state, name)
-
-      // Last track is current index
-      if (!tracks || prev < -1) return state
-
-      // Get claim uri
-      const uri = tracks[prev]
-
-      // Skip track:
-      // if there is no source to play
-      if (!uri || !state.collections.downloads[uri] || prev === -1) {
-        if (cache[uri] && !cache[uri].fee) {
-          store.action(playerActions.triggerAttempPlay)(uri, { name, index: prev })
-        } else {
-          store.action(playerActions.triggerSkipPreviousTrack)()
-        }
-      } else {
-        if (skippedTracks > 0) {
-          // TODO: Notify user
-          console.info('skipped-tracks:', skippedTracks)
-        }
-
-        // Update playlist index
-        return {
-          player: {
-            ...state.player,
-            currentTrack: state.cache[uri],
-            currentPlaylist: {
-              ...currentPlaylist,
-              index: prev,
-              skippedTracks: 0,
-            },
-          },
-        }
-      }
+      store.action(playerActions.playlistNavigation)(-1)
     },
 
     triggerPause(state) {
@@ -329,17 +305,22 @@ export default function(store) {
       })
     },
 
-    triggerSkipTrack(state, steeps, limit) {
+    triggerSkipTrack(state, steeps) {
       const { currentPlaylist } = state.player
       const { name, index, skippedTracks } = currentPlaylist
       const jump = index + steeps
       const direction = steeps > 0 ? 'Next' : 'Previous'
 
       const tracks = selectPlaylistByName(state, name)
+      const limit = jump < tracks.length - 1 && jump > 0
 
-      if (jump === limit) {
-        // TODO: Notify user
-        console.info('skipped-tracks:', skippedTracks)
+      // Reached last item
+      if (!limit) {
+        if (skippedTracks > 0) {
+          // TODO: Notify user
+          console.info('skipped-tracks:', skippedTracks)
+        }
+
         return {
           player: {
             ...state.player,
@@ -354,10 +335,14 @@ export default function(store) {
         store.setState({
           player: {
             ...state.player,
-            currentPlaylist: { ...currentPlaylist, skippedTracks: skippedTracks + 1 },
+            currentPlaylist: {
+              ...currentPlaylist,
+              index: jump,
+              skippedTracks: skippedTracks + 1,
+            },
           },
         })
-        store.action(playerActions.setPlaylistIndex)(jump)
+
         store.action(playerActions[`triggerPlay${direction}`])()
       }
     },
@@ -365,13 +350,16 @@ export default function(store) {
     triggerSkipNextTrack(state) {
       const { currentPlaylist } = state.player
       const tracks = selectPlaylistByName(state, currentPlaylist.name)
-      store.action(playerActions.triggerSkipTrack)(1, tracks.length)
+      store.action(playerActions.triggerSkipTrack)(1)
     },
 
     triggerSkipPreviousTrack(state) {
-      store.action(playerActions.triggerSkipTrack)(-1, 0)
+      store.action(playerActions.triggerSkipTrack)(-1)
     },
   }
 
-  return { ...playerActions, ...streamActions }
+  return {
+    ...streamActions,
+    ...playerActions,
+  }
 }

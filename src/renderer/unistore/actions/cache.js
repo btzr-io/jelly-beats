@@ -46,6 +46,12 @@ export default {
     }
   },
 
+  storePlaylist(state, uri, { name, list }) {
+    return {
+      playlist: { ...state.playlists, [uri]: { name, list } },
+    }
+  },
+
   storeChannel(state, { id, uri, name, nickname, tags, outpoint, thumbnail, block }) {
     // Previous data from cache
     const prevChannel = state.cache[uri] || {}

@@ -13,44 +13,17 @@ class TrackList extends React.PureComponent {
     super(props)
   }
 
-  attempPlay = (uri, index) => {
-    const {
-      name,
-      player,
-      downloads,
-      setTrack,
-      setPlaylist,
-      purchase,
-      togglePlay,
-    } = this.props
-
-    //Get player status
-    const { paused, isLoading, currentTrack } = player || {}
-    //Get stream status
-    const { isAvailable, isDownloading } = downloads[uri] || {}
-    const shouldTogglePlay = currentTrack ? currentTrack.uri === uri : false
-
-    if (shouldTogglePlay) {
-      if (!isDownloading && !isLoading) {
-        togglePlay()
-        setPlaylist({ name, index })
-      }
-    } else if (uri) {
-      setTrack(uri, { name, index })
-      purchase(uri)
-    }
-  }
-
   render() {
     const {
       list,
       cache,
       player,
       favorites,
-      toggleFavorite,
       downloads,
       doNavigate,
+      attempPlay,
       showHeader,
+      toggleFavorite,
     } = this.props
 
     return (
@@ -74,7 +47,8 @@ class TrackList extends React.PureComponent {
               downloads[uri] || {}
             //Get player status
             const { paused, isLoading, currentTrack } = player || {}
-            const isActive = currentTrack ? currentTrack.uri === uri : false
+            const isActive =
+              completed && (currentTrack ? currentTrack.uri === uri : false)
             const isPlaying = !paused && isActive
 
             const claim = cache[uri]
@@ -98,7 +72,7 @@ class TrackList extends React.PureComponent {
                 isPlaying={isPlaying}
                 isFavorite={isFavorite}
                 doNavigate={doNavigate}
-                triggerPlay={() => this.attempPlay(uri, index)}
+                triggerPlay={() => attempPlay(uri, { index })}
                 toggleFavorite={() => toggleFavorite(uri)}
               />
             ) : null

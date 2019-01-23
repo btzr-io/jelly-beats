@@ -2,8 +2,8 @@
   width: 14.2%;
   max-width: 13em;
   display: inline-block;
-  margin-right: 2%;
-  margin-bottom: 2%;
+  margin-right: 16px;
+  margin-bottom: 16px;
   padding: 0;
   text-align: left;
   vertical-align: top;

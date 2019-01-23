@@ -36,6 +36,8 @@ initialState.tooltip = {
 
 initialState.cache = {}
 
+initialState.playlist = {}
+
 initialState.history = {
   stack: [],
   forward: [],

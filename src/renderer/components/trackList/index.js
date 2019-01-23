@@ -13,6 +13,7 @@ export default connect(
     setTrack: 'setTrack',
     setPlaylist: 'setPlaylist',
     doNavigate: 'doNavigate',
+    attempPlay: 'triggerAttempPlay',
     togglePlay: 'triggerTogglePlay',
     toggleFavorite: 'toggleFavorite',
   }
