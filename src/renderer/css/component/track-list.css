@@ -95,6 +95,19 @@ tbody tr {
   font-size: 0.96em;
   opacity: 0.64;
 }
+
+.price_label {
+  padding: 2px 4px;
+  background: #ffdd59;
+  border-radius: 4px;
+  color: var(--bg-color);
+  font-weight: bold;
+}
+
+.price_label--free {
+  background-color: #33d9b2;
+}
+
 .row_label--link:hover {
   opacity: 1;
   cursor: pointer;

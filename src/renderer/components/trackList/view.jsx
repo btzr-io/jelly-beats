@@ -37,6 +37,7 @@ class TrackList extends React.PureComponent {
               <th>Track</th>
               <th>Artist</th>
               <th>Duration</th>
+              <th>Price</th>
             </tr>
           </thead>
         )}

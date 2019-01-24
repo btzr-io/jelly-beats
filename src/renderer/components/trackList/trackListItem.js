@@ -28,8 +28,7 @@ class TrackListItem extends React.Component {
       toggleFavorite,
     } = this.props
 
-    const { artist, title } = claim
-    const trackTitle = title
+    const { artist, title, fee } = claim
 
     const disabled = isAvailable === false
     const buttonIcon = isDownloading
@@ -37,6 +36,8 @@ class TrackListItem extends React.Component {
       : !isPlaying
       ? icons.PLAY
       : icons.PAUSE
+
+    const price = fee && `${fee.amount.toFixed(2)} ${fee.currency}`
 
     return (
       <tr
@@ -79,7 +80,7 @@ class TrackListItem extends React.Component {
             onClick={() => !isDownloading && triggerPlay()}
           >
             <Health status={{ completed, isAvailable, isDownloading }} />
-            {trackTitle}
+            {title}
           </span>
         </td>
 
@@ -97,6 +98,16 @@ class TrackListItem extends React.Component {
         <td>
           <span className="row_label">
             {duration ? moment.utc(duration * 1000).format('mm:ss') : 'N / A'}
+          </span>
+        </td>
+
+        <td>
+          <span
+            className={classnames('row_label', 'price_label', {
+              'price_label--free': !fee,
+            })}
+          >
+            {price || 'FREE'}
           </span>
         </td>
       </tr>
