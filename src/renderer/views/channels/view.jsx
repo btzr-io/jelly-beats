@@ -1,9 +1,11 @@
 import React from 'react'
 import * as icons from '@/constants/icons'
 import Icon from '@mdi/react'
+import Lbry from '@/utils/lbry'
+import fetchChannel from '@/api/channel'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
-import Lbry from '@/utils/lbry'
+import ChannelCard from './channelCard'
 
 function getProfileData(res) {
   const { claim } = res
@@ -33,16 +35,25 @@ class View extends React.PureComponent {
     }
   }
 
+  getChannelData(claim) {
+    const { storeChannel } = this.props
+
+    fetchChannel(claim, channel => {
+      storeChannel(channel)
+    })
+  }
+
   componentDidMount() {
-    const channelName = '@btzr'
     // Resolve uris
-    Lbry.resolve({ uri: channelName + '/profile' })
-      .then(res => {
-        const data = getProfileData(res)
-        console.info(res)
+    Lbry.channel_list()
+      .then(claims => {
+        const channels = claims.map(claim => {
+          this.getChannelData(claim)
+          return claim.permanent_url
+        })
         // Update state
         this.setState({
-          data,
+          channels,
           success: true,
           fetchingData: false,
         })
@@ -55,26 +66,42 @@ class View extends React.PureComponent {
   }
 
   render() {
-    const { fetchingData, success, data } = this.state
+    const { cache, doNavigate, setCurrentChannel, currentChannel } = this.props
+    const { fetchingData, success, channels } = this.state
 
-    const content = success ? (
-      // Render profile
-      <div>
-        <img src={data.thumbnail} />
-        <div>{data.authorName}</div>
-        <div>{data.channelName}</div>
-      </div>
-    ) : (
-      // List is empty
-      <EmptyState
-        title="No Channels yet?"
-        message={
-          <p>
-            <span>{'Create a new channel or switch to one.'}</span>
-          </p>
-        }
-      />
-    )
+    const content =
+      success && cache ? (
+        // Render profile
+        <section>
+          <h1>My channels</h1>
+          {channels.map(uri => {
+            const channel = cache[uri]
+            const active = currentChannel.uri === uri
+            return (
+              <ChannelCard
+                action={() => {
+                  setCurrentChannel(uri)
+                }}
+                isActive={active}
+                channelData={channel}
+                doNavigate={doNavigate}
+                uri={uri}
+                key={uri}
+              />
+            )
+          })}
+        </section>
+      ) : (
+        // List is empty
+        <EmptyState
+          title="No Channels yet?"
+          message={
+            <p>
+              <span>{'Create a new channel or switch to one.'}</span>
+            </p>
+          }
+        />
+      )
 
     return (
       <div className="page">

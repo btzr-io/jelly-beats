@@ -17,7 +17,8 @@ class DropMenu extends React.PureComponent {
   }
 
   render() {
-    const { doNavigate } = this.props
+    const { doNavigate, currentChannel } = this.props
+    const { uri, nickname, thumbnail } = currentChannel || {}
 
     return (
       <Button
@@ -26,25 +27,15 @@ class DropMenu extends React.PureComponent {
         active={this.state.active}
         onClick={this.toggleMenu}
       >
-        <img
-          className={'profile-thumbnail'}
-          width="22"
-          height="22"
-          src="https://avatars0.githubusercontent.com/u/14793624?s=460&v=4"
-        />
-        <span className={'profile-label'}>{'btzr'}</span>
+        {thumbnail && <img className={'profile-thumbnail'} src={thumbnail} />}
+        <span className={'profile-label'}>{nickname}</span>
         <div className={'drop-menu'}>
-          <div
-            className={'drop-item'}
-            onClick={() =>
-              doNavigate('/profile', {
-                uri: '@vicentebalderas#b4969eb15b0fe0cb538d7ea3c88089230cd0f8cc',
-              })
-            }
-          >
+          <div className={'drop-item'} onClick={() => doNavigate('/profile', { uri })}>
             Profile
           </div>
-          <div className={'drop-item'}>Switch channel</div>
+          <div className={'drop-item'} onClick={() => doNavigate('/channels')}>
+            Switch channel
+          </div>
         </div>
       </Button>
     )
@@ -59,6 +50,7 @@ class Header extends React.PureComponent {
   render() {
     const {
       doNavigate,
+      currentChannel,
       doNavigateForward,
       doNavigateBackward,
       backwardNavigation,
@@ -84,7 +76,9 @@ class Header extends React.PureComponent {
           />
         </div>
         <div>
-          <DropMenu doNavigate={doNavigate} />
+          {currentChannel && (
+            <DropMenu currentChannel={currentChannel} doNavigate={doNavigate} />
+          )}
         </div>
       </nav>
     )

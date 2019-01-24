@@ -6,7 +6,7 @@
   position: relative;
   margin: 0;
   opacity: 0;
-
+  border-radius: 6px;
   transition: opacity 0.3s ease 0.3s;
 }
 

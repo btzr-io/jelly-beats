@@ -24,7 +24,7 @@ function checkAndParse(response) {
   })
 }
 
-function apiCall(method, params = {}, resolve, reject) {
+function apiCall(method, params, resolve, reject) {
   const counter = new Date().getTime()
   const options = {
     method: 'POST',

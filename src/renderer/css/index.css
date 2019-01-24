@@ -15,6 +15,7 @@
 @import url('./component/profile.css');
 @import url('./component/time-line.css');
 @import url('./component/dropdown.css');
+@import url('./component/card.css');
 
 html {
   background: black;
@@ -119,7 +120,7 @@ a {
   /* white-space: nowrap; */
   overflow: auto;
   position: relative;
-  padding: 16px 0;
+  padding: 0;
   /*
   scroll-snap-type: mandatory;
   scroll-snap-points-y: repeat(300px);

@@ -2,9 +2,9 @@ const initialState = {}
 
 initialState.account = {
   currentChannel: {
-    name: 'Anonymous',
-    author: '',
-    thumbnail: 'url',
+    uri: '',
+    nickname: 'Anonymous',
+    thumbnail: null,
   },
   channels: [],
 }

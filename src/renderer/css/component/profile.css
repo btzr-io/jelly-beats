@@ -1,9 +1,12 @@
 .profile-thumbnail {
-  border: 1px solid var(--button-bg-color);
-  background-color: var(--bg-color);
+  height: 32px;
+  width: 32px;
   border-radius: 50%;
-  padding: 4px;
+  background-color: var(--bg-color);
+  box-shadow: inset 0px 0px 0px 1px var(--bg-color);
+  padding: 0;
   margin: 0;
+  margin-right: 4px;
 }
 
 .profile-label {

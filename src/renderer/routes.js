@@ -1,10 +1,11 @@
 import React from 'react'
 
 import Hello from './views/hello'
+import Profile from './views/profile'
+import Channels from './views/channels'
 import Downloads from './views/downloads'
 import Favorites from './views/favorites'
 import Playlists from './views/playlists'
-import Profile from './views/profile'
 
 const routes = [
   {
@@ -26,6 +27,10 @@ const routes = [
   {
     path: '/playlists',
     action: ctx => <Playlists options={ctx} />,
+  },
+  {
+    path: '/channels',
+    action: ctx => <Channels options={ctx} />,
   },
 ]
 
