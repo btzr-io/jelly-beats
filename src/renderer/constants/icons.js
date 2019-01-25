@@ -16,6 +16,7 @@ import {
   mdiHome,
   mdiLoading,
   mdiPencil,
+  mdiArrowDown,
   mdiArrowDownBoldCircleOutline,
 } from '@mdi/js'
 
@@ -38,4 +39,5 @@ export const SKIP_NEXT = mdiSkipNext
 export const SKIP_PREVIOUS = mdiSkipPrevious
 
 export const SPINNER = mdiLoading
+export const DOWNLOAD = mdiArrowDown
 export const DOWNLOAD_OUTLINE = mdiArrowDownBoldCircleOutline

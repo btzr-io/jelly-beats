@@ -224,11 +224,11 @@ export default function(store) {
         const stream = downloads[uri]
         const isFree = cache[uri] && !cache[uri].fee
 
-        const { isAvailable } = stream || {}
+        const { isAvailable, completed } = stream || {}
 
         const shouldAttempPurchase = (!uri || !stream) && isFree
 
-        if (shouldAttempPurchase) {
+        if (shouldAttempPurchase || completed) {
           store.action(playerActions.triggerAttempPlay)(uri, { name, index: jump })
         } else if (!isAvailable || !isFree) {
           // Skip track if there is no source to play
@@ -255,7 +255,7 @@ export default function(store) {
       }
     },
 
-    triggerAttempPlay(state, uri, playlist) {
+    triggerAttempPlay(state, uri, playlist, forcePurchased) {
       const { cache, player, collections } = state
 
       //Get player status
@@ -265,9 +265,12 @@ export default function(store) {
       const claim = uri && cache[uri]
 
       //Get stream status
-      const { isAvailable, isDownloading } = collections.downloads[uri] || {}
+      const { isDownloading, isAvailable, completed } = collections.downloads[uri] || {}
+
       const shouldTogglePlay =
-        isAvailable && (currentTrack ? currentTrack.uri === uri : false)
+        isAvailable && completed && (currentTrack ? currentTrack.uri === uri : false)
+
+      const shouldAttempPurchase = forcePurchased || (claim && !claim.fee)
 
       if (shouldTogglePlay) {
         // Try to play content
@@ -275,10 +278,10 @@ export default function(store) {
           store.action(playerActions.triggerTogglePlay)()
           playlist && store.action(playerActions.setPlaylistIndex)(playlist.index)
         }
-      } else if (claim && !claim.fee) {
+      } else if (shouldAttempPurchase || completed) {
         // Try to purchase and download free content
         store.action(playerActions.setTrack)(uri)
-        store.action(streamActions.purchase)(uri)
+        shouldAttempPurchase && store.action(streamActions.purchase)(uri)
         playlist && store.action(playerActions.setPlaylistIndex)(playlist.index)
       }
     },

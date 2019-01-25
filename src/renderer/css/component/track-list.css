@@ -100,8 +100,9 @@ tbody tr {
   padding: 2px 4px;
   background: #ffdd59;
   border-radius: 4px;
-  color: var(--bg-color);
+  color: rgba(0, 0, 0, 0.72);
   font-weight: bold;
+  font-size: 0.8em;
 }
 
 .price_label--free {

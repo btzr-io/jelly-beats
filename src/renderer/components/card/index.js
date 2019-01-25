@@ -9,10 +9,9 @@ export default connect(
     return { cache, player, favorites, downloads }
   },
   {
-    purchase: 'purchase',
-    setTrack: 'setTrack',
     storeTrack: 'storeTrack',
     doNavigate: 'doNavigate',
+    attempPlay: 'triggerAttempPlay',
     togglePlay: 'triggerTogglePlay',
     toggleFavorite: 'toggleFavorite',
   }

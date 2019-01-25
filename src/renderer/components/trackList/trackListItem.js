@@ -24,6 +24,7 @@ class TrackListItem extends React.Component {
       isAvailable,
       doNavigate,
       triggerPlay,
+      togglePlay,
       isDownloading,
       toggleFavorite,
     } = this.props
@@ -31,11 +32,14 @@ class TrackListItem extends React.Component {
     const { artist, title, fee } = claim
 
     const disabled = isAvailable === false
-    const buttonIcon = isDownloading
-      ? icons.SPINNER
-      : !isPlaying
-      ? icons.PLAY
-      : icons.PAUSE
+
+    const shouldPurchase = !isDownloading && !completed
+
+    let buttonIcon = isDownloading ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE
+
+    if (shouldPurchase) {
+      buttonIcon = icons.DOWNLOAD
+    }
 
     const price = fee && `${fee.amount.toFixed(2)} ${fee.currency}`
 
@@ -55,7 +59,9 @@ class TrackListItem extends React.Component {
               size="large"
               toggle={isPlaying && !isDownloading}
               animation={isDownloading && 'spin'}
-              onClick={() => !isDownloading && triggerPlay()}
+              onClick={() => {
+                !isPlaying && !isDownloading ? triggerPlay() : togglePlay()
+              }}
             />
             <span className="row_label">{index}</span>
           </div>
@@ -77,7 +83,7 @@ class TrackListItem extends React.Component {
         <td>
           <span
             className="row_label row_label--link"
-            onClick={() => !isDownloading && triggerPlay()}
+            onClick={() => !shouldPurchase && triggerPlay()}
           >
             <Health status={{ completed, isAvailable, isDownloading }} />
             {title}
@@ -97,7 +103,7 @@ class TrackListItem extends React.Component {
 
         <td>
           <span className="row_label">
-            {duration ? moment.utc(duration * 1000).format('mm:ss') : 'N / A'}
+            {duration ? moment.utc(duration * 1000).format('mm:ss') : '?'}
           </span>
         </td>
 

@@ -84,9 +84,9 @@ class View extends React.PureComponent {
             <section>
               <h1>Latest</h1>
               <div className="grid">
-                {latest.map((uri, index) => (
-                  <Card key={uri} uri={uri} index={index} />
-                ))}
+                {latest.map((uri, index) => {
+                  return <Card key={uri} uri={uri} index={index} />
+                })}
               </div>
             </section>
           ) : null)}

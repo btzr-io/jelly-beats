@@ -13,8 +13,8 @@ export default connect(
     const { uri, name, index } = player.currentPlaylist
     const tracks = selectPlaylistQueue(state, uri || name) || []
     const totalTracks = tracks.length
-    const canPlayPrev = tracks.length > 1 && index > 0
-    const canPlayNext = tracks.length > 1 && index < tracks.length - 1
+    const canPlayPrev = totalTracks > 1 && index > 0
+    const canPlayNext = totalTracks > 1 && index < tracks.length - 1
     const currentPlaylist = { uri, name, totalTracks }
     return {
       player,

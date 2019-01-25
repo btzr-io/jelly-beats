@@ -15,6 +15,7 @@ class Card extends React.PureComponent {
     this.state = { isReady: false }
   }
 
+  /*
   attempPlay = () => {
     const { uri, player, downloads, setTrack, purchase, togglePlay } = this.props
     //Get player status
@@ -29,6 +30,7 @@ class Card extends React.PureComponent {
       purchase(uri)
     }
   }
+  */
 
   componentDidMount() {
     const { uri, cache, favorites } = this.props
@@ -50,11 +52,13 @@ class Card extends React.PureComponent {
     const {
       uri,
       cache,
+      player,
       downloads,
       favorites,
-      player,
-      toggleFavorite,
       doNavigate,
+      togglePlay,
+      attempPlay,
+      toggleFavorite,
     } = this.props
 
     // Temp fix for:
@@ -75,7 +79,7 @@ class Card extends React.PureComponent {
 
     //Get player status
     const { paused, isLoading, currentTrack } = player || {}
-    const isActive = currentTrack ? currentTrack.uri === uri : false
+    const isActive = completed && (currentTrack ? currentTrack.uri === uri : false)
     const isPlaying = !paused && isActive
     // Favorite selector
     const isFavorite = favorites.indexOf(uri) > -1
@@ -104,13 +108,18 @@ class Card extends React.PureComponent {
               size="large-x"
               toggle={isPlaying && !isDownloading}
               animation={isDownloading && 'spin'}
-              onClick={() => !isDownloading && this.attempPlay()}
+              onClick={() => {
+                !isDownloading && !isPlaying ? attempPlay(uri, null, true) : togglePlay()
+              }}
             />
           )}
         </Thumbnail>
         <div className={css.content}>
           <div className={css.metadata}>
-            <div className={css.title} onClick={() => isReady && this.attempPlay()}>
+            <div
+              className={css.title}
+              onClick={() => isReady && attempPlay(uri, null, true)}
+            >
               <Health status={{ completed, isAvailable, isDownloading }} />
               {title}
             </div>

@@ -16,6 +16,8 @@
   --header-height: 48px;
   --player-height: 72px;
 
+  --seekbar-height: 4px;
+
   --sidebar-bg-color: #0e0e11;
   --sidebar-width: 200px;
 }

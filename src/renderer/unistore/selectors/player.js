@@ -16,3 +16,10 @@ export const selectPlaylistQueue = ({ collections, playlists }, uri) => {
 export const selectPlaylistByUri = ({ playlists }, uri) => {
   return playlists[uri]
 }
+
+export const selectTrackIndexByUri = (state, trackUri) => {
+  const { player, playlists } = state
+  const { uri } = player.currentPlaylist
+  const playlist = selectPlaylistQueue(state, uri)
+  return playlists && playlist.indexOf(trackUri)
+}
