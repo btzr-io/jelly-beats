@@ -101,7 +101,7 @@
 }
 
 .button:disabled {
-  opacity: 0.4;
+  opacity: 0.24;
   cursor: default;
 }
 
@@ -111,15 +111,17 @@
   display: flex;
   align-items: center;
   align-content: center;
-  padding: 8px;
-  margin: 0 8px;
+  padding: 0px;
+  margin: 0;
   flex-shrink: 1;
   flex-grow: 0;
-  border-radius: 4px;
+  height: 100%;
+  width: var(--sidebar-width);
+  box-sizing: border-box;
+  text-align: left;
 }
 
 .stack:hover {
-  background: var(--button-bg-color);
 }
 
 .stack:hover .stackLabel {
@@ -127,18 +129,27 @@
 }
 
 .stackLabel {
-  display: inline-block;
-  margin: 0 16px;
-  font-size: 0.96em;
+  margin: 0;
+  margin-left: 16px;
+  font-size: 0.86em;
   font-weight: 600;
+}
+.stackLabel p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin: 2px 0;
+}
+.stackLabel .artist {
   opacity: 0.64;
 }
 
 .stackThumb {
   flex-shrink: 0;
-  height: 36px;
-  width: 36px;
-  margin: 0;
+  height: 40px;
+  width: 40px;
+  margin-left: 16px;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.4);
   background-position: center;

@@ -103,6 +103,7 @@ tbody tr {
   color: rgba(0, 0, 0, 0.72);
   font-weight: bold;
   font-size: 0.8em;
+  white-space: nowrap;
 }
 
 .price_label--free {

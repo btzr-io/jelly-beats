@@ -19,7 +19,7 @@
   background-color: rgba(200, 200, 200, 0.6);
   height: var(--seekbar-height);
   border-radius: 10px;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .rc-slider-track {
@@ -29,7 +29,8 @@
   opacity: 1;
   border-radius: 10px;
   background-color: var(--main-color);
-  transition: width 0.2s ease;
+  /* transition: width 0.2s ease; */
+  transition: background-color 0.3s ease;
 }
 
 .rc-slider-handle {
@@ -45,7 +46,7 @@
   background-color: var(--main-color);
   -ms-touch-action: pan-x;
   touch-action: pan-x;
-  transition: left 0.2s;
+  /* transition: left 0.2s; */
 }
 .rc-slider-handle:hover {
 }

@@ -17,7 +17,7 @@
 }
 
 .button:disabled {
-  opacity: 0.4;
+  opacity: 0.24;
   cursor: default;
   pointer-events: none;
 }
@@ -198,6 +198,32 @@
   opacity: 1;
   height: initial;
   transition: opacity 0.3s ease;
+}
+
+.button--player-action {
+  border: 0;
+  display: inline-block;
+  color: inherit;
+  font-size: 1em;
+  padding: 4px;
+  opacity: 0.64;
+  margin: 0 4px;
+  border-radius: 50%;
+  background: transparent;
+  transition: opacity 0.3s ease;
+}
+
+.button--toggle.button--player-action {
+  opacity: 1;
+}
+.button--player-action:hover {
+  background: transparent;
+}
+
+.button--player-action svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin: auto;
 }
 
 /* Button elements */

@@ -82,7 +82,7 @@ class TrackListItem extends React.Component {
 
         <td>
           <span
-            className="row_label row_label--link"
+            className="row_label row_label--link trunk-label"
             onClick={() => !shouldPurchase && triggerPlay()}
           >
             <Health status={{ completed, isAvailable, isDownloading }} />

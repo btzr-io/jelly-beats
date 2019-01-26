@@ -3,6 +3,7 @@ import React from 'react'
 import moment from 'moment'
 import MediaElementWrapper from 'mediasource'
 import Icon from '@mdi/react'
+import Button from '@/components/button'
 import * as icons from '@/constants/icons'
 import classnames from 'classnames'
 import Slider from './slider'
@@ -22,9 +23,23 @@ const ControlButton = ({ icon, action, size, disabled }) => {
   )
 }
 
-const StackButton = ({ thumbnail, stack, playlist }) => {
-  const { name, totalTracks } = playlist || {}
-  const label = name + (totalTracks ? ` (${totalTracks})` : '')
+const ActionButton = ({ icon, action, size, disabled, color, toggle }) => {
+  return (
+    <Button
+      type={'player-action'}
+      onClick={action}
+      disabled={disabled}
+      toggle={toggle}
+      icon={icon}
+      iconColor={color}
+      size={'large'}
+    />
+  )
+}
+
+const StackButton = ({ thumbnail, title, artist, doNavigate }) => {
+  // const { name, totalTracks } = playlist || {}
+  // const label = name + (totalTracks ? ` (${totalTracks})` : '')
 
   const thumbnailStyle = {
     backgroundImage: thumbnail ? `url(${thumbnail})` : 'none',
@@ -33,7 +48,17 @@ const StackButton = ({ thumbnail, stack, playlist }) => {
   return (
     <div className={css.stack}>
       <div className={css.stackThumb} style={thumbnailStyle} />
-      <div className={css.stackLabel}>{label}</div>
+      <div className={css.stackLabel}>
+        <p>{title}</p>
+        {artist && (
+          <p className={css.artist}>
+            by{' '}
+            <span onClick={() => doNavigate('/profile', { uri: artist.channelUri })}>
+              {artist.channelName}
+            </span>
+          </p>
+        )}
+      </div>
     </div>
   )
 }
@@ -48,6 +73,7 @@ class Player extends React.PureComponent {
     this.audioElement = React.createRef()
     this.state = {
       ready: false,
+      repeat: false,
       duration: 0,
       currentTime: 0,
     }
@@ -97,7 +123,6 @@ class Player extends React.PureComponent {
   }
 
   reset = () => {
-    console.info('Clear state!')
     const { updatePlayerStatus } = this.props
     const audio = this.audioElement.current
     // Reset time
@@ -109,6 +134,10 @@ class Player extends React.PureComponent {
       currentTime: audio.currentTime,
     })
     updatePlayerStatus({ isLoading: true })
+  }
+
+  toggleRepeat = () => {
+    this.setState(prevState => ({ repeat: !prevState.repeat }))
   }
 
   updateTime = () => {
@@ -152,7 +181,18 @@ class Player extends React.PureComponent {
   }
 
   handleEnded = () => {
+    const { repeat } = this.state
+    const { playNext, canPlayNext } = this.props
+
+    // Fix sync
     this.pause()
+
+    if (repeat) {
+      this.updateTime(0)
+      this.play()
+    } else if (canPlayNext) {
+      playNext()
+    }
   }
 
   toggleEventListeners(type) {
@@ -230,18 +270,21 @@ class Player extends React.PureComponent {
   }
 
   render() {
-    const { ready, currentTime } = this.state
+    const { ready, repeat, currentTime } = this.state
     const {
       player,
       downloads,
       playNext,
       playPrev,
+      isFavorite,
+      toggleFavorite,
       togglePlay,
-      doNavigat,
+      doNavigate,
       canPlayPrev,
       canPlayNext,
       currentPlaylist,
     } = this.props
+
     const { paused, syncPaused, currentTrack, showPlayer } = player || {}
     const { uri, title, artist, thumbnail } = currentTrack || {}
 
@@ -277,13 +320,18 @@ class Player extends React.PureComponent {
       },
       {
         icon: icons.REPEAT,
-        action: () => {},
-        disabled: true,
+        toggle: repeat,
+        action: () => {
+          this.toggleRepeat()
+        },
+        disabled: false,
       },
       {
-        icon: icons.HEART_OUTLINE,
-        action: () => {},
-        disabled: true,
+        icon: isFavorite ? icons.HEART : icons.HEART_OUTLINE,
+        toggle: isFavorite,
+        action: () => toggleFavorite(uri),
+        disabled: false,
+        color: isFavorite ? 'var(--color-red)' : '',
       },
     ]
 
@@ -296,6 +344,14 @@ class Player extends React.PureComponent {
 
         <div className={css.container}>
           <div className={css.controls}>
+            <StackButton
+              artist={artist}
+              title={title}
+              playlist={currentPlaylist}
+              thumbnail={ready ? thumbnail : false}
+              doNavigate={doNavigate}
+            />
+
             <div className={css.actions}>
               {controls.map((props, key) => (
                 <ControlButton {...props} key={key} />
@@ -303,27 +359,6 @@ class Player extends React.PureComponent {
             </div>
 
             <div className={css.trackData}>
-              {ready ? (
-                <p>
-                  <span className={css.trackTitle}>{title}</span>
-                  <span className={css.divider}>&bull;</span>
-                  {artist && (
-                    <span
-                      className={css.trackArtist}
-                      onClick={() => doNavigate('/profile', { uri: artist.channelUri })}
-                    >
-                      {artist.channelName}
-                    </span>
-                  )}
-                </p>
-              ) : (
-                <p>
-                  <span className={css.divider}>
-                    {isDownloading ? 'Loading...' : 'No track selected'}
-                  </span>
-                </p>
-              )}
-
               <div className={css.seekBar}>
                 <span className={css.currentTime}>{formatTime(currentTime)}</span>
                 <Slider
@@ -338,14 +373,9 @@ class Player extends React.PureComponent {
 
             <div className={css.actions}>
               {actions.map((props, key) => (
-                <ControlButton {...props} key={key + '_right'} />
+                <ActionButton {...props} key={key + '_right'} />
               ))}
             </div>
-
-            <StackButton
-              playlist={currentPlaylist}
-              thumbnail={ready ? thumbnail : false}
-            />
           </div>
         </div>
       </div>

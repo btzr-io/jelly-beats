@@ -29,6 +29,10 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+h1 {
+  margin: 8px 0;
+}
+
 a,
 button {
   cursor: pointer;
@@ -130,4 +134,11 @@ a {
 
 .grid::-webkit-scrollbar {
   display: none;
+}
+
+.trunk-label {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
