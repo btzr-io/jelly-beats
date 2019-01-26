@@ -100,14 +100,14 @@ tbody tr {
   padding: 2px 4px;
   background: #ffdd59;
   border-radius: 4px;
-  color: rgba(0, 0, 0, 0.72);
+  color: rgba(0, 0, 0, 0.8);
   font-weight: bold;
   font-size: 0.8em;
   white-space: nowrap;
 }
 
 .price_label--free {
-  background-color: #33d9b2;
+  background-color: var(--subtext-color);
 }
 
 .row_label--link:hover {

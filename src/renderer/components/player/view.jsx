@@ -49,11 +49,14 @@ const StackButton = ({ thumbnail, title, artist, doNavigate }) => {
     <div className={css.stack}>
       <div className={css.stackThumb} style={thumbnailStyle} />
       <div className={css.stackLabel}>
-        <p>{title}</p>
+        <p className={css.labelLink}>{title}</p>
         {artist && (
           <p className={css.artist}>
             by{' '}
-            <span onClick={() => doNavigate('/profile', { uri: artist.channelUri })}>
+            <span
+              className={css.labelLink}
+              onClick={() => doNavigate('/profile', { uri: artist.channelUri })}
+            >
               {artist.channelName}
             </span>
           </p>
@@ -320,6 +323,7 @@ class Player extends React.PureComponent {
       },
       {
         icon: icons.REPEAT,
+        color: repeat ? 'var(--color-primary)' : '',
         toggle: repeat,
         action: () => {
           this.toggleRepeat()
@@ -328,10 +332,10 @@ class Player extends React.PureComponent {
       },
       {
         icon: isFavorite ? icons.HEART : icons.HEART_OUTLINE,
+        color: isFavorite ? 'var(--color-red)' : '',
         toggle: isFavorite,
         action: () => toggleFavorite(uri),
         disabled: false,
-        color: isFavorite ? 'var(--color-red)' : '',
       },
     ]
 

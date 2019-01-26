@@ -145,6 +145,14 @@
   opacity: 0.64;
 }
 
+.labelLink {
+  cursor: pointer;
+}
+
+.labelLink:hover {
+  text-decoration: underline;
+}
+
 .stackThumb {
   flex-shrink: 0;
   height: 40px;
