@@ -104,12 +104,18 @@ class Player extends React.PureComponent {
     const audio = this.audioElement.current
     audio.play()
 
-    const { currentTrack } = this.props.player || {}
+    const { cache, player } = this.props
+    const { currentTrack } = player || {}
 
     if (currentTrack) {
       const { duration, currentTime } = this.state
       currentTrack.duration = duration || 0
       currentTrack.currentTime = currentTime || 0
+
+      const { palette } = cache[currentTrack.uri] || {}
+      // Adaptive UI
+      palette && document.documentElement.style.setProperty('--main-color', palette)
+      // Discord integration
       ipcRenderer.send('update-discord-presence', currentTrack)
     }
   }
@@ -323,7 +329,7 @@ class Player extends React.PureComponent {
       },
       {
         icon: icons.REPEAT,
-        color: repeat ? 'var(--color-primary)' : '',
+        color: repeat ? 'var(--main-color)' : '',
         toggle: repeat,
         action: () => {
           this.toggleRepeat()

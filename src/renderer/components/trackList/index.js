@@ -9,6 +9,7 @@ export default connect(
     return { cache, player, favorites, downloads }
   },
   {
+    storePalette: 'storePalette',
     setPlaylist: 'setPlaylist',
     doNavigate: 'doNavigate',
     attempPlay: 'triggerAttempPlay',

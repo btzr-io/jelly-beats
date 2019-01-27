@@ -9,31 +9,29 @@ import Lbry from '@/utils/lbry'
 import { getTags } from '@/utils/tags'
 import * as icons from '@/constants/icons'
 
+// import worker bundle
+import Vibrant from 'node-vibrant/lib/bundle-worker'
+
 class Card extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = { isReady: false }
   }
 
-  /*
-  attempPlay = () => {
-    const { uri, player, downloads, setTrack, purchase, togglePlay } = this.props
-    //Get player status
-    const { paused, isLoading, currentTrack } = player || {}
-    //Get stream status
-    const { isAvailable, isDownloading } = downloads[uri] || {}
-    const shouldTogglePlay = currentTrack ? currentTrack.uri === uri : false
-    if (shouldTogglePlay) {
-      !isDownloading && !isLoading && togglePlay()
-    } else if (uri) {
-      setTrack(uri)
-      purchase(uri)
-    }
+  getPalette(src) {
+    // Adaptive UI
+    const { storePalette, uri } = this.props
+    Vibrant.from(src)
+      .quality(10)
+      .maxColorCount(32)
+      .getPalette()
+      .then(palette => {
+        storePalette(uri, palette.Vibrant.hex)
+      })
   }
-  */
 
   componentDidMount() {
-    const { uri, cache, favorites } = this.props
+    const { uri, cache, favorites, storePalette } = this.props
     cache[uri] && this.setState({ isReady: true })
   }
 
@@ -44,6 +42,11 @@ class Card extends React.PureComponent {
     if (track) {
       // Track uri updated
       if (track.uri != prevTrack.uri) this.setState({ isReady: true })
+
+      // Thumbnail update
+      if (track.thumbnail != prevTrack.thumbnail) {
+        this.getPalette(track.thumbnail)
+      }
     }
   }
 
@@ -72,7 +75,7 @@ class Card extends React.PureComponent {
     const { isReady } = this.state
 
     // Get metadata
-    const { title, artist, thumbnail } = (cache && cache[uri]) || {}
+    const { title, artist, thumbnail, palette } = (cache && cache[uri]) || {}
 
     //Get stream status
     const { completed, isAvailable, isDownloading } = (downloads && downloads[uri]) || {}

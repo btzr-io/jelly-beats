@@ -11,7 +11,7 @@
 }
 
 .card--active {
-  border-color: var(--color-primary);
+  border-color: var(--main-color);
 }
 
 .card--avatar {

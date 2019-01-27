@@ -33,16 +33,27 @@ export default {
       fee,
       uri,
       // Fallback for track title
-      title: title || name,
       artist,
       outpoint,
       thumbnail,
       description,
+      title: title || name,
+      palette: prevTrack.palette || 'var(--color-primary)',
     }
 
     // Update cache
     return {
-      cache: { ...state.cache, [uri]: { ...track } },
+      cache: { ...state.cache, [uri]: { ...prevTrack, ...track } },
+    }
+  },
+
+  storePalette(state, uri, palette) {
+    const claim = state.cache[uri]
+    if (claim) {
+      // Update cache
+      return {
+        cache: { ...state.cache, [uri]: { ...claim, palette } },
+      }
     }
   },
 

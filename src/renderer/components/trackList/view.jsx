@@ -25,6 +25,7 @@ class TrackList extends React.PureComponent {
       togglePlay,
       attempPlay,
       showHeader,
+      storePalette,
       toggleFavorite,
     } = this.props
 
@@ -76,6 +77,7 @@ class TrackList extends React.PureComponent {
                 isFavorite={isFavorite}
                 doNavigate={doNavigate}
                 togglePlay={togglePlay}
+                storePalette={storePalette}
                 triggerPlay={() => attempPlay(uri, { index })}
                 toggleFavorite={() => toggleFavorite(uri)}
               />

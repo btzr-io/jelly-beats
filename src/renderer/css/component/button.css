@@ -108,13 +108,13 @@
 
 .button--toggle.button--table-action--overlay {
   opacity: 1;
-  background: var(--color-primary);
+  background: var(--main-color);
   transition: none;
 }
 
 .button--table-action--overlay.button--toggle::before {
   border-radius: 50%;
-  background: var(--color-primary);
+  background: var(--main-color);
   width: 100%;
   height: 100%;
   content: '';
@@ -154,12 +154,12 @@
 }
 
 .button--card-action--overlay.button--toggle {
-  /* background: var(--color-primary); */
-  background: var(--color-primary);
+  /* background: var(--main-color); */
+  background: var(--main-color);
 }
 .button--card-action--overlay.button--toggle::before {
   border-radius: 50%;
-  background: var(--color-primary);
+  background: var(--main-color);
   width: 4em;
   height: 4em;
   content: '';

@@ -6,9 +6,30 @@ import Button from '@/components/button'
 import Health from '@/components/common/health'
 import * as icons from '@/constants/icons'
 
+// import worker bundle
+import Vibrant from 'node-vibrant/lib/bundle-worker'
+
 class TrackListItem extends React.Component {
   constructor(props) {
     super(props)
+  }
+
+  getPalette(src) {
+    // Adaptive UI
+    const { storePalette, uri } = this.props
+    src &&
+      Vibrant.from(src)
+        .quality(5)
+        .maxColorCount(32)
+        .getPalette()
+        .then(palette => {
+          storePalette(uri, palette.Vibrant.hex)
+        })
+  }
+
+  componentDidMount() {
+    const { uri, claim } = this.props
+    claim && this.getPalette(claim.thumbnail)
   }
 
   render() {
