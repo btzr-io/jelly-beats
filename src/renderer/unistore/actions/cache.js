@@ -28,6 +28,11 @@ export default {
     // Previous data from cache
     const prevTrack = state.cache[uri] || {}
 
+    const defaultPalette = {
+      dark: 'var(--card-alt-bg-color)',
+      vibrant: 'var(--color-primary)',
+    }
+
     // New track data
     const track = {
       fee,
@@ -38,7 +43,7 @@ export default {
       thumbnail,
       description,
       title: title || name,
-      palette: prevTrack.palette || 'var(--color-primary)',
+      palette: prevTrack.palette || defaultPalette,
     }
 
     // Update cache

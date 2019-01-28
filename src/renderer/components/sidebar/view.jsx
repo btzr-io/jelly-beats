@@ -6,6 +6,7 @@ import {
   PLAYLIST_PLUS as playlistPlus,
   HEART_OUTLINE as heart,
   DOWNLOAD_OUTLINE as download,
+  SETTINGS as settings,
 } from '@/constants/icons'
 
 const NavLink = ({ icon, label, active, action, badge }) => (
@@ -63,6 +64,11 @@ class SideBar extends React.PureComponent {
         label: 'Downloads',
         path: '/downloads',
         icon: download,
+      },
+      {
+        label: 'Settings',
+        path: '/settings',
+        icon: settings,
       },
     ]
     return (

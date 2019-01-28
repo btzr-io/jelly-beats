@@ -41,6 +41,7 @@
     "rc-slider": "^8.6.4",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-switch": "^3.0.4",
     "source-map-support": "^0.5.9",
     "stockroom": "^1.0.1",
     "unistore": "^3.2.1",

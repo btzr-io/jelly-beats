@@ -104,7 +104,7 @@ class Player extends React.PureComponent {
     const audio = this.audioElement.current
     audio.play()
 
-    const { cache, player } = this.props
+    const { cache, player, settings } = this.props
     const { currentTrack } = player || {}
 
     if (currentTrack) {
@@ -113,10 +113,20 @@ class Player extends React.PureComponent {
       currentTrack.currentTime = currentTime || 0
 
       const { palette } = cache[currentTrack.uri] || {}
-      // Adaptive UI
-      palette && document.documentElement.style.setProperty('--main-color', palette)
+
+      // Adaptive colors
+      if (settings && settings.adaptiveColors && palette) {
+        document.documentElement.style.setProperty(
+          '--color-palette-vibrant',
+          palette.vibrant
+        )
+        document.documentElement.style.setProperty('--color-palette-dark', palette.dark)
+      }
+
       // Discord integration
-      ipcRenderer.send('update-discord-presence', currentTrack)
+      if (settings && settings.discord) {
+        ipcRenderer.send('update-discord-presence', currentTrack)
+      }
     }
   }
 

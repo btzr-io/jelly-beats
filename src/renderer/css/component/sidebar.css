@@ -29,7 +29,7 @@
 }
 
 .nav__link--active {
-  background: var(--card-alt-bg-color);
+  background: var(--sidebar-active-color);
 }
 
 .link__body {

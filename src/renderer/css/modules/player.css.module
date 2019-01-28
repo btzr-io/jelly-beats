@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   height: var(--player-height);
-  border-top: 1px solid var(--bg-color);
+  border-top: 1px solid var(--border-color);
   display: inline-block;
   background: var(--sidebar-bg-color);
   transform: translateY(100%);

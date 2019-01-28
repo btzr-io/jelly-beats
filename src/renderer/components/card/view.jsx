@@ -26,7 +26,11 @@ class Card extends React.PureComponent {
       .maxColorCount(32)
       .getPalette()
       .then(palette => {
-        storePalette(uri, palette.Vibrant.hex)
+        const rgb = palette.DarkMuted.getRgb()
+        const dark = `rgba(${rgb[0]},${rgb[1]},${rgb[2]}, 0.4)`
+        const vibrant = palette.Vibrant.getHex()
+
+        storePalette(uri, { dark, vibrant })
       })
   }
 

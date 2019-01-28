@@ -1,14 +1,21 @@
 :root {
   --color-red: #fc5c65;
   --color-primary: #54a0ff;
-  --main-color: #54a0ff;
-  --bg-color: #050506;
+
+  --color-palette-vibrant: var(--color-primary);
+  --color-palette-dark: #2a2a2f;
+
+  --main-color: var(--color-palette-vibrant);
+  --border-color: #050506ab;
+  --bg-color: #0e0e11;
   --text-color: #fff;
   --subtext-color: #bcbcbc;
   --button-bg-color: #3f3f43;
   --card-bg-color: #212125;
   --card-dark-bg-color: #151518;
   --card-alt-bg-color: #2a2a2f;
+
+  --card-overlay-bg-color: rgba(33, 33, 37, 0.6);
 
   --scrollbar-thumb-bg: #2a2a2f;
   --scrollbar-track-bg: rgba(23, 25, 31, 0.99);
@@ -17,7 +24,9 @@
   --player-height: 72px;
 
   --seekbar-height: 4px;
-
-  --sidebar-bg-color: #0e0e11;
+  --sidebar-bg-color: #1a1a1f;
+  --sidebar-active-color: #26262d;
   --sidebar-width: 240px;
+
+  --track-list-active-color: var(--color-palette-dark);
 }

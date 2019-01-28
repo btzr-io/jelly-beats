@@ -2,6 +2,7 @@ import React from 'react'
 
 import Hello from './views/hello'
 import Profile from './views/profile'
+import Settings from './views/settings'
 import Channels from './views/channels'
 import Downloads from './views/downloads'
 import Favorites from './views/favorites'
@@ -27,6 +28,10 @@ const routes = [
   {
     path: '/playlists',
     action: ctx => <Playlists options={ctx} />,
+  },
+  {
+    path: '/settings',
+    action: ctx => <Settings options={ctx} />,
   },
   {
     path: '/channels',

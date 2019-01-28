@@ -1,0 +1,14 @@
+.page .form section {
+  margin: 32px 0;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 32px 0;
+}
+
+.form-label {
+  color: var(--subtext-color);
+}

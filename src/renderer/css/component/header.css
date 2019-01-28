@@ -5,9 +5,10 @@
   align-items: center;
   justify-content: space-between;
   background: var(--sidebar-bg-color);
-  border-bottom: 1px solid var(--bg-color);
+  border-bottom: 1px solid var(--border-color);
   height: var(--header-height);
   padding: 0 16px;
+
   z-index: 1;
 }
 

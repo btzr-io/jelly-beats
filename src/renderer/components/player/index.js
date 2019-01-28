@@ -5,7 +5,7 @@ import { selectPlaylistQueue } from '@/unistore/selectors/player'
 
 export default connect(
   (state, props) => {
-    const { player, cache, collections } = state
+    const { player, cache, collections, settings } = state
 
     // See: https://github.com/btzr-io/jelly-beats/issues/287
     if (!player) return {}
@@ -21,12 +21,13 @@ export default connect(
     return {
       player,
       cache,
+      settings,
       downloads,
       favorites,
       isFavorite,
-      currentPlaylist,
       canPlayNext,
       canPlayPrev,
+      currentPlaylist,
     }
   },
   {

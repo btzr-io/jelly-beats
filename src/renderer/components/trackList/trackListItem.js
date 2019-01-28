@@ -17,14 +17,17 @@ class TrackListItem extends React.Component {
   getPalette(src) {
     // Adaptive UI
     const { storePalette, uri } = this.props
-    src &&
-      Vibrant.from(src)
-        .quality(5)
-        .maxColorCount(32)
-        .getPalette()
-        .then(palette => {
-          storePalette(uri, palette.Vibrant.hex)
-        })
+    Vibrant.from(src)
+      .quality(10)
+      .maxColorCount(32)
+      .getPalette()
+      .then(palette => {
+        const rgb = palette.DarkMuted.getRgb()
+        const dark = `rgba(${rgb[0]},${rgb[1]},${rgb[2]}, 0.4)`
+        const vibrant = palette.Vibrant.getHex()
+
+        storePalette(uri, { dark, vibrant })
+      })
   }
 
   componentDidMount() {

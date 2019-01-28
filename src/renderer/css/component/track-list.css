@@ -54,7 +54,7 @@ tbody tr {
 .row--active,
 .row--active:last-child {
   border-color: transparent;
-  background-color: var(--card-alt-bg-color);
+  background-color: var(--track-list-active-color);
 }
 
 .row--active .row_label {
@@ -107,7 +107,7 @@ tbody tr {
 }
 
 .price_label--free {
-  background-color: var(--subtext-color);
+  background-color: rgba(200, 200, 200, 0.64);
 }
 
 .row_label--link:hover {

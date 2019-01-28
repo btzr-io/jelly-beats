@@ -1,3 +1,5 @@
+import settings from './defaultSettings'
+
 const initialState = {}
 
 initialState.account = {
@@ -50,5 +52,9 @@ initialState.collections = {
 }
 
 initialState.latestBlock = 0
+
+initialState.settings = {
+  ...settings,
+}
 
 export default initialState

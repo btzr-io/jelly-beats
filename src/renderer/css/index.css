@@ -16,6 +16,7 @@
 @import url('./component/time-line.css');
 @import url('./component/dropdown.css');
 @import url('./component/card.css');
+@import url('./component/form.css');
 
 html {
   background: black;
@@ -96,25 +97,17 @@ a {
 }
 
 .page {
-  margin: 0 32px;
+  margin: 0;
+  padding: 0 32px;
   position: relative;
   text-align: center;
   height: 100%;
+  overflow: auto;
 }
 
 .page section {
   text-align: left;
   margin: 16px 0;
-}
-
-.label {
-  border: 2px solid #aaa;
-  color: #aaa;
-  font-weight: bold;
-  padding: 8px;
-  border-radius: 5px;
-  margin: 8px;
-  display: inline-block;
 }
 
 .grid {
