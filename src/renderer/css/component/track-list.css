@@ -83,7 +83,8 @@ tbody tr {
   background-color: #545454;
 }
 
-.row:hover .button--table-action--overlay + .row_label {
+.row:hover .button--table-action--overlay + .row_label,
+.row--active .button--table-action--overlay + .row_label {
   opacity: 0;
 }
 

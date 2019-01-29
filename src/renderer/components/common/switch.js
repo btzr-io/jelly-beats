@@ -9,8 +9,8 @@ class Switch extends Component {
   render() {
     const { label, value, onChange } = this.props
 
-    const style = getComputedStyle(document.documentElement)
-    const mainColor = style.getPropertyValue('--color-primary')
+    const style = getComputedStyle(document.getElementById('window'))
+    const mainColor = style.getPropertyValue('--main-color').trim()
 
     return (
       <label className={'form-row'} htmlFor="normal-switch">
