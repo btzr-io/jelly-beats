@@ -93,6 +93,7 @@ a {
   --color-palette-dark: var(--adaptive-palette-dark);
   --color-palette-vibrant: var(--adaptive-palette-vibrant);
   --main-color: var(--color-palette-vibrant);
+  --track-list-active-color: var(--color-palette-dark);
 }
 
 .view {

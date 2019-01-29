@@ -80,7 +80,7 @@ tbody tr {
 }
 
 .row--active .button--table-action--overlay:not(.button--toggle) {
-  background-color: #545454;
+  background-color: rgba(200, 200, 200, 0.24);
 }
 
 .row:hover .button--table-action--overlay + .row_label,
