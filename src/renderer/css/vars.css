@@ -2,10 +2,21 @@
   --color-red: #fc5c65;
   --color-primary: #54a0ff;
 
-  --color-palette-vibrant: var(--color-primary);
-  --color-palette-dark: #2a2a2f;
+  /* Default theme colors */
+  --default-palette-vibrant: #54a0ff;
+  --default-palette-dark: #2a2a2f;
 
+  /* Adaptive theme colors */
+  --adaptive-palette-vibrant: var(--default-palette-vibrant);
+  --adaptive-palette-dark: var(--default-palette-dark);
+
+  /* Current theme colors*/
+  --color-palette-vibrant: var(--default-palette-vibrant);
+  --color-palette-dark: var(--default-palette-dark);
+
+  /* Accent color */
   --main-color: var(--color-palette-vibrant);
+
   --border-color: #050506ab;
   --bg-color: #0e0e11;
   --text-color: #fff;

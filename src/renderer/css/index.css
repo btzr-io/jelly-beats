@@ -89,6 +89,12 @@ a {
   bottom: var(--player-height);
 }
 
+#window.adaptive {
+  --color-palette-dark: var(--adaptive-palette-dark);
+  --color-palette-vibrant: var(--adaptive-palette-vibrant);
+  --main-color: var(--color-palette-vibrant);
+}
+
 .view {
   height: 100%;
   overflow: auto;

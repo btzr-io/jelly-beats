@@ -3,6 +3,6 @@ import { connect } from 'unistore/react'
 import App from './view'
 
 export default connect(
-  'navigation, player',
+  'navigation, player, settings',
   { updateBlockHeight: 'doUpdateBlockHeight' }
 )(App)

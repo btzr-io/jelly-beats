@@ -5,6 +5,7 @@ import Header from '@/components/header'
 import Player from '@/components/player'
 import SideBar from '@/components/sidebar'
 import navigate from '@/utils/navigate'
+import classnames from 'classnames'
 
 const TWO_POINT_FIVE_MINUTES = 1000 * 60 * 2.5
 
@@ -38,13 +39,17 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const { children, player } = this.props
+    const { children, player, settings } = this.props
     const { showPlayer } = player || {}
+    const { adaptiveColors } = settings || {}
 
     return (
       <React.Fragment>
         <Header />
-        <div id="window" className={showPlayer ? 'short' : ''}>
+        <div
+          id="window"
+          className={classnames({ short: showPlayer, adaptive: adaptiveColors })}
+        >
           <SideBar />
           <Router routes={routes} defaultRoute={'/'} />
           <Player />

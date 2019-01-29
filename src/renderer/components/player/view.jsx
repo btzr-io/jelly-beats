@@ -115,12 +115,10 @@ class Player extends React.PureComponent {
       const { palette } = cache[currentTrack.uri] || {}
 
       // Adaptive colors
-      if (settings && settings.adaptiveColors && palette) {
-        document.documentElement.style.setProperty(
-          '--color-palette-vibrant',
-          palette.vibrant
-        )
-        document.documentElement.style.setProperty('--color-palette-dark', palette.dark)
+      if (palette) {
+        const root = document.documentElement
+        root.style.setProperty('--adaptive-palette-dark', palette.dark)
+        root.style.setProperty('--adaptive-palette-vibrant', palette.vibrant)
       }
 
       // Discord integration
