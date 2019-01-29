@@ -3,6 +3,9 @@
 </h1>
 
 <h1 align="center">
+ <a href="https://travis-ci.org/btzr-io/jelly-beats">
+   <img alt="undefined" src="https://img.shields.io/travis/btzr-io/jelly-beats.svg?style=for-the-badge">
+ </a>
  <a href=https://david-dm.org/btzr-io/jelly-beats>                
    <img src="https://img.shields.io/david/btzr-io/jelly-beats.svg?style=for-the-badge" alt="dependencies"/>
  </a>
