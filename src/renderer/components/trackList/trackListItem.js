@@ -1,7 +1,6 @@
 import React from 'react'
 import moment from 'moment'
 import classnames from 'classnames'
-import navigate from '@/utils/navigate'
 import Button from '@/components/button'
 import Health from '@/components/common/health'
 import * as icons from '@/constants/icons'

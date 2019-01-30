@@ -2,7 +2,6 @@ import React from 'react'
 import classnames from 'classnames'
 import Loader from '@/components/common/loader'
 import css from '@/css/modules/thumbnail.css.module'
-import navigate from '@/utils/navigate'
 
 class Card extends React.PureComponent {
   static defaultProps = {
