@@ -6,6 +6,7 @@
   "scripts": {
     "win": "yarn install --ignore-optional",
     "dev": "electron-webpack dev",
+    "release": "build",
     "compile": "electron-webpack",
     "dist": "yarn compile && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null",
