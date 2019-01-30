@@ -6,7 +6,6 @@ import Icon from '@mdi/react'
 import css from '@/css/modules/card.css.module'
 import Thumbnail from './thumbnail'
 import Lbry from '@/utils/lbry'
-import { getTags } from '@/utils/tags'
 import * as icons from '@/constants/icons'
 
 // import worker bundle
