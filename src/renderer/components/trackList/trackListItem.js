@@ -31,7 +31,7 @@ class TrackListItem extends React.Component {
 
   componentDidMount() {
     const { uri, claim } = this.props
-    claim && this.getPalette(claim.thumbnail)
+    claim.thumbnail.length > 0 && this.getPalette(claim.thumbnail)
   }
 
   render() {

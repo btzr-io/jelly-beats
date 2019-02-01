@@ -48,7 +48,7 @@ class Card extends React.PureComponent {
 
       // Thumbnail update
       if (track.thumbnail != prevTrack.thumbnail) {
-        this.getPalette(track.thumbnail)
+        track.thumbnail.length > 0 && this.getPalette(track.thumbnail)
       }
     }
   }

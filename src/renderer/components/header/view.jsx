@@ -76,9 +76,9 @@ class Header extends React.PureComponent {
           />
         </div>
         <div>
-          {currentChannel && (
+          {/* currentChannel && (
             <DropMenu currentChannel={currentChannel} doNavigate={doNavigate} />
-          )}
+          ) */}
         </div>
       </nav>
     )

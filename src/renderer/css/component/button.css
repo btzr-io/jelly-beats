@@ -200,6 +200,7 @@
   transition: opacity 0.3s ease;
 }
 
+.button--player-control,
 .button--player-action {
   border: 0;
   display: inline-block;
@@ -208,9 +209,34 @@
   padding: 4px;
   opacity: 0.64;
   margin: 0 4px;
-  border-radius: 50%;
   background: transparent;
   transition: opacity 0.3s ease;
+}
+
+.button--player-main-action {
+  border: 0;
+  display: inline-block;
+  padding: 4px;
+  margin: 0 4px;
+  border-radius: 50%;
+  background-color: var(--button-bg-color);
+}
+
+.button--toggle.button--player-main-action {
+  background-color: var(--color-palette-vibrant);
+}
+
+.button--player-control {
+  opacity: 1;
+  border-radius: 50%;
+}
+
+.button--player-control:hover {
+  background-color: var(--button-bg-color);
+}
+
+.button--player-control svg path {
+  transition: fill 0.2s ease;
 }
 
 .button--toggle.button--player-action {

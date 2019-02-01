@@ -1,46 +1,21 @@
 import fs from 'fs'
 import React from 'react'
-import moment from 'moment'
-import MediaElementWrapper from 'mediasource'
-import Icon from '@mdi/react'
-import Button from '@/components/button'
-import * as icons from '@/constants/icons'
 import classnames from 'classnames'
-import Slider from './slider'
 import { ipcRenderer } from 'electron'
+import { formatDuration } from '@/utils/formatMediaTime'
+import * as icons from '@/constants/icons'
 
-const formatTime = (seconds = 0) => moment.utc(seconds * 1000).format('mm:ss')
+// Components
+import Icon from '@mdi/react'
+import Slider from './slider'
+import Button from '@/components/button'
+import PlayerButton from './playerButton'
 
 // Import CSS
 import '@/css/slider.css'
 import css from '@/css/modules/player.css.module'
 
-const ControlButton = ({ icon, action, size, disabled }) => {
-  return (
-    <button className={css.button} onClick={action} disabled={disabled}>
-      <Icon path={icon} className={`icon icon--${size || 'large'}`} />
-    </button>
-  )
-}
-
-const ActionButton = ({ icon, action, size, disabled, color, toggle }) => {
-  return (
-    <Button
-      type={'player-action'}
-      onClick={action}
-      disabled={disabled}
-      toggle={toggle}
-      icon={icon}
-      iconColor={color}
-      size={'large'}
-    />
-  )
-}
-
 const StackButton = ({ thumbnail, title, artist, doNavigate }) => {
-  // const { name, totalTracks } = playlist || {}
-  // const label = name + (totalTracks ? ` (${totalTracks})` : '')
-
   const thumbnailStyle = {
     backgroundImage: thumbnail ? `url(${thumbnail})` : 'none',
   }
@@ -84,6 +59,10 @@ class Player extends React.PureComponent {
 
   createStream() {
     /*
+    TODO: FIX IT!
+
+    import MediaElementWrapper from 'mediasource'
+
     const { fileSource } = this.state
     const readable = fs.createReadStream(fileSource.path)
     const wrapper = new MediaElementWrapper(this.audioElement.current)
@@ -312,32 +291,35 @@ class Player extends React.PureComponent {
 
     const controls = [
       {
+        type: 'control',
         icon: icons.SKIP_PREVIOUS,
+        iconColor: canPlayPrev ? 'var(--main-color)' : '',
         action: () => playPrev(),
         disabled: !canPlayPrev,
       },
       {
+        type: 'main-action',
         size: 'large-x',
+        toggle: !paused && ready,
         icon: paused ? icons.PLAY : icons.PAUSE,
         action: () => togglePlay(),
         disabled: !ready,
       },
       {
+        type: 'control',
         icon: icons.SKIP_NEXT,
+        iconColor: canPlayNext ? 'var(--main-color)' : '',
         action: () => playNext(),
         disabled: !canPlayNext,
       },
     ]
 
     const actions = [
+      { type: 'action', icon: icons.SHUFFLE, action: () => {}, disabled: true },
       {
-        icon: icons.SHUFFLE,
-        action: () => {},
-        disabled: true,
-      },
-      {
+        type: 'action',
         icon: icons.REPEAT,
-        color: repeat ? 'var(--main-color)' : '',
+        iconColor: repeat ? 'var(--main-color)' : '',
         toggle: repeat,
         action: () => {
           this.toggleRepeat()
@@ -345,8 +327,9 @@ class Player extends React.PureComponent {
         disabled: false,
       },
       {
+        type: 'action',
         icon: isFavorite ? icons.HEART : icons.HEART_OUTLINE,
-        color: isFavorite ? 'var(--color-red)' : '',
+        iconColor: isFavorite ? 'var(--color-red)' : '',
         toggle: isFavorite,
         action: () => toggleFavorite(uri),
         disabled: false,
@@ -372,26 +355,26 @@ class Player extends React.PureComponent {
 
             <div className={css.actions}>
               {controls.map((props, key) => (
-                <ControlButton {...props} key={key} />
+                <PlayerButton {...props} key={key} />
               ))}
             </div>
 
             <div className={css.trackData}>
               <div className={css.seekBar}>
-                <span className={css.currentTime}>{formatTime(currentTime)}</span>
+                <span className={css.currentTime}>{formatDuration(currentTime)}</span>
                 <Slider
                   onChange={this.setCurrentTime}
                   value={currentTime}
                   max={duration}
                   disabled={!ready}
                 />
-                <span className={css.duration}>{formatTime(duration)}</span>
+                <span className={css.duration}>{formatDuration(duration)}</span>
               </div>
             </div>
 
             <div className={css.actions}>
               {actions.map((props, key) => (
-                <ActionButton {...props} key={key + '_right'} />
+                <PlayerButton {...props} key={key + '_right'} />
               ))}
             </div>
           </div>
