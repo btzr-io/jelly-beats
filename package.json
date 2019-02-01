@@ -1,7 +1,7 @@
 {
   "name": "jelly-beats",
   "version": "0.0.0",
-  "description": "",
+  "description": "A decentralized music streaming platform",
   "main": "index.js",
   "scripts": {
     "win": "yarn install --ignore-optional",
