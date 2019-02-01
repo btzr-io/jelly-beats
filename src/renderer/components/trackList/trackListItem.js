@@ -3,6 +3,7 @@ import moment from 'moment'
 import classnames from 'classnames'
 import Button from '@/components/button'
 import Health from '@/components/common/health'
+import PriceLabel from '@/components/common/priceLabel'
 import * as icons from '@/constants/icons'
 
 // import worker bundle
@@ -63,8 +64,6 @@ class TrackListItem extends React.Component {
     if (shouldPurchase) {
       buttonIcon = icons.DOWNLOAD
     }
-
-    const price = fee && `${fee.amount.toFixed(2)} ${fee.currency}`
 
     return (
       <tr
@@ -131,13 +130,7 @@ class TrackListItem extends React.Component {
         </td>
 
         <td>
-          <span
-            className={classnames('row_label', 'price_label', {
-              'price_label--free': !fee,
-            })}
-          >
-            {price || 'FREE'}
-          </span>
+          <PriceLabel className={'row_label'} fee={fee} />
         </td>
       </tr>
     )

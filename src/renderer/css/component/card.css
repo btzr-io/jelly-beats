@@ -10,6 +10,10 @@
   border: 4px solid transparent;
 }
 
+.card_label {
+  margin-top: 16px;
+}
+
 .card--active {
   border-color: var(--main-color);
 }

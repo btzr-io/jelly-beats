@@ -1,12 +1,17 @@
 import React from 'react'
+import Icon from '@mdi/react'
+import Lbry from '@/utils/lbry'
+import classnames from 'classnames'
+import * as icons from '@/constants/icons'
+
+// Components
 import Button from '@/components/button'
 import Health from '@/components/common/health'
 import Loader from '@/components/common/loader'
-import Icon from '@mdi/react'
-import css from '@/css/modules/card.css.module'
+import PriceLabel from '@/components/common/priceLabel'
 import Thumbnail from './thumbnail'
-import Lbry from '@/utils/lbry'
-import * as icons from '@/constants/icons'
+
+import css from '@/css/modules/card.css.module'
 
 // import worker bundle
 import Vibrant from 'node-vibrant/lib/bundle-worker'
@@ -78,7 +83,7 @@ class Card extends React.PureComponent {
     const { isReady } = this.state
 
     // Get metadata
-    const { title, artist, thumbnail, palette } = (cache && cache[uri]) || {}
+    const { title, artist, thumbnail, palette, fee } = (cache && cache[uri]) || {}
 
     //Get stream status
     const { completed, isAvailable, isDownloading } = (downloads && downloads[uri]) || {}
@@ -87,15 +92,13 @@ class Card extends React.PureComponent {
     const { paused, isLoading, currentTrack } = player || {}
     const isActive = completed && (currentTrack ? currentTrack.uri === uri : false)
     const isPlaying = !paused && isActive
+
     // Favorite selector
     const isFavorite = favorites.indexOf(uri) > -1
     const showOverlay = !(isAvailable === false) && (isPlaying || isDownloading)
 
-    const buttonIcon = isDownloading
-      ? icons.SPINNER
-      : !isPlaying
-      ? icons.PLAY
-      : icons.PAUSE
+    const shouldPurchase = !isDownloading && !completed
+    let buttonIcon = isDownloading ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE
 
     return (
       <div
@@ -120,6 +123,7 @@ class Card extends React.PureComponent {
             />
           )}
         </Thumbnail>
+        <PriceLabel className={'card_label'} fee={fee} />
         <div className={css.content}>
           <div className={css.metadata}>
             <div

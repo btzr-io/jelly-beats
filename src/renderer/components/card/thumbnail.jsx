@@ -14,6 +14,10 @@ class Card extends React.PureComponent {
     this.state = { ready: false }
   }
 
+  handleError = () => {
+    this.setState({ ready: true })
+  }
+
   handleLoad = () => {
     this.setState({ ready: true })
   }
@@ -32,7 +36,7 @@ class Card extends React.PureComponent {
           {this.props.children}
         </div>
         <div className={css.picture} style={thumbnailStyle} />
-        <img src={src} onLoad={this.handleLoad} />
+        <img src={src} onLoad={this.handleLoad} onError={this.handleError} />
       </div>
     )
   }

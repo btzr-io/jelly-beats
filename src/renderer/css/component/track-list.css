@@ -99,13 +99,14 @@ tbody tr {
 }
 
 .price_label {
-  padding: 2px 4px;
+  padding: 2px 8px;
   background: #ffdd59;
-  border-radius: 4px;
+  border-radius: 16px;
   color: rgba(0, 0, 0, 0.8);
   font-weight: bold;
   font-size: 0.8em;
   white-space: nowrap;
+  display: inline-block;
 }
 
 .price_label--free {
