@@ -8,6 +8,7 @@
   opacity: 0;
   border-radius: 6px;
   transition: opacity 0.3s ease 0.3s;
+  background-color: rgba(0, 0, 0, 0.24);
 }
 
 .thumb img,

@@ -22,11 +22,11 @@
   --text-color: #fff;
   --subtext-color: #bcbcbc;
   --button-bg-color: #3c3c49;
-  --card-bg-color: #212125;
+  --card-bg-color: #25252d;
   --card-dark-bg-color: #151518;
   --card-alt-bg-color: #2a2a2f;
 
-  --card-overlay-bg-color: rgba(33, 33, 37, 0.6);
+  --card-overlay-bg-color: rgba(26, 26, 31, 0.6);
 
   --scrollbar-thumb-bg: #3c3c49;
   --scrollbar-thumb-active-bg: #3c3c49;

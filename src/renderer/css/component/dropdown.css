@@ -71,7 +71,7 @@
 }
 
 .tag {
-  background-color: var(--card-bg-color);
+  background-color: var(--button-bg-color);
   padding: 4px 12px;
   border-radius: 16px;
   display: inline-block;
