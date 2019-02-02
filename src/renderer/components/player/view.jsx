@@ -289,15 +289,11 @@ class Player extends React.PureComponent {
     const { currentPage, currentQuery } = navigation || {}
 
     const collectionPath = isPlayingCollection && `/${currentPlaylist.uri}`
-    console.error(isPlayingCollection, collectionPath, currentPlaylist)
-
-    const playlistActive = currentPage === '/playlist' || currentPage === collectionPath
     const playlistPath = collectionPath || '/playlist'
+    const playlistActive = currentPage === playlistPath
 
     const togglePlaylist = () =>
-      !playlistActive
-        ? doNavigate(playlistPath, { ...currentPlaylist })
-        : doNavigateBackward()
+      !playlistActive ? doNavigate(playlistPath, currentPlaylist) : doNavigateBackward()
 
     const playerOptions = {
       autoPlay: true,
