@@ -32,20 +32,21 @@ A Decentralized music streaming platform.
 
 ## Dependencies required
 
-In order to run this app you need to install **all**  these dependencies.
+In order to run this app you need to install **all** these dependencies.
 
-|  Install  |
- | :-----|
-|[Git](https://git-scm.com/) |
-|[Node.js LTS](https://nodejs.org/)|
-| [Yarn](https://yarnpkg.com/)|
-|[LBRY Daemon](https://github.com/lbryio/lbry)|
+| Install                                       |
+| :-------------------------------------------- |
+| [Git](https://git-scm.com/)                   |
+| [Node.js LTS](https://nodejs.org/)            |
+| [Yarn](https://yarnpkg.com/)                  |
+| [LBRY Daemon](https://github.com/lbryio/lbry) |
 
- > **Only for Linux**
-  
- > You may also require **``  Make ``** tools. 
- > 
- > For example, on Debian you can install the [Build-essentials](https://packages.debian.org/stretch/build-essential) package.
+> **Only for Linux**
+
+> You may also require **`Make`** tools.
+>
+> For example, on Debian you can install the [Build-essentials](https://packages.debian.org/stretch/build-essential) package.
+
 ## How to run
 
 ```sh
@@ -67,11 +68,11 @@ $ yarn dev
 $ yarn dist
 ```
 
-| OS      |  File  |
-| ------------- | :-----|
-| **Linux**   |**.deb** -    Inside dist folder. |
-| **Windows**  |**.exe** -   Inside dist folder.|
-| **MacOS** |**.dmg** -      Inside dist folder. |
+| OS          | File                           |
+| ----------- | :----------------------------- |
+| **Linux**   | **.deb** - Inside dist folder. |
+| **Windows** | **.exe** - Inside dist folder. |
+| **MacOS**   | **.dmg** - Inside dist folder. |
 
 ## Awesome contributors :tada:
 
@@ -79,9 +80,9 @@ Thanks goes to these wonderful people and bots ([emoji-key](https://all-contribu
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars1.githubusercontent.com/u/14793624?v=4" width="100px;"/><br /><sub><b>Baltazar Gomez</b></sub>](http://codepen.io/btzr-io)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=btzr-io "Code") | [<img src="https://avatars2.githubusercontent.com/u/36207117?v=4" width="100px;"/><br /><sub><b>Dependabot</b></sub>](https://dependabot.com)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=dependabot-bot "Code") | [<img src="https://avatars2.githubusercontent.com/u/16674412?v=4" width="100px;"/><br /><sub><b>kodxana</b></sub>](https://github.com/kodxana)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=kodxana "Code") | [<img src="https://avatars2.githubusercontent.com/u/31211514?v=4" width="100px;"/><br /><sub><b>Tomas Rimkus</b></sub>](https://github.com/tomrimk)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=tomrimk "Code") | [<img src="https://avatars2.githubusercontent.com/u/22016005?v=4" width="100px;"/><br /><sub><b>Igor Guastalla</b></sub>](https://github.com/guastallaigor)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=guastallaigor "Code") | [<img src="https://avatars1.githubusercontent.com/u/3979577?v=4" width="100px;"/><br /><sub><b>Izabela Lima</b></sub>](http://izamglima.github.io)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=izamglima "Code") | [<img src="https://avatars1.githubusercontent.com/u/13919928?v=4" width="100px;"/><br /><sub><b>Manoj Kumar S</b></sub>](https://github.com/KumarManoj-S)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=KumarManoj-S "Code") |
+| [<img src="https://avatars1.githubusercontent.com/u/14793624?v=4" width="100px;" alt="Baltazar Gomez"/><br /><sub><b>Baltazar Gomez</b></sub>](http://codepen.io/btzr-io)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=btzr-io "Code") [🤔](#ideas-btzr-io "Ideas, Planning, & Feedback") [🎨](#design-btzr-io "Design") [📦](#platform-btzr-io "Packaging/porting to new platform") [🚧](#maintenance-btzr-io "Maintenance") | [<img src="https://avatars2.githubusercontent.com/u/36207117?v=4" width="100px;" alt="Dependabot"/><br /><sub><b>Dependabot</b></sub>](https://dependabot.com)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=dependabot-bot "Code") | [<img src="https://avatars2.githubusercontent.com/u/16674412?v=4" width="100px;" alt="kodxana"/><br /><sub><b>kodxana</b></sub>](https://github.com/kodxana)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=kodxana "Code") | [<img src="https://avatars2.githubusercontent.com/u/31211514?v=4" width="100px;" alt="Tomas Rimkus"/><br /><sub><b>Tomas Rimkus</b></sub>](https://github.com/tomrimk)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=tomrimk "Code") | [<img src="https://avatars2.githubusercontent.com/u/22016005?v=4" width="100px;" alt="Igor Guastalla"/><br /><sub><b>Igor Guastalla</b></sub>](https://github.com/guastallaigor)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=guastallaigor "Code") | [<img src="https://avatars1.githubusercontent.com/u/3979577?v=4" width="100px;" alt="Izabela Lima"/><br /><sub><b>Izabela Lima</b></sub>](http://izamglima.github.io)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=izamglima "Code") | [<img src="https://avatars1.githubusercontent.com/u/13919928?v=4" width="100px;" alt="Manoj Kumar S"/><br /><sub><b>Manoj Kumar S</b></sub>](https://github.com/KumarManoj-S)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=KumarManoj-S "Code") |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| [<img src="https://avatars0.githubusercontent.com/u/39452319?v=4" width="100px;"/><br /><sub><b>micaelsbno</b></sub>](https://github.com/micaelsbno)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=micaelsbno "Code") | [<img src="https://avatars3.githubusercontent.com/u/9062913?v=4" width="100px;"/><br /><sub><b>Austin Stevens</b></sub>](https://github.com/aestevens)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=aestevens "Code") | [<img src="https://avatars1.githubusercontent.com/u/39308480?v=4" width="100px;"/><br /><sub><b>Carlos G</b></sub>](https://github.com/gcarlosr)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=gcarlosr "Code") | [<img src="https://avatars2.githubusercontent.com/u/1237070?v=4" width="100px;"/><br /><sub><b>Julian Xhokaxhiu</b></sub>](https://julianxhokaxhiu.com)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=julianxhokaxhiu "Code") | [<img src="https://avatars1.githubusercontent.com/u/1800499?v=4" width="100px;"/><br /><sub><b>Michael Sanford</b></sub>](http://accidentalbeard.com)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=michaelsanford "Code") | [<img src="https://avatars3.githubusercontent.com/u/6307066?v=4" width="100px;"/><br /><sub><b>Mike Kerslake</b></sub>](http://www.mikekerslake.com/)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=theonlymikeever "Code") | [<img src="https://avatars2.githubusercontent.com/u/8999467?v=4" width="100px;"/><br /><sub><b>Juliano Garcia</b></sub>](https://linux.ime.usp.br/~robotenique/)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=robotenique "Code") |
-| [<img src="https://avatars2.githubusercontent.com/u/1966512?v=4" width="100px;"/><br /><sub><b>Rogelio Orts</b></sub>](http://rogelioorts.com)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=rogelio-o "Code") |
+| [<img src="https://avatars0.githubusercontent.com/u/39452319?v=4" width="100px;" alt="micaelsbno"/><br /><sub><b>micaelsbno</b></sub>](https://github.com/micaelsbno)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=micaelsbno "Code") | [<img src="https://avatars3.githubusercontent.com/u/9062913?v=4" width="100px;" alt="Austin Stevens"/><br /><sub><b>Austin Stevens</b></sub>](https://github.com/aestevens)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=aestevens "Code") | [<img src="https://avatars1.githubusercontent.com/u/39308480?v=4" width="100px;" alt="Carlos G"/><br /><sub><b>Carlos G</b></sub>](https://github.com/gcarlosr)<br />[🎨](#design-gcarlosr "Design") | [<img src="https://avatars2.githubusercontent.com/u/1237070?v=4" width="100px;" alt="Julian Xhokaxhiu"/><br /><sub><b>Julian Xhokaxhiu</b></sub>](https://julianxhokaxhiu.com)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=julianxhokaxhiu "Code") | [<img src="https://avatars1.githubusercontent.com/u/1800499?v=4" width="100px;" alt="Michael Sanford"/><br /><sub><b>Michael Sanford</b></sub>](http://accidentalbeard.com)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=michaelsanford "Code") | [<img src="https://avatars3.githubusercontent.com/u/6307066?v=4" width="100px;" alt="Mike Kerslake"/><br /><sub><b>Mike Kerslake</b></sub>](http://www.mikekerslake.com/)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=theonlymikeever "Code") | [<img src="https://avatars2.githubusercontent.com/u/8999467?v=4" width="100px;" alt="Juliano Garcia"/><br /><sub><b>Juliano Garcia</b></sub>](https://linux.ime.usp.br/~robotenique/)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=robotenique "Code") |
+| [<img src="https://avatars2.githubusercontent.com/u/1966512?v=4" width="100px;" alt="Rogelio Orts"/><br /><sub><b>Rogelio Orts</b></sub>](http://rogelioorts.com)<br />[💻](https://github.com/btzr-io/jelly-beats/commits?author=rogelio-o "Code") |
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
