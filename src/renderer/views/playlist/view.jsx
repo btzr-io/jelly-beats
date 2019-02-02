@@ -80,23 +80,12 @@ class View extends React.PureComponent {
         </section>
       ) : (
         // List is empty
-        <EmptyState
-          title="No favorites?"
-          message={
-            <p>
-              <span>{'Press'}</span>
-              <span>
-                <Icon className="icon icon--small-x" path={icons.HEART} />
-              </span>
-              <span>{'to add something you like'}</span>
-            </p>
-          }
-        />
+        <EmptyState title="Playlist empty!" message="" />
       )
 
     return (
       <div className="page">
-        {!fetchingData ? content : <Loader icon={icons.HEART} animation="pulse" />}
+        {!fetchingData ? content : <Loader icon={icons.PLAYLIST} animation="pulse" />}
       </div>
     )
   }

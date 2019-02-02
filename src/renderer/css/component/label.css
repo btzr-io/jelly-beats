@@ -1,0 +1,30 @@
+.label {
+  padding: 2px 8px;
+  border-radius: 16px;
+  background-color: rgba(200, 200, 200, 0.64);
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+  font-size: 0.8em;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.label-outline {
+  background-color: transparent;
+  border: 2px solid rgba(200, 200, 200, 0.64);
+  color: rgba(200, 200, 200, 0.64);
+}
+
+.price_label {
+  background: #ffdd59;
+}
+
+.stats {
+  margin: 16px 0;
+}
+
+.stats span {
+  display: inline-block;
+  margin-right: 16px;
+  color: var(--subtext-color);
+}

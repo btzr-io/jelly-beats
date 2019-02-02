@@ -11,24 +11,41 @@ class View extends React.PureComponent {
     super(props)
     this.state = {
       fetchingData: true,
-      downloads: [],
     }
   }
 
+  getChannelData(claim) {
+    const { storeChannel } = this.props
+
+    fetchChannel(claim, channel => {
+      storeChannel(channel)
+    })
+  }
+
   componentDidMount() {
-    const { cache, downloads } = this.props
-    const uris = Object.keys(downloads)
+    const { cache, tracks, setPlaylist } = this.props
     // List is empty
-    if (uris.length === 0) {
+    if (!tracks || tracks.length === 0) {
       // Stop loading data
       this.setState({ fetchingData: false })
     } else {
+      const { storeTrack } = this.props
       // Resolve uris
-      Lbry.resolve({ uris })
+      Lbry.resolve({ uris: tracks })
         .then(res => {
-          // Remove unresolved claims
           const list = Object.entries(res).filter(([key, value]) => !value.error)
-          // Update state
+
+          const { claim: claimData, certificate: channelData, error } = value
+
+          // Filter errors
+          if (error || !channelData) return
+
+          // Extract channel data
+          channelData && this.getChannelData(channelData)
+
+          // Cache track data
+          storeTrack(uri, { channelData, claimData })
+
           this.setState({
             fetchingData: false,
           })
@@ -41,14 +58,26 @@ class View extends React.PureComponent {
   }
 
   render() {
-    const { downloads } = this.props
+    const { tracks, duration, playlist } = this.props
+    const { name, uri } = playlist || {}
     const { fetchingData } = this.state
-    const uris = Object.keys(downloads)
 
     const content =
-      uris.length > 0 ? (
+      tracks && tracks.length > 0 ? (
         // Render list
-        <TrackList list={uris} uri={'downloads'} name={'downloads'} />
+        <section>
+          <header>
+            <h1>{name}</h1>
+            <div className={'stats'}>
+              <span className={'label label-outline'}>AUTO-GENERATED</span>
+              <span>•</span>
+              <span>{`${tracks.length} tracks`}</span>
+              <span>•</span>
+              <span>{duration}</span>
+            </div>
+          </header>
+          <TrackList list={tracks} uri={uri} name={name} />
+        </section>
       ) : (
         // List is empty
         <EmptyState
@@ -67,11 +96,7 @@ class View extends React.PureComponent {
 
     return (
       <div className="page">
-        {!fetchingData ? (
-          content
-        ) : (
-          <Loader icon={icons.DOWNLOAD_OUTLINE} animation="pulse" />
-        )}
+        {!fetchingData ? content : <Loader icon={icons.DOWNLOAD} animation="pulse" />}
       </div>
     )
   }

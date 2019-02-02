@@ -15,5 +15,6 @@ export default connect(
     attempPlay: 'triggerAttempPlay',
     togglePlay: 'triggerTogglePlay',
     toggleFavorite: 'toggleFavorite',
+    setPlaylist: 'setPlaylist',
   }
 )(Progress)

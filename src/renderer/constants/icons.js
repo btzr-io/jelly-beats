@@ -17,6 +17,7 @@ import {
   mdiLoading,
   mdiPencil,
   mdiArrowDown,
+  mdiPlaylistMusic,
   mdiArrowDownBoldCircleOutline,
   mdiSettingsOutline,
 } from '@mdi/js'
@@ -30,6 +31,7 @@ export const HEART_OUTLINE = mdiHeartOutline
 export const HEART_BROKEN = mdiHeartBroken
 export const MENU_DOWN = mdiChevronDown
 export const MENU_DOTS = mdiDotsVertical
+export const PLAYLIST = mdiPlaylistMusic
 export const PLAYLIST_PLUS = mdiPlaylistPlus
 
 export const PLAY = mdiPlay

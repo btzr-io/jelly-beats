@@ -328,6 +328,12 @@ class Player extends React.PureComponent {
       },
       {
         type: 'action',
+        icon: icons.PLAYLIST,
+        action: () => doNavigate('/playlist', { ...currentPlaylist }),
+        disabled: false,
+      },
+      {
+        type: 'action',
         icon: isFavorite ? icons.HEART : icons.HEART_OUTLINE,
         iconColor: isFavorite ? 'var(--color-red)' : '',
         toggle: isFavorite,

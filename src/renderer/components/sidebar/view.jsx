@@ -29,15 +29,19 @@ class SideBar extends React.PureComponent {
     super(props)
   }
 
-  getNavLink = ({ path, label, icon, idx }) => {
-    const { doNavigate, navigation } = this.props
-    const { currentPage } = navigation || {}
+  isActive = (path, query) => {
+    const { currentPage, currentQuery } = this.props.navigation || {}
+    return currentPage === path
+  }
+
+  getNavLink = ({ path, query, label, icon, idx }) => {
+    const { doNavigate } = this.props
     return (
       <NavLink
-        action={() => doNavigate(path)}
+        action={() => doNavigate(path, query)}
         label={label}
         icon={icon}
-        active={currentPage == path}
+        active={this.isActive(path, query)}
         key={`${idx}_navLink`}
       />
     )
@@ -46,29 +50,29 @@ class SideBar extends React.PureComponent {
   render() {
     const navLinks = [
       {
-        label: 'Home',
-        path: '/',
         icon: home,
+        path: '/',
+        label: 'Home',
       },
       {
-        label: 'Playlists',
-        path: '/playlists',
         icon: playlistPlus,
+        path: '/playlists',
+        label: 'Playlists',
       },
       {
-        label: 'Favorites',
-        path: '/favorites',
         icon: heart,
+        path: '/favorites',
+        label: 'Favorites',
       },
       {
-        label: 'Downloads',
-        path: '/downloads',
         icon: download,
+        path: '/downloads',
+        label: 'Downloads',
       },
       {
-        label: 'Settings',
-        path: '/settings',
         icon: settings,
+        path: '/settings',
+        label: 'Settings',
       },
     ]
     return (

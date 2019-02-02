@@ -17,6 +17,7 @@
 @import url('./component/dropdown.css');
 @import url('./component/card.css');
 @import url('./component/form.css');
+@import url('./component/label.css');
 
 html {
   background: black;
@@ -141,4 +142,17 @@ a {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+}
+
+section header {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--card-bg-color);
+}
+
+section header h1 {
+  text-transform: capitalize;
+}
+
+section header p {
+  color: var(--subtext-color);
 }

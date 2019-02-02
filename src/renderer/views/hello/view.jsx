@@ -34,12 +34,18 @@ class View extends React.PureComponent {
       // Stop loading data
       this.setState({ fetchingData: false })
     } else {
-      const { storeTrack } = this.props
+      const { storeTrack, storePlaylist } = this.props
       // Latest content
       fetchNewClaims({ limit: 10, page: 0 }).then(res => {
         const latestUris = res.map(claimData => `${claimData.name}#${claimData.claim_id}`)
         // Update state: Done!
         this.setState(prevState => ({ latest: [...prevState.latest, ...latestUris] }))
+
+        // Store latest playlist
+        storePlaylist('latest', { name: 'Latest', list: latestUris })
+
+        // Store latest playlist
+        storePlaylist('featured', { name: 'Featured', list })
 
         // Featured content
         Lbry.resolve({ uris: [...list, ...latestUris] })
@@ -55,6 +61,7 @@ class View extends React.PureComponent {
 
               // Cache track data
               storeTrack(uri, { channelData, claimData })
+              return uri
             })
 
             // Update state: Done!
@@ -85,7 +92,14 @@ class View extends React.PureComponent {
               <h1>Latest</h1>
               <div className="grid">
                 {latest.map((uri, index) => {
-                  return <Card key={uri} uri={uri} index={index} />
+                  return (
+                    <Card
+                      key={uri}
+                      uri={uri}
+                      index={index}
+                      playlist={{ uri: 'latest', name: 'Latest' }}
+                    />
+                  )
                 })}
               </div>
             </section>
@@ -96,7 +110,12 @@ class View extends React.PureComponent {
               <h1>Featured</h1>
               <div className="grid">
                 {list.map((uri, index) => (
-                  <Card key={uri} uri={uri} index={index} />
+                  <Card
+                    key={uri}
+                    uri={uri}
+                    index={index}
+                    playlist={{ uri: 'featured', name: 'Featured' }}
+                  />
                 ))}
               </div>
             </section>

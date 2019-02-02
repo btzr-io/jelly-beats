@@ -62,15 +62,25 @@ class Card extends React.PureComponent {
     // Get props
     const {
       uri,
+      index,
       cache,
       player,
       downloads,
       favorites,
       doNavigate,
-      togglePlay,
+      playlist,
+      setPlaylist,
       attempPlay,
+      togglePlay,
       toggleFavorite,
     } = this.props
+
+    const action = () => {
+      // Toggle play or purchase
+      !isDownloading && !isPlaying ? attempPlay(uri, null, true) : togglePlay()
+      // Update playlist state
+      playlist && setPlaylist({ ...playlist, index })
+    }
 
     // Temp fix for:
     // Store properties undefined on "first render" #287
@@ -118,7 +128,7 @@ class Card extends React.PureComponent {
               toggle={isPlaying && !isDownloading}
               animation={isDownloading && 'spin'}
               onClick={() => {
-                !isDownloading && !isPlaying ? attempPlay(uri, null, true) : togglePlay()
+                action()
               }}
             />
           )}
@@ -126,10 +136,7 @@ class Card extends React.PureComponent {
         <PriceLabel className={'card_label'} fee={fee} />
         <div className={css.content}>
           <div className={css.metadata}>
-            <div
-              className={css.title}
-              onClick={() => isReady && attempPlay(uri, null, true)}
-            >
+            <div className={css.title} onClick={() => {}}>
               <Health status={{ completed, isAvailable, isDownloading }} />
               {title}
             </div>

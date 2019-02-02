@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const selectPlaylistQueue = ({ collections, playlists }, uri) => {
   let playlist = []
   let collection = collections[uri]
@@ -11,6 +13,19 @@ export const selectPlaylistQueue = ({ collections, playlists }, uri) => {
     playlist = playlists[uri].list
   }
   return playlist
+}
+
+export const selectPlaylistDuration = ({ collections }, tracks = []) => {
+  let duration = 0
+
+  tracks
+    .map(uri => collections.downloads[uri])
+    .map(track => {
+      if (track && track.duration) {
+        duration += track.duration
+      }
+    })
+  return duration ? moment.duration(duration, 'seconds').humanize() : '?'
 }
 
 export const selectPlaylistByUri = ({ playlists }, uri) => {

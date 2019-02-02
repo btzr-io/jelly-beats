@@ -10,5 +10,6 @@ export default connect(
   {
     storeTrack: 'storeTrack',
     storeChannel: 'storeChannel',
+    storePlaylist: 'storePlaylist',
   }
 )(View)

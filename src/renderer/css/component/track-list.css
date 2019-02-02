@@ -98,21 +98,6 @@ tbody tr {
   opacity: 0.64;
 }
 
-.price_label {
-  padding: 2px 8px;
-  background: #ffdd59;
-  border-radius: 16px;
-  color: rgba(0, 0, 0, 0.8);
-  font-weight: bold;
-  font-size: 0.8em;
-  white-space: nowrap;
-  display: inline-block;
-}
-
-.price_label--free {
-  background-color: rgba(200, 200, 200, 0.64);
-}
-
 .row_label--link:hover {
   opacity: 1;
   cursor: pointer;

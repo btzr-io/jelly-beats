@@ -26,6 +26,7 @@
 }
 
 .empty-state__message {
+  color: var(--subtext-color);
   opacity: 0.75;
   margin: 4px;
 }
