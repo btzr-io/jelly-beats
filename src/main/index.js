@@ -26,6 +26,7 @@ let mainWindow
 
 function createMainWindow() {
   const window = new BrowserWindow({
+    title: `${app.getName()} ~ ${app.getVersion()}`,
     webPreferences: {
       webSecurity: false,
     },
