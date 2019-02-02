@@ -123,6 +123,7 @@ class Card extends React.PureComponent {
           {!(isAvailable === false) && (
             <Button
               icon={buttonIcon}
+              iconColor={fee && !isPlaying ? 'var(--color-yellow)' : ''}
               type="card-action--overlay"
               size="large-x"
               toggle={isPlaying && !isDownloading}

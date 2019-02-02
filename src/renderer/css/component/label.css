@@ -16,7 +16,7 @@
 }
 
 .price_label {
-  background: #ffdd59;
+  background: var(--color-yellow);
 }
 
 .stats {
