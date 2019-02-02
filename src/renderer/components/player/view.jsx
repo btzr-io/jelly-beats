@@ -270,19 +270,34 @@ class Player extends React.PureComponent {
     const {
       player,
       downloads,
+      navigation,
       playNext,
       playPrev,
       isFavorite,
       toggleFavorite,
       togglePlay,
       doNavigate,
+      doNavigateBackward,
       canPlayPrev,
       canPlayNext,
       currentPlaylist,
+      isPlayingCollection,
     } = this.props
 
     const { paused, syncPaused, currentTrack, showPlayer } = player || {}
     const { uri, title, artist, thumbnail } = currentTrack || {}
+    const { currentPage, currentQuery } = navigation || {}
+
+    const collectionPath = isPlayingCollection && `/${currentPlaylist.uri}`
+    console.error(isPlayingCollection, collectionPath, currentPlaylist)
+
+    const playlistActive = currentPage === '/playlist' || currentPage === collectionPath
+    const playlistPath = collectionPath || '/playlist'
+
+    const togglePlaylist = () =>
+      !playlistActive
+        ? doNavigate(playlistPath, { ...currentPlaylist })
+        : doNavigateBackward()
 
     const playerOptions = {
       autoPlay: true,
@@ -329,7 +344,9 @@ class Player extends React.PureComponent {
       {
         type: 'action',
         icon: icons.PLAYLIST,
-        action: () => doNavigate('/playlist', { ...currentPlaylist }),
+        iconColor: playlistActive ? 'var(--main-color)' : '',
+        toggle: playlistActive,
+        action: () => togglePlaylist(),
         disabled: false,
       },
       {

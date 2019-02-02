@@ -8,6 +8,7 @@ class RangeSlider extends React.Component {
     const { value } = this.props
     this.state = { value, shouldUpdate: true }
   }
+
   setValue(e) {
     this.setState({ value: e })
   }
