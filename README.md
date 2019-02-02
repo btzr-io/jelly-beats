@@ -73,7 +73,7 @@ $ yarn dist
 | **Windows**  |**.exe** -   Inside dist folder.|
 | **MacOS** |**.dmg** -      Inside dist folder. |
 
-## Contributor list
+## Awesome contributors :tada:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
