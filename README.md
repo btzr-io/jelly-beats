@@ -75,7 +75,7 @@ $ yarn dist
 
 ## Awesome contributors :tada:
 
-Thanks goes to these wonderful people and bots ([emoji-key](https://github.com/all-contributors/all-contributors#emoji-key)):
+Thanks goes to these wonderful people and bots ([emoji-key](https://all-contributors.js.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
