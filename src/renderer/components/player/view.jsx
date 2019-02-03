@@ -282,11 +282,15 @@ class Player extends React.PureComponent {
       canPlayNext,
       currentPlaylist,
       isPlayingCollection,
+      streamStatus,
     } = this.props
 
     const { paused, syncPaused, currentTrack, showPlayer } = player || {}
     const { uri, title, artist, thumbnail } = currentTrack || {}
     const { currentPage, currentQuery } = navigation || {}
+
+    //Get stream status
+    const { duration, completed, isDownloading } = streamStatus || {}
 
     const collectionPath = isPlayingCollection && `/${currentPlaylist.uri}`
     const playlistPath = collectionPath || '/playlist'
@@ -294,6 +298,14 @@ class Player extends React.PureComponent {
 
     const togglePlaylist = () =>
       !playlistActive ? doNavigate(playlistPath, currentPlaylist) : doNavigateBackward()
+
+    const isPlaying = !paused && ready && completed
+
+    const buttonIcon = isDownloading
+      ? icons.SPINNER
+      : !isPlaying
+      ? icons.PLAY
+      : icons.PAUSE
 
     const playerOptions = {
       autoPlay: true,
@@ -310,11 +322,12 @@ class Player extends React.PureComponent {
       },
       {
         type: 'main-action',
+        icon: buttonIcon,
         size: 'large-x',
-        toggle: !paused && ready,
-        icon: paused ? icons.PLAY : icons.PAUSE,
+        toggle: isPlaying,
         action: () => togglePlay(),
         disabled: !ready,
+        animation: isDownloading && 'spin',
       },
       {
         type: 'control',
@@ -354,9 +367,6 @@ class Player extends React.PureComponent {
         disabled: false,
       },
     ]
-
-    const fileSource = (downloads && downloads[uri]) || {}
-    const { duration, isDownloading } = fileSource
 
     return (
       <div className={css.player + ' ' + (showPlayer ? css.active : '')}>

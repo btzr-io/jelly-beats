@@ -18,6 +18,7 @@ export default connect(
     const canPlayNext = totalTracks > 1 && index < tracks.length - 1
     const isFavorite = favorites.indexOf(currentTrack.uri) > -1
     const isPlayingCollection = uri && collections[uri] ? true : false
+    const streamStatus = (downloads && downloads[currentTrack.uri]) || {}
 
     return {
       player,
@@ -31,6 +32,7 @@ export default connect(
       canPlayPrev,
       currentPlaylist,
       isPlayingCollection,
+      streamStatus,
     }
   },
   {
