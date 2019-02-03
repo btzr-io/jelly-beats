@@ -1,72 +1,18 @@
-import { app, ipcMain, BrowserWindow } from 'electron'
-import path from 'path'
-import { format as formatUrl } from 'url'
-import discordRPC from 'discord-rich-presence'
+import { app } from 'electron'
+import findProcess from 'find-process'
 
-// Discord client_id / app_id
-// TODO: Probably move or hide this :)
-const DISCORD_APP_ID = '462706392877236247'
+import Daemon from './daemon'
+import discordClient from './discord'
+import createMainWindow from './create-window'
 
-// Discord rich presence client
-const discordClient = discordRPC(DISCORD_APP_ID)
+const IS_WINDOWS = process.platform === 'win32'
+const appState = {}
 
-const isDevelopment = process.env.NODE_ENV !== 'production'
+// LBRY daemon instace
+let daemon = null
 
-const localURL = `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`
-
-// Production url
-const productionURL = formatUrl({
-  pathname: path.join(__dirname, 'index.html'),
-  protocol: 'file',
-  slashes: true,
-})
-
-// global reference to mainWindow (necessary to prevent window from being garbage collected)
-let mainWindow
-
-function createMainWindow() {
-  const window = new BrowserWindow({
-    title: `${app.getName()} ~ ${app.getVersion()}`,
-    webPreferences: {
-      webSecurity: false,
-    },
-  })
-
-  // Open the Dev tools only if the environment is not production
-  isDevelopment && window.webContents.openDevTools()
-
-  // Pick url based on the deployment environment
-  window.loadURL(isDevelopment ? localURL : productionURL)
-
-  window.on('closed', () => {
-    mainWindow = null
-  })
-
-  window.webContents.on('devtools-opened', () => {
-    window.focus()
-    setImmediate(() => {
-      window.focus()
-    })
-  })
-
-  return window
-}
-
-// This event is called each time the user plays track
-ipcMain.on('update-discord-presence', (event, args) => {
-  const { title, artist, duration, currentTime } = args
-
-  // Update discord rich presence data
-  discordClient.updatePresence({
-    state: artist.channelName,
-    details: `♪ ${title}`,
-    startTimestamp: Date.now() + currentTime * 1000,
-    endTimestamp: Date.now() + duration * 1000,
-    largeImageKey: 'jelly-beats-icon',
-    // smallImageKey: '',
-    instance: true,
-  })
-})
+// Discord integration
+discordClient()
 
 // quit application when all windows are closed
 app.on('window-all-closed', () => {
@@ -76,14 +22,28 @@ app.on('window-all-closed', () => {
   }
 })
 
-app.on('activate', () => {
-  // on macOS it is common to re-create a window even after all windows have been closed
-  if (mainWindow === null) {
-    mainWindow = createMainWindow()
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.on('ready', async () => {
+  // Main window props
+  const windowProps = {
+    title: `${app.getName()} ~ ${app.getVersion()}`,
+    webPreferences: { webSecurity: false },
   }
-})
 
-// create main BrowserWindow when electron is ready
-app.on('ready', () => {
-  mainWindow = createMainWindow()
+  // Create main BrowserWindow when electron is ready
+  createMainWindow(windowProps)
+
+  // Windows WMIC returns lbrynet start with 2 spaces. https://github.com/yibn2008/find-process/issues/18
+  const processListArgs =
+    process.platform === 'win32' ? 'lbrynet  start' : 'lbrynet start'
+  const processList = await findProcess('name', processListArgs)
+  const isDaemonRunning = processList.length > 0
+
+  // Start LBRY DAEMON
+  if (!isDaemonRunning) {
+    daemon = new Daemon()
+    daemon.launch()
+  }
 })
