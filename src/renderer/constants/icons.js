@@ -20,6 +20,10 @@ import {
   mdiPlaylistMusic,
   mdiArrowDownBoldCircleOutline,
   mdiSettingsOutline,
+  mdiAlertCircle,
+  mdiCheckCircle,
+  mdiCircleOutline,
+  mdiCircleSlice6,
 } from '@mdi/js'
 
 export const EDIT = mdiPencil
@@ -45,3 +49,9 @@ export const SPINNER = mdiLoading
 export const DOWNLOAD = mdiArrowDown
 export const DOWNLOAD_OUTLINE = mdiArrowDownBoldCircleOutline
 export const SETTINGS = mdiSettingsOutline
+
+// Circle status
+export const BUSY = mdiCircleSlice6
+export const READY = mdiCheckCircle
+export const UKNOWN = mdiCircleOutline
+export const WARNING = mdiAlertCircle

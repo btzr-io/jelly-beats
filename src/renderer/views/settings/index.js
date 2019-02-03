@@ -3,10 +3,11 @@ import View from './view'
 
 export default connect(
   (state, props) => {
-    const { settings } = state
-    return { settings }
+    const { settings, network } = state
+    return { settings, network }
   },
   {
     updateSettings: 'updateSettings',
+    updateNetworkConnection: 'updateNetworkConnection',
   }
 )(View)

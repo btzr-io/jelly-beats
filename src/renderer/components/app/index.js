@@ -4,5 +4,9 @@ import App from './view'
 
 export default connect(
   'navigation, player, settings',
-  { updateBlockHeight: 'doUpdateBlockHeight' }
+  {
+    updateBlockHeight: 'doUpdateBlockHeight',
+    checkNetworkConnection: 'checkNetworkConnection',
+    handleNetworkError: 'handleNetworkError',
+  }
 )(App)

@@ -6,6 +6,7 @@ import Player from '@/components/player'
 import SideBar from '@/components/sidebar'
 import navigate from '@/utils/navigate'
 import classnames from 'classnames'
+import Lbry from '@/utils/lbry'
 
 const TWO_POINT_FIVE_MINUTES = 1000 * 60 * 2.5
 
@@ -31,7 +32,12 @@ class App extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { updateBlockHeight } = this.props
+    const { updateBlockHeight, checkNetworkConnection } = this.props
+
+    // Network status
+    checkNetworkConnection()
+
+    // Last block height
     updateBlockHeight()
     setInterval(() => {
       updateBlockHeight()

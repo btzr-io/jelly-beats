@@ -11,6 +11,11 @@ initialState.account = {
   channels: [],
 }
 
+initialState.network = {
+  isReady: false,
+  connection: {},
+}
+
 initialState.navigation = {
   currentPage: '',
   currentQuery: {},

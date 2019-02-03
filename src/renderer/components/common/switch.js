@@ -7,13 +7,13 @@ class Switch extends Component {
   }
 
   render() {
-    const { label, value, onChange } = this.props
+    const { label, value, onChange, targetId } = this.props
 
     const style = getComputedStyle(document.getElementById('window'))
     const mainColor = style.getPropertyValue('--main-color').trim()
 
     return (
-      <label className={'form-row'} htmlFor="normal-switch">
+      <label className={'form-row'} htmlFor={targetId}>
         <span className={'form-label'}>{label}</span>
         <ReactSwitch
           onChange={onChange}
@@ -24,7 +24,7 @@ class Switch extends Component {
           width={34}
           onColor={mainColor}
           handleDiameter={20}
-          id="normal-switch"
+          id={targetId}
         />
       </label>
     )
