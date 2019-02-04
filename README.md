@@ -9,10 +9,10 @@
  <a href=https://david-dm.org/btzr-io/jelly-beats>                
    <img src="https://img.shields.io/david/btzr-io/jelly-beats.svg?style=for-the-badge" alt="dependencies"/>
  </a>
- <a>
+ <a href="https://github.com/btzr-io/jelly-beats/releases">
    <img src="https://img.shields.io/github/downloads/btzr-io/jelly-beats/total.svg?style=for-the-badge" alt="Github All Releases"/>
   </a>
- <a src="https://github.com/btzr-io/electron-preact-app/blob/master/LICENSE">
+ <a href="https://github.com/btzr-io/electron-preact-app/blob/master/LICENSE">
    <img src="https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=for-the-badge" alt="license" />
   </a>
 </h1>
