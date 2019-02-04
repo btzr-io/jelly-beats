@@ -40,7 +40,7 @@ export default () => {
         {
           label: 'Learn More',
           click() {
-            shell.openExternal('https://electronjs.org')
+            shell.openExternal('https://github.com/btzr-io/jelly-beats')
           },
         },
       ],
