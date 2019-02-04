@@ -1,6 +1,6 @@
 {
   "name": "jelly-beats",
-  "version": "0.0.0",
+  "version": "0.0.0-rc",
   "description": "A decentralized music streaming platform",
   "main": "index.js",
   "scripts": {
