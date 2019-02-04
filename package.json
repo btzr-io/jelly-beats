@@ -48,8 +48,7 @@
     "source-map-support": "^0.5.9",
     "stockroom": "^1.0.1",
     "unistore": "^3.2.1",
-    "universal-router": "^8.0.0",
-    "worker-loader": "^2.0.0"
+    "universal-router": "^8.0.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.2.3",
@@ -68,6 +67,7 @@
     "prop-types": "^15.6.2",
     "remote-origin-url": "^2.0.0",
     "style-loader": "^0.23.1",
-    "webpack": "^4.28.1"
+    "webpack": "^4.28.1",
+    "worker-loader": "^2.0.0"
   }
 }

@@ -15,12 +15,11 @@ export default class Daemon {
 
   constructor() {
     this.handlers = []
-    this.subprocess = null
+    this.subprocess = undefined
   }
 
   launch() {
     this.subprocess = spawn(Daemon.getPath(), ['start'])
-
     this.subprocess.stdout.on('data', data => console.log(`Daemon: ${data}`))
     this.subprocess.stderr.on('data', data => console.error(`Daemon: ${data}`))
     this.subprocess.on('exit', () => this.fire('exit'))
