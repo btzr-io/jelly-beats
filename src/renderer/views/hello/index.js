@@ -5,7 +5,8 @@ export default connect(
   (state, props) => {
     const { cache, collections, network } = state
     const { favorites } = collections
-    return { cache, favorites, network }
+    const connectionCode = network.connection.code
+    return { cache, favorites, network, connectionCode }
   },
   {
     storeTrack: 'storeTrack',

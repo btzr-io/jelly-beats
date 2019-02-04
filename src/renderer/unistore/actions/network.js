@@ -1,5 +1,7 @@
 import Lbry from '@/utils/lbry'
 
+const CONNECTION_TIME_OUT = 2500
+
 export default function(store) {
   const actions = {
     checkNetworkConnection(state) {
@@ -27,12 +29,19 @@ export default function(store) {
           // Retry connection
           setTimeout(() => {
             store.action(actions.checkNetworkConnection)()
-          }, 2500)
+          }, CONNECTION_TIME_OUT)
         })
         .catch(error => {
-          store.action(actions.handleNetworkError)()
+          if (connection.code !== 'disconnected') {
+            store.action(actions.handleNetworkError)()
+          }
+          // Retry connection
+          setTimeout(() => {
+            store.action(actions.checkNetworkConnection)()
+          }, CONNECTION_TIME_OUT)
         })
     },
+
     updateNetworkConnection(state, connection, isReady) {
       const { network } = state
       return {

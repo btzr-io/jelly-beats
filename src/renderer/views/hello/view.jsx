@@ -36,6 +36,8 @@ class View extends React.PureComponent {
   fetchData = () => {
     const { storeTrack, storePlaylist, network } = this.props
     const { isReady, connection } = network
+    // Update status
+    this.setState({ fetchingData: true })
     // Attemp to fetch
     if (!connection.code || connection.code === 'connecting') {
       // Retry fetch
@@ -51,7 +53,7 @@ class View extends React.PureComponent {
             claimData => `${claimData.name}#${claimData.claim_id}`
           )
           // Update state: Done!
-          this.setState(prevState => ({ latest: [...prevState.latest, ...latestUris] }))
+          this.setState({ latest: [...latestUris] })
 
           // Store latest playlist
           storePlaylist('latest', { name: 'Latest', list: latestUris })
@@ -92,6 +94,17 @@ class View extends React.PureComponent {
 
   componentDidMount() {
     this.fetchData()
+  }
+  componentDidUpdate(prevProps, prevState) {
+    const { connectionCode } = this.props
+
+    // Auto-retry connection
+    if (
+      prevProps.connectionCode !== connectionCode &&
+      connectionCode !== 'disconnected'
+    ) {
+      this.fetchData()
+    }
   }
 
   render() {
