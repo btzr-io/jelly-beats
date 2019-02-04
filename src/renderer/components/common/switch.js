@@ -20,10 +20,10 @@ class Switch extends Component {
           checked={value}
           checkedIcon={false}
           uncheckedIcon={false}
-          height={18}
-          width={34}
+          height={16}
+          width={32}
           onColor={mainColor}
-          handleDiameter={20}
+          handleDiameter={18}
           id={targetId}
         />
       </label>

@@ -28,58 +28,70 @@ class View extends React.PureComponent {
     })
   }
 
-  componentDidMount() {
-    // List is empty
-    if (list.length === 0) {
-      // Stop loading data
-      this.setState({ fetchingData: false })
-    } else {
-      const { storeTrack, storePlaylist } = this.props
+  handleFetchError = () => {
+    // Deamon has stop running
+    this.setState({ error: true, fetchingData: false })
+  }
+
+  fetchData = () => {
+    const { storeTrack, storePlaylist, network } = this.props
+    const { isReady, connection } = network
+    // Attemp to fetch
+    if (!connection.code || connection.code === 'connecting') {
+      // Retry fetch
+      setTimeout(() => this.fetchData(), 2500)
+    } else if (connection.code === 'disconnected') {
+      // Deamon has stop running
+      this.handleFetchError()
+    } else if (isReady) {
       // Latest content
-      fetchNewClaims({ limit: 10, page: 0 }).then(res => {
-        const latestUris = res.map(claimData => `${claimData.name}#${claimData.claim_id}`)
-        // Update state: Done!
-        this.setState(prevState => ({ latest: [...prevState.latest, ...latestUris] }))
+      fetchNewClaims({ limit: 10, page: 0 })
+        .then(res => {
+          const latestUris = res.map(
+            claimData => `${claimData.name}#${claimData.claim_id}`
+          )
+          // Update state: Done!
+          this.setState(prevState => ({ latest: [...prevState.latest, ...latestUris] }))
 
-        // Store latest playlist
-        storePlaylist('latest', { name: 'Latest', list: latestUris })
+          // Store latest playlist
+          storePlaylist('latest', { name: 'Latest', list: latestUris })
 
-        // Store latest playlist
-        storePlaylist('featured', { name: 'Featured', list })
+          // Store latest playlist
+          storePlaylist('featured', { name: 'Featured', list })
 
-        // Featured content
-        Lbry.resolve({ uris: [...list, ...latestUris] })
-          .then(res => {
-            Object.entries(res).map(([uri, value], index) => {
-              const { claim: claimData, certificate: channelData, error } = value
+          // Featured content
+          Lbry.resolve({ uris: [...list, ...latestUris] })
+            .then(res => {
+              Object.entries(res).map(([uri, value], index) => {
+                const { claim: claimData, certificate: channelData, error } = value
 
-              // Filter errors
-              if (error || !channelData) return
+                // Filter errors
+                if (error || !channelData) return
 
-              // Extract channel data
-              channelData && this.getChannelData(channelData)
+                // Extract channel data
+                channelData && this.getChannelData(channelData)
 
-              // Cache track data
-              storeTrack(uri, { channelData, claimData })
-              return uri
+                // Cache track data
+                storeTrack(uri, { channelData, claimData })
+                return uri
+              })
+
+              // Update state: Done!
+              this.setState({
+                error: false,
+                fetchingData: false,
+              })
             })
-
-            // Update state: Done!
-            this.setState({
-              error: false,
-              fetchingData: false,
-            })
-          })
-          // Handle errors
-          .catch(err => {
-            console.error(err)
-            this.setState({
-              error: true,
-              fetchingData: false,
-            })
-          })
-      })
+            // Handle errors
+            .catch(this.handleFetchError)
+        })
+        // Handle errors
+        .catch(this.handleFetchError)
     }
+  }
+
+  componentDidMount() {
+    this.fetchData()
   }
 
   render() {

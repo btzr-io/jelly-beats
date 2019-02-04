@@ -25,7 +25,7 @@ class View extends React.PureComponent {
   componentDidMount() {
     const { cache, tracks, setPlaylist } = this.props
     // List is empty
-    if (!tracks || tracks.length === 0) {
+    if (tracks.length === 0) {
       // Stop loading data
       this.setState({ fetchingData: false })
     } else {
@@ -58,12 +58,12 @@ class View extends React.PureComponent {
   }
 
   render() {
-    const { tracks, duration, playlist } = this.props
-    const { name, uri } = playlist || {}
     const { fetchingData } = this.state
+    const { tracks, duration, playlist } = this.props
+    const { name, uri } = playlist
 
     const content =
-      tracks && tracks.length > 0 ? (
+      tracks.length > 0 ? (
         // Render list
         <section>
           <header>

@@ -3,9 +3,9 @@ import View from './view'
 
 export default connect(
   (state, props) => {
-    const { cache, collections } = state
-    const { favorites } = collections || {}
-    return { cache, favorites }
+    const { cache, collections, network } = state
+    const { favorites } = collections
+    return { cache, favorites, network }
   },
   {
     storeTrack: 'storeTrack',

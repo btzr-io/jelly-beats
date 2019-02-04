@@ -4,7 +4,7 @@ export function chainquery(sqlQuery, queryOpts) {
   const resultLimit = queryOpts ? queryOpts.limit : 10
   const pageIndex = queryOpts ? queryOpts.page : 0
   const paginate = ` LIMIT ${resultLimit} OFFSET ${resultLimit * pageIndex}`
-  const promise = new Promise(resolve => {
+  const promise = new Promise((resolve, reject) => {
     // Get all claims ( audio files only ) from a channel
     fetch(encodeURI(CHAINQUERY_API + sqlQuery + paginate))
       .then(response => {
@@ -19,17 +19,18 @@ export function chainquery(sqlQuery, queryOpts) {
         } else {
           const error = new Error(response.statusText)
           error.response = response
-          throw error
+          reject(error)
         }
       })
       .then(json => {
         const { error, data } = json
         // Check for api errors
 
-        !error && resolve(data)
+        !error ? resolve(data) : reject(error)
       })
       .catch(error => {
         console.error(error.message)
+        reject(error)
       })
   })
   return promise

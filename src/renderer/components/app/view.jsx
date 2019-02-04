@@ -45,9 +45,13 @@ class App extends React.PureComponent {
   }
 
   render() {
+    if (!this.props.AppStateReady) {
+      return null
+    }
+
     const { children, player, settings } = this.props
-    const { showPlayer } = player || {}
-    const { adaptiveColors } = settings || {}
+    const { showPlayer } = player
+    const { adaptiveColors } = settings
 
     return (
       <React.Fragment>

@@ -4,9 +4,7 @@ import View from './view'
 
 export default connect((state, props) => {
   const { cache, collections } = state
-  const { downloads } = collections || {}
-
-  if (!downloads) return { cache }
+  const { downloads } = collections
   const tracks = Object.keys(downloads)
   const duration = selectPlaylistDuration(state, tracks)
   const playlist = { uri: 'downloads', name: 'Downloads' }
