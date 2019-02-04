@@ -84,7 +84,7 @@ class Player extends React.PureComponent {
     audio.play()
 
     const { cache, player, settings } = this.props
-    const { currentTrack } = player || {}
+    const { currentTrack } = player
 
     if (currentTrack) {
       const { duration, currentTime } = this.state
@@ -213,8 +213,8 @@ class Player extends React.PureComponent {
   componentDidUpdate(prevProps, prevState) {
     // OPTIMIZE AND IMPROVE THIS MESS!
     const { downloads, player, togglePlay } = this.props
-    const { uri } = player ? player.currentTrack : {}
-    const prevTrack = prevProps.player ? prevProps.player.currentTrack : {}
+    const { uri } = player.currentTrack || {}
+    const prevTrack = prevProps.player.currentTrack || {}
     const fileSource = downloads[uri]
 
     // If source exist
@@ -247,11 +247,12 @@ class Player extends React.PureComponent {
           player.syncPaused !== prevProps.player.syncPaused
         ) {
           // Try to sync back
-          console.log({
+          /* console.log({
             isActive,
             isPlaying,
             testNextSync: player.syncPaused,
-          })
+          }) */
+
           // Try to play
           if (!player.syncPaused && !isPlaying) this.play()
           else if (player.syncPaused && isPlaying) this.pause()
@@ -285,12 +286,12 @@ class Player extends React.PureComponent {
       streamStatus,
     } = this.props
 
-    const { paused, syncPaused, currentTrack, showPlayer } = player || {}
-    const { uri, title, artist, thumbnail } = currentTrack || {}
-    const { currentPage, currentQuery } = navigation || {}
+    const { paused, syncPaused, currentTrack, showPlayer } = player
+    const { uri, title, artist, thumbnail } = currentTrack
+    const { currentPage, currentQuery } = navigation
 
     //Get stream status
-    const { duration, completed, isDownloading } = streamStatus || {}
+    const { duration, completed, isDownloading } = streamStatus
 
     const collectionPath = isPlayingCollection && `/${currentPlaylist.uri}`
     const playlistPath = collectionPath || '/playlist'

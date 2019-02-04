@@ -1,6 +1,8 @@
 import settings from './defaultSettings'
 
-const initialState = {}
+// Store properties undefined on "first render" #14
+// https://github.com/developit/stockroom/issues/14
+const initialState = { appStateReady: true }
 
 initialState.account = {
   currentChannel: {

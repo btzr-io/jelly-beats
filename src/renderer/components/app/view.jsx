@@ -45,7 +45,9 @@ class App extends React.PureComponent {
   }
 
   render() {
-    if (!this.props.AppStateReady) {
+    // Store properties undefined on "first render" #14
+    // https://github.com/developit/stockroom/issues/14
+    if (!this.props.appStateReady) {
       return null
     }
 
