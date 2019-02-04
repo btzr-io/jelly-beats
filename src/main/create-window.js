@@ -1,6 +1,7 @@
 import { BrowserWindow } from 'electron'
 import { format as formatUrl } from 'url'
 import path from 'path'
+import createMenu from './create-menu'
 
 const IS_DEV = process.env.NODE_ENV === 'development'
 
@@ -24,6 +25,9 @@ function createWindow(windowProps = {}) {
 
   // Pick url based on the deployment environment and load index.html
   mainWindow.loadURL(IS_DEV ? DEV_URL : PRODUCTION_URL)
+
+  // Setup menu
+  createMenu()
 
   // Open the DevTools
   IS_DEV && mainWindow.webContents.openDevTools()
