@@ -7183,6 +7183,10 @@ unique-string@^1.0.0:
   dependencies:
     crypto-random-string "^1.0.0"
 
+unissist@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/unissist/-/unissist-1.3.0.tgz#0a39a94c061d4fbfca4e3974b0b1210223c2d02a"
+
 unistore@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/unistore/-/unistore-3.2.1.tgz#26e316c834e39b83b2a301a65f78138f43975a0b"

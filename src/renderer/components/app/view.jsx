@@ -33,26 +33,27 @@ class App extends React.PureComponent {
     if (currentPage && currentPage !== prevNavigation.currentPage) {
       navigate(currentPage, query)
     }
+
+    // Handle render
+    const { ready } = this.props
+
+    if (prevProps.ready !== ready) {
+      this.attempRender()
+    }
   }
 
-  componentDidMount() {
-    this.runTasks()
-  }
+  componentDidMount() {}
 
-  runTasks = () => {
-    const { appStateReady } = this.props
+  attempRender = () => {
+    const { ready, hydrated } = this.props
     // Wait for store
-    if (appStateReady) {
-      const { checkNetworkConnection, updateBlockHeight } = this.props
-      // Tasks to run
+    if (ready && hydrated) {
+      const { updateBlockHeight, checkNetworkConnection } = this.props
+      // Tasks
       checkNetworkConnection()
       updateBlockHeight()
       setInterval(updateBlockHeight, TWO_POINT_FIVE_MINUTES)
-      // Update state
       this.setState({ shouldRender: true })
-    } else {
-      // Retry tasks
-      setTimeout(this.runTasks, TWO_POINT_FIVE_SECONDS)
     }
   }
 

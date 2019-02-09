@@ -93,16 +93,17 @@ class View extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.fetchData()
+    const { connected } = this.props
+    if (connected) {
+      this.fetchData()
+    }
   }
+
   componentDidUpdate(prevProps, prevState) {
-    const { connectionCode } = this.props
+    const { connected } = this.props
 
     // Auto-retry connection
-    if (
-      prevProps.connectionCode !== connectionCode &&
-      connectionCode !== 'disconnected'
-    ) {
+    if (connected === true && connected !== prevProps.connected) {
       this.fetchData()
     }
   }

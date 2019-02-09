@@ -3,7 +3,7 @@ import { connect } from 'unistore/react'
 import App from './view'
 
 export default connect(
-  'appStateReady, navigation, player, settings',
+  'ready, hydrated, navigation, player, settings',
   {
     updateBlockHeight: 'doUpdateBlockHeight',
     checkNetworkConnection: 'checkNetworkConnection',
