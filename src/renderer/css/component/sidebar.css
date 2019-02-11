@@ -7,14 +7,27 @@
 }
 
 .nav__links {
+  margin: 0;
+}
+.nav__group {
   margin: 32px 0;
+}
+
+.nav__group--title {
+  margin: 8px 12px;
+  padding: 0 12px;
+  font-size: 0.78em;
+  font-weight: bold;
+  color: var(--subtext-color);
+  opacity: 0.64;
 }
 
 .nav__link {
   font-size: 1em;
   font-weight: 600;
   padding: 8px 12px;
-  margin: 8px 12px;
+  margin: 0 12px;
+  margin-bottom: 8px;
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.3s ease;
@@ -33,7 +46,7 @@
 }
 
 .link__body {
-  opacity: 0.54;
+  opacity: 0.52;
 }
 
 .link__icon {

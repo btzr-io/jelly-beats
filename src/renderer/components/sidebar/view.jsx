@@ -54,6 +54,9 @@ class SideBar extends React.PureComponent {
         path: '/',
         label: 'Home',
       },
+    ]
+
+    const collectionLinks = [
       {
         icon: playlistPlus,
         path: '/playlists',
@@ -69,16 +72,35 @@ class SideBar extends React.PureComponent {
         path: '/downloads',
         label: 'Downloads',
       },
+    ]
+
+    const appLinks = [
       {
         icon: settings,
         path: '/settings',
         label: 'Settings',
       },
     ]
+
     return (
       <div className="sidebar">
-        <div className="nav__links">
-          {navLinks.map((item, idx) => this.getNavLink({ ...item, idx }))}
+        <div className="nav__group">
+          <div className="nav__group--title">DISCOVER</div>
+          <div className="nav__links">
+            {navLinks.map((item, idx) => this.getNavLink({ ...item, idx }))}
+          </div>
+        </div>
+        <div className="nav__group">
+          <div className="nav__group--title">COLLECTIONS</div>
+          <div className="nav__links">
+            {collectionLinks.map((item, idx) => this.getNavLink({ ...item, idx }))}
+          </div>
+        </div>
+        <div className="nav__group">
+          <div className="nav__group--title">APPLICATION</div>
+          <div className="nav__links">
+            {appLinks.map((item, idx) => this.getNavLink({ ...item, idx }))}
+          </div>
         </div>
       </div>
     )
