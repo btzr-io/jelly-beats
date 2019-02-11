@@ -47,7 +47,7 @@ class View extends React.PureComponent {
       this.handleFetchError()
     } else if (isReady) {
       // Latest content
-      fetchNewClaims({ limit: 10, page: 0 })
+      fetchNewClaims({ limit: 6, page: 0 })
         .then(res => {
           const latestUris = res.map(
             claimData => `${claimData.name}#${claimData.claim_id}`
