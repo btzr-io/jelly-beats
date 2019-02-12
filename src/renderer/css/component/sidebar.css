@@ -4,6 +4,8 @@
   width: var(--sidebar-width);
   background: var(--sidebar-bg-color);
   flex-shrink: 0;
+  overflow: auto;
+  -webkit-user-select: none;
 }
 
 .nav__links {
