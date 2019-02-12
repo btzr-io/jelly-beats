@@ -16,8 +16,18 @@ const claims = [
 ]
 
 const podcasts = [
-  '@SwordAndScale#9c2faeaf8d2f5145d6c7380174e9b1b087033cc4',
-  '@RoboticsForEveryone#c0aba61eb6c871b3f79cf14c30133d516d3c45b7',
+  {
+    uri: '@RoboticsForEveryone#c0aba61eb6c871b3f79cf14c30133d516d3c45b7',
+    host: 'Mark Falcon',
+    title: 'Robotics for Everyone',
+    thumbnail: 'https://spee.ch/c/tNtMwix6tIrPf1OMsSWj0ZGR.jpg',
+  },
+  {
+    uri: '@SwordAndScale#9c2faeaf8d2f5145d6c7380174e9b1b087033cc4',
+    host: 'Mike Boudet',
+    title: 'Sword and Scale',
+    thumbnail: 'https://spee.ch/9/GvF41O2ARMa2BA72P3UBM1EZ.png',
+  },
 ]
 
 export default claims
