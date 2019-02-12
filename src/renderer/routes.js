@@ -7,7 +7,7 @@ import Channels from './views/channels'
 import Downloads from './views/downloads'
 import Favorites from './views/favorites'
 import Playlist from './views/playlist'
-import Playlists from './views/playlists'
+import Podcasts from './views/podcasts'
 
 const routes = [
   {
@@ -41,6 +41,10 @@ const routes = [
   {
     path: '/channels',
     action: ctx => <Channels options={ctx} />,
+  },
+  {
+    path: '/podcasts',
+    action: ctx => <Podcasts options={ctx} />,
   },
 ]
 

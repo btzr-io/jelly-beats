@@ -24,6 +24,9 @@ import {
   mdiCheckCircle,
   mdiCircleOutline,
   mdiCircleSlice6,
+  mdiPodcast,
+  mdiMenuDown,
+  mdiMenuRight,
 } from '@mdi/js'
 
 export const EDIT = mdiPencil
@@ -55,3 +58,8 @@ export const BUSY = mdiCircleSlice6
 export const READY = mdiCheckCircle
 export const UKNOWN = mdiCircleOutline
 export const WARNING = mdiAlertCircle
+
+export const PODCAST = mdiPodcast
+
+export const GROUP_DOWN = mdiMenuDown
+export const GROUP_RIGHT = mdiMenuRight
