@@ -1,5 +1,5 @@
 import React from 'react'
-import Progress from './view'
+import TrackList from './view'
 import { connect } from 'unistore/react'
 
 export default connect(
@@ -16,4 +16,4 @@ export default connect(
     togglePlay: 'triggerTogglePlay',
     toggleFavorite: 'toggleFavorite',
   }
-)(Progress)
+)(TrackList)

@@ -18,7 +18,6 @@ class TiledCard extends React.PureComponent {
 
     fetchClaimsCountByChannel(id, { limit: 100, page: 0 })
       .then(res => {
-        console.info(res)
         this.setState({ count: res[0]['COUNT(*)'] })
       })
       .catch(error => {

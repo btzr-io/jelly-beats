@@ -39,6 +39,10 @@ tbody tr {
   transition: 0;
 }
 
+.row {
+  opacity: 0;
+}
+
 .row:last-child {
   border-bottom: 1px solid var(--card-bg-color);
 }
@@ -102,4 +106,25 @@ tbody tr {
   opacity: 1;
   cursor: pointer;
   text-decoration: underline;
+}
+
+.row--placeholder .row_label--temp {
+  display: inline-block;
+  border-radius: 16px;
+  background-color: var(--subtext-color);
+  padding: 4px;
+  margin: 0 16px;
+  width: 75%;
+}
+
+.row--placeholder .row_label--temp.small {
+  min-width: 1em;
+}
+
+.row--placeholder .row_label--temp.medium {
+  min-width: 4em;
+}
+
+.row--placeholder .row_label--temp.large {
+  min-width: 8em;
 }

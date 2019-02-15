@@ -3,10 +3,10 @@ import TrackListItem from './trackListItem'
 
 class TrackList extends React.PureComponent {
   static defaultProps = {
-    uri: '',
     name: '',
     list: [],
     type: 'playlist',
+    playlist: null,
     showHeader: true,
   }
 
@@ -15,20 +15,7 @@ class TrackList extends React.PureComponent {
   }
 
   render() {
-    const {
-      list,
-      type,
-      cache,
-      player,
-      favorites,
-      downloads,
-      doNavigate,
-      togglePlay,
-      attempPlay,
-      showHeader,
-      storePalette,
-      toggleFavorite,
-    } = this.props
+    const { list, type, doNavigate, showHeader, playlist } = this.props
 
     return (
       <table className="track-list">
@@ -46,28 +33,13 @@ class TrackList extends React.PureComponent {
         )}
         <tbody>
           {list.map((uri, index) => {
-            const isFavorite = favorites.indexOf(uri) > -1
-            //Get stream status
-            const { duration, completed, isAvailable, isDownloading } =
-              downloads[uri] || {}
-            //Get player status
-            const { paused, isLoading, currentTrack } = player || {}
-            const isActive =
-              completed && (currentTrack ? currentTrack.uri === uri : false)
-            const isPlaying = !paused && isActive
-
-            const claim = cache[uri]
-
-            if (isPlaying) {
-              const { uri, name, setPlaylist } = this.props
-              setPlaylist({ uri, name, index })
-            }
-
-            return claim ? (
+            return uri ? (
               <TrackListItem
                 key={uri}
                 uri={uri}
                 index={index + 1}
+                playlist={playlist}
+                /*
                 claim={claim}
                 duration={duration}
                 isActive={isActive}
@@ -81,6 +53,7 @@ class TrackList extends React.PureComponent {
                 storePalette={storePalette}
                 triggerPlay={() => attempPlay(uri, { index })}
                 toggleFavorite={() => toggleFavorite(uri)}
+                */
               />
             ) : null
           })}

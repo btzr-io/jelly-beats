@@ -20,7 +20,7 @@ let config = {
   debounceTime: 100,
   // takes in the current state and returns the state to be persisted
   map: ({ cache, settings, collections, latestBlock }) => ({
-    cache,
+    // cache,
     settings,
     collections,
     latestBlock,
