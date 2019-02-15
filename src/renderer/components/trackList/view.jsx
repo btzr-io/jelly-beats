@@ -15,7 +15,7 @@ class TrackList extends React.PureComponent {
   }
 
   render() {
-    const { list, type, doNavigate, showHeader, playlist } = this.props
+    const { list, type, showHeader, playlist } = this.props
 
     return (
       <table className="track-list">
@@ -34,27 +34,7 @@ class TrackList extends React.PureComponent {
         <tbody>
           {list.map((uri, index) => {
             return uri ? (
-              <TrackListItem
-                key={uri}
-                uri={uri}
-                index={index + 1}
-                playlist={playlist}
-                /*
-                claim={claim}
-                duration={duration}
-                isActive={isActive}
-                completed={completed}
-                isAvailable={isAvailable}
-                isDownloading={isDownloading}
-                isPlaying={isPlaying}
-                isFavorite={isFavorite}
-                doNavigate={doNavigate}
-                togglePlay={togglePlay}
-                storePalette={storePalette}
-                triggerPlay={() => attempPlay(uri, { index })}
-                toggleFavorite={() => toggleFavorite(uri)}
-                */
-              />
+              <TrackListItem key={uri} uri={uri} index={index} playlist={playlist} />
             ) : null
           })}
         </tbody>

@@ -17,6 +17,7 @@ class TrackListItem extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      error: false,
       fetchingData: true,
     }
   }
@@ -52,27 +53,22 @@ class TrackListItem extends React.Component {
   }
 
   handleAction = () => {
-    const {
-      uri,
-      index,
-      playlist,
-      isPlaying,
-      isDownloading,
-      setPlaylist,
-      attempPlay,
-      togglePlay,
-    } = this.props
-    !isPlaying && !isDownloading ? attempPlay(uri, { index }) : togglePlay()
-    playlist && setPlaylist({ ...playlist, index })
+    const { uri, isPlaying, attempPlay, togglePlay, isDownloading } = this.props
+
+    !isPlaying && !isDownloading ? attempPlay(uri) : togglePlay()
   }
 
   componentDidMount() {
+    const { fetchingData } = this.state
     const { uri, claim, storeTrack } = this.props
     if (claim) {
+      // Show content
       this.setState({ fetchingData: false })
+      // Extract color palette
       const { thumbnail } = claim
       thumbnail && thumbnail.length > 0 && this.getPalette(thumbnail)
-    } else {
+    } else if (fetchingData) {
+      // Fetch claim data
       Lbry.resolve({ uri })
         .then(res => {
           console.info(res)
@@ -101,6 +97,7 @@ class TrackListItem extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     const { fetchingData } = this.state
     const { claim } = this.props
+
     if (claim) {
       const { uri } = claim
       const prevUri = prevProps.claim && prevProps.claim.uri
@@ -115,15 +112,19 @@ class TrackListItem extends React.Component {
       uri,
       index,
       claim,
+      playlist,
       duration,
       isActive,
       completed,
       isPlaying,
       isFavorite,
       isAvailable,
+      buttonIcon,
       doNavigate,
+      setPlaylist,
       isDownloading,
       toggleFavorite,
+      shouldPurchase,
     } = this.props
 
     const { fetchingData } = this.state
@@ -133,7 +134,7 @@ class TrackListItem extends React.Component {
         <tr className={'row--placeholder animated--fade-in'}>
           <td>
             <div className="row_item">
-              <span className="row_label">{index}</span>
+              <span className="row_label">{index + 1}</span>
             </div>
           </td>
 
@@ -163,14 +164,8 @@ class TrackListItem extends React.Component {
 
     const { artist, title, fee } = claim
 
-    const disabled = isAvailable === false
-
-    const shouldPurchase = !isDownloading && !completed
-
-    let buttonIcon = isDownloading ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE
-
-    if (shouldPurchase) {
-      buttonIcon = icons.DOWNLOAD
+    if (isPlaying) {
+      setPlaylist({ ...playlist, index })
     }
 
     return (
@@ -178,7 +173,7 @@ class TrackListItem extends React.Component {
         className={classnames('row', 'animated--fade-in', {
           'row--active': isActive,
           'row--busy': isDownloading,
-          'row--disabled': disabled,
+          'row--disabled': isAvailable === false,
         })}
       >
         <td>
@@ -191,7 +186,7 @@ class TrackListItem extends React.Component {
               animation={isDownloading && 'spin'}
               onClick={this.handleAction}
             />
-            <span className="row_label">{index}</span>
+            <span className="row_label">{index + 1}</span>
           </div>
         </td>
 
@@ -242,7 +237,7 @@ class TrackListItem extends React.Component {
 
 export default connect(
   (state, props) => {
-    const { uri } = props
+    const { uri, setPlaylist } = props
     const { cache, player, collections } = state
     const { favorites, downloads } = collections || {}
     const isFavorite = favorites.indexOf(uri) > -1
@@ -254,6 +249,14 @@ export default connect(
     const { paused, isLoading, currentTrack } = player || {}
     const isActive = completed && (currentTrack ? currentTrack.uri === uri : false)
     const isPlaying = !paused && isActive
+
+    const shouldPurchase = !isDownloading && !completed
+
+    let buttonIcon = isDownloading ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE
+
+    if (shouldPurchase) {
+      buttonIcon = icons.DOWNLOAD
+    }
     const claim = cache[uri]
 
     return {
@@ -265,6 +268,8 @@ export default connect(
       isAvailable,
       isPlaying,
       isDownloading,
+      shouldPurchase,
+      buttonIcon,
     }
   },
   {

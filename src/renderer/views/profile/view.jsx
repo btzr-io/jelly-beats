@@ -127,7 +127,7 @@ class View extends React.PureComponent {
         <div className="tabs-panel">
           <TrackList
             list={this.state.uris}
-            playlis={{
+            playlist={{
               uri: channelData.uri,
               name: channelData.nickname,
             }}
