@@ -1,15 +1,20 @@
 import React from 'react'
 import moment from 'moment'
-import * as icons from '@/constants/icons'
-import { fetchClaimsByChannel } from '@/utils/chainquery'
-import fetchChannel from '@/api/channel'
 import Icon from '@mdi/react'
-import Loader from '@/components/common/loader'
-import EmptyState from '@/components/common/emptyState'
+import * as icons from '@/constants/icons'
+
+// Utils
+import Lbry from '@/utils/lbry'
+import fetchChannel from '@/api/channel'
+import { fetchClaimsByChannel } from '@/utils/chainquery'
+
+// Components
 import Button from '@/components/button'
 import TimeLine from '@/components/timeLine'
-import Lbry from '@/utils/lbry'
 import TrackList from '@/components/trackList'
+import Loader from '@/components/common/loader'
+import Thumbnail from '@/components/common/thumbnail'
+import EmptyState from '@/components/common/emptyState'
 
 class View extends React.PureComponent {
   constructor(props) {
@@ -94,14 +99,13 @@ class View extends React.PureComponent {
   render() {
     const { fetchingData, success, channelData } = this.state
 
-    const avatarImage = {
-      backgroundImage: `url(${channelData && channelData.thumbnail})`,
-    }
-
     const content = success ? (
       <section>
         <div className={'profile-box'}>
-          <div className={'avatar'} style={avatarImage} />
+          <Thumbnail
+            className={'profile-avatar profile-avatar--circle'}
+            src={channelData.thumbnail}
+          />
           <div className="profile-data">
             <div className={'nickname'}>{channelData.nickname}</div>
             <h1 className={'name'}>{channelData.name}</h1>

@@ -1,15 +1,23 @@
 import React from 'react'
+import Icon from '@mdi/react'
 import moment from 'moment'
+
+// Constants
 import * as icons from '@/constants/icons'
+
+// Utils
+import Lbry from '@/utils/lbry'
 import { fetchClaimsByChannel } from '@/utils/chainquery'
 import fetchChannel from '@/api/channel'
-import Icon from '@mdi/react'
-import Loader from '@/components/common/loader'
-import EmptyState from '@/components/common/emptyState'
+
+// Components
 import Button from '@/components/button'
-import TimeLine from '@/components/timeLine'
-import Lbry from '@/utils/lbry'
 import TrackList from '@/components/trackList'
+import Loader from '@/components/common/loader'
+import Thumbnail from '@/components/common/thumbnail'
+import EmptyState from '@/components/common/emptyState'
+
+// import TimeLine from '@/components/timeLine'
 
 class View extends React.PureComponent {
   constructor(props) {
@@ -90,15 +98,11 @@ class View extends React.PureComponent {
   render() {
     const { fetchingData, success, podcastData } = this.state
 
-    const avatarImage = {
-      backgroundImage: `url(${podcastData && podcastData.thumbnail})`,
-    }
-
     const content = success ? (
       <section>
         <header>
           <div className={'profile-box'}>
-            <div className={'avatar'} style={avatarImage} />
+            <Thumbnail className={'profile-avatar'} src={podcastData.thumbnail} />
             <div className="profile-data">
               <h1 className={'name'}>{podcastData.title}</h1>
               <div className={'stats'}>

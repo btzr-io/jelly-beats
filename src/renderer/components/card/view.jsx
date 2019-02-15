@@ -2,19 +2,20 @@ import React from 'react'
 import Icon from '@mdi/react'
 import Lbry from '@/utils/lbry'
 import classnames from 'classnames'
+
+// import worker bundle
+import Vibrant from 'node-vibrant/lib/bundle-worker'
+
 import * as icons from '@/constants/icons'
 
 // Components
 import Button from '@/components/button'
 import Health from '@/components/common/health'
 import Loader from '@/components/common/loader'
+import Thumbnail from '@/components/common/thumbnail'
 import PriceLabel from '@/components/common/priceLabel'
-import Thumbnail from './thumbnail'
 
 import css from '@/css/modules/card.css.module'
-
-// import worker bundle
-import Vibrant from 'node-vibrant/lib/bundle-worker'
 
 class Card extends React.PureComponent {
   constructor(props) {
@@ -105,7 +106,7 @@ class Card extends React.PureComponent {
 
     // Favorite selector
     const isFavorite = favorites.indexOf(uri) > -1
-    const showOverlay = !(isAvailable === false) && (isPlaying || isDownloading)
+    const showOverlay = isAvailable !== false && (isPlaying || isDownloading)
 
     const shouldPurchase = !isDownloading && !completed
     let buttonIcon = isDownloading ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE
@@ -119,20 +120,24 @@ class Card extends React.PureComponent {
           (isAvailable === false ? css.block : '')
         }
       >
-        <Thumbnail className={css.thumb} src={thumbnail} showOverlay={showOverlay}>
-          {!(isAvailable === false) && (
-            <Button
-              icon={buttonIcon}
-              iconColor={fee && !isPlaying ? 'var(--color-yellow)' : ''}
-              type="card-action--overlay"
-              size="large-x"
-              toggle={isPlaying && !isDownloading}
-              animation={isDownloading && 'spin'}
-              onClick={() => {
-                action()
-              }}
-            />
-          )}
+        <Thumbnail className={'card--thumbnail'} src={thumbnail}>
+          <div
+            className={classnames('card--overlay', { 'card--overlay-show': showOverlay })}
+          >
+            {!(isAvailable === false) && (
+              <Button
+                icon={buttonIcon}
+                iconColor={fee && !isPlaying ? 'var(--color-yellow)' : ''}
+                type="card-action--overlay"
+                size="large-x"
+                toggle={isPlaying && !isDownloading}
+                animation={isDownloading && 'spin'}
+                onClick={() => {
+                  action()
+                }}
+              />
+            )}
+          </div>
         </Thumbnail>
         <PriceLabel className={'card_label'} fee={fee} />
         <div className={css.content}>

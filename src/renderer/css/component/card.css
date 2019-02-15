@@ -33,6 +33,43 @@
   margin: 16px auto;
 }
 
+.card--thumbnail {
+  padding-top: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  border-radius: 6px;
+  transition: opacity 0.3s ease 0.3s;
+}
+
+.card--thumbnail .thumbnail--picture {
+  top: 0;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.card--overlay {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
+  z-index: 2;
+  background: var(--card-overlay-bg-color);
+  transition: opacity 0.3s ease 0.3s;
+}
+
+.card--overlay-show,
+.card--overlay:hover {
+  opacity: 1;
+  transition: opacity 0.3s ease 0s;
+}
+
 .tile-card {
   margin-top: 32px;
   margin-right: 32px;
