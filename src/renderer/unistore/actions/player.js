@@ -161,16 +161,19 @@ export default function(store) {
 
   const playerActions = {
     setTrack(state, uri, playlist) {
-      // Select track
-      store.setState({
-        player: {
-          ...state.player,
-          currentTrack: state.cache[uri],
-        },
-      })
+      const track = state.cache[uri]
+      if (track) {
+        // Select track
+        store.setState({
+          player: {
+            ...state.player,
+            currentTrack: track,
+          },
+        })
 
-      // Update playlist
-      playlist && store.action(playerActions.setPlaylist)(playlist)
+        // Update playlist
+        playlist && store.action(playerActions.setPlaylist)(playlist)
+      }
     },
 
     setPlaylist(state, { uri, name, index }) {

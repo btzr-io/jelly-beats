@@ -1,0 +1,21 @@
+.thumbnail {
+  overflow: hidden;
+}
+
+.thumbnail img {
+  display: none;
+}
+
+.thumbnail--picture {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: opacity 0.3s;
+}
+
+.thumbnail--ready .thumbnail--picture {
+  opacity: 1;
+}

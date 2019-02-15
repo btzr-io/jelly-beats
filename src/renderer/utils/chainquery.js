@@ -42,6 +42,12 @@ export function fetchClaimsByChannel(id, queryOpts) {
   const query = `SELECT * FROM claim WHERE ${channel} AND ${filter}`
   return chainquery(query, queryOpts)
 }
+export function fetchClaimsCountByChannel(id, queryOpts) {
+  const channel = `publisher_id="${id}"`
+  const filter = 'content_type LIKE "audio%"'
+  const query = `SELECT COUNT(*) FROM claim WHERE ${channel} AND ${filter}`
+  return chainquery(query, queryOpts)
+}
 
 export function fetchNewClaims(queryOpts) {
   const order = 'ORDER BY created_at DESC'

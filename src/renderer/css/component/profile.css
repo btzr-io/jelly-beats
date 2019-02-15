@@ -16,8 +16,8 @@
 .profile-box {
   text-align: center;
   position: relative;
-  padding: 16px;
-  margin: 0;
+  padding: 16px 0;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: flex-start;

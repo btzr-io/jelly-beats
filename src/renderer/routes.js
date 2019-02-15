@@ -6,6 +6,7 @@ import Settings from './views/settings'
 import Channels from './views/channels'
 import Downloads from './views/downloads'
 import Favorites from './views/favorites'
+import Podcast from './views/podcast'
 import Podcasts from './views/podcasts'
 import Playlist from './views/playlist'
 import Playlists from './views/playlists'
@@ -42,6 +43,10 @@ const routes = [
   {
     path: '/channels',
     action: ctx => <Channels options={ctx} />,
+  },
+  {
+    path: '/podcast',
+    action: ctx => <Podcast options={ctx} />,
   },
   {
     path: '/podcasts',

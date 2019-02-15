@@ -35,14 +35,14 @@
 .avatar {
   padding: 4px;
   border-radius: 50%;
-  margin: 16px;
+  margin-right: 16px;
 
   -webkit-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.25);
   -moz-box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.25);
   box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.25);
 
-  height: 120px;
-  width: 120px;
+  height: 144px;
+  width: 144px;
 
   overflow: hidden;
   background-position: center;
@@ -53,16 +53,14 @@
 .profile-data {
   margin: 16px;
   text-align: left;
-  font-size: 1.24em;
 }
 .name {
-  margin: 8px 0;
+  margin: 16px 0;
   font-weight: bold;
-  font-size: 1.2em;
 }
 
 .nickname {
-  font-size: 0.8em;
+  font-size: 1em;
   opacity: 0.64;
 }
 
@@ -77,7 +75,7 @@
   display: inline-block;
   margin: 16px 8px 0 0;
   text-transform: lowercase;
-  font-size: 0.64em;
+  font-size: 0.8em;
 }
 
 .tabs {

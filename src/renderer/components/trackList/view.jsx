@@ -6,6 +6,7 @@ class TrackList extends React.PureComponent {
     uri: '',
     name: '',
     list: [],
+    type: 'playlist',
     showHeader: true,
   }
 
@@ -16,6 +17,7 @@ class TrackList extends React.PureComponent {
   render() {
     const {
       list,
+      type,
       cache,
       player,
       favorites,
@@ -35,8 +37,8 @@ class TrackList extends React.PureComponent {
             <tr>
               <th>#</th>
               <th>{/* Favorite */}</th>
-              <th>Track</th>
-              <th>Artist</th>
+              <th>{type === 'podcast' ? 'Episode' : 'Track'}</th>
+              <th>{type === 'podcast' ? 'Publisher' : 'Artist'}</th>
               <th>Duration</th>
               <th>Price</th>
             </tr>

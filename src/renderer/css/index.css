@@ -18,7 +18,7 @@
 @import url('./component/card.css');
 @import url('./component/form.css');
 @import url('./component/label.css');
-
+@import url('./component/thumbnail.css');
 html {
   background: black;
 }

@@ -1,7 +1,5 @@
 import React from 'react'
 import classnames from 'classnames'
-import Loader from '@/components/common/loader'
-import css from '@/css/modules/thumbnail.css.module'
 
 class Thumbnail extends React.PureComponent {
   static defaultProps = {
@@ -23,20 +21,24 @@ class Thumbnail extends React.PureComponent {
   }
 
   render() {
-    const { src, showOverlay } = this.props
     const { ready } = this.state
+    const { src, className } = this.props
 
     const thumbnailStyle = {
       backgroundImage: src ? `url(${src})` : 'none',
     }
 
     return (
-      <div className={!ready ? css.thumb : css.thumbReady}>
-        <div className={classnames(css.overlay, { [css.overlayShow]: showOverlay })}>
+      <div className={classnames('thumbnail', { 'thumbnail--ready': ready }, className)}>
+        <div className={'thumbnail--picture'} style={thumbnailStyle}>
           {this.props.children}
         </div>
-        <div className={css.picture} style={thumbnailStyle} />
-        <img src={src} onLoad={this.handleLoad} onError={this.handleError} />
+        <img
+          src={src}
+          style={{ display: 'none' }}
+          onLoad={this.handleLoad}
+          onError={this.handleError}
+        />
       </div>
     )
   }

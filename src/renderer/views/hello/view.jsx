@@ -1,7 +1,8 @@
 import React from 'react'
 import Icon from '@mdi/react'
 import * as icons from '@/constants/icons'
-import list from '@/utils/api'
+import { feature } from '@/utils/api'
+import { mergeDedupe } from '@/utils'
 import { fetchNewClaims } from '@/utils/chainquery'
 import fetchChannel from '@/api/channel'
 import Card from '@/components/card'
@@ -16,7 +17,6 @@ class View extends React.PureComponent {
       error: false,
       fetchingData: true,
       latest: [],
-      feature: [],
     }
   }
 
@@ -28,7 +28,8 @@ class View extends React.PureComponent {
     })
   }
 
-  handleFetchError = () => {
+  handleFetchError = error => {
+    console.error(error)
     // Deamon has stop running
     this.setState({ error: true, fetchingData: false })
   }
@@ -59,10 +60,10 @@ class View extends React.PureComponent {
           storePlaylist('latest', { name: 'Latest', list: latestUris })
 
           // Store latest playlist
-          storePlaylist('featured', { name: 'Featured', list })
-
+          storePlaylist('featured', { name: 'Featured', list: feature })
+          const uris = mergeDedupe([latestUris, feature])
           // Featured content
-          Lbry.resolve({ uris: [...list, ...latestUris] })
+          Lbry.resolve({ uris })
             .then(res => {
               Object.entries(res).map(([uri, value], index) => {
                 const { claim: claimData, certificate: channelData, error } = value
@@ -135,7 +136,7 @@ class View extends React.PureComponent {
             <section>
               <h1>Featured</h1>
               <div className="grid">
-                {list.map((uri, index) => (
+                {feature.map((uri, index) => (
                   <Card
                     key={uri}
                     uri={uri}

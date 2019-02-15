@@ -19,8 +19,9 @@
 }
 
 .card--avatar {
-  height: 100px;
-  width: 100px;
+  height: 124px;
+  width: 124px;
+  padding: 8px;
   border-radius: 50%;
   background-repeat: no-repeat;
   background-position: center;
@@ -30,4 +31,40 @@
 
 .card .button {
   margin: 16px auto;
+}
+
+.tile-card {
+  margin-top: 32px;
+  margin-right: 32px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--sidebar-bg-color);
+  width: 380px;
+  font-size: 1.062em;
+}
+
+.tile-card--content {
+  text-align: left;
+  padding: 0 16px;
+}
+
+.tile-card--title {
+  font-weight: bold;
+  margin: 4px 0;
+}
+.tile-card--subtitle {
+  color: var(--subtext-color);
+  margin: 8px 0;
+  font-size: 0.86em;
+}
+.tile-card--subtitle span {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.tile-card--thumbnail {
+  height: 124px;
+  width: 124px;
+  border-radius: 8px 0 0 8px;
 }

@@ -32,18 +32,18 @@ class View extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { cache, options, storeTrack, storePlaylist } = this.props
+    const { podcasts, options, storeTrack, storePlaylist } = this.props
 
     if (options) {
       const { uri } = options
-      const channel = uri ? cache[uri] : null
-      if (channel) {
-        fetchClaimsByChannel(channel.id, { limit: 20, page: 0 }).then(claims => {
-          const channelTracks = claims.map(
+      const podcast = uri ? podcasts[uri] : null
+      if (podcast) {
+        fetchClaimsByChannel(podcast.id, { limit: 25, page: 0 }).then(claims => {
+          const episodes = claims.map(
             claimData => `${claimData.name}#${claimData.claim_id}`
           )
           // Featured content
-          Lbry.resolve({ uris: channelTracks })
+          Lbry.resolve({ uris: episodes })
             .then(res => {
               const tracks = Object.entries(res)
                 .map(([uri, value], index) => {
@@ -70,7 +70,7 @@ class View extends React.PureComponent {
               })
 
               // store playlist from channel
-              storePlaylist(channel.uri, { name: channel.nickname, list: tracks })
+              storePlaylist(podcast.uri, { name: podcast.title, list: tracks })
             })
             // Handle errors
             .catch(err => {
@@ -82,53 +82,41 @@ class View extends React.PureComponent {
             })
         })
 
-        this.setState({
-          fetchingChannelData: !channel,
-          success: true,
-          channelData: channel,
-        })
+        this.setState({ success: true, podcastData: podcast })
       }
     }
   }
 
   render() {
-    const { fetchingData, success, channelData } = this.state
+    const { fetchingData, success, podcastData } = this.state
 
     const avatarImage = {
-      backgroundImage: `url(${channelData && channelData.thumbnail})`,
+      backgroundImage: `url(${podcastData && podcastData.thumbnail})`,
     }
 
     const content = success ? (
       <section>
-        <div className={'profile-box'}>
-          <div className={'avatar'} style={avatarImage} />
-          <div className="profile-data">
-            <div className={'nickname'}>{channelData.nickname}</div>
-            <h1 className={'name'}>{channelData.name}</h1>
-            <div>
-              {channelData.tags.map((tag, key) => (
-                <div className={'tag'} key={key}>
-                  {tag}
-                </div>
-              ))}
+        <header>
+          <div className={'profile-box'}>
+            <div className={'avatar'} style={avatarImage} />
+            <div className="profile-data">
+              <h1 className={'name'}>{podcastData.title}</h1>
+              <div className={'stats'}>
+                <span className={'label label-outline'}>Podcast</span>
+                <span>•</span>
+                <span>{podcastData.host}</span>
+                <span>•</span>
+                <span>{`${this.state.uris.length} episodes`}</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="profile-bar">
-          <div className="tabs">
-            <div className="tab active">Tracks</div>
-          </div>
-          {/* Button label="SUBSCRIBE" /> */}
-        </div>
-        <div className="tabs-panel">
-          <TrackList
-            uri={channelData.uri}
-            list={this.state.uris}
-            name={channelData.nickname}
-            showIndex={false}
-            showHeader={false}
-          />
-        </div>
+        </header>
+        <TrackList
+          type={'podcast'}
+          uri={podcastData.uri}
+          list={this.state.uris}
+          name={podcastData.title}
+        />
       </section>
     ) : (
       // List is empty
