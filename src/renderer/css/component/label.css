@@ -5,6 +5,7 @@
   color: rgba(0, 0, 0, 0.8);
   font-weight: bold;
   font-size: 0.8em;
+  text-transform: uppercase;
   white-space: nowrap;
   display: inline-block;
 }
