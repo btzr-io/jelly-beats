@@ -7,7 +7,6 @@ export const feature = [
   'dv145-findme#6f1b877756fefbd5638eedf5c43877ad14e5ea58',
   'one#198c1a116beb445979af7c77ab947fa300f1a9e0',
   'worldbeyond-everythingwestandfor#b8891a739496df5391982cf3711cc03e05bc3a0c',
-  'piano#f13c81bf0bc0bfbb608ac59d53e3112377e92919',
 ]
 
 export const podcasts = {

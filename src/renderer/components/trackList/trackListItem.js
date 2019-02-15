@@ -51,6 +51,21 @@ class TrackListItem extends React.Component {
     })
   }
 
+  handleAction = () => {
+    const {
+      uri,
+      index,
+      playlist,
+      isPlaying,
+      isDownloading,
+      setPlaylist,
+      attempPlay,
+      togglePlay,
+    } = this.props
+    !isPlaying && !isDownloading ? attempPlay(uri, { index }) : togglePlay()
+    playlist && setPlaylist({ ...playlist, index })
+  }
+
   componentDidMount() {
     const { uri, claim, storeTrack } = this.props
     if (claim) {
@@ -107,8 +122,6 @@ class TrackListItem extends React.Component {
       isFavorite,
       isAvailable,
       doNavigate,
-      attempPlay,
-      togglePlay,
       isDownloading,
       toggleFavorite,
     } = this.props
@@ -160,11 +173,6 @@ class TrackListItem extends React.Component {
       buttonIcon = icons.DOWNLOAD
     }
 
-    if (isPlaying) {
-      const { uri, name, setPlaylist } = this.props
-      setPlaylist({ uri, name, index })
-    }
-
     return (
       <tr
         className={classnames('row', 'animated--fade-in', {
@@ -181,9 +189,7 @@ class TrackListItem extends React.Component {
               size="large"
               toggle={isPlaying && !isDownloading}
               animation={isDownloading && 'spin'}
-              onClick={() => {
-                !isPlaying && !isDownloading ? attempPlay(uri, { index }) : togglePlay()
-              }}
+              onClick={this.handleAction}
             />
             <span className="row_label">{index}</span>
           </div>
@@ -203,10 +209,7 @@ class TrackListItem extends React.Component {
         </td>
 
         <td>
-          <span
-            className="row_label row_label--link trunk-label"
-            onClick={() => !shouldPurchase && triggerPlay()}
-          >
+          <span className="row_label row_label--link trunk-label">
             <Health status={{ completed, isAvailable, isDownloading }} />
             {title}
           </span>

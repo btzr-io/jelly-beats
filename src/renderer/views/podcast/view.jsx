@@ -113,9 +113,11 @@ class View extends React.PureComponent {
         </header>
         <TrackList
           type={'podcast'}
-          uri={podcastData.uri}
           list={this.state.uris}
-          name={podcastData.title}
+          playlist={{
+            uri: podcastData.uri,
+            name: podcastData.title,
+          }}
         />
       </section>
     ) : (

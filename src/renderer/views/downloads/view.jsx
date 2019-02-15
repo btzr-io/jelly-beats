@@ -76,7 +76,7 @@ class View extends React.PureComponent {
               <span>{duration}</span>
             </div>
           </header>
-          <TrackList list={tracks} uri={uri} name={name} />
+          <TrackList list={tracks} playlist={{ uri, name }} />
         </section>
       ) : (
         // List is empty
