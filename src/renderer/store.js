@@ -19,11 +19,11 @@ let config = {
   version: 1,
   debounceTime: 100,
   // takes in the current state and returns the state to be persisted
-  map: state => ({
-    settings: state.settings,
-    playlists: state.playlists,
-    collections: state.collections,
-    latestBlock: state.latestBlock,
+  map: ({ cache, settings, collections, latestBlock }) => ({
+    cache,
+    settings,
+    collections,
+    latestBlock,
   }),
 }
 
