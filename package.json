@@ -53,7 +53,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
-    "all-contributors-cli": "^6.1.0",
+    "all-contributors-cli": "^6.1.1",
     "css-loader": "^2.1.0",
     "electron": "^4.0.3",
     "electron-builder": "^20.38.3",
