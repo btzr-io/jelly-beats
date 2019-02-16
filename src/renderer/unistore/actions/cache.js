@@ -1,3 +1,5 @@
+import getArtistTitle from 'get-artist-title'
+
 export default {
   storeTrack(state, uri, { claimData, channelData }) {
     const { favorites } = state.collections
@@ -28,6 +30,13 @@ export default {
     // Previous data from cache
     const prevTrack = state.cache[uri] || {}
 
+    // Format title
+    const defaultTitle = title || name
+    const [formatedArtist, formatedTitle] = getArtistTitle(defaultTitle, {
+      defaultTitle,
+      defaultArtist: artist.channelName,
+    })
+
     // New track data
     const track = {
       fee,
@@ -37,7 +46,7 @@ export default {
       outpoint,
       thumbnail,
       description,
-      title: title || name,
+      title: formatedTitle,
     }
 
     // Update cache
