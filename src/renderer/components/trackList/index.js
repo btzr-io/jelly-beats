@@ -3,8 +3,6 @@ import TrackList from './view'
 import { connect } from 'unistore/react'
 
 export default connect(
-  (state, props) => null,
-  {
-    doNavigate: 'doNavigate',
-  }
+  null,
+  null
 )(TrackList)

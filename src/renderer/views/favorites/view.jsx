@@ -1,10 +1,16 @@
 import React from 'react'
-import * as icons from '@/constants/icons'
 import Icon from '@mdi/react'
-import Loader from '@/components/common/loader'
-import EmptyState from '@/components/common/emptyState'
-import TrackList from '@/components/trackList'
+
+// Utils
 import Lbry from '@/utils/lbry'
+
+// Components
+import Loader from '@/components/common/loader'
+import TrackList from '@/components/trackList'
+import EmptyState from '@/components/common/emptyState'
+
+// Constants
+import * as icons from '@/constants/icons'
 
 class View extends React.PureComponent {
   constructor(props) {
@@ -15,11 +21,13 @@ class View extends React.PureComponent {
   }
 
   getChannelData(claim) {
-    const { storeChannel } = this.props
-
-    fetchChannel(claim, channel => {
-      storeChannel(channel)
-    })
+    const { cache, storeChannel } = this.props
+    const { permanent_url: uri } = claim
+    if (!cache[uri]) {
+      fetchChannel(claim, channel => {
+        storeChannel(channel)
+      })
+    }
   }
 
   componentDidMount() {
@@ -30,8 +38,9 @@ class View extends React.PureComponent {
       this.setState({ fetchingData: false })
     } else {
       const { storeTrack } = this.props
+      const uris = tracks.filter(uri => !cache[uri])
       // Resolve uris
-      Lbry.resolve({ uris: tracks })
+      Lbry.resolve({ uris })
         .then(res => {
           const list = Object.entries(res).filter(([key, value]) => !value.error)
 

@@ -1,14 +1,19 @@
 import React from 'react'
 import Icon from '@mdi/react'
-import * as icons from '@/constants/icons'
+
+// Utils
+import Lbry from '@/utils/lbry'
 import { feature } from '@/utils/api'
 import { mergeDedupe } from '@/utils'
 import { fetchNewClaims } from '@/utils/chainquery'
 import fetchChannel from '@/api/channel'
+
+// Components
 import Card from '@/components/card'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
-import Lbry from '@/utils/lbry'
+
+import * as icons from '@/constants/icons'
 
 class View extends React.PureComponent {
   constructor(props) {
@@ -21,11 +26,13 @@ class View extends React.PureComponent {
   }
 
   getChannelData(claim) {
-    const { storeChannel } = this.props
-
-    fetchChannel(claim, channel => {
-      storeChannel(channel)
-    })
+    const { cache, storeChannel } = this.props
+    const { permanent_url: uri } = claim
+    if (!cache[uri]) {
+      fetchChannel(claim, channel => {
+        storeChannel(channel)
+      })
+    }
   }
 
   handleFetchError = error => {
@@ -35,7 +42,7 @@ class View extends React.PureComponent {
   }
 
   fetchData = () => {
-    const { storeTrack, storePlaylist, network } = this.props
+    const { storeTrack, storePlaylist, network, cache } = this.props
     const { isReady, connection } = network
     // Update status
     this.setState({ fetchingData: true })
@@ -61,7 +68,10 @@ class View extends React.PureComponent {
 
           // Store latest playlist
           storePlaylist('featured', { name: 'Featured', list: feature })
-          const uris = mergeDedupe([latestUris, feature])
+
+          // Filter cached claims
+          const uris = mergeDedupe([latestUris, feature]).filter(uri => !cache[uri])
+
           // Featured content
           Lbry.resolve({ uris })
             .then(res => {

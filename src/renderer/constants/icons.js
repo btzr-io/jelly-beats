@@ -27,6 +27,7 @@ import {
   mdiPodcast,
   mdiMenuDown,
   mdiMenuRight,
+  mdiClockOutline,
 } from '@mdi/js'
 
 export const EDIT = mdiPencil
@@ -63,3 +64,4 @@ export const PODCAST = mdiPodcast
 
 export const GROUP_DOWN = mdiMenuDown
 export const GROUP_RIGHT = mdiMenuRight
+export const CLOCK = mdiClockOutline

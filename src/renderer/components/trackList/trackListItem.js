@@ -45,11 +45,13 @@ class TrackListItem extends React.Component {
   }
 
   getChannelData(claim) {
-    const { storeChannel } = this.props
-
-    fetchChannel(claim, channel => {
-      storeChannel(channel)
-    })
+    const { cache, storeChannel } = this.props
+    const { permanent_url: uri } = claim
+    if (!cache[uri]) {
+      fetchChannel(claim, channel => {
+        storeChannel(channel)
+      })
+    }
   }
 
   handleAction = () => {
@@ -222,13 +224,13 @@ class TrackListItem extends React.Component {
         </td>
 
         <td>
-          <span className="row_label">
-            {duration ? moment.utc(duration * 1000).format('mm:ss') : '?'}
-          </span>
+          <PriceLabel className={'row_label'} fee={fee} />
         </td>
 
         <td>
-          <PriceLabel className={'row_label'} fee={fee} />
+          <span className="row_label">
+            {duration ? moment.utc(duration * 1000).format('mm:ss') : '?'}
+          </span>
         </td>
       </tr>
     )
@@ -260,6 +262,7 @@ export default connect(
     const claim = cache[uri]
 
     return {
+      cache,
       claim,
       completed,
       duration,

@@ -31,63 +31,97 @@ class View extends React.PureComponent {
     }
   }
 
-  getChannelData(claim) {
-    const { storeChannel } = this.props
-
-    fetchChannel(claim, channel => {
-      storeChannel(channel)
+  handleFetchError(err) {
+    console.error(err)
+    this.setState({
+      error: true,
+      fetchingData: false,
     })
   }
 
-  componentDidMount() {
-    const { podcasts, options, storeTrack, storePlaylist } = this.props
+  handleFetchCompleted(playlist, list) {
+    const { storePlaylist } = this.props
+    // Update state: Done!
+    this.setState({
+      uris: list,
+      error: false,
+      fetchingData: false,
+    })
+    // store playlist from channel
+    storePlaylist(playlist.uri, { list, name: playlist.title })
+  }
 
+  getChannelData(claim) {
+    const { cache, storeChannel } = this.props
+    const { permanent_url: uri } = claim
+    if (!cache[uri]) {
+      fetchChannel(claim, channel => {
+        storeChannel(channel)
+      })
+    }
+  }
+
+  componentDidMount() {
+    const { cache, podcasts, options, storeTrack, storePlaylist } = this.props
     if (options) {
       const { uri } = options
       const podcast = uri ? podcasts[uri] : null
       if (podcast) {
         fetchClaimsByChannel(podcast.id, { limit: 25, page: 0 }).then(claims => {
-          const episodes = claims.map(
-            claimData => `${claimData.name}#${claimData.claim_id}`
-          )
-          // Featured content
-          Lbry.resolve({ uris: episodes })
-            .then(res => {
-              const tracks = Object.entries(res)
-                .map(([uri, value], index) => {
-                  const { claim: claimData, certificate: channelData, error } = value
-
-                  // Filter errors
-                  if (error || !channelData) return null
-
-                  // Extract channel data
-                  channelData && this.getChannelData(channelData)
-
-                  // Cache track data
-                  storeTrack(uri, { channelData, claimData })
-
-                  return uri
-                })
-                .filter(uri => uri && uri != null)
-
-              // Update state: Done!
-              this.setState({
-                uris: tracks,
-                error: false,
-                fetchingData: false,
-              })
-
-              // store playlist from channel
-              storePlaylist(podcast.uri, { name: podcast.title, list: tracks })
+          const cachedUris = []
+          const uris = claims
+            .map(claimData => {
+              const {
+                name,
+                vout: nout,
+                claim_id: id,
+                transaction_hash_id: txid,
+              } = claimData
+              // Generate claim uri
+              const uri = `${name}#${id}`
+              // Generate claim outpoint
+              const outpoint = `${txid}:${nout}`
+              // Filter cached content
+              const prevOutpoint = cache[uri] && cache[uri].outpoint
+              // Save to resolve list
+              if (prevOutpoint !== outpoint) {
+                return uri
+              }
+              // Save to cached list
+              cachedUris[cachedUris.length] = uri
+              return null
             })
-            // Handle errors
-            .catch(err => {
-              console.error(err)
-              this.setState({
-                error: true,
-                fetchingData: false,
+            .filter(uri => uri && uri !== null)
+
+          if (uris.length > 0) {
+            // Featured content
+            Lbry.resolve({ uris })
+              .then(res => {
+                const tracks = Object.entries(res)
+                  .map(([uri, value], index) => {
+                    const { claim: claimData, certificate: channelData, error } = value
+
+                    // Filter errors
+                    if (error || !channelData) return null
+
+                    // Extract channel data
+                    channelData && this.getChannelData(channelData)
+
+                    // Cache track data
+                    storeTrack(uri, { channelData, claimData })
+
+                    return uri
+                  })
+                  .filter(uri => uri && uri !== null)
+
+                const list = [...cachedUris, ...tracks]
+                this.handleFetchCompleted(podcast, list)
               })
-            })
+              // Handle errors
+              .catch(this.handleFetchError)
+          } else {
+            this.handleFetchCompleted(podcast, cachedUris)
+          }
         })
 
         this.setState({ success: true, podcastData: podcast })

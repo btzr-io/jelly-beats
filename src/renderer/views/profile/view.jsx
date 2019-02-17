@@ -29,11 +29,13 @@ class View extends React.PureComponent {
   }
 
   getChannelData(claim) {
-    const { storeChannel } = this.props
-
-    fetchChannel(claim, channel => {
-      storeChannel(channel)
-    })
+    const { cache, storeChannel } = this.props
+    const { permanent_url: uri } = claim
+    if (!cache[uri]) {
+      fetchChannel(claim, channel => {
+        storeChannel(channel)
+      })
+    }
   }
 
   componentDidMount() {
@@ -101,29 +103,32 @@ class View extends React.PureComponent {
 
     const content = success ? (
       <section>
-        <div className={'profile-box'}>
-          <Thumbnail
-            className={'profile-avatar profile-avatar--circle'}
-            src={channelData.thumbnail}
-          />
-          <div className="profile-data">
-            <div className={'nickname'}>{channelData.nickname}</div>
-            <h1 className={'name'}>{channelData.name}</h1>
-            <div>
-              {channelData.tags.map((tag, key) => (
-                <div className={'tag'} key={key}>
-                  {tag}
-                </div>
-              ))}
+        <header>
+          <div className={'profile-box'}>
+            <Thumbnail
+              className={'profile-avatar profile-avatar--circle'}
+              src={channelData.thumbnail}
+            />
+            <div className="profile-data">
+              <div className={'nickname'}>{channelData.nickname}</div>
+              <h1 className={'name'}>{channelData.name}</h1>
+              <div>
+                {channelData.tags.map((tag, key) => (
+                  <div className={'tag'} key={key}>
+                    {tag}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <div className="profile-bar">
-          <div className="tabs">
-            <div className="tab active">Tracks</div>
+          <div className="profile-bar">
+            {/*
+            <div className="tabs">
+              <div className="tab active">Tracks</div>
+            </div>
+            */}
           </div>
-          {/* Button label="SUBSCRIBE" /> */}
-        </div>
+        </header>
         <div className="tabs-panel">
           <TrackList
             list={this.state.uris}
@@ -131,8 +136,6 @@ class View extends React.PureComponent {
               uri: channelData.uri,
               name: channelData.nickname,
             }}
-            showIndex={false}
-            showHeader={false}
           />
         </div>
       </section>
