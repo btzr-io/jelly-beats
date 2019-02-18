@@ -6,9 +6,6 @@ export default connect(
   (state, props) => {
     const { navigation, history, account } = state
     const { currentChannel } = account || {}
-    // See: https://github.com/btzr-io/jelly-beats/issues/287
-    if (!history) return { navigation }
-
     const forwardNavigation = state.history.forward.length > 0
     const backwardNavigation = state.history.stack.length > 1
     return { navigation, currentChannel, backwardNavigation, forwardNavigation }

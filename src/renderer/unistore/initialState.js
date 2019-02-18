@@ -9,6 +9,8 @@ const initialState = {
   settings,
 }
 
+initialState.searchQuery = null
+
 initialState.account = {
   currentChannel: {
     uri: '',

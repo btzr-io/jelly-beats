@@ -73,7 +73,6 @@ class TrackListItem extends React.Component {
       // Fetch claim data
       Lbry.resolve({ uri })
         .then(res => {
-          console.info(res)
           const { claim: claimData, certificate: channelData, error } = res
 
           // Filter errors

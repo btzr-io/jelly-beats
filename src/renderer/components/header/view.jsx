@@ -1,5 +1,6 @@
 import React from 'react'
 import Icon from '@mdi/react'
+import SearchBar from '@/components/searchBar'
 import Button from '@/components/button'
 import * as icons from '@/constants/icons'
 
@@ -75,11 +76,12 @@ class Header extends React.PureComponent {
             disabled={!forwardNavigation}
           />
         </div>
-        <div>
-          {/* currentChannel && (
+
+        <SearchBar />
+
+        {/* currentChannel && (
             <DropMenu currentChannel={currentChannel} doNavigate={doNavigate} />
           ) */}
-        </div>
       </nav>
     )
   }

@@ -6,6 +6,7 @@ import Lbry from '@/utils/lbry'
 import { feature } from '@/utils/api'
 import { mergeDedupe } from '@/utils'
 import { fetchNewClaims } from '@/utils/chainquery'
+import lighthouse from '@/utils/lighthouse'
 import fetchChannel from '@/api/channel'
 
 // Components
@@ -22,7 +23,7 @@ class View extends React.PureComponent {
       error: false,
       fetchingData: true,
       latest: [],
-      feature: [],
+      results: [],
     }
   }
 
@@ -42,7 +43,19 @@ class View extends React.PureComponent {
     this.setState({ error: true, fetchingData: false })
   }
 
-  fetchData = () => {
+  handleSearchQuery = () => {
+    const { searchQuery } = this.props
+    this.setState({ fetchingData: true })
+    lighthouse
+      .search(searchQuery)
+      .then(data => {
+        const uris = data.map(claim => `${claim.name}#${claim.claimId}`)
+        this.fetchData(uris)
+      })
+      .catch(this.handleFetchError)
+  }
+
+  fetchData = uris => {
     const { storeTrack, storePlaylist, network, cache } = this.props
     const { isReady, connection } = network
     // Update status
@@ -55,62 +68,31 @@ class View extends React.PureComponent {
       // Deamon has stop running
       this.handleFetchError()
     } else if (isReady) {
-      // Latest content
-      fetchNewClaims({ limit: 6, page: 0 })
+      // Fetch content
+      Lbry.resolve({ uris })
         .then(res => {
-          const latestCached = []
-          const featureCached = []
+          const results = Object.entries(res)
+            .map(([uri, value], index) => {
+              const { claim: claimData, certificate: channelData, error } = value
 
-          const latestUris = res.map(
-            claimData => `${claimData.name}#${claimData.claim_id}`
-          )
+              // Filter errors
+              if (error || !channelData) return null
 
-          // Filter cached claims
-          const uris = mergeDedupe([latestUris, feature])
+              // Extract channel data
+              channelData && this.getChannelData(channelData)
 
-          // Featured content
-          Lbry.resolve({ uris })
-            .then(res => {
-              const resolvedUris = Object.entries(res)
-                .map(([uri, value], index) => {
-                  const { claim: claimData, certificate: channelData, error } = value
-
-                  // Filter errors
-                  if (error || !channelData) return
-
-                  // Extract channel data
-                  channelData && this.getChannelData(channelData)
-
-                  // Cache track data
-                  storeTrack(uri, { channelData, claimData })
-                  return uri
-                })
-                .filter(uri => uri !== null)
-
-              const latestResolved = latestUris.filter(
-                uri => resolvedUris.indexOf(uri) !== -1
-              )
-
-              const featureResolved = feature.filter(
-                uri => resolvedUris.indexOf(uri) !== -1
-              )
-
-              // Store latest playlist
-              storePlaylist('latest', { name: 'Latest', list: latestResolved })
-              this.setState({ latest: latestResolved })
-
-              // Store latest playlist
-              storePlaylist('featured', { name: 'Featured', list: featureResolved })
-              this.setState({ feature: featureResolved })
-
-              // Update state: Done!
-              this.setState({
-                error: false,
-                fetchingData: false,
-              })
+              // Cache track data
+              storeTrack(uri, { channelData, claimData })
+              return uri
             })
-            // Handle errors
-            .catch(this.handleFetchError)
+            .filter(uri => uri !== null)
+
+          // Update state: Done!
+          this.setState({
+            error: false,
+            fetchingData: false,
+            results,
+          })
         })
         // Handle errors
         .catch(this.handleFetchError)
@@ -120,36 +102,33 @@ class View extends React.PureComponent {
   componentDidMount() {
     const { connected } = this.props
     if (connected) {
-      this.fetchData()
+      this.handleSearchQuery()
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { connected } = this.props
+    const { connected, searchQuery } = this.props
 
     // Auto-retry connection
     if (connected === true && connected !== prevProps.connected) {
-      this.fetchData()
+      // this.fetchData()
+    }
+
+    if (connected && searchQuery !== prevProps.searchQuery) {
+      this.handleSearchQuery()
     }
   }
 
   render() {
-    const {
-      fetchingData,
-      fetchingLatest,
-      error,
-      errorLatest,
-      latest,
-      feature,
-    } = this.state
+    const { fetchingData, fetchingLatest, error, errorLatest, results } = this.state
     return (
       <div className="page">
         {!error &&
           (!fetchingData ? (
             <section>
-              <h1>Latest</h1>
+              <h1>Search results</h1>
               <div className="grid">
-                {latest.map((uri, index) => {
+                {results.map((uri, index) => {
                   return (
                     <Card
                       key={uri}
@@ -159,22 +138,6 @@ class View extends React.PureComponent {
                     />
                   )
                 })}
-              </div>
-            </section>
-          ) : null)}
-        {!error &&
-          (!fetchingData ? (
-            <section>
-              <h1>Featured</h1>
-              <div className="grid">
-                {feature.map((uri, index) => (
-                  <Card
-                    key={uri}
-                    uri={uri}
-                    index={index}
-                    playlist={{ uri: 'featured', name: 'Featured' }}
-                  />
-                ))}
               </div>
             </section>
           ) : (

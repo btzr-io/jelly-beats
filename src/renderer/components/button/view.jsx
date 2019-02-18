@@ -6,9 +6,11 @@ class Button extends React.PureComponent {
   static defaultProps = {
     type: 'normal',
     size: 'normal',
+    onClick: () => {},
     active: false,
     toggle: false,
-    onClick: () => {},
+    isSubmit: false,
+    preventDefault: false,
   }
 
   constructor(props) {
@@ -41,8 +43,9 @@ class Button extends React.PureComponent {
     hideTooltip()
   }
 
-  handleClick = () => {
-    const { tooltip, hideTooltip, onClick } = this.props
+  handleClick = event => {
+    const { tooltip, hideTooltip, onClick, preventDefault } = this.props
+    preventDefault && event.preventDefault()
     onClick()
     tooltip && hideTooltip()
   }
@@ -81,6 +84,7 @@ class Button extends React.PureComponent {
       disabled,
       onClick,
       animation,
+      isSubmit,
     } = this.props
     const { animated } = this.state
 
@@ -96,6 +100,7 @@ class Button extends React.PureComponent {
 
     return (
       <button
+        type={isSubmit ? 'submit' : 'button'}
         className={buttonClass}
         onClick={this.handleClick}
         disabled={disabled}

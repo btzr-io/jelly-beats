@@ -252,6 +252,16 @@
   margin: auto;
 }
 
+.button--search {
+  opacity: 0.64;
+  background: transparent;
+}
+
+.button--search:focus,
+.button--search:hover {
+  opacity: 1;
+}
+
 /* Button elements */
 
 .button_icon {

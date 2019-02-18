@@ -83,6 +83,10 @@ export default function(store) {
         }
       }
     },
+
+    updateSearchQuery(state, query) {
+      return { searchQuery: query }
+    },
   }
 
   return actions
