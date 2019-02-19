@@ -39,6 +39,41 @@ export const podcasts = {
     title: 'Robotics for Everyone',
     thumbnail: 'https://spee.ch/c/tNtMwix6tIrPf1OMsSWj0ZGR.jpg',
   },
+  '@diacast#b8cd66d676e1de2209e3b8f4c33d2dd117ae4e68': {
+    id: 'b8cd66d676e1de2209e3b8f4c33d2dd117ae4e68',
+    uri: '@diacast#b8cd66d676e1de2209e3b8f4c33d2dd117ae4e68',
+    host: 'Adi Barilan, Brent Holtevert, Cas Eliëns',
+    tags: [],
+    title: 'Diacast',
+    thumbnail:
+      'http://static1.squarespace.com/static/594951c65016e1e7922845e6/t/594cdf6015d5dbae6d677880/1498210148568/1500w/square%402x.png',
+  },
+  '@Bloom#8b488f3e28ec5e5894bd87ee41f6c8ff42b072f3': {
+    id: '8b488f3e28ec5e5894bd87ee41f6c8ff42b072f3',
+    uri: '@Bloom#8b488f3e28ec5e5894bd87ee41f6c8ff42b072f3',
+    host: 'Bloom Protocol',
+    tags: [],
+    title: 'Bloom Fireside',
+    thumbnail:
+      'https://spee.ch/bb67366bd61c1837fa7715d516690c3ed45dbe93/QDNo0fO8ZwVZVGeiqCyQ9T8d.jpg',
+  },
+  '@podcastinit#e10bbf84f6cadd40808f5b0e265ee2a1f0c45760': {
+    id: 'e10bbf84f6cadd40808f5b0e265ee2a1f0c45760',
+    uri: '@podcastinit#e10bbf84f6cadd40808f5b0e265ee2a1f0c45760',
+    host: 'Tobias Macey',
+    tags: [],
+    title: 'Podcast.__init',
+    thumbnail:
+      'https://pbs.twimg.com/profile_images/585111890302472192/JKuWhLdY_400x400.png',
+  },
+  '@ProgrammingThrowdown#e0fc55e2b0fa1158414e44713a2c77b7dde43798': {
+    id: 'e0fc55e2b0fa1158414e44713a2c77b7dde43798',
+    uri: '@ProgrammingThrowdown#e0fc55e2b0fa1158414e44713a2c77b7dde43798',
+    host: 'Patrick Wheeler and Jason Gauci',
+    tags: [],
+    title: 'Programming Throwdown',
+    thumbnail: 'https://cdn1.player.fm/images/23202/series/102XwN6vGLPoi9ou/512.png',
+  },
   '@fintekneekspodcast#aa0d63606b070c2b51b518696f377ed9c55027dc': {
     id: 'aa0d63606b070c2b51b518696f377ed9c55027dc',
     uri: '@fintekneekspodcast#aa0d63606b070c2b51b518696f377ed9c55027dc',

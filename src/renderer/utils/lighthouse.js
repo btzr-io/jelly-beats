@@ -1,14 +1,14 @@
 const lighthouse = {}
 
-lighthouse.API = 'https://lighthouse.lbry.io/search?size=25&mediaType=audio&s='
+lighthouse.API = 'https://lighthouse.lbry.io/search?s='
 
 lighthouse.search = (query, queyOpts) => {
+  const params = '&' + encodeURIParams(queyOpts)
   const promise = new Promise((resolve, reject) => {
     // Get all claims ( audio files only ) from a channel
-    fetch(encodeURI(lighthouse.API + query))
+    fetch(encodeURI(lighthouse.API + query + params))
       .then(response => {
         const contentType = response.headers.get('content-type')
-
         if (
           response.ok &&
           contentType &&
@@ -31,6 +31,20 @@ lighthouse.search = (query, queyOpts) => {
       })
   })
   return promise
+}
+
+lighthouse.searchChannels = (query, queyOpts) => {
+  const params = {
+    ...queryOpts,
+    claimType: channel,
+  }
+  return lighthouse.search(query, params)
+}
+
+function encodeURIParams(params = []) {
+  return Object.entries(params)
+    .map(([key, value]) => encodeURIComponent(key) + '=' + encodeURIComponent(value))
+    .join('&')
 }
 
 export default lighthouse

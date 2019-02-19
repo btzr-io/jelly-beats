@@ -34,9 +34,9 @@ export default {
     const { favorites } = state.collections
     const isFavorite = uri && favorites && favorites.indexOf(uri) > -1
 
-    // Format title
     const defaultTitle = title || name
 
+    // Format title
     const [formatedArtist, formatedTitle] = getArtistTitle(defaultTitle, {
       defaultTitle,
       defaultArtist: artist.channelName,
@@ -51,7 +51,9 @@ export default {
       outpoint,
       thumbnail,
       description,
-      title: formatedTitle,
+      formatedTitle,
+      formatedArtist,
+      title: defaultTitle,
     }
 
     // Update cache

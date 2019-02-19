@@ -16,6 +16,12 @@ import EmptyState from '@/components/common/emptyState'
 
 import * as icons from '@/constants/icons'
 
+const searchSettings = {
+  size: 50,
+  nfsw: false,
+  mediaType: 'audio',
+}
+
 class View extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -47,7 +53,7 @@ class View extends React.PureComponent {
     const { searchQuery } = this.props
     this.setState({ fetchingData: true })
     lighthouse
-      .search(searchQuery)
+      .search(searchQuery, searchSettings)
       .then(data => {
         const uris = data.map(claim => `${claim.name}#${claim.claimId}`)
         this.fetchData(uris)

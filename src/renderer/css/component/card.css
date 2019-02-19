@@ -71,24 +71,24 @@
 }
 
 .tile-card {
+  width: 420px;
   margin-top: 32px;
   margin-right: 32px;
   display: inline-flex;
   align-items: center;
   border-radius: 8px;
   background: var(--sidebar-bg-color);
-  width: 420px;
   font-size: 1.062em;
 }
 
 .tile-card--content {
-  text-align: left;
   padding: 0 16px;
+  text-align: left;
 }
 
 .tile-card--title {
-  font-weight: bold;
   margin: 4px 0;
+  font-weight: bold;
 }
 .tile-card--subtitle {
   color: var(--subtext-color);
@@ -96,12 +96,13 @@
   font-size: 0.86em;
 }
 .tile-card--subtitle span {
-  display: inline-block;
   margin-right: 8px;
+  display: inline-block;
 }
 
 .tile-card--thumbnail {
-  height: 124px;
   width: 124px;
+  height: 124px;
+  flex-shrink: 0;
   border-radius: 8px 0 0 8px;
 }
