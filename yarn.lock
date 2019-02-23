@@ -7237,9 +7237,9 @@ unistore@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/unistore/-/unistore-3.2.1.tgz#26e316c834e39b83b2a301a65f78138f43975a0b"
 
-universal-router@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/universal-router/-/universal-router-8.0.0.tgz#c3562a847026422aa7a4012d29ebc16a83d2ebd4"
+universal-router@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/universal-router/-/universal-router-8.1.0.tgz#1fbd04b8d37633139d6814f7e29dfeeaa446cdfa"
   dependencies:
     path-to-regexp "^3.0.0"
 
