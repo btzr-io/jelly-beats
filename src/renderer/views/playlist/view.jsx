@@ -33,7 +33,7 @@ class View extends React.PureComponent {
     } else {
       const { storeTrack } = this.props
       // Resolve uris
-      Lbry.resolve({ uris: tracks })
+      Lbry.resolve({ urls: tracks })
         .then(res => {
           const list = Object.entries(res).filter(([key, value]) => !value.error)
 

@@ -71,7 +71,7 @@ class TrackListItem extends React.Component {
       thumbnail && thumbnail.length > 0 && this.getPalette(thumbnail)
     } else if (fetchingData) {
       // Fetch claim data
-      Lbry.resolve({ uri })
+      Lbry.resolve({ urls: uri })
         .then(res => {
           const { claim: claimData, certificate: channelData, error } = res
 

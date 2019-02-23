@@ -5,11 +5,14 @@ import EmptyState from '@/components/common/emptyState'
 import TrackList from '@/components/trackList'
 import Lbry from '@/utils/lbry'
 
+import fetchChannel from '@/api/channel'
+
 import DataTable from '@/components/common/dataTable.jsx'
 
 import Button from '@/components/button'
 import Health from '@/components/common/health'
 import PriceLabel from '@/components/common/priceLabel'
+
 import {
   CLOCK as iconClock,
   DOWNLOAD as iconDownload,
@@ -36,33 +39,26 @@ class View extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { cache, tracks, setPlaylist } = this.props
+    const { cache, tracks, storeTrack, setPlaylist } = this.props
     // List is empty
     if (tracks.length === 0) {
       // Stop loading data
       this.setState({ fetchingData: false })
     } else {
-      const { storeTrack } = this.props
-      // const uris = tracks.filter(uri => !cache[uri])
       // Resolve uris
-      Lbry.resolve({ uris: tracks })
+      Lbry.resolve({ urls: tracks })
         .then(res => {
-          const list = Object.entries(res).filter(([key, value]) => !value.error)
-
-          const { claim: claimData, certificate: channelData, error } = value
-
-          // Filter errors
-          if (error || !channelData) return
-
-          // Extract channel data
-          this.getChannelData(channelData)
-
-          // Cache track data
-          storeTrack(uri, { channelData, claimData })
-
-          this.setState({
-            fetchingData: false,
-          })
+          const list = Object.entries(res)
+            .filter(([uri, value]) => !value.error && value.certificate)
+            .map(([uri, value], index) => {
+              const { claim: claimData, certificate: channelData } = value
+              // Extract channel data
+              this.getChannelData(channelData)
+              // Cache track data
+              storeTrack(uri, { channelData, claimData })
+              return uri
+            })
+          this.setState({ fetchingData: false })
         })
         // Handle errors
         .catch(err => {

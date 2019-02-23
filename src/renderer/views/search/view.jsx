@@ -61,7 +61,7 @@ class View extends React.PureComponent {
       .catch(this.handleFetchError)
   }
 
-  fetchData = uris => {
+  fetchData = urls => {
     const { storeTrack, storePlaylist, network, cache } = this.props
     const { isReady, connection } = network
     // Update status
@@ -75,7 +75,7 @@ class View extends React.PureComponent {
       this.handleFetchError()
     } else if (isReady) {
       // Fetch content
-      Lbry.resolve({ uris })
+      Lbry.resolve({ urls })
         .then(res => {
           const results = Object.entries(res)
             .map(([uri, value], index) => {

@@ -69,7 +69,7 @@ class View extends React.PureComponent {
       if (podcast) {
         fetchClaimsByChannel(podcast.id, { limit: 25, page: 0 }).then(claims => {
           const cachedUris = []
-          const uris = claims
+          const urls = claims
             .map(claimData => {
               const {
                 name,
@@ -93,9 +93,9 @@ class View extends React.PureComponent {
             })
             .filter(uri => uri && uri !== null)
 
-          if (uris.length > 0) {
+          if (urls.length > 0) {
             // Featured content
-            Lbry.resolve({ uris })
+            Lbry.resolve({ urls })
               .then(res => {
                 const tracks = Object.entries(res)
                   .map(([uri, value], index) => {

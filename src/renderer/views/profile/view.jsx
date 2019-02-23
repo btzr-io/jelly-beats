@@ -50,7 +50,7 @@ class View extends React.PureComponent {
             claimData => `${claimData.name}#${claimData.claim_id}`
           )
           // Featured content
-          Lbry.resolve({ uris: channelTracks })
+          Lbry.resolve({ urls: channelTracks })
             .then(res => {
               const tracks = Object.entries(res)
                 .map(([uri, value], index) => {

@@ -11,5 +11,9 @@ export default connect(
     const playlist = { uri: 'downloads', name: 'Downloads' }
     return { cache, tracks, playlist, duration, downloads, favorites }
   },
-  { toggleFavorite: 'toggleFavorite' }
+  {
+    storeTrack: 'storeTrack',
+    storeChannel: 'storeChannel',
+    toggleFavorite: 'toggleFavorite',
+  }
 )(View)

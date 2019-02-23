@@ -66,10 +66,10 @@ class View extends React.PureComponent {
           )
 
           // Filter cached claims
-          const uris = mergeDedupe([latestUris, feature])
+          const urls = mergeDedupe([latestUris, feature])
 
           // Featured content
-          Lbry.resolve({ uris })
+          Lbry.resolve({ urls })
             .then(res => {
               const resolvedUris = Object.entries(res)
                 .map(([uri, value], index) => {
