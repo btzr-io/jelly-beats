@@ -113,7 +113,6 @@ tbody tr {
   border-radius: 16px;
   background-color: var(--subtext-color);
   padding: 4px;
-  margin: 0 16px;
   width: 75%;
 }
 
@@ -127,4 +126,58 @@ tbody tr {
 
 .row--placeholder .row_label--temp.large {
   min-width: 8em;
+}
+
+.table__row__cell-center {
+}
+
+.table__row__cell--placeholder {
+  display: inline-block;
+  height: 0.96em;
+  width: 80%;
+  border-radius: 1em;
+  background: var(--card-bg-color);
+}
+
+.table__row__cell--text {
+  font-size: 0.96em;
+  opacity: 0.64;
+}
+
+.ReactVirtualized__Table__row:hover .table__row__cell--text {
+  opacity: 1;
+}
+
+.ReactVirtualized__Table {
+}
+
+.ReactVirtualized__Table__headerColumn {
+  outline: 0;
+  font-size: 0.96em;
+  text-transform: uppercase;
+}
+
+.ReactVirtualized__Table__sortableHeaderIcon {
+  vertical-align: middle;
+}
+
+.ReactVirtualized__Table__headerRow {
+  border-bottom: 1px solid var(--card-bg-color);
+  box-sizing: border-box;
+}
+
+.ReactVirtualized__Table__row:first-child {
+  border-top: 0;
+}
+
+.ReactVirtualized__Table__row {
+  border-top: 1px solid var(--card-bg-color);
+  box-sizing: border-box;
+}
+
+.ReactVirtualized__Table__Grid {
+  outline: 0;
+}
+
+.ReactVirtualized__Table__rowColumn {
 }
