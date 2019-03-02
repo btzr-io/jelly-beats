@@ -30,7 +30,7 @@
   
 ## What's this?
 
-A Decentralized music and podcasts streaming platform.
+A decentralized open-source music and podcasts streaming platform.
 
 ## The lbry protocol
 
@@ -64,6 +64,8 @@ $ yarn dist
 | **MacOS**   | **.dmg** - Inside dist folder. |
 
 ## Support
+
+If you'd like to help support the future of the project, please consider making a donation:
 
 >**LBC:** bQaC73Mgs7D2vPk7oogej6Zx9YvGqf7znw
 
