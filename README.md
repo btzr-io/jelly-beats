@@ -30,7 +30,7 @@
   
 ## What's this?
 
-A Decentralized music streaming platform.
+A Decentralized music and podcasts streaming platform.
 
 ## The lbry protocol
 
