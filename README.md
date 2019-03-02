@@ -30,24 +30,7 @@ A Decentralized music streaming platform.
 
 [LBRY](https://github.com/lbryio/lbry) is an open-source protocol providing distribution, discovery, and purchase of digital content via a decentralized network. We use this protocol to discover and stream music and other audio files such as podcasts.
 
-## Dependencies required
-
-In order to run this app you need to install **all** these dependencies.
-
-| Install                                       |
-| :-------------------------------------------- |
-| [Git](https://git-scm.com/)                   |
-| [Node.js LTS](https://nodejs.org/)            |
-| [Yarn](https://yarnpkg.com/)                  |
-| [LBRY Daemon](https://github.com/lbryio/lbry) |
-
-> **Only for Linux**
-
-> You may also require **`Make`** tools.
->
-> For example, on Debian you can install the [Build-essentials](https://packages.debian.org/stretch/build-essential) package.
-
-## How to run
+## Quick start
 
 ```sh
 # Clone this repository
@@ -61,7 +44,7 @@ $ yarn
 $ yarn dev
 ```
 
-## How to package
+## Build
 
 ```sh
 # Run the app
@@ -73,6 +56,11 @@ $ yarn dist
 | **Linux**   | **.deb** - Inside dist folder. |
 | **Windows** | **.exe** - Inside dist folder. |
 | **MacOS**   | **.dmg** - Inside dist folder. |
+
+## Support
+>**lbc:** bQaC73Mgs7D2vPk7oogej6Zx9YvGqf7znw
+
+>**btc:** 36StGtp6CVwYN8JkiqfcTnZKWeYiKbahuH
 
 ## Awesome contributors :tada:
 
