@@ -15,6 +15,9 @@
  <a href="https://github.com/btzr-io/electron-preact-app/blob/master/LICENSE">
    <img src="https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=for-the-badge" alt="license" />
   </a>
+   <a href="https://github.com/btzr-io/jelly-beats#support">
+   <img src="https://img.shields.io/badge/support-yellow.svg?style=for-the-badge" alt="license" />
+  </a>
 </h1>
 
  <img src="https://user-images.githubusercontent.com/14793624/47196971-9b235b80-d320-11e8-85a7-307f9a33476f.png" alt="screenshot"/>
