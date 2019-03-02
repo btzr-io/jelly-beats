@@ -61,9 +61,12 @@ $ yarn dist
 | **MacOS**   | **.dmg** - Inside dist folder. |
 
 ## Support
->**lbc:** bQaC73Mgs7D2vPk7oogej6Zx9YvGqf7znw
 
->**btc:** 36StGtp6CVwYN8JkiqfcTnZKWeYiKbahuH
+>**LBC:** bQaC73Mgs7D2vPk7oogej6Zx9YvGqf7znw
+
+>**BTC:** 36StGtp6CVwYN8JkiqfcTnZKWeYiKbahuH
+
+>**ETH:** 0xd3bcec62285b9209d96499f1d05d257eaf5b0439
 
 ## Awesome contributors :tada:
 
