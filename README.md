@@ -67,11 +67,14 @@ $ yarn dist
 
 If you'd like to help support the future of the project, please consider making a donation:
 
->**LBC:** bQaC73Mgs7D2vPk7oogej6Zx9YvGqf7znw
+**Lbry credits (LBC):**
+> bQaC73Mgs7D2vPk7oogej6Zx9YvGqf7znw
 
->**BTC:** 36StGtp6CVwYN8JkiqfcTnZKWeYiKbahuH
+**Bitcoin (BTC):**
+> 36StGtp6CVwYN8JkiqfcTnZKWeYiKbahuH
 
->**ETH:** 0xd3bcec62285b9209d96499f1d05d257eaf5b0439
+**Etherum (ETH):**
+> 0xd3bcec62285b9209d96499f1d05d257eaf5b0439
 
 ## Awesome contributors :tada:
 
