@@ -140,6 +140,7 @@ tbody tr {
 }
 
 .Row {
+  color: var(--subtext-color);
   display: flex;
   text-align: left;
   align-items: center;
@@ -164,6 +165,11 @@ tbody tr {
 
 .Row--active .button--action--overlay:not(.button--toggle) {
   background-color: var(--button-bg-color);
+}
+
+.Row:hover,
+.Row--active {
+  color: var(--text-color);
 }
 
 .Row:hover .button--action--overlay,
