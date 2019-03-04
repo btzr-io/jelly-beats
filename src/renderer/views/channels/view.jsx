@@ -37,10 +37,7 @@ class View extends React.PureComponent {
 
   getChannelData(claim) {
     const { storeChannel } = this.props
-
-    fetchChannel(claim, channel => {
-      storeChannel(channel)
-    })
+    storeChannel(claim)
   }
 
   componentDidMount() {

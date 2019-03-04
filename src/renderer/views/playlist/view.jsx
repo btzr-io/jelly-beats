@@ -15,13 +15,8 @@ class View extends React.PureComponent {
   }
 
   getChannelData(claim) {
-    const { cache, storeChannel } = this.props
-    const { permanent_url: uri } = claim
-    if (!cache[uri]) {
-      fetchChannel(claim, channel => {
-        storeChannel(channel)
-      })
-    }
+    const { storeChannel } = this.props
+    storeChannel(claim)
   }
 
   componentDidMount() {

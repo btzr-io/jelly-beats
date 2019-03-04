@@ -1,3 +1,4 @@
+/* OLD stuff */
 .track-list {
   width: 100%;
   margin-bottom: 16px;
@@ -128,7 +129,28 @@ tbody tr {
   min-width: 8em;
 }
 
-.table__row__cell-center {
+/* New dataTable component css styles */
+
+.table__row--active {
+  border-radius: 8px;
+  border-color: transparent;
+  background-color: var(--track-list-active-color);
+}
+
+.table__row--active + .table__row {
+  border-color: transparent;
+}
+
+.table__row--active .table__row__cell--text {
+  opacity: 1;
+}
+
+.table__row--active .button--table-action--overlay:not(.button--toggle) {
+  background-color: rgba(200, 200, 200, 0.24);
+}
+
+.table__row__cell {
+  position: relative;
 }
 
 .table__row__cell--placeholder {
@@ -144,11 +166,47 @@ tbody tr {
   opacity: 0.64;
 }
 
-.ReactVirtualized__Table__row:hover .table__row__cell--text {
+.table__row .button--table-action--overlay {
+  left: 0;
+  right: 0;
+  opacity: 0;
+  margin: auto;
+}
+
+.table__row:hover .button--table-action--overlay,
+.table__row--active .button--table-action--overlay {
+  opacity: 1;
+  transition: none;
+}
+
+.table__row:hover .button--table-action--overlay + .table__row__cell--text,
+.table__row--active .button--table-action--overlay + .table__row__cell--text {
+  opacity: 0;
+}
+
+.table__row:hover .table__row__cell--text {
   opacity: 1;
 }
 
-.ReactVirtualized__Table {
+.table__row__column {
+  margin-right: 24px;
+}
+
+.table__row__column:first-of-type {
+  margin-left: 16px;
+}
+
+.table__row__column:last-of-type {
+  margin-left: 16px;
+}
+
+.table__row__column--center {
+  text-align: center !important;
+  overflow: visible !important;
+}
+
+.table__row__column--connected {
+  margin: 0;
 }
 
 .ReactVirtualized__Table__headerColumn {
@@ -180,4 +238,107 @@ tbody tr {
 }
 
 .ReactVirtualized__Table__rowColumn {
+}
+
+/* New dataTable component css styles */
+
+.table {
+  width: 100%;
+  margin: 0;
+  height: 100%;
+  overflow: auto;
+}
+
+.Row {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  box-sizing: border-box;
+  border-top: 1px solid var(--card-bg-color);
+}
+
+.Row:first-of-type {
+  border: 0;
+}
+
+.Row--active {
+  border-radius: 8px;
+  border-color: transparent;
+  background-color: var(--track-list-active-color);
+}
+
+.Row--active .button--action--overlay:not(.button--toggle) {
+  background-color: var(--button-bg-color);
+}
+
+.Row:hover .button--action--overlay,
+.Row--active .button--action--overlay {
+  opacity: 1;
+}
+
+.Row:hover .button--action--overlay + .table__row__cell--text,
+.Row--active .button--action--overlay + .table__row__cell--text {
+  opacity: 0;
+}
+
+.Row__cell {
+  text-align: left;
+  overflow: hidden;
+  margin-right: 32px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.Row__cell--action {
+  overflow: visible;
+  text-align: center;
+  position: relative;
+  flex-shrink: 0 !important;
+}
+
+.Row__cell:first-of-type {
+  margin-left: 16px;
+}
+
+.Row__cell:last-of-type {
+  margin-right: 16px;
+}
+
+.Row--placeholder {
+  opacity: 0.2;
+}
+
+.button--action--overlay {
+  text-align: center;
+  position: absolute;
+  top: -25%;
+  z-index: 1;
+  opacity: 0;
+  margin: auto;
+  padding: 4px;
+  transition: none;
+  border-radius: 32px;
+  background-color: transparent;
+}
+
+.button--toggle.button--action--overlay::before {
+  border-radius: 50%;
+  background-color: var(--main-color);
+  width: 100%;
+  height: 100%;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -2;
+  /* wave animation */
+  animation-name: wave;
+  animation-duration: 0.6s;
+  animation-delay: 0.4s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }

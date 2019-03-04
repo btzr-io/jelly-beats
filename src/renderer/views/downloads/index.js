@@ -6,14 +6,15 @@ export default connect(
   (state, props) => {
     const { cache, collections } = state
     const { downloads, favorites } = collections
-    const tracks = Object.keys(downloads)
-    const duration = selectPlaylistDuration(state, tracks)
+    const tracks = favorites // Object.keys(downloads)
+    const duration = 0 //selectPlaylistDuration(state, tracks)
     const playlist = { uri: 'downloads', name: 'Downloads' }
-    return { cache, tracks, playlist, duration, downloads, favorites }
+    return { tracks, cache, playlist, duration }
   },
   {
     storeTrack: 'storeTrack',
     storeChannel: 'storeChannel',
     toggleFavorite: 'toggleFavorite',
+    setPlaylist: 'setPlaylist',
   }
 )(View)

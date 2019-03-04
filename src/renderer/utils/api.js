@@ -39,6 +39,15 @@ export const podcasts = {
     title: 'Robotics for Everyone',
     thumbnail: 'https://spee.ch/c/tNtMwix6tIrPf1OMsSWj0ZGR.jpg',
   },
+
+  '@FeralLogic#e46c575bb4b77ff3f26cd8e85aa2908d76e9972d': {
+    id: 'e46c575bb4b77ff3f26cd8e85aa2908d76e9972d',
+    uri: '@FeralLogic#e46c575bb4b77ff3f26cd8e85aa2908d76e9972d',
+    host: 'Vega Deftwing',
+    tags: [],
+    title: 'Feral Logic',
+    thumbnail: 'https://spee.ch/3/0hiwaFQfWA00Uz9EpVH1YrAW.png',
+  },
   '@diacast#b8cd66d676e1de2209e3b8f4c33d2dd117ae4e68': {
     id: 'b8cd66d676e1de2209e3b8f4c33d2dd117ae4e68',
     uri: '@diacast#b8cd66d676e1de2209e3b8f4c33d2dd117ae4e68',

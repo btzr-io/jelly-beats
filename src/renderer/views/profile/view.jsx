@@ -29,13 +29,8 @@ class View extends React.PureComponent {
   }
 
   getChannelData(claim) {
-    const { cache, storeChannel } = this.props
-    const { permanent_url: uri } = claim
-    if (!cache[uri]) {
-      fetchChannel(claim, channel => {
-        storeChannel(channel)
-      })
-    }
+    const { storeChannel } = this.props
+    storeChannel(claim)
   }
 
   componentDidMount() {
@@ -112,13 +107,6 @@ class View extends React.PureComponent {
             <div className="profile-data">
               <div className={'nickname'}>{channelData.nickname}</div>
               <h1 className={'name'}>{channelData.name}</h1>
-              <div>
-                {channelData.tags.map((tag, key) => (
-                  <div className={'tag'} key={key}>
-                    {tag}
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
           <div className="profile-bar">

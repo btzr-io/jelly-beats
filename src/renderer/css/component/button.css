@@ -102,7 +102,13 @@
   left: -8px;
   z-index: 1;
   border-radius: 32px;
-  background-color: var(--button-bg);
+  background-color: var(--button-bg-color);
+  transition: none;
+}
+
+.button--toggle.button--action--overlay {
+  opacity: 1;
+  background: var(--main-color);
   transition: none;
 }
 
@@ -273,4 +279,8 @@
 
 .button_icon + .button_label {
   margin: 0 8px;
+}
+
+.button_icon svg path {
+  color: var(--subtext-color);
 }

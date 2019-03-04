@@ -2,18 +2,17 @@ import React from 'react'
 import Icon from '@mdi/react'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
-import TrackList from '@/components/trackList'
+import TrackList from '@/components/trackList-w'
 import Lbry from '@/utils/lbry'
 
 import fetchChannel from '@/api/channel'
-
-import DataTable from '@/components/common/dataTable.jsx'
 
 import Button from '@/components/button'
 import Health from '@/components/common/health'
 import PriceLabel from '@/components/common/priceLabel'
 
 import {
+  PLAY as iconPlay,
   CLOCK as iconClock,
   DOWNLOAD as iconDownload,
   HEART as iconHeart,
@@ -23,30 +22,29 @@ import {
 class View extends React.PureComponent {
   constructor(props) {
     super(props)
+    const { tracks, cache } = props
+    const urls = tracks.filter(uri => !cache[uri])
     this.state = {
-      fetchingData: true,
+      fetchingData: urls.length > 0,
     }
   }
 
   getChannelData(claim) {
-    const { cache, storeChannel } = this.props
-    const { permanent_url: uri } = claim
-    if (!cache[uri]) {
-      fetchChannel(claim, channel => {
-        storeChannel(channel)
-      })
-    }
+    const { storeChannel } = this.props
+    storeChannel(claim)
   }
 
   componentDidMount() {
-    const { cache, tracks, storeTrack, setPlaylist } = this.props
+    const { fetchingData } = this.state
+    const { tracks, cache, storeTrack } = this.props
+    const urls = tracks.filter(uri => !cache[uri])
     // List is empty
-    if (tracks.length === 0) {
+    if (tracks.length === 0 || urls.length === 0) {
       // Stop loading data
       this.setState({ fetchingData: false })
     } else {
       // Resolve uris
-      Lbry.resolve({ urls: tracks })
+      Lbry.resolve({ urls })
         .then(res => {
           const list = Object.entries(res)
             .filter(([uri, value]) => !value.error && value.certificate)
@@ -69,94 +67,30 @@ class View extends React.PureComponent {
 
   render() {
     const { fetchingData } = this.state
-    const {
-      cache,
-      tracks,
-      duration,
-      playlist,
-      downloads,
-      favorites,
-      toggleFavorite,
-    } = this.props
-    const { name, uri } = playlist
-    /*
-    const list = tracks.map(uri=> cache[uri]).filter(item => item && item !== null)
+    const { tracks, playlist } = this.props
 
-    const columns = [
-      {
-        label: '#',
-        dataKey: 'index',
-        className: 'table__row__cell-center',
-        width: 25,
-        flexGrow: 0,
-        flexShrink: 0,
-        disableSort: true,
-      },
-      {
-        label: '',
-        dataKey: 'favorite',
-        className: 'table__row__cell-center',
-        width: 50,
-        flexGrow: 0,
-        flexShrink: 0,
-        disableSort: true,
-        cellDataGetter: ({dataKey, rowData}) => (rowData && favorites.indexOf(rowData.uri) !== -1),
-        cellRenderer: ({ rowData, cellData: isFavorite }) => (
-          <Button
-            size="large"
-            type="table-action"
-            iconColor={isFavorite ? 'var(--color-red)' : ''}
-            icon={isFavorite ? iconHeart : iconHeartEmpty}
-            toggle={isFavorite}
-            onClick={() => toggleFavorite(rowData.uri)}
-            // disabled={true}
-          />
-        ),
-      },
-      { label: 'Track', dataKey: 'title', width: 250, flexGrow: 1 },
-      { label: 'Artist', dataKey: 'artist', width: 250,
-          cellDataGetter: ({dataKey, rowData}) => {
-            return (rowData ? rowData[dataKey].channelName : '?')
-          },
-      },
-      {
-        label: 'Price',
-        dataKey: 'fee',
-        width: 150,
-        cellRenderer: ({ cellData }) => (
-          <PriceLabel className={'row_label'} fee={cellData} />
-        ),
-      },
-      {
-        label: <Icon className="icon link__icon" path={iconClock} />,
-        dataKey: 'duration',
-        width: 75,
-        cellDataGetter: ({dataKey, rowData}) => {
-          const { duration } = (rowData && downloads[rowData.uri]) || {}
-          return duration || 0
-        },
-      },
-    ]
-    */
     const content =
       tracks.length > 0 ? (
-        // Render list
-        <section className={'page--layout'}>
-          <header>
-            <h1>{name}</h1>
-            <div className={'stats'}>
-              <span className={'label label-outline'}>AUTO-GENERATED</span>
-              <span>•</span>
-              <span>{`${tracks.length} tracks`}</span>
-              <span>•</span>
-              <span>{duration}</span>
+        fetchingData ? (
+          <Loader icon={iconDownload} animation="pulse" />
+        ) : (
+          // Render list
+          <section className={'page--layout'}>
+            <header>
+              <h1>{playlist.name}</h1>
+              <div className={'stats'}>
+                <span className={'label label-outline'}>AUTO-GENERATED</span>
+                <span>•</span>
+                <span>{`${tracks.length} tracks`}</span>
+                <span>•</span>
+                {/* <span>{duration}</span> */}
+              </div>
+            </header>
+            <div className={'page--content'}>
+              <TrackList tracks={tracks} playlist={playlist} />
             </div>
-          </header>
-          <div className={'page--content'}>
-            <TrackList list={tracks} playlist={{ uri, name }} />
-            {/* <DataTable list={list} columns={columns} /> */}
-          </div>
-        </section>
+          </section>
+        )
       ) : (
         // List is empty
         <EmptyState
@@ -165,7 +99,7 @@ class View extends React.PureComponent {
             <p>
               <span>{'Press'}</span>
               <span>
-                <Icon className="icon icon--small-x" path={icons.PLAY} />
+                <Icon className="icon icon--small-x" path={iconPlay} />
               </span>
               <span>{'to download a track'}</span>
             </p>
@@ -173,11 +107,7 @@ class View extends React.PureComponent {
         />
       )
 
-    return (
-      <div className="page">
-        {!fetchingData ? content : <Loader icon={iconDownload} animation="pulse" />}
-      </div>
-    )
+    return <div className="page">{content}</div>
   }
 }
 

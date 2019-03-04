@@ -41,5 +41,6 @@ export default connect(
     toggleFavorite: 'toggleFavorite',
     updateStreamInfo: 'updateStreamInfo',
     updatePlayerStatus: 'updatePlayerStatus',
+    storeTrackDuration: 'storeTrackDuration',
   }
 )(Player)

@@ -30,7 +30,16 @@ import {
   mdiClockOutline,
   mdiMagnify,
   mdiClose,
+  mdiPlus,
+  mdiPlusCircle,
+  mdiPound,
+  mdiCheckboxMarked,
+  mdiCheckboxBlankOutline,
+  mdiCheckBold,
+  mdiCheck,
 } from '@mdi/js'
+
+console.error(mdiCheckBold)
 
 export const EDIT = mdiPencil
 export const HOME = mdiHome
@@ -63,9 +72,16 @@ export const UKNOWN = mdiCircleOutline
 export const WARNING = mdiAlertCircle
 
 export const PODCAST = mdiPodcast
-
 export const GROUP_DOWN = mdiMenuDown
 export const GROUP_RIGHT = mdiMenuRight
 export const CLOCK = mdiClockOutline
 export const SEARCH = mdiMagnify
 export const CLOSE = mdiClose
+
+export const PLUS = mdiPlus
+export const PLUS_CIRCLE = mdiPlusCircle
+export const HASH = mdiPound
+
+export const CHECKBOX_MARK = mdiCheckBold || mdiCheck
+export const CHECKBOX_MARKED = mdiCheckboxMarked
+export const CHECKBOX_OUTLINE = mdiCheckboxBlankOutline

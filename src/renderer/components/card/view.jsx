@@ -156,6 +156,14 @@ class Card extends React.PureComponent {
             )}
           </div>
           <div className={css.actions}>
+            {/* <Button
+              icon={icons.PLUS}
+              size="large"
+              type="card-action"
+              onClick={() => null}
+              disabled={true}
+            />
+            */}
             <Button
               toggle={isFavorite}
               iconColor={isFavorite ? 'var(--color-red)' : ''}
@@ -165,12 +173,6 @@ class Card extends React.PureComponent {
               // TODO: FIX IT!
               // tooltip={{ text: `${isFavorite ? 'Remove from' : 'Add to'} favorites` }}
               onClick={() => uri && toggleFavorite(uri)}
-            />
-            <Button
-              icon={icons.PLAYLIST_PLUS}
-              size="large"
-              type="card-action"
-              onClick={() => null}
             />
           </div>
         </div>

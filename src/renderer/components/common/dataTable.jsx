@@ -11,19 +11,12 @@ import {
 import 'react-virtualized/styles.css'
 
 class DataTable extends React.PureComponent {
-  static defaultRowHeight = 50
-
-  static sortObjectArray = (items, dataKey) => {
-    items.sort(function(a, b) {
-      if (a[dataKey] > b[dataKey]) {
-        return 1
-      }
-      if (a[dataKey] < b[dataKey]) {
-        return -1
-      }
-      // Equal value
-      return 0
-    })
+  static defaultProps = {
+    list: [],
+    filters: [],
+    sortBy: null,
+    sortDirection: null,
+    rowClassName: DataTable.defaultRowClassName,
   }
 
   constructor(props) {
@@ -35,16 +28,53 @@ class DataTable extends React.PureComponent {
       sortBy: null,
       sortedList: list,
       sortDirection: null,
+      loadedRowsMap: {},
+      loadedRowCount: 0,
+      loadedRowCount: 0,
+    }
+
+    this.tableRef = React.createRef()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentIndex !== this.props.currentIndex) {
+      this.tableRef.current.scrollToRow(this.props.currentIndex)
     }
   }
 
-  static defaultHeaderRenderer({ label, dataKey, sortBy, sortDirection }) {
-    return (
-      <div>
-        {label}
-        {sortBy === dataKey && <SortIndicator sortDirection={sortDirection} />}
-      </div>
-    )
+  static defaultRowHeight = 52
+
+  static sortObjectArray = (items, dataKey) =>
+    items.sort((a, b) => {
+      if (a[dataKey] > b[dataKey]) {
+        return 1
+      }
+      if (a[dataKey] < b[dataKey]) {
+        return -1
+      }
+      // Equal value
+      return 0
+    })
+
+  static defaultHeaderRenderer = ({ label, dataKey, sortBy, sortDirection }) => (
+    <div>
+      {label}
+      {sortBy === dataKey && <SortIndicator sortDirection={sortDirection} />}
+    </div>
+  )
+
+  static defaultRowClassName = ({ index }) => {
+    return 'table__row'
+  }
+
+  static defaultCellDataGetter({ dataKey, rowData }) {
+    if (!rowData) return null
+
+    if (typeof rowData.get === 'function') {
+      rowData.get(dataKey)
+    }
+
+    return rowData[dataKey]
   }
 
   static defaultCellRenderer({ dataKey, cellData, rowIndex, isScrolling }) {
@@ -69,47 +99,68 @@ class DataTable extends React.PureComponent {
 
   defaultRowGetter = ({ index }) => {
     const { sortedList } = this.state
-    return sortedList[index]
-  }
-
-  sortData = ({ sortBy, sortDirection }) => {
-    const { list } = this.props
-    const tempList = DataTable.sortObjectArray(list, sortBy)
-    const sortedList = sortDirection === SortDirection.DESC ? list.reverse() : list
-    this.setState({ sortBy, sortDirection, sortedList })
+    return this.props.list[index]
   }
 
   render() {
     // Table data as an array of objects
-    const { columns } = this.props
-    const { sortedList, sortBy, sortDirection } = this.state
+    const {
+      list,
+      filters,
+      columns,
+      rowCount,
+      rowClassName,
+      currentIndex,
+      sortBy,
+      onSort,
+      sortDirection,
+    } = this.props
 
-    const tableRenderer = ({ width, height }) => (
-      <Table
-        // autoHeight
-        width={width}
-        height={height}
-        headerHeight={DataTable.defaultRowHeight}
-        rowHeight={DataTable.defaultRowHeight}
-        rowCount={sortedList.length}
-        rowGetter={this.defaultRowGetter}
-        // Sortable data
-        sort={this.sortData}
-        sortBy={sortBy}
-        sortDirection={sortDirection}
-      >
-        {columns.map(columnProps => (
-          <Column
-            key={columnProps.dataKey}
-            cellRenderer={DataTable.defaultCellRenderer}
-            headerRenderer={DataTable.defaultHeaderRenderer}
-            {...columnProps}
-          />
-        ))}
-      </Table>
+    const tableRenderer = (
+      <AutoSizer>
+        {({ width, height }) => (
+          <Table
+            ref={this.tableRef}
+            // autoHeight
+            height={height}
+            width={width}
+            headerHeight={DataTable.defaultRowHeight}
+            rowHeight={DataTable.defaultRowHeight}
+            rowCount={rowCount}
+            rowGetter={this.defaultRowGetter}
+            rowClassName={rowClassName}
+            // onRowsRendered={onRowsRendered}
+            // Sortable data
+            sort={onSort}
+            sortBy={sortBy}
+            sortDirection={sortDirection}
+            overscanRowCount={10}
+            scrollToIndex={currentIndex}
+          >
+            {columns.map(columnProps => {
+              if (filters.length > 0) {
+                if (filters.indexOf(columnProps.dataKey) !== -1) {
+                  return null
+                }
+              }
+              return (
+                <Column
+                  key={columnProps.dataKey}
+                  cellRenderer={DataTable.defaultCellRenderer}
+                  cellDataGetter={DataTable.defaultCellDataGetter}
+                  headerRenderer={DataTable.defaultHeaderRenderer}
+                  headerClassName={'table__row__column'}
+                  className={'table__row__column'}
+                  {...columnProps}
+                />
+              )
+            })}
+          </Table>
+        )}
+      </AutoSizer>
     )
 
-    return <AutoSizer heightDisabled={false}>{tableRenderer}</AutoSizer>
+    return tableRenderer
   }
 }
 

@@ -53,12 +53,24 @@ export default {
       description,
       formatedTitle,
       formatedArtist,
-      title: defaultTitle,
+      title: formatedTitle || defaultTitle,
     }
 
     // Update cache
     return {
       cache: { ...state.cache, [uri]: { ...prevTrack, ...track } },
+    }
+  },
+
+  storeTrackDuration(state, uri, duration) {
+    const claim = state.cache[uri]
+
+    if (claim) {
+      if (claim.duration === duration) return null
+      // Update cache
+      return {
+        cache: { ...state.cache, [uri]: { ...claim, duration } },
+      }
     }
   },
 
@@ -82,8 +94,19 @@ export default {
     }
   },
 
-  storeChannel(state, { id, uri, name, nickname, tags, outpoint, thumbnail, block }) {
-    // Previous data from cache
+  storeChannel(state, channelData) {
+    const {
+      name,
+      nout,
+      txid,
+      height: block,
+      claim_id: id,
+      permanent_url: uri,
+    } = channelData
+
+    // Generate claim outpoint
+    const outpoint = `${txid}:${nout}`
+
     const prevChannel = state.cache[uri] || {}
 
     // Prevent update
@@ -91,16 +114,15 @@ export default {
       return null
     }
 
-    // New channel data
+    // Default channel data
     const channel = {
       id,
       uri,
-      tags,
-      name,
       block,
-      nickname,
       outpoint,
-      thumbnail,
+      name: name.substring(1),
+      nickname: name,
+      thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Cubozoa.jpg',
     }
 
     // Update cache

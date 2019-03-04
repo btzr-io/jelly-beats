@@ -2,7 +2,7 @@ import fs from 'fs'
 import React from 'react'
 import classnames from 'classnames'
 import { ipcRenderer } from 'electron'
-import { formatDuration } from '@/utils/formatMediaTime'
+import { memoizeFormatDuration } from '@/utils/formatMediaTime'
 import * as icons from '@/constants/icons'
 
 // Components
@@ -151,12 +151,13 @@ class Player extends React.PureComponent {
     const audio = this.audioElement.current
     const duration = audio.duration
 
-    const { player, updateStreamInfo } = this.props
+    const { player, updateStreamInfo, storeTrackDuration } = this.props
     const { uri } = player ? player.currentTrack : {}
 
     // Store duration
     this.setState({ duration })
     updateStreamInfo(uri, { duration })
+    // storeTrackDuration(uri, duration)
   }
 
   handleLoadStart = () => {
@@ -353,18 +354,18 @@ class Player extends React.PureComponent {
       },
       {
         type: 'action',
-        icon: icons.PLAYLIST,
-        iconColor: playlistActive ? 'var(--main-color)' : '',
-        toggle: playlistActive,
-        action: () => togglePlaylist(),
-        disabled: false,
-      },
-      {
-        type: 'action',
         icon: isFavorite ? icons.HEART : icons.HEART_OUTLINE,
         iconColor: isFavorite ? 'var(--color-red)' : '',
         toggle: isFavorite,
         action: () => toggleFavorite(uri),
+        disabled: false,
+      },
+      {
+        type: 'action',
+        icon: icons.PLAYLIST,
+        iconColor: playlistActive ? 'var(--main-color)' : '',
+        toggle: playlistActive,
+        action: () => togglePlaylist(),
         disabled: false,
       },
     ]
@@ -391,14 +392,16 @@ class Player extends React.PureComponent {
 
             <div className={css.trackData}>
               <div className={css.seekBar}>
-                <span className={css.currentTime}>{formatDuration(currentTime)}</span>
+                <span className={css.currentTime}>
+                  {memoizeFormatDuration(currentTime)}
+                </span>
                 <Slider
                   onChange={this.setCurrentTime}
                   value={currentTime}
                   max={duration}
                   disabled={!ready}
                 />
-                <span className={css.duration}>{formatDuration(duration)}</span>
+                <span className={css.duration}>{memoizeFormatDuration(duration)}</span>
               </div>
             </div>
 
