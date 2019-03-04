@@ -131,117 +131,6 @@ tbody tr {
 
 /* New dataTable component css styles */
 
-.table__row--active {
-  border-radius: 8px;
-  border-color: transparent;
-  background-color: var(--track-list-active-color);
-}
-
-.table__row--active + .table__row {
-  border-color: transparent;
-}
-
-.table__row--active .table__row__cell--text {
-  opacity: 1;
-}
-
-.table__row--active .button--table-action--overlay:not(.button--toggle) {
-  background-color: rgba(200, 200, 200, 0.24);
-}
-
-.table__row__cell {
-  position: relative;
-}
-
-.table__row__cell--placeholder {
-  display: inline-block;
-  height: 0.96em;
-  width: 80%;
-  border-radius: 1em;
-  background: var(--card-bg-color);
-}
-
-.table__row__cell--text {
-  font-size: 0.96em;
-  opacity: 0.64;
-}
-
-.table__row .button--table-action--overlay {
-  left: 0;
-  right: 0;
-  opacity: 0;
-  margin: auto;
-}
-
-.table__row:hover .button--table-action--overlay,
-.table__row--active .button--table-action--overlay {
-  opacity: 1;
-  transition: none;
-}
-
-.table__row:hover .button--table-action--overlay + .table__row__cell--text,
-.table__row--active .button--table-action--overlay + .table__row__cell--text {
-  opacity: 0;
-}
-
-.table__row:hover .table__row__cell--text {
-  opacity: 1;
-}
-
-.table__row__column {
-  margin-right: 24px;
-}
-
-.table__row__column:first-of-type {
-  margin-left: 16px;
-}
-
-.table__row__column:last-of-type {
-  margin-left: 16px;
-}
-
-.table__row__column--center {
-  text-align: center !important;
-  overflow: visible !important;
-}
-
-.table__row__column--connected {
-  margin: 0;
-}
-
-.ReactVirtualized__Table__headerColumn {
-  outline: 0;
-  font-size: 0.96em;
-  text-transform: uppercase;
-}
-
-.ReactVirtualized__Table__sortableHeaderIcon {
-  vertical-align: middle;
-}
-
-.ReactVirtualized__Table__headerRow {
-  border-bottom: 1px solid var(--card-bg-color);
-  box-sizing: border-box;
-}
-
-.ReactVirtualized__Table__row:first-child {
-  border-top: 0;
-}
-
-.ReactVirtualized__Table__row {
-  border-top: 1px solid var(--card-bg-color);
-  box-sizing: border-box;
-}
-
-.ReactVirtualized__Table__Grid {
-  outline: 0;
-}
-
-.ReactVirtualized__Table__rowColumn {
-}
-
-/* New dataTable component css styles */
-
 .table {
   margin: 0;
   height: 100%;
@@ -267,6 +156,10 @@ tbody tr {
   border-radius: 8px;
   border-color: transparent;
   background-color: var(--track-list-active-color);
+}
+
+.Row--active + .Row {
+  border-color: transparent;
 }
 
 .Row--active .button--action--overlay:not(.button--toggle) {
