@@ -5958,9 +5958,9 @@ rc-animate@2.x:
     raf "^3.4.0"
     react-lifecycles-compat "^3.0.4"
 
-rc-slider@^8.6.5:
-  version "8.6.5"
-  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-8.6.5.tgz#4bc90b8adfa6d46430a887f63cf70b88b43070a8"
+rc-slider@^8.6.6:
+  version "8.6.6"
+  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-8.6.6.tgz#008c5a5ccf29d83787d846b6b1d0bbb8e2a121c8"
   dependencies:
     babel-runtime "6.x"
     classnames "^2.2.5"
@@ -5968,7 +5968,7 @@ rc-slider@^8.6.5:
     rc-tooltip "^3.7.0"
     rc-util "^4.0.4"
     shallowequal "^1.0.1"
-    warning "^3.0.0"
+    warning "^4.0.3"
 
 rc-tooltip@^3.7.0:
   version "3.7.3"
@@ -7413,6 +7413,12 @@ vm-browserify@0.0.4:
 warning@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
+  dependencies:
+    loose-envify "^1.0.0"
+
+warning@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.3.tgz#16e9e077eb8a86d6af7d64aa1e05fd85b4678ca3"
   dependencies:
     loose-envify "^1.0.0"
 
