@@ -861,9 +861,9 @@
   dependencies:
     core-js "^2.5.7"
 
-"@mdi/js@^3.4.93":
-  version "3.4.93"
-  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-3.4.93.tgz#998c64d15668de156ef35ec0c8c50f39e7808ebd"
+"@mdi/js@^3.5.95":
+  version "3.5.95"
+  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-3.5.95.tgz#0aafcb9db89a128bb152ade440839f738561d5ac"
 
 "@mdi/react@^1.0.1":
   version "1.1.0"
