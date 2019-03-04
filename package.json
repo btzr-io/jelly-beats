@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/btzr-io/jelly-beats#readme",
   "dependencies": {
-    "@mdi/js": "^3.4.93",
+    "@mdi/js": "^3.5.95",
     "@mdi/react": "^1.0.1",
     "classnames": "^2.2.6",
     "discord-rich-presence": "^0.0.8",
@@ -41,7 +41,7 @@
     "moment": "^2.22.2",
     "node-vibrant": "^3.2.0-alpha",
     "proxy-polyfill": "^0.3.0",
-    "rc-slider": "^8.6.5",
+    "rc-slider": "^8.6.6",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-measure": "^2.2.4",
@@ -55,7 +55,7 @@
     "universal-router": "^8.1.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/plugin-transform-runtime": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "all-contributors-cli": "^6.1.2",
