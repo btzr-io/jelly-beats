@@ -39,8 +39,6 @@ import {
   mdiCheck,
 } from '@mdi/js'
 
-console.error(mdiCheckBold)
-
 export const EDIT = mdiPencil
 export const HOME = mdiHome
 export const LEFT = mdiChevronLeft
