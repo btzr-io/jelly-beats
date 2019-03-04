@@ -1,6 +1,8 @@
 import React from 'react'
 import memoize from 'memoize-one'
+import Measure from 'react-measure'
 import { FixedSizeList as List } from 'react-window'
+
 import RowRenderer from './internal/row'
 
 const ROW_HEIGHT = 50
@@ -43,6 +45,7 @@ class TrackList extends React.PureComponent {
     type: 'playlist',
     tracks: [],
     playlist: null,
+    dimensions: { width: 0, height: 0 },
     selectedItems: {},
   }
 
@@ -54,6 +57,11 @@ class TrackList extends React.PureComponent {
       sortDirection: null,
       currentIndex: 0,
     }
+  }
+
+  handleResize = contentRect => {
+    console.info(contentRect.bounds)
+    this.setState({ dimensions: contentRect.bounds })
   }
 
   handleItemChecked = (item, checked) => {
@@ -75,13 +83,15 @@ class TrackList extends React.PureComponent {
 
   render() {
     // state
-    const { selectedItems } = this.state
+    const { selectedItems, dimensions } = this.state
     // props
     const { cache, tracks, paused, downloads, favorites, currentTrack } = this.props
     // actions
     const { attempPlay, doNavigate, togglePlay, toggleFavorite } = this.props
+
     // Memoized props
     const data = createItemData(
+      // State
       tracks,
       cache,
       paused,
@@ -96,16 +106,26 @@ class TrackList extends React.PureComponent {
       toggleFavorite,
       this.handleItemChecked
     )
+
+    // Dimensions
+    const { width, height } = dimensions || {}
+
     return (
-      <List
-        height={ROW_HEIGHT * 10}
-        width={1000}
-        itemSize={ROW_HEIGHT}
-        itemData={data}
-        itemCount={tracks.length}
-      >
-        {RowRenderer}
-      </List>
+      <Measure bounds={true} onResize={this.handleResize}>
+        {({ measureRef }) => (
+          <div ref={measureRef} className={'table'}>
+            <List
+              width={width || 0}
+              height={height || 0}
+              itemSize={ROW_HEIGHT}
+              itemData={data}
+              itemCount={tracks.length}
+            >
+              {RowRenderer}
+            </List>
+          </div>
+        )}
+      </Measure>
     )
   }
 }

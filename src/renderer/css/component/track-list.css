@@ -243,10 +243,11 @@ tbody tr {
 /* New dataTable component css styles */
 
 .table {
-  width: 100%;
   margin: 0;
   height: 100%;
+  width: 100%;
   overflow: auto;
+  position: absolute;
 }
 
 .Row {
@@ -255,6 +256,7 @@ tbody tr {
   align-items: center;
   box-sizing: border-box;
   border-top: 1px solid var(--card-bg-color);
+  justify-content: space-between;
 }
 
 .Row:first-of-type {

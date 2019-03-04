@@ -26,7 +26,7 @@ const Row = React.memo(({ data, index, style }) => {
   const duration = item && downloads[item] && downloads[item].duration
   const isFavorite = item && favorites.indexOf(item) !== -1
   const isActive = item === currentTrack.uri
-  const isSelected = item && selectedItems && selectedItems[item] !== undefined
+  const isSelected = item && selectedItems && selectedItems[item] ? true : false
   const isPlaying = !paused && isActive
   const isDownloading = streamData && streamData.isDownloading
   const streamRequired = !streamData
@@ -113,7 +113,7 @@ const Row = React.memo(({ data, index, style }) => {
           <div
             key={key}
             className={classname('Row__cell', isAction && 'Row__cell--action')}
-            style={{ flex: `0 0 ${width}` }}
+            style={{ flex: `0 1 ${width}` }}
           >
             {cellRender}
           </div>
