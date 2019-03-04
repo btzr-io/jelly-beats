@@ -6,7 +6,7 @@ export default connect(
   (state, props) => {
     const { cache, collections } = state
     const { downloads, favorites } = collections
-    const tracks = favorites // Object.keys(downloads)
+    const tracks = Object.keys(downloads)
     const duration = 0 //selectPlaylistDuration(state, tracks)
     const playlist = { uri: 'downloads', name: 'Downloads' }
     return { tracks, cache, playlist, duration }
