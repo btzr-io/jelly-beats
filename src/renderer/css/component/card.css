@@ -33,6 +33,10 @@
   margin: 16px auto;
 }
 
+.cards-list {
+  margin: 0 32px;
+}
+
 .card--thumbnail {
   padding-top: 100%;
   width: 100%;

@@ -154,6 +154,10 @@ tbody tr {
   box-sizing: border-box;
   border-top: 1px solid var(--card-bg-color);
   justify-content: space-between;
+  width: auto !important;
+  left: 0;
+  right: 0;
+  margin: 0 32px;
 }
 
 .Row--header {
@@ -169,12 +173,12 @@ tbody tr {
   cursor: pointer;
 }
 
-.Row:first-child {
+.Row:first-of-type {
   border-top: 0;
 }
 
 .Row--active {
-  border-radius: 8px;
+  border-radius: 4px;
   border-color: transparent;
   background-color: var(--track-list-active-color);
 }

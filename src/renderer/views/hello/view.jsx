@@ -141,7 +141,7 @@ class View extends React.PureComponent {
       <div className="page">
         {!error &&
           (!fetchingData ? (
-            <section>
+            <section className={'cards-list'}>
               <h1>Latest</h1>
               <div className="grid">
                 {latest.map((uri, index) => {
@@ -159,7 +159,7 @@ class View extends React.PureComponent {
           ) : null)}
         {!error &&
           (!fetchingData ? (
-            <section>
+            <section className={'cards-list'}>
               <h1>Featured</h1>
               <div className="grid">
                 {feature.map((uri, index) => (

@@ -70,7 +70,7 @@ const Row = React.memo(({ data, index, style }) => {
       },
       {
         key: 'title',
-        width: '200px',
+        width: '300px',
         cellRender: claimData.title,
       },
       {

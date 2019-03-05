@@ -77,9 +77,11 @@ class View extends React.PureComponent {
               <span>{`${podcastsList.length} shows`}</span>
             </div>
           </header>
-          {podcastsList.map(([uri, value]) => (
-            <TiledCard {...value} key={uri} action={this.navigate} />
-          ))}
+          <div className={'cards-list'}>
+            {podcastsList.map(([uri, value]) => (
+              <TiledCard {...value} key={uri} action={this.navigate} />
+            ))}
+          </div>
         </section>
       ) : (
         <EmptyState title="No podcasts yet?" message="( Coming soon )" />

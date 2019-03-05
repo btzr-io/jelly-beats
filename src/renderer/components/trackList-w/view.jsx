@@ -179,7 +179,7 @@ class TrackList extends React.PureComponent {
       },
       {
         dataKey: 'title',
-        width: '200px',
+        width: '300px',
         cellRender: 'Title',
       },
       {

@@ -108,7 +108,6 @@ a {
 
 .page {
   margin: 0;
-  padding: 0 32px;
   position: relative;
   text-align: center;
   height: 100%;
@@ -158,7 +157,8 @@ section {
 }
 
 section header {
-  padding: 32px 0;
+  padding: 16px 0;
+  margin: 0 32px;
   border-bottom: 1px solid var(--card-bg-color);
 }
 

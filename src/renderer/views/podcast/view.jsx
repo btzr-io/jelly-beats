@@ -12,7 +12,7 @@ import fetchChannel from '@/api/channel'
 
 // Components
 import Button from '@/components/button'
-import TrackList from '@/components/trackList'
+import TrackList from '@/components/trackList-w'
 import Loader from '@/components/common/loader'
 import Thumbnail from '@/components/common/thumbnail'
 import EmptyState from '@/components/common/emptyState'
@@ -128,30 +128,30 @@ class View extends React.PureComponent {
     const { fetchingData, success, podcastData } = this.state
 
     const content = success ? (
-      <section>
-        <header>
-          <div className={'profile-box'}>
-            <Thumbnail className={'profile-avatar'} src={podcastData.thumbnail} />
-            <div className="profile-data">
-              <h1 className={'name'}>{podcastData.title}</h1>
-              <div className={'stats'}>
-                <span className={'label label-outline'}>Podcast</span>
-                <span>•</span>
-                <span>{podcastData.host}</span>
-                <span>•</span>
-                <span>{`${this.state.uris.length} episodes`}</span>
-              </div>
+      <section className={'page--layout'}>
+        <div className={'profile-box'}>
+          <Thumbnail className={'profile-avatar'} src={podcastData.thumbnail} />
+          <div className="profile-data">
+            <h1 className={'name'}>{podcastData.title}</h1>
+            <div className={'stats'}>
+              <span className={'label label-outline'}>Podcast</span>
+              <span>•</span>
+              <span>{podcastData.host}</span>
+              <span>•</span>
+              <span>{`${this.state.uris.length} episodes`}</span>
             </div>
           </div>
-        </header>
-        <TrackList
-          type={'podcast'}
-          list={this.state.uris}
-          playlist={{
-            uri: podcastData.uri,
-            name: podcastData.title,
-          }}
-        />
+        </div>
+        <div className={'page--content'}>
+          <TrackList
+            type={'podcast'}
+            tracks={this.state.uris}
+            playlist={{
+              uri: podcastData.uri,
+              name: podcastData.title,
+            }}
+          />
+        </div>
       </section>
     ) : (
       // List is empty

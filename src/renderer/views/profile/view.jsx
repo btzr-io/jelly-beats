@@ -11,7 +11,7 @@ import { fetchClaimsByChannel } from '@/utils/chainquery'
 // Components
 import Button from '@/components/button'
 import TimeLine from '@/components/timeLine'
-import TrackList from '@/components/trackList'
+import TrackList from '@/components/trackList-w'
 import Loader from '@/components/common/loader'
 import Thumbnail from '@/components/common/thumbnail'
 import EmptyState from '@/components/common/emptyState'
@@ -97,29 +97,20 @@ class View extends React.PureComponent {
     const { fetchingData, success, channelData } = this.state
 
     const content = success ? (
-      <section>
-        <header>
-          <div className={'profile-box'}>
-            <Thumbnail
-              className={'profile-avatar profile-avatar--circle'}
-              src={channelData.thumbnail}
-            />
-            <div className="profile-data">
-              <div className={'nickname'}>{channelData.nickname}</div>
-              <h1 className={'name'}>{channelData.name}</h1>
-            </div>
+      <section className={'page--layout'}>
+        <div className={'profile-box'}>
+          <Thumbnail
+            className={'profile-avatar profile-avatar--circle'}
+            src={channelData.thumbnail}
+          />
+          <div className="profile-data">
+            <div className={'nickname'}>{channelData.nickname}</div>
+            <h1 className={'name'}>{channelData.name}</h1>
           </div>
-          <div className="profile-bar">
-            {/*
-            <div className="tabs">
-              <div className="tab active">Tracks</div>
-            </div>
-            */}
-          </div>
-        </header>
-        <div className="tabs-panel">
+        </div>
+        <div className="page--content">
           <TrackList
-            list={this.state.uris}
+            tracks={this.state.uris}
             playlist={{
               uri: channelData.uri,
               name: channelData.nickname,

@@ -16,11 +16,16 @@
 .profile-box {
   text-align: center;
   position: relative;
-  padding: 16px 0;
-  margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  overflow: hidden;
+  padding: 32px 0;
+  margin: 0 32px;
+  border-bottom: 1px solid var(--card-bg-color);
+  /*
+  background-color: #111114;
+  */
 }
 
 .profile-bar {
@@ -31,10 +36,10 @@
 }
 
 .profile-avatar {
-  height: 144px;
-  width: 144px;
+  height: 124px;
+  width: 124px;
   overflow: hidden;
-  margin-right: 16px;
+  margin-right: 8px;
 }
 
 .profile-avatar--circle {
@@ -46,7 +51,7 @@
   text-align: left;
 }
 .name {
-  margin: 16px 0;
+  margin: 8px 0;
   font-weight: bold;
 }
 

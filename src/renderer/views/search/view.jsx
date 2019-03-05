@@ -126,7 +126,7 @@ class View extends React.PureComponent {
       <div className="page">
         {!error &&
           (!fetchingData ? (
-            <section>
+            <section className={'cards-list'}>
               <h1>Search results</h1>
               <div className="grid">
                 {results.map((uri, index) => {
