@@ -218,7 +218,7 @@ class TrackList extends React.PureComponent {
     return (
       <Measure bounds={true} onResize={this.handleResize}>
         {({ measureRef }) => (
-          <div>
+          <div className={'Table'}>
             <div className={'Row Row--header'} style={{ height: ROW_HEIGHT }}>
               {columns.map(columnProps => (
                 <HeaderColumn
@@ -230,14 +230,18 @@ class TrackList extends React.PureComponent {
                 />
               ))}
             </div>
-            <div ref={measureRef} className={'table-container'}>
+            <div
+              ref={measureRef}
+              className={'Rows-container'}
+              style={{ top: ROW_HEIGHT }}
+            >
               <List
                 width={width || 0}
-                height={height ? height - ROW_HEIGHT : 0}
+                height={height || 0}
                 itemSize={ROW_HEIGHT}
                 itemData={data}
                 itemCount={tracks.length}
-                className={'table'}
+                className={'Rows'}
               >
                 {RowRenderer}
               </List>
