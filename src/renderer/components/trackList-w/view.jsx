@@ -1,9 +1,14 @@
 import React from 'react'
 import memoize from 'memoize-one'
 import Measure from 'react-measure'
+import Icon from '@mdi/react'
 import { FixedSizeList as List } from 'react-window'
 
+import Checkbox from '@/components/common/checkbox'
 import RowRenderer from './internal/row'
+import HeaderColumn from './internal/headerColumn'
+import * as SortDirection from '@/constants/sortDirection'
+import { HASH as iconHash, CLOCK as iconClock } from '@/constants/icons'
 
 const ROW_HEIGHT = 50
 
@@ -42,19 +47,26 @@ const createItemData = memoize((
 
 class TrackList extends React.PureComponent {
   static defaultProps = {
+    // Playlist
     type: 'playlist',
     tracks: [],
     playlist: null,
+    // Measure
     dimensions: { width: 0, height: 0 },
-    selectedItems: {},
   }
 
   constructor(props) {
     super(props)
     const { tracks } = this.props
     this.state = {
+      // Sort
       sortBy: null,
       sortDirection: null,
+      // Edit
+      selectedItems: {},
+      editModeEnabled: false,
+      allItemsSelected: false,
+      // Scroll
       currentIndex: 0,
     }
   }
@@ -81,9 +93,51 @@ class TrackList extends React.PureComponent {
     })
   }
 
+  handleAllItemsChecked = event => {
+    const { tracks } = this.props
+    const { checked } = event.target
+
+    this.setState(prevState => {
+      // Clear all items
+      const selectedItems = {}
+      // Add All items
+      if (checked) {
+        tracks.map(item => {
+          selectedItems[item] = item
+        })
+      }
+      // Update items list
+      return { selectedItems, allItemsSelected: checked }
+    })
+  }
+
+  handleSort = sortBy => {
+    let sortDirection
+    this.setState(prevState => {
+      if (prevState.sortBy !== sortBy) {
+        // Ascending order
+        sortDirection = SortDirection.ASC
+      } else if (prevState.sortDirection == SortDirection.ASC) {
+        // Descending order
+        sortDirection = SortDirection.DESC
+      } else if (prevState.sortDirection == SortDirection.DESC) {
+        // Natural sort order
+        return { sortBy: null, sortDirection: null }
+      }
+      // Update state
+      return { sortBy, sortDirection }
+    })
+  }
+
   render() {
     // state
-    const { selectedItems, dimensions } = this.state
+    const {
+      dimensions,
+      selectedItems,
+      allItemsSelected,
+      sortBy,
+      sortDirection,
+    } = this.state
     // props
     const { cache, tracks, paused, downloads, favorites, currentTrack } = this.props
     // actions
@@ -107,22 +161,87 @@ class TrackList extends React.PureComponent {
       this.handleItemChecked
     )
 
+    // Header columns
+    const columns = [
+      {
+        dataKey: 'index',
+        width: '32px',
+        isAction: true,
+        disabledSort: true,
+        cellRender: <Icon className="icon link__icon" path={iconHash} />,
+      },
+      {
+        dataKey: 'favorite',
+        width: '32px',
+        isAction: true,
+        cellRender: null,
+        disabledSort: true,
+      },
+      {
+        dataKey: 'title',
+        width: '200px',
+        cellRender: 'Title',
+      },
+      {
+        dataKey: 'artist',
+        width: '124px',
+        cellRender: 'Artist',
+      },
+      {
+        dataKey: 'price',
+        width: '80px',
+        cellRender: 'Price',
+      },
+      {
+        dataKey: 'duration',
+        width: '64px',
+        cellRender: <Icon className="icon link__icon" path={iconClock} />,
+      },
+      {
+        dataKey: 'selected',
+        width: '32px',
+        isAction: true,
+        disabledSort: true,
+        cellRender: (
+          <Checkbox
+            name={'checkbox'}
+            checked={allItemsSelected}
+            onChange={this.handleAllItemsChecked}
+          />
+        ),
+      },
+    ]
+
     // Dimensions
     const { width, height } = dimensions || {}
 
     return (
       <Measure bounds={true} onResize={this.handleResize}>
         {({ measureRef }) => (
-          <div ref={measureRef} className={'table'}>
-            <List
-              width={width || 0}
-              height={height || 0}
-              itemSize={ROW_HEIGHT}
-              itemData={data}
-              itemCount={tracks.length}
-            >
-              {RowRenderer}
-            </List>
+          <div>
+            <div className={'Row Row--header'} style={{ height: ROW_HEIGHT }}>
+              {columns.map(columnProps => (
+                <HeaderColumn
+                  key={columnProps.dataKey}
+                  sortBy={sortBy}
+                  sortDirection={sortDirection}
+                  onSort={this.handleSort}
+                  {...columnProps}
+                />
+              ))}
+            </div>
+            <div ref={measureRef} className={'table-container'}>
+              <List
+                width={width || 0}
+                height={height ? height - ROW_HEIGHT : 0}
+                itemSize={ROW_HEIGHT}
+                itemData={data}
+                itemCount={tracks.length}
+                className={'table'}
+              >
+                {RowRenderer}
+              </List>
+            </div>
           </div>
         )}
       </Measure>

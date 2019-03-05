@@ -5,27 +5,15 @@ import EmptyState from '@/components/common/emptyState'
 import TrackList from '@/components/trackList-w'
 import Lbry from '@/utils/lbry'
 
-import fetchChannel from '@/api/channel'
-
-import Button from '@/components/button'
-import Health from '@/components/common/health'
-import PriceLabel from '@/components/common/priceLabel'
-
-import {
-  PLAY as iconPlay,
-  CLOCK as iconClock,
-  DOWNLOAD as iconDownload,
-  HEART as iconHeart,
-  HEART_OUTLINE as iconHeartEmpty,
-} from '@/constants/icons'
+import { PLAY as iconPlay, DOWNLOAD as iconDownload } from '@/constants/icons'
 
 class View extends React.PureComponent {
   constructor(props) {
     super(props)
-    const { tracks, cache } = props
-    const urls = tracks.filter(uri => !cache[uri])
+    const { loadingTracks } = props
+
     this.state = {
-      fetchingData: urls.length > 0,
+      fetchingData: loadingTracks.length > 0,
     }
   }
 
@@ -36,15 +24,14 @@ class View extends React.PureComponent {
 
   componentDidMount() {
     const { fetchingData } = this.state
-    const { tracks, cache, storeTrack } = this.props
-    const urls = tracks.filter(uri => !cache[uri])
+    const { tracks, loadingTracks, storeTrack } = this.props
     // List is empty
-    if (tracks.length === 0 || urls.length === 0) {
+    if (tracks.length === 0 || loadingTracks.length === 0) {
       // Stop loading data
       this.setState({ fetchingData: false })
     } else {
       // Resolve uris
-      Lbry.resolve({ urls })
+      Lbry.resolve({ urls: loadingTracks })
         .then(res => {
           const list = Object.entries(res)
             .filter(([uri, value]) => !value.error && value.certificate)
@@ -67,7 +54,7 @@ class View extends React.PureComponent {
 
   render() {
     const { fetchingData } = this.state
-    const { tracks, playlist } = this.props
+    const { tracks, playlist, duration } = this.props
 
     const content =
       tracks.length > 0 ? (
@@ -83,7 +70,7 @@ class View extends React.PureComponent {
                 <span>•</span>
                 <span>{`${tracks.length} tracks`}</span>
                 <span>•</span>
-                {/* <span>{duration}</span> */}
+                <span>{duration}</span>
               </div>
             </header>
             <div className={'page--content'}>

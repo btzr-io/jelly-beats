@@ -7,9 +7,10 @@ export default connect(
     const { cache, collections } = state
     const { downloads, favorites } = collections
     const tracks = Object.keys(downloads)
-    const duration = 0 //selectPlaylistDuration(state, tracks)
+    const duration = selectPlaylistDuration(state, tracks)
+    const loadingTracks = tracks.filter(uri => !cache[uri])
     const playlist = { uri: 'downloads', name: 'Downloads' }
-    return { tracks, cache, playlist, duration }
+    return { tracks, playlist, loadingTracks, duration }
   },
   {
     storeTrack: 'storeTrack',

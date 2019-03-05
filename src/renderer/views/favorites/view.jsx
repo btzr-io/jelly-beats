@@ -6,7 +6,7 @@ import Lbry from '@/utils/lbry'
 
 // Components
 import Loader from '@/components/common/loader'
-import TrackList from '@/components/trackList'
+import TrackList from '@/components/trackList-w'
 import EmptyState from '@/components/common/emptyState'
 
 import fetchChannel from '@/api/channel'
@@ -17,8 +17,9 @@ import * as icons from '@/constants/icons'
 class View extends React.PureComponent {
   constructor(props) {
     super(props)
+    const { loadingTracks } = this.props
     this.state = {
-      fetchingData: true,
+      fetchingData: loadingTracks.length > 0,
     }
   }
 
@@ -28,14 +29,14 @@ class View extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { cache, tracks, storeTrack, setPlaylist } = this.props
+    const { tracks, loadingTracks, storeTrack, setPlaylist } = this.props
     // List is empty
-    if (tracks.length === 0) {
+    if (tracks.length === 0 || loadingTracks.length === 0) {
       // Stop loading data
       this.setState({ fetchingData: false })
     } else {
       // Resolve uris
-      Lbry.resolve({ urls: tracks })
+      Lbry.resolve({ urls: loadingTracks })
         .then(res => {
           const list = Object.entries(res)
             .filter(([uri, value]) => !value.error && value.certificate)
@@ -58,15 +59,13 @@ class View extends React.PureComponent {
 
   render() {
     const { fetchingData } = this.state
-    const { tracks, duration, playlist } = this.props
-    const { name, uri } = playlist
-
+    const { tracks, playlist, duration } = this.props
     const content =
       tracks.length > 0 ? (
         // Render list
-        <section>
+        <section className={'page--layout'}>
           <header>
-            <h1>{name}</h1>
+            <h1>{playlist.name}</h1>
             <div className={'stats'}>
               <span className={'label label-outline'}>AUTO-GENERATED</span>
               <span>•</span>
@@ -75,7 +74,9 @@ class View extends React.PureComponent {
               <span>{duration}</span>
             </div>
           </header>
-          <TrackList list={tracks} playlist={{ uri, name }} />
+          <div className={'page--content'}>
+            <TrackList tracks={tracks} playlist={playlist} />
+          </div>
         </section>
       ) : (
         // List is empty

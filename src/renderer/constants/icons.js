@@ -5,6 +5,7 @@ import {
   mdiSkipNext,
   mdiSkipPrevious,
   mdiShuffle,
+  mdiChevronUp,
   mdiChevronDown,
   mdiChevronLeft,
   mdiChevronRight,
@@ -25,6 +26,7 @@ import {
   mdiCircleOutline,
   mdiCircleSlice6,
   mdiPodcast,
+  mdiMenuUp,
   mdiMenuDown,
   mdiMenuRight,
   mdiClockOutline,
@@ -83,3 +85,6 @@ export const HASH = mdiPound
 export const CHECKBOX_MARK = mdiCheckBold || mdiCheck
 export const CHECKBOX_MARKED = mdiCheckboxMarked
 export const CHECKBOX_OUTLINE = mdiCheckboxBlankOutline
+
+export const ARROW_UP = mdiMenuUp
+export const ARROW_DOWN = mdiMenuDown
