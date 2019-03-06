@@ -53,8 +53,10 @@ class Card extends React.PureComponent {
       if (track.uri != prevTrack.uri) this.setState({ isReady: true })
 
       // Thumbnail update
-      if (track.thumbnail != prevTrack.thumbnail) {
-        track.thumbnail.length > 0 && this.getPalette(track.thumbnail)
+      if (track.thumbnail) {
+        track.thumbnail.length &&
+          track.thumbnail.length > 0 &&
+          this.getPalette(track.thumbnail)
       }
     }
   }

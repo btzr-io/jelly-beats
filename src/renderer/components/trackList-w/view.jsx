@@ -63,8 +63,8 @@ class TrackList extends React.PureComponent {
       sortBy: null,
       sortDirection: null,
       // Edit
-      selectedItems: {},
-      editModeEnabled: false,
+      selectedItems: null,
+      editModeActive: false,
       allItemsSelected: false,
       // Scroll
       currentIndex: 0,
@@ -79,7 +79,7 @@ class TrackList extends React.PureComponent {
   handleItemChecked = (item, checked) => {
     this.setState(prevState => {
       // Previous state
-      const selectedItems = { ...prevState.selectedItems }
+      let selectedItems = { ...prevState.selectedItems }
       // Add item
       if (checked) {
         selectedItems[item] = item
@@ -87,6 +87,10 @@ class TrackList extends React.PureComponent {
       // Remove item
       if (!checked && selectedItems[item]) {
         delete selectedItems[item]
+        // Empty list
+        if (Object.keys(selectedItems).length === 0) {
+          selectedItems = null
+        }
       }
       // Update items list
       return { selectedItems }
@@ -99,9 +103,10 @@ class TrackList extends React.PureComponent {
 
     this.setState(prevState => {
       // Clear all items
-      const selectedItems = {}
+      let selectedItems = null
       // Add All items
       if (checked) {
+        selectedItems = {}
         tracks.map(item => {
           selectedItems[item] = item
         })
@@ -129,6 +134,42 @@ class TrackList extends React.PureComponent {
     })
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { tracks } = this.props
+    const { selectedItems, editModeActive } = this.state
+    // Enable edit mode
+    if (!editModeActive && selectedItems) {
+      this.setState({ editModeActive: true })
+    }
+    // Disable edit mode
+    if (editModeActive && !selectedItems) {
+      this.setState({ editModeActive: false })
+    }
+    // Update selected items list
+    if (editModeActive && selectedItems && prevProps.tracks.length !== tracks.length) {
+      let removedItems = 0
+      let nextSelectedItems = { ...selectedItems }
+      const selectedItemsList = Object.keys(selectedItems)
+      // Chedck for removed items
+      selectedItemsList.map((item, index) => {
+        // Item was removed from list
+        if (tracks.indexOf(item) === -1) {
+          delete nextSelectedItems[item]
+          removedItems++
+        }
+      })
+      // List is empty
+      if (removedItems === selectedItemsList.length) {
+        nextSelectedItems = null
+      }
+      // List needs to be update
+      if (removedItems > 0) {
+        // Update selected items
+        this.setState({ selectedItems: nextSelectedItems })
+      }
+    }
+  }
+
   render() {
     // state
     const {
@@ -137,6 +178,7 @@ class TrackList extends React.PureComponent {
       allItemsSelected,
       sortBy,
       sortDirection,
+      editModeActive,
     } = this.state
     // props
     const { cache, tracks, paused, downloads, favorites, currentTrack } = this.props
@@ -197,20 +239,35 @@ class TrackList extends React.PureComponent {
         width: '64px',
         cellRender: <Icon className="icon link__icon" path={iconClock} />,
       },
-      {
-        dataKey: 'selected',
-        width: '32px',
-        isAction: true,
-        disabledSort: true,
-        cellRender: (
-          <Checkbox
-            name={'checkbox'}
-            checked={allItemsSelected}
-            onChange={this.handleAllItemsChecked}
-          />
-        ),
-      },
     ]
+
+    const editColumnProps = {
+      dataKey: 'selected',
+      width: '32px',
+      isAction: true,
+      disabledSort: true,
+      cellRender: (
+        <Checkbox
+          name={'checkbox'}
+          checked={allItemsSelected}
+          onChange={this.handleAllItemsChecked}
+        />
+      ),
+    }
+
+    const formatedItemsCount = count => {
+      if (tracks.length === count) return 'All tracks selected'
+      if (count === 1) return '1 track selected'
+      return `${count} tracks selected`
+    }
+
+    const editOptions = (
+      <div className={'Row--header__edit-bar'}>
+        <span>
+          {selectedItems && formatedItemsCount(Object.keys(selectedItems).length)}
+        </span>
+      </div>
+    )
 
     // Dimensions
     const { width, height } = dimensions || {}
@@ -220,15 +277,23 @@ class TrackList extends React.PureComponent {
         {({ measureRef }) => (
           <div className={'Table'}>
             <div className={'Row Row--header'} style={{ height: ROW_HEIGHT }}>
-              {columns.map(columnProps => (
-                <HeaderColumn
-                  key={columnProps.dataKey}
-                  sortBy={sortBy}
-                  sortDirection={sortDirection}
-                  onSort={this.handleSort}
-                  {...columnProps}
-                />
-              ))}
+              {!editModeActive &&
+                columns.map(columnProps => (
+                  <HeaderColumn
+                    key={columnProps.dataKey}
+                    sortBy={sortBy}
+                    sortDirection={sortDirection}
+                    onSort={this.handleSort}
+                    {...columnProps}
+                  />
+                ))}
+              {editModeActive && editOptions}
+              <HeaderColumn
+                sortBy={sortBy}
+                sortDirection={sortDirection}
+                onSort={this.handleSort}
+                {...editColumnProps}
+              />
             </div>
             <div
               ref={measureRef}

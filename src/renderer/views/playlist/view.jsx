@@ -3,7 +3,7 @@ import * as icons from '@/constants/icons'
 import Icon from '@mdi/react'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
-import TrackList from '@/components/trackList'
+import TrackList from '@/components/trackList-w'
 import Lbry from '@/utils/lbry'
 
 class View extends React.PureComponent {
@@ -56,15 +56,14 @@ class View extends React.PureComponent {
 
   render() {
     const { tracks, duration, playlist } = this.props
-    const { name, uri } = playlist || {}
     const { fetchingData } = this.state
 
     const content =
       tracks && tracks.length > 0 ? (
         // Render list
-        <section>
+        <section className={'page--layout'}>
           <header>
-            <h1>{name}</h1>
+            <h1>{playlist.name}</h1>
             <div className={'stats'}>
               <span className={'label label-outline'}>AUTO-GENERATED</span>
               <span>•</span>
@@ -73,7 +72,9 @@ class View extends React.PureComponent {
               <span>{duration}</span>
             </div>
           </header>
-          <TrackList list={tracks} playlist={{ uri, name }} />
+          <div className={'page--content'}>
+            <TrackList tracks={tracks} playlist={playlist} />
+          </div>
         </section>
       ) : (
         // List is empty
