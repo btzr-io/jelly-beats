@@ -2,7 +2,7 @@ import React from 'react'
 import Icon from '@mdi/react'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
-import TrackList from '@/components/trackList-w'
+import TrackList from '@/components/trackList'
 import Lbry from '@/utils/lbry'
 
 import { PLAY as iconPlay, DOWNLOAD as iconDownload } from '@/constants/icons'

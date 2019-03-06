@@ -11,7 +11,7 @@ import { fetchClaimsByChannel } from '@/utils/chainquery'
 // Components
 import Button from '@/components/button'
 import TimeLine from '@/components/timeLine'
-import TrackList from '@/components/trackList-w'
+import TrackList from '@/components/trackList'
 import Loader from '@/components/common/loader'
 import Thumbnail from '@/components/common/thumbnail'
 import EmptyState from '@/components/common/emptyState'

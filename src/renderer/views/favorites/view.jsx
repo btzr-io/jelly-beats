@@ -6,7 +6,7 @@ import Lbry from '@/utils/lbry'
 
 // Components
 import Loader from '@/components/common/loader'
-import TrackList from '@/components/trackList-w'
+import TrackList from '@/components/trackList'
 import EmptyState from '@/components/common/emptyState'
 
 import fetchChannel from '@/api/channel'

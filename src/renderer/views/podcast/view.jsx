@@ -12,7 +12,7 @@ import fetchChannel from '@/api/channel'
 
 // Components
 import Button from '@/components/button'
-import TrackList from '@/components/trackList-w'
+import TrackList from '@/components/trackList'
 import Loader from '@/components/common/loader'
 import Thumbnail from '@/components/common/thumbnail'
 import EmptyState from '@/components/common/emptyState'
