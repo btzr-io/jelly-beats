@@ -38,6 +38,13 @@
 .Row--header__edit-bar {
   flex-grow: 1;
   margin: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Row--header__edit-bar > span {
+  display: inline-block;
 }
 
 .Row--header .Row__cell {

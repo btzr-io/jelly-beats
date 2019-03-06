@@ -57,6 +57,12 @@ class View extends React.PureComponent {
     }
   }
 
+  handleRemoveItems = items => {
+    const { removeBatchfromFavorites } = this.props
+    removeBatchfromFavorites(items)
+    console.info('Request recived!')
+  }
+
   render() {
     const { fetchingData } = this.state
     const { tracks, playlist, duration } = this.props
@@ -75,7 +81,11 @@ class View extends React.PureComponent {
             </div>
           </header>
           <div className={'page--content'}>
-            <TrackList tracks={tracks} playlist={playlist} />
+            <TrackList
+              tracks={tracks}
+              playlist={playlist}
+              onRemoveItems={this.handleRemoveItems}
+            />
           </div>
         </section>
       ) : (

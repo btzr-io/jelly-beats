@@ -4,11 +4,16 @@ import Measure from 'react-measure'
 import Icon from '@mdi/react'
 import { FixedSizeList as List } from 'react-window'
 
+import Button from '@/components/button'
 import Checkbox from '@/components/common/checkbox'
 import RowRenderer from './internal/row'
 import HeaderColumn from './internal/headerColumn'
 import * as SortDirection from '@/constants/sortDirection'
-import { HASH as iconHash, CLOCK as iconClock } from '@/constants/icons'
+import {
+  HASH as iconHash,
+  CLOCK as iconClock,
+  DELETE as iconDelete,
+} from '@/constants/icons'
 
 const ROW_HEIGHT = 50
 
@@ -53,6 +58,7 @@ class TrackList extends React.PureComponent {
     playlist: null,
     // Measure
     dimensions: { width: 0, height: 0 },
+    onRemoveItems: items => {},
   }
 
   constructor(props) {
@@ -132,6 +138,12 @@ class TrackList extends React.PureComponent {
       // Update state
       return { sortBy, sortDirection }
     })
+  }
+
+  handleRemoveRequest = () => {
+    const { selectedItems } = this.state
+    const { onRemoveItems } = this.props
+    onRemoveItems(selectedItems)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -265,6 +277,13 @@ class TrackList extends React.PureComponent {
       <div className={'Row--header__edit-bar'}>
         <span>
           {selectedItems && formatedItemsCount(Object.keys(selectedItems).length)}
+        </span>
+        <span>
+          <Button
+            type={'secondary'}
+            label={'Remove'}
+            onClick={this.handleRemoveRequest}
+          />
         </span>
       </div>
     )

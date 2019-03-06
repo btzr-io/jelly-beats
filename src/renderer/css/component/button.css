@@ -32,6 +32,12 @@
   padding: 8px 16px;
 }
 
+.button--secondary {
+  font-size: 0.92em;
+  border-radius: 32px;
+  padding: 4px 16px;
+}
+
 .button--empty-state {
   margin: 32px;
   padding: 8px 18px;
@@ -62,10 +68,12 @@
 
 .button--toggle {
   opacity: 1;
+  /*
   animation-name: pulsate;
   animation-duration: 0.4s;
   animation-fill-mode: forwards;
   animation-timing-function: ease;
+  */
 }
 
 .button--header-nav {
@@ -81,8 +89,7 @@
   background: var(--button-bg-color);
 }
 
-/* Card action button #525257 */
-
+/* Table */
 .button--table-action {
   padding: 4px;
   border-radius: 16px;
@@ -106,6 +113,7 @@
   transition: none;
 }
 
+/* Card action button #525257 */
 .button--toggle.button--action--overlay {
   opacity: 1;
   background: var(--main-color);

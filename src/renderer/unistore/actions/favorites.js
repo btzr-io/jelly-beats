@@ -16,6 +16,16 @@ export default function(store) {
       return { collections: { ...state.collections, favorites } }
     },
 
+    removeBatchfromFavorites(state, uris) {
+      const favorites = Object.assign([], state.collections.favorites)
+      // Remove from list
+      Object.keys(uris).map(uri => {
+        const index = favorites.indexOf(uri)
+        index > -1 && favorites.splice(index, 1)
+      })
+      return { collections: { ...state.collections, favorites } }
+    },
+
     toggleFavorite(state, uri) {
       const favorites = state.collections.favorites || []
       // Favorite selector

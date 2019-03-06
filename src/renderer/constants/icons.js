@@ -39,6 +39,7 @@ import {
   mdiCheckboxBlankOutline,
   mdiCheckBold,
   mdiCheck,
+  mdiDelete,
 } from '@mdi/js'
 
 export const EDIT = mdiPencil
@@ -88,3 +89,5 @@ export const CHECKBOX_OUTLINE = mdiCheckboxBlankOutline
 
 export const ARROW_UP = mdiMenuUp
 export const ARROW_DOWN = mdiMenuDown
+
+export const DELETE = mdiDelete

@@ -15,5 +15,6 @@ export default connect(
   {
     storeTrack: 'storeTrack',
     storeChannel: 'storeChannel',
+    removeBatchfromFavorites: 'removeBatchfromFavorites',
   }
 )(View)
