@@ -2,7 +2,7 @@ import getArtistTitle from 'get-artist-title'
 
 export default {
   storeTrack(state, uri, { claimData, channelData }) {
-    const { txid, nout, value } = claimData
+    const { txid, nout, value, name } = claimData
 
     // Generate claim outpoint
     const outpoint = `${txid}:${nout}`
@@ -17,7 +17,7 @@ export default {
 
     // Extract metadata
     const metadata = value.stream.metadata
-    const { fee, name, title, author, thumbnail, description } = metadata
+    const { fee, title, author, thumbnail, description } = metadata
 
     // Channel
     const artist = {
@@ -38,23 +38,24 @@ export default {
     const defaultTitle = title || name
 
     // Format title
+    /*
     const [formatedArtist, formatedTitle] = getArtistTitle(defaultTitle, {
       defaultTitle,
       defaultArtist: artist.channelName,
-    })
+    })*/
 
     // New track data
     const track = {
       fee,
       uri,
-      // Fallback for track title
+      name,
       artist,
       outpoint,
       thumbnail,
       description,
-      formatedTitle,
-      formatedArtist,
-      title: formatedTitle || defaultTitle,
+      // formatedTitle,
+      // formatedArtist,
+      title: defaultTitle,
     }
 
     // Update cache

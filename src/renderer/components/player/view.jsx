@@ -57,25 +57,9 @@ class Player extends React.PureComponent {
     }
   }
 
-  createStream() {
-    /*
-    TODO: FIX IT!
-
-    import MediaElementWrapper from 'mediasource'
-
-    const { fileSource } = this.state
-    const readable = fs.createReadStream(fileSource.path)
-    const wrapper = new MediaElementWrapper(this.audioElement.current)
-    // The correct mime type, including codecs, must be provided
-    const writable = wrapper.createWriteStream(getCodec(fileSource.name))
-    // Pipe stream
-    readable.pipe(writable)
-    */
-  }
-
-  loadSource = fileSource => {
+  loadSource = source => {
     const audio = this.audioElement.current
-    audio.src = 'file:' + fileSource.path
+    audio.src = source
     audio.load()
   }
 
@@ -129,7 +113,7 @@ class Player extends React.PureComponent {
       ready: false,
       currentTime: audio.currentTime,
     })
-    updatePlayerStatus({ isLoading: true })
+    updatePlayerStatus({ loading: true })
   }
 
   toggleRepeat = () => {
@@ -147,25 +131,33 @@ class Player extends React.PureComponent {
   }
 
   handleMetadata = () => {
+    // DEBUG:
+    console.info('Metadata: loaded!')
+
     // Get audio duration
     const audio = this.audioElement.current
     const duration = audio.duration
-
-    const { player, updateStreamInfo } = this.props
+    const { player, streamSource, updateFileSourceInfo, updateStreamInfo } = this.props
     const { uri } = player ? player.currentTrack : {}
 
-    // Store duration
+    // Store duration (NEEDS REFACTORING)
     this.setState({ duration })
-    updateStreamInfo(uri, { duration })
+    updateFileSourceInfo(uri, { duration })
+
+    // Stream is ready
+    if (streamSource && streamSource.url === audio.src) {
+      updateStreamInfo(uri, { ready: true })
+    }
   }
 
   handleLoadStart = () => {
-    const { updatePlayerStatus } = this.props
+    const { player, streamSource, updateStreamInfo, updatePlayerStatus } = this.props
+    const { uri } = player ? player.currentTrack : {}
     const audio = this.audioElement.current
     // ready to play
     console.info('New track loaded!')
     this.setState({ ready: true })
-    updatePlayerStatus({ isLoading: false, showPlayer: true })
+    updatePlayerStatus({ loading: false, showPlayer: true })
     this.play()
   }
 
@@ -191,6 +183,11 @@ class Player extends React.PureComponent {
     }
   }
 
+  handleError = event => {
+    const { error } = event.target
+    console.info(error)
+  }
+
   toggleEventListeners(type) {
     const audio = this.audioElement.current
     const action = type === 'add' ? 'addEventListener' : 'removeEventListener'
@@ -199,6 +196,7 @@ class Player extends React.PureComponent {
     audio[action]('loadstart', this.handleLoadStart)
     audio[action]('loadedmetadata', this.handleMetadata)
     audio[action]('timeupdate', this.updateTime)
+    audio[action]('error', this.handleError)
   }
 
   componentWillUnmount() {
@@ -206,21 +204,22 @@ class Player extends React.PureComponent {
   }
 
   componentDidMount() {
-    //audio.addEventListener('error', err => {})
     this.toggleEventListeners('add')
   }
 
   componentDidUpdate(prevProps, prevState) {
     // OPTIMIZE AND IMPROVE THIS MESS!
-    const { streamStatus, player, togglePlay } = this.props
+    const { fileSource, player, togglePlay, streamSource } = this.props
     const { uri } = player.currentTrack || {}
     const prevTrack = prevProps.player.currentTrack || {}
-    const fileSource = streamStatus
+    const prevStreamSource = prevProps.streamSource || {}
+    const sourceLoaded =
+      (fileSource.path && fileSource.completed) || (streamSource && streamSource.ready)
 
     // If source exist
     if (fileSource && fileSource.path) {
       // Get previous path
-      const prevSource = prevProps.streamStatus
+      const prevSource = prevProps.fileSource
       // If file path change or Download completed
       if (
         fileSource.path !== prevSource.path ||
@@ -229,12 +228,18 @@ class Player extends React.PureComponent {
         // Start steam or load file
         if (fileSource.completed) {
           // Track is ready
-          this.loadSource(fileSource)
+          this.loadSource('file://' + fileSource.path)
         } else {
           this.reset()
         }
       }
+    } else if (streamSource) {
+      if (streamSource.url !== prevStreamSource.url) {
+        this.loadSource(streamSource.url)
+      }
+    }
 
+    if (sourceLoaded) {
       if (uri && player) {
         const audio = this.audioElement.current
         const isActive = player.currentTrack.uri === uri
@@ -246,15 +251,9 @@ class Player extends React.PureComponent {
           player.syncPaused !== player.paused &&
           player.syncPaused !== prevProps.player.syncPaused
         ) {
-          // Try to sync back
-          /* console.log({
-            isActive,
-            isPlaying,
-            testNextSync: player.syncPaused,
-          }) */
-
           // Try to play
           if (!player.syncPaused && !isPlaying) this.play()
+          // Try to pause
           else if (player.syncPaused && isPlaying) this.pause()
         }
       }
@@ -273,6 +272,7 @@ class Player extends React.PureComponent {
       navigation,
       playNext,
       playPrev,
+      isLoading,
       isFavorite,
       toggleFavorite,
       togglePlay,
@@ -280,9 +280,10 @@ class Player extends React.PureComponent {
       doNavigateBackward,
       canPlayPrev,
       canPlayNext,
+      fileSource,
+      streamSource,
       currentPlaylist,
       isPlayingCollection,
-      streamStatus,
     } = this.props
 
     const { paused, syncPaused, currentTrack, showPlayer } = player
@@ -290,7 +291,7 @@ class Player extends React.PureComponent {
     const { currentPage, currentQuery } = navigation
 
     //Get stream status
-    const { duration, completed, isDownloading } = streamStatus
+    const { duration, completed } = fileSource
 
     const collectionPath = isPlayingCollection && `/${currentPlaylist.uri}`
     const playlistPath = collectionPath || '/playlist'
@@ -299,13 +300,9 @@ class Player extends React.PureComponent {
     const togglePlaylist = () =>
       !playlistActive ? doNavigate(playlistPath, currentPlaylist) : doNavigateBackward()
 
-    const isPlaying = !paused && ready && completed
+    const isPlaying = !paused && ready && !isLoading
 
-    const buttonIcon = isDownloading
-      ? icons.SPINNER
-      : !isPlaying
-      ? icons.PLAY
-      : icons.PAUSE
+    const buttonIcon = isLoading ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE
 
     const playerOptions = {
       autoPlay: true,
@@ -327,7 +324,7 @@ class Player extends React.PureComponent {
         toggle: isPlaying,
         action: () => togglePlay(),
         disabled: !ready,
-        animation: isDownloading && 'spin',
+        animation: isLoading && 'spin',
       },
       {
         type: 'control',

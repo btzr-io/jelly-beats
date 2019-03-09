@@ -23,6 +23,7 @@ const createItemData = memoize((
   items,
   cache,
   paused,
+  streams,
   downloads,
   favorites,
   currentTrack,
@@ -37,6 +38,7 @@ const createItemData = memoize((
   // State
   items,
   cache,
+  streams,
   paused,
   downloads,
   favorites,
@@ -193,7 +195,15 @@ class TrackList extends React.PureComponent {
       editModeActive,
     } = this.state
     // props
-    const { cache, tracks, paused, downloads, favorites, currentTrack } = this.props
+    const {
+      cache,
+      streams,
+      tracks,
+      paused,
+      downloads,
+      favorites,
+      currentTrack,
+    } = this.props
     // actions
     const { attempPlay, doNavigate, togglePlay, toggleFavorite } = this.props
 
@@ -203,6 +213,7 @@ class TrackList extends React.PureComponent {
       tracks,
       cache,
       paused,
+      streams,
       downloads,
       favorites,
       currentTrack,

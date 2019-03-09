@@ -14,15 +14,16 @@ const RowIndexRenderer = ({
   showIndex,
   isActive,
   isPlaying,
+  isLoading,
   isDownloading,
-  streamRequired,
 }) => {
   // Select icons
-  let buttonIcon = isDownloading ? iconSpinner : !isPlaying ? iconPlay : iconPause
-
-  if (streamRequired) {
+  let buttonIcon = isLoading ? iconSpinner : !isPlaying ? iconPlay : iconPause
+  /*
+  if (downloadRequired) {
     buttonIcon = iconDownload
   }
+  */
 
   return (
     <React.Fragment>
@@ -30,8 +31,8 @@ const RowIndexRenderer = ({
         icon={buttonIcon}
         type="action--overlay"
         size="large"
-        toggle={isPlaying && !isDownloading}
-        animation={isDownloading && 'spin'}
+        toggle={isPlaying && !isLoading}
+        animation={isLoading && 'spin'}
         onClick={onClick}
       />
       {showIndex && <span className="table__row__cell--text">{index}</span>}

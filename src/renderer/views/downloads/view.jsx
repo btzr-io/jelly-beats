@@ -53,9 +53,9 @@ class View extends React.PureComponent {
   }
 
   handleRemoveItems = items => {
-    const { removeStream } = this.props
+    const { removeDownload } = this.props
     Object.keys(items).forEach(item => {
-      removeStream(item)
+      removeDownload(item)
     })
   }
 

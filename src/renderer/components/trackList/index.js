@@ -5,10 +5,10 @@ import { connect } from 'unistore/react'
 
 export default connect(
   (state, props) => {
-    const { cache, player, collections } = state
+    const { cache, streams, player, collections } = state
     const { downloads, favorites } = collections
     const { currentTrack, paused } = player
-    return { cache, downloads, favorites, currentTrack, paused }
+    return { cache, streams, downloads, favorites, currentTrack, paused }
   },
   {
     storeTrack: 'storeTrack',

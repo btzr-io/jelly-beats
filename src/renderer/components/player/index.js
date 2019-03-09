@@ -6,7 +6,7 @@ import { selectPlaylistQueue } from '@/unistore/selectors/player'
 
 export default connect(
   (state, props) => {
-    const { player, cache, collections, settings, navigation } = state
+    const { player, cache, streams, collections, settings, navigation } = state
     const { favorites } = collections
     const { currentTrack, currentPlaylist } = player
     const { uri, name, index } = currentPlaylist
@@ -16,20 +16,24 @@ export default connect(
     const canPlayNext = totalTracks > 1 && index < tracks.length - 1
     const isFavorite = favorites.indexOf(currentTrack.uri) > -1
     const isPlayingCollection = uri && collections[uri] ? true : false
-    const streamStatus = selectStreamByUri(state, currentTrack.uri) || {}
+    const fileSource = selectStreamByUri(state, currentTrack.uri) || {}
+    const streamSource = streams[currentTrack.uri]
+    const isLoading = fileSource.isDownloading || (streamSource && !streamSource.ready)
 
     return {
       player,
       cache,
       settings,
       favorites,
+      isLoading,
       isFavorite,
       navigation,
       canPlayNext,
       canPlayPrev,
+      fileSource,
+      streamSource,
       currentPlaylist,
       isPlayingCollection,
-      streamStatus,
     }
   },
   {
@@ -41,5 +45,6 @@ export default connect(
     toggleFavorite: 'toggleFavorite',
     updateStreamInfo: 'updateStreamInfo',
     updatePlayerStatus: 'updatePlayerStatus',
+    updateFileSourceInfo: 'updateFileSourceInfo',
   }
 )(Player)

@@ -51,14 +51,6 @@ class Card extends React.PureComponent {
     if (track) {
       // Track uri updated
       if (track.uri != prevTrack.uri) this.setState({ isReady: true })
-
-      // Thumbnail update
-      /*
-      if (track.thumbnail) {
-        track.thumbnail.length &&
-          track.thumbnail.length > 0 &&
-          this.getPalette(track.thumbnail)
-      }*/
     }
   }
 
@@ -69,22 +61,17 @@ class Card extends React.PureComponent {
       index,
       cache,
       player,
-      streamData,
       favorites,
+      fileSource,
       doNavigate,
+      streamSource,
       playlist,
       setPlaylist,
       attempPlay,
       togglePlay,
       toggleFavorite,
+      isLoading,
     } = this.props
-
-    const action = () => {
-      // Toggle play or purchase
-      !isDownloading && !isPlaying ? attempPlay(uri, null, true) : togglePlay()
-      // Update playlist state
-      playlist && setPlaylist({ ...playlist, index })
-    }
 
     // Temp fix for:
     // Store properties undefined on "first render" #287
@@ -100,19 +87,31 @@ class Card extends React.PureComponent {
     const { title, artist, thumbnail, palette, fee } = (cache && cache[uri]) || {}
 
     //Get stream status
-    const { completed, isAvailable, isDownloading } = streamData
+    const { completed, isAvailable, isDownloading } = fileSource
 
     //Get player status
-    const { paused, isLoading, currentTrack } = player || {}
-    const isActive = completed && (currentTrack ? currentTrack.uri === uri : false)
+    const { paused, currentTrack } = player || {}
+    const isActive = (completed || streamSource) && currentTrack.uri === uri
     const isPlaying = !paused && isActive
 
     // Favorite selector
     const isFavorite = favorites.indexOf(uri) > -1
     const showOverlay = isAvailable !== false && (isPlaying || isDownloading)
 
-    const shouldPurchase = !isDownloading && !completed
-    let buttonIcon = isDownloading ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE
+    const shouldPurchase = !isLoading && !completed
+    let buttonIcon = isLoading ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE
+
+    const action = () => {
+      // Toggle play or purchase
+      if (isActive) {
+        togglePlay()
+      } else if (!isLoading && !isPlaying) {
+        attempPlay(uri, null)
+      }
+
+      // Update playlist state
+      playlist && setPlaylist({ ...playlist, index })
+    }
 
     return (
       <div
@@ -133,8 +132,8 @@ class Card extends React.PureComponent {
                 iconColor={fee && !isPlaying ? 'var(--color-yellow)' : ''}
                 type="card-action--overlay"
                 size="large-x"
-                toggle={isPlaying && !isDownloading}
-                animation={isDownloading && 'spin'}
+                toggle={isPlaying && !isLoading}
+                animation={isLoading && 'spin'}
                 onClick={() => {
                   action()
                 }}

@@ -1,7 +1,7 @@
 import Lbry from '@/apis/lbry'
 import { selectCalimByUri, selectStreamByUri } from '@/unistore/selectors/cache'
 import { selectPlaylistQueue } from '@/unistore/selectors/player'
-import { createStreamUrl } from '@/apis/speech'
+import { createStreamUrl } from '@/apis/stream'
 
 const DOWNLOAD_TIMEOUT = 20
 const DOWNLOAD_POLL_INTERVAL = 250
@@ -18,9 +18,9 @@ export default function(store) {
 
   // Actions to register
   const streamActions = {
-    updateStreamInfo({ collections }, uri, streamData) {
-      const stream = { uri, ...streamData }
-      let { downloads } = collections
+    updateFileSourceInfo({ collections }, uri, fileData) {
+      const { downloads } = collections
+      const fileSource = { uri, ...fileData }
       const index = downloads.findIndex(item => item.uri === uri)
       // Update existent stream
       if (index !== -1) {
@@ -28,7 +28,7 @@ export default function(store) {
           collections: {
             ...collections,
             downloads: downloads.map((item, count) => {
-              return index !== count ? item : { ...item, ...stream }
+              return index !== count ? item : { ...item, ...fileSource }
             }),
           },
         }
@@ -37,12 +37,12 @@ export default function(store) {
       return {
         collections: {
           ...collections,
-          downloads: downloads.concat(stream),
+          downloads: downloads.concat(fileSource),
         },
       }
     },
 
-    removeStream({ collections }, uri) {
+    removeDownload({ collections }, uri) {
       let downloads = Object.assign([], collections.downloads)
       const index = downloads.findIndex(item => item.uri === uri)
       if (index !== -1) {
@@ -51,19 +51,19 @@ export default function(store) {
       }
     },
 
-    handleStreamError(state, uri) {
+    handleDownloadError(state, uri) {
       console.error(
         `Failed to download ${uri}, please try again. If this problem persists, visit https://lbry.io/faq/support for support.`
       )
       // Dispatch updateTrackStatus action
-      store.action(streamActions.updateStreamInfo)(uri, {
+      store.action(streamActions.updateFileSourceInfo)(uri, {
         completed: false,
         isAvailable: false,
         isDownloading: false,
       })
     },
 
-    updateLoadStatus(state, uri, outpoint) {
+    updateDownloadStatus(state, uri, outpoint) {
       Lbry.file_list({ outpoint, full_status: true }).then(([fileInfo]) => {
         // Get stream relevant data
         const streamInfo = fileInfo
@@ -84,7 +84,7 @@ export default function(store) {
           streamInfo.progress = 100
 
           // Update stream info
-          store.action(streamActions.updateStreamInfo)(uri, {
+          store.action(streamActions.updateFileSourceInfo)(uri, {
             ...streamInfo,
             // Update status
             completed: true,
@@ -94,7 +94,7 @@ export default function(store) {
         }
         // Download stopped ?
         else if (fileInfo && fileInfo.stopped) {
-          store.action(streamActions.handleStreamError)(uri)
+          store.action(streamActions.handleDownloadError)(uri)
         }
         // Downlading...
         else if (fileInfo) {
@@ -104,7 +104,7 @@ export default function(store) {
           // Update progress
           streamInfo.progress = (fileInfo.written_bytes / fileInfo.total_bytes) * 100
           // Update stream info
-          store.action(streamActions.updateStreamInfo)(uri, {
+          store.action(streamActions.updateFileSourceInfo)(uri, {
             ...streamInfo,
             // Update status
             completed: false,
@@ -114,18 +114,18 @@ export default function(store) {
 
           // Next update
           setTimeout(() => {
-            store.action(streamActions.updateLoadStatus)(uri, outpoint)
+            store.action(streamActions.updateDownloadStatus)(uri, outpoint)
           }, DOWNLOAD_POLL_INTERVAL)
         }
       })
     },
 
-    loadSource(state, uri, outpoint) {
+    downloadSource(state, uri, outpoint) {
       // Debug
       console.info('Downloading start!')
 
       // Start download
-      store.action(streamActions.updateStreamInfo)(uri, {
+      store.action(streamActions.updateFileSourceInfo)(uri, {
         completed: false,
         isDownloading: true,
       })
@@ -134,12 +134,32 @@ export default function(store) {
         .then(streamInfo => {
           const timeout = !streamInfo || streamInfo.error === 'Timeout'
           timeout
-            ? store.action(streamActions.handleStreamError)(uri)
+            ? store.action(streamActions.handleDownloadError)(uri)
             : store.action(streamActions.purchase)(uri, streamInfo.outpoint)
         })
         .catch(() => {
-          store.action(streamActions.handleStreamError)(uri)
+          store.action(streamActions.handleDownloadError)(uri)
         })
+    },
+
+    createStream(state, uri) {
+      const claim = selectCalimByUri(state, uri)
+      // Claim missing from cach or existning / invalid stream
+      if (!claim || claim.fee || !claim.artist || state.streams[uri]) return null
+
+      const { artist, name } = claim
+      const { channelId, channelName } = artist
+      const streamSources = createStreamUrl(channelName, channelId, name)
+      const stream = { ...streamSources, ready: false }
+      return { streams: { ...state.streams, [uri]: stream } }
+    },
+
+    updateStreamInfo({ streams }, uri, streamInfo) {
+      if (streams[uri]) {
+        return {
+          streams: { ...streams, [uri]: { ...streams[uri], ...streamInfo } },
+        }
+      }
     },
 
     purchase(state, uri, outpoint) {
@@ -149,12 +169,6 @@ export default function(store) {
       // Claim missing from cache
       if (!claim || !claimOutpoint) return null
 
-      if (!claim.fee) {
-        const { artist, title } = claim
-        const { channelId, channelName } = artist
-        createStreamUrl(channelName, channelId, title)
-      }
-
       Lbry.file_list({ outpoint: claimOutpoint, full_status: true }).then(
         ([fileInfo]) => {
           // We already fully downloaded the file.
@@ -162,25 +176,25 @@ export default function(store) {
             // Reconstruct file:
             // If written_bytes is false that means the user has deleted/moved the
             // file manually on their file system, so we need to dispatch a
-            // do loadSource action to reconstruct the file from the blobs
+            // do downloadSource action to reconstruct the file from the blobs
             if (!fileInfo.written_bytes) {
               console.error(fileInfo)
-              store.action(streamActions.loadSource)(uri, claimOutpoint)
+              store.action(streamActions.downloadSource)(uri, claimOutpoint)
             }
             // Success!
             else {
               // Update downloads
-              store.action(streamActions.updateLoadStatus)(uri, claimOutpoint)
+              store.action(streamActions.updateDownloadStatus)(uri, claimOutpoint)
             }
           }
           // Downlading
           else if (fileInfo) {
-            store.action(streamActions.updateLoadStatus)(uri, claimOutpoint)
+            store.action(streamActions.updateDownloadStatus)(uri, claimOutpoint)
           }
           // No download yet
           else if (!fileInfo) {
             // Todo add flag to protect purchase
-            store.action(streamActions.loadSource)(uri, claimOutpoint)
+            store.action(streamActions.downloadSource)(uri, claimOutpoint)
           }
         }
       )
@@ -289,7 +303,7 @@ export default function(store) {
       const { cache, player, collections } = state
 
       //Get player status
-      const { paused, isLoading, currentTrack } = player || {}
+      const { paused, loading, currentTrack } = player || {}
 
       // Get claim data
       const claim = uri && cache[uri]
@@ -301,11 +315,13 @@ export default function(store) {
       const shouldTogglePlay =
         isAvailable && completed && (currentTrack ? currentTrack.uri === uri : false)
 
-      const shouldAttempPurchase = forcePurchased || (claim && !claim.fee)
+      const shouldAttempPurchase = claim && claim.fee
+
+      const shouldStreamSource = !isDownloading && !completed
 
       if (shouldTogglePlay) {
         // Try to play content
-        if (!isDownloading && !isLoading) {
+        if (!isDownloading && !loading) {
           store.action(playerActions.triggerTogglePlay)()
           playlist && store.action(playerActions.setPlaylistIndex)(playlist.index)
         }
@@ -314,6 +330,9 @@ export default function(store) {
         store.action(playerActions.setTrack)(uri)
         shouldAttempPurchase && store.action(streamActions.purchase)(uri)
         playlist && store.action(playerActions.setPlaylistIndex)(playlist.index)
+      } else if (shouldStreamSource) {
+        store.action(playerActions.setTrack)(uri)
+        store.action(streamActions.createStream)(uri)
       }
     },
 

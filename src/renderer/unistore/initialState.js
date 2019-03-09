@@ -5,21 +5,12 @@ import { podcasts } from '@/apis/api'
 // https://github.com/developit/stockroom/issues/14
 const initialState = {
   ready: true,
-  streams: [],
+  streams: {},
   podcasts,
   settings,
 }
 
 initialState.searchQuery = null
-
-initialState.account = {
-  currentChannel: {
-    uri: '',
-    nickname: 'Anonymous',
-    thumbnail: null,
-  },
-  channels: [],
-}
 
 initialState.network = {
   isReady: false,
@@ -33,7 +24,7 @@ initialState.navigation = {
 
 initialState.player = {
   paused: true,
-  isLoading: false,
+  loading: false,
   showPlayer: false,
   syncPaused: true,
   currentTrack: {

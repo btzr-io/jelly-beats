@@ -6,10 +6,12 @@ import { selectStreamByUri } from '@/unistore/selectors/cache'
 export default connect(
   (state, props) => {
     const { uri } = props
-    const { cache, player, collections } = state
+    const { cache, player, collections, streams } = state
     const { favorites, downloads } = collections || {}
-    const streamData = selectStreamByUri(state, uri) || {}
-    return { cache, player, favorites, streamData }
+    const fileSource = selectStreamByUri(state, uri) || {}
+    const streamSource = !fileSource.isAvailable && streams[uri]
+    const isLoading = fileSource.isDownloading || (streamSource && !streamSource.ready)
+    return { cache, player, favorites, fileSource, streamSource, isLoading }
   },
   {
     storePalette: 'storePalette',

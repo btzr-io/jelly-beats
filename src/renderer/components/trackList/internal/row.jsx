@@ -14,7 +14,16 @@ import RowIndexRenderer from './rowIndexRenderer'
 // List row component
 const Row = React.memo(({ data, index, style }) => {
   // Props
-  const { items, paused, cache, favorites, downloads, currentTrack, selectedItems } = data
+  const {
+    items,
+    paused,
+    cache,
+    streams,
+    favorites,
+    downloads,
+    currentTrack,
+    selectedItems,
+  } = data
   // Actions
   const { attempPlay, doNavigate, togglePlay, toggleFavorite, handleItemChecked } = data
   // Current item
@@ -22,17 +31,23 @@ const Row = React.memo(({ data, index, style }) => {
   const formatedIndex = index + 1
   // Cached data
   const claimData = item && cache[item]
-  const streamData = item && downloads.find(stream => stream.uri === item)
-  const duration = item && streamData && streamData.duration
+  const streamSource = streams[item]
+  const fileSource = item && downloads.find(download => download.uri === item)
+  const { duration, completed, isDownloading } = fileSource || {}
   const isFavorite = item && favorites.indexOf(item) !== -1
-  const isActive = item === currentTrack.uri
+  const isActive = (completed || streamSource) && currentTrack.uri === item
   const isSelected = item && selectedItems && selectedItems[item] ? true : false
   const isPlaying = !paused && isActive
-  const isDownloading = streamData && streamData.isDownloading
-  const streamRequired = !streamData
+  const isLoading = isDownloading || (streamSource && !streamSource.ready)
+
   // Main button action
-  const handlePlay = event => {
-    !isPlaying && !isDownloading ? attempPlay(item) : togglePlay()
+  const handlePlay = () => {
+    // Toggle play or purchase
+    if (isActive && !isLoading) {
+      togglePlay()
+    } else if (!isLoading && !isPlaying) {
+      attempPlay(item, null)
+    }
   }
   // Item selection
   const handleSelect = event => {
@@ -55,8 +70,8 @@ const Row = React.memo(({ data, index, style }) => {
             onClick={handlePlay}
             isActive={isActive}
             isPlaying={isPlaying}
+            isLoading={isLoading}
             isDownloading={isDownloading}
-            streamRequired={streamRequired}
           />
         ),
       },
