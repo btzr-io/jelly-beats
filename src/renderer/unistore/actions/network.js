@@ -1,4 +1,5 @@
-import Lbry from '@/utils/lbry'
+import Lbry from '@/apis/lbry'
+import * as StatusCode from '@/constants/statusCodes'
 
 const CONNECTION_TIME_OUT = 2500
 
@@ -10,21 +11,28 @@ export default function(store) {
       Lbry.status()
         .then(status => {
           const { connection_status: connectionStatus, is_running: isReady } = status
-          const isConnecting = connectionStatus.code === 'connected' && !isReady
+          const isConnecting = connectionStatus.code === StatusCode.CONNECTED && !isReady
           // Update network status
           // SDK is now running
           if (isReady) {
-            // Update network status
+            // SDK is ready to use
             store.action(actions.updateNetworkConnection)(connectionStatus, isReady)
           } else {
+            // New network status
             const connectingStatus = {
-              code: 'connecting',
+              code: StatusCode.CONNECTING,
               message: 'Loading components...',
             }
-            store.action(actions.updateNetworkConnection)(
-              isConnecting ? connectingStatus : connectionStatus,
-              isReady
-            )
+            // Check if needs an update
+            if (
+              connectionStatus.code !== connection.code &&
+              connectingStatus.code !== connetion.code
+            ) {
+              store.action(actions.updateNetworkConnection)(
+                isConnecting ? connectingStatus : connectionStatus,
+                isReady
+              )
+            }
           }
           // Retry connection
           setTimeout(() => {
@@ -32,7 +40,7 @@ export default function(store) {
           }, CONNECTION_TIME_OUT)
         })
         .catch(error => {
-          if (connection.code !== 'disconnected') {
+          if (connection.code !== StatusCode.DISCONNECTED) {
             store.action(actions.handleNetworkError)()
           }
           // Retry connection
@@ -56,7 +64,7 @@ export default function(store) {
     handleNetworkError(state) {
       store.action(actions.updateNetworkConnection)(
         {
-          code: 'disconnected',
+          code: StatusCode.DISCONNECTED,
           message: 'The LBRY daemon (lbrynet) is not running',
         },
         false

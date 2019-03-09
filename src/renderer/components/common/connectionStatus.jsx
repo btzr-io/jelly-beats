@@ -3,6 +3,8 @@ import Icon from '@mdi/react'
 import classnames from 'classnames'
 import * as icons from '@/constants/icons'
 
+import * as StatusCode from '@/constants/statusCodes'
+
 class ConnectionStatus extends React.PureComponent {
   static defaultProps = {
     connection: {},
@@ -10,23 +12,23 @@ class ConnectionStatus extends React.PureComponent {
 
   static codes = {
     connected: {
-      type: 'connected',
+      type: StatusCode.CONNECTED,
       icon: icons.READY,
       label: 'CONNECTED',
       color: 'green',
     },
     connecting: {
-      type: 'connecting',
+      type: StatusCode.CONNECTING,
       icon: icons.SPINNER,
       label: 'CONNECTING',
     },
     disconnected: {
-      type: 'disconnected',
+      type: StatusCode.DISCONNECTED,
       icon: icons.UKNOWN,
       label: 'DISCONNECTED',
     },
     network_connection: {
-      type: 'network',
+      type: StatusCode.NETWORK_ISSUES,
       icon: icons.WARNING,
       label: 'NETWORK ISSUES',
       color: 'yellow',

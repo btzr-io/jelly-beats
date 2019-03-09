@@ -1,8 +1,6 @@
 import React from 'react'
 import css from '@/css/modules/card.css.module'
 
-import Lbry from '@/utils/lbry'
-
 const Tag = ({ name }) => <span className={css.tag}>{name}</span>
 
 class Tags extends React.Component {

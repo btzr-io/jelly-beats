@@ -2,12 +2,11 @@ import React from 'react'
 import Icon from '@mdi/react'
 
 // Utils
-import Lbry from '@/utils/lbry'
-import { feature } from '@/utils/api'
+import Lbry from '@/apis/lbry'
+import { feature } from '@/apis/api'
 import { mergeDedupe } from '@/utils'
-import { fetchNewClaims } from '@/utils/chainquery'
-import lighthouse from '@/utils/lighthouse'
-import fetchChannel from '@/api/channel'
+import { fetchNewClaims } from '@/apis/chainquery'
+import lighthouse from '@/apis/lighthouse'
 
 // Components
 import Card from '@/components/card'

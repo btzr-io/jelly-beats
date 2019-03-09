@@ -27,6 +27,7 @@ export default {
 
     // Get creator
     if (channelData) {
+      artist.channelId = channelData.claim_id
       artist.channelUri = channelData.permanent_url
       artist.channelName = channelData.name
     }
@@ -59,18 +60,6 @@ export default {
     // Update cache
     return {
       cache: { ...state.cache, [uri]: { ...prevTrack, ...track } },
-    }
-  },
-
-  storeTrackDuration(state, uri, duration) {
-    const claim = state.cache[uri]
-
-    if (claim) {
-      if (claim.duration === duration) return null
-      // Update cache
-      return {
-        cache: { ...state.cache, [uri]: { ...claim, duration } },
-      }
     }
   },
 

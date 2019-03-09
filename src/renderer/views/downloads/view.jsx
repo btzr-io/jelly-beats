@@ -3,7 +3,7 @@ import Icon from '@mdi/react'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
 import TrackList from '@/components/trackList'
-import Lbry from '@/utils/lbry'
+import Lbry from '@/apis/lbry'
 
 import { PLAY as iconPlay, DOWNLOAD as iconDownload } from '@/constants/icons'
 
@@ -52,7 +52,12 @@ class View extends React.PureComponent {
     }
   }
 
-  handleRemoveItems = items => {}
+  handleRemoveItems = items => {
+    const { removeStream } = this.props
+    Object.keys(items).forEach(item => {
+      removeStream(item)
+    })
+  }
 
   render() {
     const { fetchingData } = this.state

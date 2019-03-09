@@ -2,14 +2,12 @@ import React from 'react'
 import Icon from '@mdi/react'
 
 // Utils
-import Lbry from '@/utils/lbry'
+import Lbry from '@/apis/lbry'
 
 // Components
 import Loader from '@/components/common/loader'
 import TrackList from '@/components/trackList'
 import EmptyState from '@/components/common/emptyState'
-
-import fetchChannel from '@/api/channel'
 
 // Constants
 import * as icons from '@/constants/icons'

@@ -4,9 +4,9 @@ import Icon from '@mdi/react'
 import * as icons from '@/constants/icons'
 
 // Utils
-import Lbry from '@/utils/lbry'
-import fetchChannel from '@/api/channel'
-import { fetchClaimsByChannel } from '@/utils/chainquery'
+import Lbry from '@/apis/lbry'
+
+import { fetchClaimsByChannel } from '@/apis/chainquery'
 
 // Components
 import Button from '@/components/button'

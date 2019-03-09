@@ -1,25 +1,36 @@
 import moment from 'moment'
+import { selectStreamByUri } from '@/unistore/selectors/cache'
 
+// TODO: REFACTOR
 export const selectPlaylistQueue = ({ collections, playlists }, uri) => {
   let playlist = []
   let collection = collections[uri]
   const isArray = Array.isArray(collection)
 
   if (collection && !isArray) {
-    playlist = Object.keys(collection)
+    // Object
+    return Object.keys(collection)
   } else if (collection && isArray) {
-    playlist = collection
+    /// Array of objects
+    if (collection.length > 0 && collection[0].uri) {
+      return collection.map(track => track.uri)
+    }
+    // Array of strings
+    return collection
   } else if (playlists[uri]) {
-    playlist = playlists[uri].list
+    // playlist
+    return playlists[uri].list
   }
+
+  // Empty
   return playlist
 }
 
-export const selectPlaylistDuration = ({ collections }, tracks = []) => {
+export const selectPlaylistDuration = (state, tracks = []) => {
   let duration = 0
 
   tracks
-    .map(uri => collections.downloads[uri])
+    .map(uri => selectStreamByUri(state, uri))
     .map(track => {
       if (track && track.duration) {
         duration += track.duration

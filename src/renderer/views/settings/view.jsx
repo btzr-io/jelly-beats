@@ -1,11 +1,12 @@
 import React from 'react'
-import * as icons from '@/constants/icons'
 import Icon from '@mdi/react'
 import Switch from '@/components/common/switch'
 import Loader from '@/components/common/loader'
 import ConnectionStatus from '@/components/common/connectionStatus'
 import EmptyState from '@/components/common/emptyState'
-import Lbry from '@/utils/lbry'
+import Lbry from '@/apis/lbry'
+import * as StatusCode from '@/constants/statusCodes'
+import * as icons from '@/constants/icons'
 
 class View extends React.PureComponent {
   constructor(props) {
@@ -23,7 +24,7 @@ class View extends React.PureComponent {
         this.setState({ version })
       })
       .catch(error => {
-        this.setState({ status: 'disconnected' })
+        this.setState({ status: StatusCode.DISCONNECTED })
       })
   }
 

@@ -6,9 +6,8 @@ import moment from 'moment'
 import * as icons from '@/constants/icons'
 
 // Utils
-import Lbry from '@/utils/lbry'
-import { fetchClaimsByChannel } from '@/utils/chainquery'
-import fetchChannel from '@/api/channel'
+import Lbry from '@/apis/lbry'
+import { fetchClaimsByChannel } from '@/apis/chainquery'
 
 // Components
 import Button from '@/components/button'

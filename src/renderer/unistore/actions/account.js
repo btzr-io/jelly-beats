@@ -1,4 +1,4 @@
-import Lbry from '@/utils/lbry'
+import Lbry from '@/apis/lbry'
 
 export default function(store) {
   const actions = {

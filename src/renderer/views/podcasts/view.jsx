@@ -3,7 +3,7 @@ import * as icons from '@/constants/icons'
 import Thumbnail from '@/components/common/thumbnail'
 import EmptyState from '@/components/common/emptyState'
 
-import { fetchClaimsCountByChannel } from '@/utils/chainquery'
+import { fetchClaimsCountByChannel } from '@/apis/chainquery'
 
 class TiledCard extends React.PureComponent {
   constructor(props) {

@@ -151,13 +151,12 @@ class Player extends React.PureComponent {
     const audio = this.audioElement.current
     const duration = audio.duration
 
-    const { player, updateStreamInfo, storeTrackDuration } = this.props
+    const { player, updateStreamInfo } = this.props
     const { uri } = player ? player.currentTrack : {}
 
     // Store duration
     this.setState({ duration })
     updateStreamInfo(uri, { duration })
-    // storeTrackDuration(uri, duration)
   }
 
   handleLoadStart = () => {
@@ -213,15 +212,15 @@ class Player extends React.PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     // OPTIMIZE AND IMPROVE THIS MESS!
-    const { downloads, player, togglePlay } = this.props
+    const { streamStatus, player, togglePlay } = this.props
     const { uri } = player.currentTrack || {}
     const prevTrack = prevProps.player.currentTrack || {}
-    const fileSource = downloads[uri]
+    const fileSource = streamStatus
 
     // If source exist
-    if (fileSource) {
+    if (fileSource && fileSource.path) {
       // Get previous path
-      const prevSource = prevProps.downloads[prevTrack.uri] || {}
+      const prevSource = prevProps.streamStatus
       // If file path change or Download completed
       if (
         fileSource.path !== prevSource.path ||
@@ -271,7 +270,6 @@ class Player extends React.PureComponent {
     const { ready, repeat, currentTime } = this.state
     const {
       player,
-      downloads,
       navigation,
       playNext,
       playPrev,

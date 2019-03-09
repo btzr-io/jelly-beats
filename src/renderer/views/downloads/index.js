@@ -6,7 +6,7 @@ export default connect(
   (state, props) => {
     const { cache, collections } = state
     const { downloads, favorites } = collections
-    const tracks = Object.keys(downloads)
+    const tracks = downloads.map(({ uri }) => uri)
     const duration = selectPlaylistDuration(state, tracks)
     const loadingTracks = tracks.filter(uri => !cache[uri])
     const playlist = { uri: 'downloads', name: 'Downloads' }
@@ -17,5 +17,6 @@ export default connect(
     storeChannel: 'storeChannel',
     toggleFavorite: 'toggleFavorite',
     setPlaylist: 'setPlaylist',
+    removeStream: 'removeStream',
   }
 )(View)

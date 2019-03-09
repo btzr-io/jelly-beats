@@ -2,25 +2,27 @@ import React from 'react'
 import Icon from '@mdi/react'
 
 // Utils
-import Lbry from '@/utils/lbry'
-import { feature } from '@/utils/api'
+import Lbry from '@/apis/lbry'
+import { feature } from '@/apis/api'
 import { mergeDedupe } from '@/utils'
-import { fetchNewClaims } from '@/utils/chainquery'
-import fetchChannel from '@/api/channel'
+import { fetchNewClaims } from '@/apis/chainquery'
 
 // Components
 import Card from '@/components/card'
 import Loader from '@/components/common/loader'
 import EmptyState from '@/components/common/emptyState'
-
+import * as StatusCode from '@/constants/statusCodes'
 import * as icons from '@/constants/icons'
 
 class View extends React.PureComponent {
   constructor(props) {
     super(props)
+    const { connection } = props.network
+    const disconnected = connection.code === StatusCode.DISCONNECTED
+
     this.state = {
-      error: false,
-      fetchingData: true,
+      error: disconnected,
+      fetchingData: !disconnected,
       latest: [],
       feature: [],
     }
@@ -38,15 +40,16 @@ class View extends React.PureComponent {
   }
 
   fetchData = () => {
+    const { fetchingData } = this.state
     const { storeTrack, storePlaylist, network, cache } = this.props
     const { isReady, connection } = network
     // Update status
     this.setState({ fetchingData: true })
     // Attemp to fetch
-    if (!connection.code || connection.code === 'connecting') {
+    if (!connection.code || connection.code === StatusCode.CONNECTING) {
       // Retry fetch
       setTimeout(() => this.fetchData(), 2500)
-    } else if (connection.code === 'disconnected') {
+    } else if (connection.code === StatusCode.DISCONNECTED) {
       // Deamon has stop running
       this.handleFetchError()
     } else if (isReady) {

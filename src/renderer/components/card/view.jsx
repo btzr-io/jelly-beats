@@ -1,6 +1,6 @@
 import React from 'react'
 import Icon from '@mdi/react'
-import Lbry from '@/utils/lbry'
+import Lbry from '@/apis/lbry'
 import classnames from 'classnames'
 
 // import worker bundle
@@ -53,11 +53,12 @@ class Card extends React.PureComponent {
       if (track.uri != prevTrack.uri) this.setState({ isReady: true })
 
       // Thumbnail update
+      /*
       if (track.thumbnail) {
         track.thumbnail.length &&
           track.thumbnail.length > 0 &&
           this.getPalette(track.thumbnail)
-      }
+      }*/
     }
   }
 
@@ -68,7 +69,7 @@ class Card extends React.PureComponent {
       index,
       cache,
       player,
-      downloads,
+      streamData,
       favorites,
       doNavigate,
       playlist,
@@ -99,7 +100,7 @@ class Card extends React.PureComponent {
     const { title, artist, thumbnail, palette, fee } = (cache && cache[uri]) || {}
 
     //Get stream status
-    const { completed, isAvailable, isDownloading } = (downloads && downloads[uri]) || {}
+    const { completed, isAvailable, isDownloading } = streamData
 
     //Get player status
     const { paused, isLoading, currentTrack } = player || {}

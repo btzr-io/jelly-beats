@@ -22,8 +22,8 @@ const Row = React.memo(({ data, index, style }) => {
   const formatedIndex = index + 1
   // Cached data
   const claimData = item && cache[item]
-  const streamData = item && downloads[item]
-  const duration = item && downloads[item] && downloads[item].duration
+  const streamData = item && downloads.find(stream => stream.uri === item)
+  const duration = item && streamData && streamData.duration
   const isFavorite = item && favorites.indexOf(item) !== -1
   const isActive = item === currentTrack.uri
   const isSelected = item && selectedItems && selectedItems[item] ? true : false

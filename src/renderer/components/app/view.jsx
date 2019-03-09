@@ -6,7 +6,7 @@ import Player from '@/components/player'
 import SideBar from '@/components/sidebar'
 import navigate from '@/utils/navigate'
 import classnames from 'classnames'
-import Lbry from '@/utils/lbry'
+import Lbry from '@/apis/lbry'
 
 const TWO_POINT_FIVE_SECONDS = 2500
 const TWO_POINT_FIVE_MINUTES = 1000 * 60 * 2.5

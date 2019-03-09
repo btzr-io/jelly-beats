@@ -1,6 +1,7 @@
-import Lbry from '@/utils/lbry'
-import { selectCalimByUri } from '@/unistore/selectors/cache'
+import Lbry from '@/apis/lbry'
+import { selectCalimByUri, selectStreamByUri } from '@/unistore/selectors/cache'
 import { selectPlaylistQueue } from '@/unistore/selectors/player'
+import { createStreamUrl } from '@/apis/speech'
 
 const DOWNLOAD_TIMEOUT = 20
 const DOWNLOAD_POLL_INTERVAL = 250
@@ -17,15 +18,36 @@ export default function(store) {
 
   // Actions to register
   const streamActions = {
-    updateStreamInfo(state, uri, streamInfo) {
+    updateStreamInfo({ collections }, uri, streamData) {
+      const stream = { uri, ...streamData }
+      let { downloads } = collections
+      const index = downloads.findIndex(item => item.uri === uri)
+      // Update existent stream
+      if (index !== -1) {
+        return {
+          collections: {
+            ...collections,
+            downloads: downloads.map((item, count) => {
+              return index !== count ? item : { ...item, ...stream }
+            }),
+          },
+        }
+      }
+      // Register new stream
       return {
         collections: {
-          ...state.collections,
-          downloads: {
-            ...state.collections.downloads,
-            [uri]: { ...state.collections.downloads[uri], ...streamInfo },
-          },
+          ...collections,
+          downloads: downloads.concat(stream),
         },
+      }
+    },
+
+    removeStream({ collections }, uri) {
+      let downloads = Object.assign([], collections.downloads)
+      const index = downloads.findIndex(item => item.uri === uri)
+      if (index !== -1) {
+        downloads.splice(index, 1)
+        return { collections: { ...collections, downloads } }
       }
     },
 
@@ -125,7 +147,13 @@ export default function(store) {
       const claim = selectCalimByUri(state, uri)
       const claimOutpoint = outpoint || (claim && claim.outpoint)
       // Claim missing from cache
-      if (!claim || !claimOutpoint) return state
+      if (!claim || !claimOutpoint) return null
+
+      if (!claim.fee) {
+        const { artist, title } = claim
+        const { channelId, channelName } = artist
+        createStreamUrl(channelName, channelId, title)
+      }
 
       Lbry.file_list({ outpoint: claimOutpoint, full_status: true }).then(
         ([fileInfo]) => {
@@ -210,8 +238,7 @@ export default function(store) {
     },
 
     playlistNavigation(state, steeps) {
-      const { cache, player, collections } = state
-      const { downloads } = collections
+      const { cache, player } = state
       const { currentPlaylist } = player
       const { uri, name, index, skippedTracks } = currentPlaylist
       const jump = index + steeps
@@ -224,7 +251,7 @@ export default function(store) {
       if (tracks && limit) {
         // Get claim uri
         const uri = tracks[jump]
-        const stream = downloads[uri]
+        const stream = selectStreamByUri(state, uri)
         const isFree = cache[uri] && !cache[uri].fee
 
         const { isAvailable, completed } = stream || {}
@@ -268,7 +295,8 @@ export default function(store) {
       const claim = uri && cache[uri]
 
       //Get stream status
-      const { isDownloading, isAvailable, completed } = collections.downloads[uri] || {}
+      const { isDownloading, isAvailable, completed } =
+        selectStreamByUri(state, uri) || {}
 
       const shouldTogglePlay =
         isAvailable && completed && (currentTrack ? currentTrack.uri === uri : false)

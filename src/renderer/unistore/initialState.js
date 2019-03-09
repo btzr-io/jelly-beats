@@ -1,10 +1,11 @@
 import settings from './defaultSettings'
-import { podcasts } from '@/utils/api'
+import { podcasts } from '@/apis/api'
 
 // Store properties undefined on "first render" #14
 // https://github.com/developit/stockroom/issues/14
 const initialState = {
   ready: true,
+  streams: [],
   podcasts,
   settings,
 }
@@ -64,7 +65,7 @@ initialState.history = {
 
 initialState.collections = {
   favorites: [],
-  downloads: {},
+  downloads: [],
 }
 
 initialState.latestBlock = 0
