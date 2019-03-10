@@ -42,13 +42,35 @@ export default function(store) {
       }
     },
 
-    removeDownload({ collections }, uri) {
+    removeFileSource({ cache, collections }, uri) {
       let downloads = Object.assign([], collections.downloads)
       const index = downloads.findIndex(item => item.uri === uri)
-      if (index !== -1) {
-        downloads.splice(index, 1)
-        return { collections: { ...collections, downloads } }
+      const { outpoint } = cache[uri]
+      if (outpoint && index !== -1) {
+        Lbry.file_delete({ outpoint, delete_from_download_dir: true }).then(deleted => {
+          if (deleted) {
+            downloads.splice(index, 1)
+            store.setState({ collections: { ...collections, downloads } })
+          }
+        })
       }
+    },
+
+    removeFileSources({ cache, collections }, uris) {
+      let downloads = Object.assign([], collections.downloads)
+
+      uris.map(uri => {
+        const index = downloads.findIndex(item => item.uri === uri)
+        const { outpoint } = cache[uri]
+        if (outpoint && index !== -1) {
+          Lbry.file_delete({ outpoint, delete_from_download_dir: true }).then(
+            deleted => {}
+          )
+          downloads.splice(index, 1)
+        }
+      })
+
+      return { collections: { ...collections, downloads } }
     },
 
     handleDownloadError(state, uri) {

@@ -17,6 +17,6 @@ export default connect(
     storeChannel: 'storeChannel',
     toggleFavorite: 'toggleFavorite',
     setPlaylist: 'setPlaylist',
-    removeDownload: 'removeDownload',
+    removeFileSources: 'removeFileSources',
   }
 )(View)

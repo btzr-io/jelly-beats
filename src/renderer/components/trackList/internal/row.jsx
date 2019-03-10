@@ -8,6 +8,7 @@ import classname from 'classnames'
 import Link from '@/components/common/link'
 import Checkbox from '@/components/common/checkbox'
 import PriceLabel from '@/components/common/priceLabel'
+import DownloadButton from '@/components/common/downloadButton'
 import FavoriteButton from '@/components/common/favoriteButton'
 import RowIndexRenderer from './rowIndexRenderer'
 
@@ -60,7 +61,7 @@ const Row = React.memo(({ data, index, style }) => {
 
     const columns = [
       {
-        key: 'index',
+        dataKey: 'index',
         width: '32px',
         isAction: true,
         cellRender: (
@@ -76,7 +77,7 @@ const Row = React.memo(({ data, index, style }) => {
         ),
       },
       {
-        key: 'favorite',
+        dataKey: 'favorite',
         width: '32px',
         isAction: true,
         cellRender: (
@@ -84,12 +85,12 @@ const Row = React.memo(({ data, index, style }) => {
         ),
       },
       {
-        key: 'title',
+        dataKey: 'title',
         width: '300px',
         cellRender: claimData.title,
       },
       {
-        key: 'artist',
+        dataKey: 'artist',
         width: '124px',
         cellRender: (
           <Link
@@ -99,17 +100,17 @@ const Row = React.memo(({ data, index, style }) => {
         ),
       },
       {
-        key: 'price',
+        dataKey: 'price',
         width: '80px',
         cellRender: <PriceLabel fee={claimData.fee} />,
       },
       {
-        key: 'duration',
+        dataKey: 'duration',
         width: '64px',
         cellRender: duration ? memoizeFormatDuration(duration) : '?',
       },
       {
-        key: 'selected',
+        dataKey: 'selected',
         width: '32px',
         isAction: true,
         cellRender: (
@@ -124,9 +125,9 @@ const Row = React.memo(({ data, index, style }) => {
 
     return (
       <div className={classname('Row', isActive && 'Row--active')} style={style}>
-        {columns.map(({ key, width, cellRender, isAction }) => (
+        {columns.map(({ dataKey, width, cellRender, isAction }) => (
           <div
-            key={key}
+            key={dataKey}
             className={classname('Row__cell', isAction && 'Row__cell--action')}
             style={{ flex: `0 1 ${width}` }}
           >

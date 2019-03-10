@@ -266,7 +266,7 @@ class Player extends React.PureComponent {
   }
 
   render() {
-    const { ready, repeat, currentTime } = this.state
+    const { ready, repeat, duration, currentTime } = this.state
     const {
       player,
       navigation,
@@ -291,7 +291,7 @@ class Player extends React.PureComponent {
     const { currentPage, currentQuery } = navigation
 
     //Get stream status
-    const { duration, completed } = fileSource
+    const { completed } = fileSource
 
     const collectionPath = isPlayingCollection && `/${currentPlaylist.uri}`
     const playlistPath = collectionPath || '/playlist'
