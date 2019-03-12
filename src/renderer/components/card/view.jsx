@@ -141,7 +141,6 @@ class Card extends React.PureComponent {
             )}
           </div>
         </Thumbnail>
-        <PriceLabel className={'card_label'} fee={fee} />
         <div className={css.content}>
           <div className={css.metadata}>
             <div className={css.title} onClick={() => {}}>
@@ -158,24 +157,27 @@ class Card extends React.PureComponent {
             )}
           </div>
           <div className={css.actions}>
-            {/* <Button
+            <PriceLabel className={'card_label'} fee={fee} />
+            <div>
+              <Button
+                toggle={isFavorite}
+                iconColor={isFavorite ? 'var(--color-red)' : ''}
+                icon={isFavorite ? icons.HEART : icons.HEART_OUTLINE}
+                type="card-action"
+                size="large"
+                // TODO: FIX IT!
+                // tooltip={{ text: `${isFavorite ? 'Remove from' : 'Add to'} favorites` }}
+                onClick={() => uri && toggleFavorite(uri)}
+              />
+              {/*<Button
               icon={icons.PLUS}
               size="large"
               type="card-action"
               onClick={() => null}
               disabled={true}
-            />
-            */}
-            <Button
-              toggle={isFavorite}
-              iconColor={isFavorite ? 'var(--color-red)' : ''}
-              icon={isFavorite ? icons.HEART : icons.HEART_OUTLINE}
-              type="card-action"
-              size="large"
-              // TODO: FIX IT!
-              // tooltip={{ text: `${isFavorite ? 'Remove from' : 'Add to'} favorites` }}
-              onClick={() => uri && toggleFavorite(uri)}
-            />
+              />
+              */}
+            </div>
           </div>
         </div>
       </div>

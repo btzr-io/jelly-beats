@@ -54,11 +54,13 @@
 /* Card action button */
 
 .button--card-action {
-  margin-right: 8px;
+  margin-left: 16px;
   opacity: 0.64;
   border-radius: 50px;
   background: transparent;
   transition: all 0.4s ease;
+  display: inline-block;
+  vertical-align: middle;
 }
 .button--active,
 .button--card-action:hover {

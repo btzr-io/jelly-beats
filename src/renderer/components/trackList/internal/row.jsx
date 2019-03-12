@@ -132,11 +132,7 @@ const Row = React.memo(({ data, index, style }) => {
 
     return (
       <div
-        className={classname(
-          'Row',
-          isActive && 'Row--active',
-          isDownloading && 'Row--active'
-        )}
+        className={classname('Row', isActive && 'Row--active', isLoading && 'Row--busy')}
         style={style}
       >
         {columns.map(({ dataKey, width, cellRender, isAction }) => (
