@@ -54,14 +54,25 @@ class View extends React.PureComponent {
       this.handleFetchError()
     } else if (isReady) {
       // Latest content
-      fetchNewClaims({ limit: 6, page: 0 })
+      fetchNewClaims({ limit: 25, page: 0 })
         .then(res => {
           const latestCached = []
           const featureCached = []
 
-          const latestUris = res.map(
-            claimData => `${claimData.name}#${claimData.claim_id}`
-          )
+          let latestUris = res
+            .map(claimData => {
+              if (!claimData.publisher_id) return null
+              return `${claimData.name}#${claimData.claim_id}`
+            })
+            .filter(claimUri => {
+              return claimUri !== null
+            })
+
+          const ROW_LIMIT = 5
+
+          if (latestUris.length > ROW_LIMIT) {
+            latestUris = latestUris.slice(0, ROW_LIMIT)
+          }
 
           // Filter cached claims
           const urls = mergeDedupe([latestUris, feature])

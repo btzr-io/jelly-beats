@@ -342,7 +342,7 @@ class TrackList extends React.PureComponent {
                 height={height || 0}
                 itemSize={ROW_HEIGHT}
                 itemData={data}
-                itemCount={tracks.length}
+                itemCount={tracks.length + 1}
                 className={'Rows'}
               >
                 {RowRenderer}
