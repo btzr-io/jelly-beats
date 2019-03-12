@@ -54,6 +54,8 @@ class Player extends React.PureComponent {
       repeat: false,
       duration: 0,
       currentTime: 0,
+      bufferedProgress: 0,
+      updatingBufferedProgress: false,
     }
   }
 
@@ -61,6 +63,21 @@ class Player extends React.PureComponent {
     const audio = this.audioElement.current
     audio.src = source
     audio.load()
+  }
+
+  updateBuffer = () => {
+    const audio = this.audioElement.current
+    const { duration } = audio
+    const lastIndex = audio.buffered.length - 1
+
+    if (duration > 0 && lastIndex !== -1) {
+      const bufferedEnd = audio.buffered.end(lastIndex)
+      const bufferedProgress = (bufferedEnd / duration) * 100
+
+      if (bufferedProgress !== this.state.bufferedProgress) {
+        this.setState({ bufferedProgress })
+      }
+    }
   }
 
   play = () => {
@@ -111,7 +128,10 @@ class Player extends React.PureComponent {
     // Reset state
     this.setState({
       ready: false,
-      currentTime: audio.currentTime,
+      waiting: false,
+      duration: 0,
+      currentTime: 0,
+      bufferedProgress: 0,
     })
     updatePlayerStatus({ loading: true })
   }
@@ -142,12 +162,8 @@ class Player extends React.PureComponent {
 
     // Store duration (NEEDS REFACTORING)
     this.setState({ duration })
+    this.updateBuffer()
     updateFileSourceInfo(uri, { duration })
-
-    // Stream is ready
-    if (streamSource && streamSource.url === audio.src) {
-      updateStreamInfo(uri, { ready: true })
-    }
   }
 
   handleLoadStart = () => {
@@ -165,6 +181,8 @@ class Player extends React.PureComponent {
     // Update state
     const { updatePlayerStatus } = this.props
     const audio = this.audioElement.current
+    this.updateBuffer()
+    this.setState({ waiting: false })
     updatePlayerStatus({ paused: audio.paused, syncPaused: audio.paused })
   }
 
@@ -185,7 +203,12 @@ class Player extends React.PureComponent {
 
   handleError = event => {
     const { error } = event.target
-    console.info(error)
+    console.error(error)
+  }
+
+  handleWaiting = () => {
+    this.updateBuffer()
+    this.setState({ waiting: true })
   }
 
   toggleEventListeners(type) {
@@ -193,8 +216,10 @@ class Player extends React.PureComponent {
     const action = type === 'add' ? 'addEventListener' : 'removeEventListener'
     audio[action]('ended', this.handleEnded)
     audio[action]('playing', this.handlePlaying)
+    audio[action]('progress', this.updateBuffer)
     audio[action]('loadstart', this.handleLoadStart)
     audio[action]('loadedmetadata', this.handleMetadata)
+    audio[action]('waiting', this.handleWaiting)
     audio[action]('timeupdate', this.updateTime)
     audio[action]('error', this.handleError)
   }
@@ -217,7 +242,7 @@ class Player extends React.PureComponent {
       (fileSource.path && fileSource.completed) || (streamSource && streamSource.ready)
 
     // If source exist
-    if (fileSource && fileSource.path) {
+    if (fileSource.path) {
       // Get previous path
       const prevSource = prevProps.fileSource
       // If file path change or Download completed
@@ -233,9 +258,18 @@ class Player extends React.PureComponent {
           this.reset()
         }
       }
-    } else if (streamSource) {
+    } else if (!fileSource.completed && streamSource) {
       if (streamSource.url !== prevStreamSource.url) {
-        this.loadSource(streamSource.url)
+        if (streamSource.ready) {
+          this.loadSource(streamSource.url)
+        } else {
+          this.reset()
+          this.props.resolveStream(uri)
+        }
+      }
+
+      if (streamSource.ready !== prevStreamSource.ready) {
+        streamSource.ready && this.loadSource(streamSource.url)
       }
     }
 
@@ -266,7 +300,7 @@ class Player extends React.PureComponent {
   }
 
   render() {
-    const { ready, repeat, duration, currentTime } = this.state
+    const { ready, waiting, repeat, duration, currentTime, bufferedProgress } = this.state
     const {
       player,
       navigation,
@@ -300,11 +334,14 @@ class Player extends React.PureComponent {
     const togglePlaylist = () =>
       !playlistActive ? doNavigate(playlistPath, currentPlaylist) : doNavigateBackward()
 
-    const isPlaying = !paused && ready && !isLoading
-
-    const buttonIcon = isLoading ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE
+    // TODO: OPTIMIZE
+    const currentTimeProgress = (currentTime / duration) * 100
+    const isBusy = isLoading || !bufferedProgress || waiting
+    const isPlaying = !paused && ready && !isBusy
+    const buttonIcon = isBusy ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE
 
     const playerOptions = {
+      preload: 'auto',
       autoPlay: true,
       controls: true,
     }
@@ -323,8 +360,8 @@ class Player extends React.PureComponent {
         size: 'large-x',
         toggle: isPlaying,
         action: () => togglePlay(),
-        disabled: !ready,
-        animation: isLoading && 'spin',
+        disabled: isBusy,
+        animation: isBusy && 'spin',
       },
       {
         type: 'control',
@@ -391,6 +428,7 @@ class Player extends React.PureComponent {
                   {memoizeFormatDuration(currentTime)}
                 </span>
                 <Slider
+                  buffered={bufferedProgress}
                   onChange={this.setCurrentTime}
                   value={currentTime}
                   max={duration}

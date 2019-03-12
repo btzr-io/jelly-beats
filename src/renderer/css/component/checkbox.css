@@ -22,8 +22,8 @@
 
 .checkbox {
   display: block;
-  width: 16px;
-  height: 16px;
+  width: 1em;
+  height: 1em;
   margin: 0 auto;
   border: 1px solid var(--subtext-color);
   opacity: 0.64;

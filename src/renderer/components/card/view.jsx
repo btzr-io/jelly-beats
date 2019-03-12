@@ -96,7 +96,7 @@ class Card extends React.PureComponent {
 
     // Favorite selector
     const isFavorite = favorites.indexOf(uri) > -1
-    const showOverlay = isAvailable !== false && (isPlaying || isDownloading)
+    const showOverlay = isAvailable !== false && (isPlaying || isLoading)
 
     const shouldPurchase = !isLoading && !completed
     let buttonIcon = isLoading ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE

@@ -31,19 +31,27 @@ class RangeSlider extends React.Component {
   }
 
   render() {
-    const { max, disabled } = this.props
+    const { value } = this.state
+    const { max, disabled, buffered } = this.props
+    const isDisabled = disabled || !max || max === 0
     return (
-      <Slider
-        className={css.seek}
-        defaultValue={0}
-        min={0}
-        max={this.props.max}
-        value={this.state.value}
-        onBeforeChange={this.stopUpdate.bind(this)}
-        onChange={this.setValue.bind(this)}
-        onAfterChange={this.update.bind(this)}
-        disabled={disabled || !max || max === 0}
-      />
+      <div className={'Slider'}>
+        <div
+          className={'buffer'}
+          style={{ display: isDisabled ? 'none' : 'block', width: buffered + '%' }}
+        />
+        <Slider
+          className={css.seek}
+          defaultValue={0}
+          min={0}
+          max={max}
+          value={value}
+          onBeforeChange={this.stopUpdate.bind(this)}
+          onChange={this.setValue.bind(this)}
+          onAfterChange={this.update.bind(this)}
+          disabled={isDisabled}
+        />
+      </div>
     )
   }
 }

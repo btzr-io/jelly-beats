@@ -262,6 +262,13 @@ class TrackList extends React.PureComponent {
         width: '64px',
         cellRender: <Icon className="icon link__icon" path={iconClock} />,
       },
+      {
+        dataKey: 'options',
+        width: '32px',
+        isAction: true,
+        cellRender: null,
+        disabledSort: true,
+      },
     ]
 
     const editColumnProps = {

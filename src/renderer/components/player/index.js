@@ -43,6 +43,7 @@ export default connect(
     playPrev: 'triggerPlayPrevious',
     togglePlay: 'triggerTogglePlay',
     toggleFavorite: 'toggleFavorite',
+    resolveStream: 'resolveStream',
     updateStreamInfo: 'updateStreamInfo',
     updatePlayerStatus: 'updatePlayerStatus',
     updateFileSourceInfo: 'updateFileSourceInfo',

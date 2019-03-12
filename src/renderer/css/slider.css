@@ -18,7 +18,7 @@
 .rc-slider-rail {
   position: absolute;
   width: 100%;
-  background-color: rgba(200, 200, 200, 0.6);
+  background-color: rgba(250, 250, 250, 0.2);
   height: var(--seekbar-height);
   border-radius: 10px;
   transition: background-color 0.3s ease;
@@ -100,6 +100,10 @@
 .rc-slider-disabled {
   opacity: 0.4;
   cursor: normal;
+}
+
+.rc-slider-disabled .rc-slider-track {
+  display: none;
 }
 
 .rc-slider-disabled .rc-slider-handle,

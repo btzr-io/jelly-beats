@@ -8,6 +8,7 @@ import classname from 'classnames'
 import Link from '@/components/common/link'
 import Checkbox from '@/components/common/checkbox'
 import PriceLabel from '@/components/common/priceLabel'
+import OptionsButton from '@/components/common/optionsButton'
 import DownloadButton from '@/components/common/downloadButton'
 import FavoriteButton from '@/components/common/favoriteButton'
 import RowIndexRenderer from './rowIndexRenderer'
@@ -110,6 +111,12 @@ const Row = React.memo(({ data, index, style }) => {
         cellRender: duration ? memoizeFormatDuration(duration) : '?',
       },
       {
+        dataKey: 'options',
+        width: '32px',
+        isAction: true,
+        cellRender: <OptionsButton />,
+      },
+      {
         dataKey: 'selected',
         width: '32px',
         isAction: true,
@@ -124,7 +131,14 @@ const Row = React.memo(({ data, index, style }) => {
     ]
 
     return (
-      <div className={classname('Row', isActive && 'Row--active')} style={style}>
+      <div
+        className={classname(
+          'Row',
+          isActive && 'Row--active',
+          isDownloading && 'Row--active'
+        )}
+        style={style}
+      >
         {columns.map(({ dataKey, width, cellRender, isAction }) => (
           <div
             key={dataKey}

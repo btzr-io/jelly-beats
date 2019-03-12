@@ -36,10 +36,12 @@ const HeaderColumn = React.memo(
         className={classname('Row__cell', isAction && 'Row__cell--action')}
         onClick={event => onSort(dataKey)}
       >
-        <span className={'Row__cell__label'}>{cellRender}</span>
-        <span className={'Row__cell__label'}>
-          {showSortIndicator && <Icon className="icon link__icon" path={sortIndicator} />}
-        </span>
+        <div className={'Row__cell__label'}>{cellRender}</div>
+        {showSortIndicator && (
+          <div className={'Sort-indicator'}>
+            <Icon className="icon link__icon" path={sortIndicator} />
+          </div>
+        )}
       </div>
     )
   }

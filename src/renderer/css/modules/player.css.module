@@ -45,8 +45,7 @@
 }
 
 .player .seek {
-  margin: 12px 0;
-  flex-grow: 1;
+
 }
 
 .player .seekBar {

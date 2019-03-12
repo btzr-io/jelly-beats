@@ -176,6 +176,37 @@ export default function(store) {
       return { streams: { ...state.streams, [uri]: stream } }
     },
 
+    resolveStream({ streams }, uri) {
+      const stream = streams[uri]
+      if (!stream || !stream.url) return null
+      fetch(stream.url)
+        .then(response => {
+          const { ok, headers, redirected } = response
+          const contentType = headers.get('content-type')
+          const isJson = contentType && contentType.indexOf('application/json') !== -1
+          if (redirected && isJson) {
+            return response.json()
+          } else if (ok) {
+            store.action(streamActions.updateStreamInfo)(uri, { ready: true })
+          }
+        })
+        .then(data => {
+          const { success, completed } = data || {}
+          if (success) {
+            store.action(streamActions.updateStreamInfo)(uri, { ready: completed })
+            // Retry
+            if (!completed) {
+              setTimeout(() => {
+                store.action(streamActions.resolveStream)(uri)
+              }, 2500)
+            }
+          }
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+
     updateStreamInfo({ streams }, uri, streamInfo) {
       if (streams[uri]) {
         return {

@@ -37,9 +37,9 @@ import {
   mdiPound,
   mdiCheckboxMarked,
   mdiCheckboxBlankOutline,
-  mdiCheckBold,
   mdiCheck,
   mdiDelete,
+  mdiDotsHorizontal,
 } from '@mdi/js'
 
 export const EDIT = mdiPencil
@@ -83,7 +83,7 @@ export const PLUS = mdiPlus
 export const PLUS_CIRCLE = mdiPlusCircle
 export const HASH = mdiPound
 
-export const CHECKBOX_MARK = mdiCheckBold || mdiCheck
+export const CHECKBOX_MARK = mdiCheck
 export const CHECKBOX_MARKED = mdiCheckboxMarked
 export const CHECKBOX_OUTLINE = mdiCheckboxBlankOutline
 
@@ -91,3 +91,5 @@ export const ARROW_UP = mdiMenuUp
 export const ARROW_DOWN = mdiMenuDown
 
 export const DELETE = mdiDelete
+
+export const DOTS_HORIZONTAL = mdiDotsHorizontal

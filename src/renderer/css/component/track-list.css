@@ -1,7 +1,4 @@
 /* New dataTable component css styles */
-.Table {
-}
-
 .Rows-container {
   margin: 0;
   bottom: 0;
@@ -20,13 +17,13 @@
   display: flex;
   text-align: left;
   align-items: center;
-  box-sizing: border-box;
   border-top: 1px solid var(--card-bg-color);
   justify-content: space-between;
   width: auto !important;
   left: 0;
   right: 0;
   margin: 0 32px;
+  box-sizing: content-box;
 }
 
 .Row--header {
@@ -49,9 +46,13 @@
 
 .Row--header .Row__cell {
   cursor: pointer;
-  font-size: 0.92em;
   font-weight: bold;
   text-transform: uppercase;
+}
+
+.Row--header .Row__cell:not(.Row__cell--action) {
+  display: flex;
+  align-items: center;
 }
 
 .Row:first-of-type {
@@ -59,7 +60,7 @@
 }
 
 .Row--active {
-  border-radius: 4px;
+  border-radius: 8px;
   border-color: transparent;
   background-color: var(--track-list-active-color);
 }
@@ -100,6 +101,7 @@
   text-align: center;
   position: relative;
   flex-shrink: 0 !important;
+  font-size: 1em;
 }
 
 .Row__cell:first-of-type {
@@ -108,6 +110,9 @@
 
 .Row__cell:last-of-type {
   margin-right: 16px;
+}
+
+.Row__cell__text {
 }
 
 .Row__cell__label {
@@ -152,4 +157,9 @@
   animation-fill-mode: forwards;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+}
+
+.Sort-indicator {
+  display: inline-block;
+  vertical-align: middle;
 }

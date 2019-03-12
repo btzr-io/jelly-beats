@@ -21,6 +21,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 114px;
+  font-size: 0.96em;
 }
 .card .title {
   margin-top: 12px;
