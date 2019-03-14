@@ -1,0 +1,75 @@
+.profile-thumbnail {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  box-shadow: inset 0px 0px 0px 1px var(--bg-color);
+  padding: 0;
+  margin: 0;
+  margin-right: 4px;
+}
+
+.profile-label {
+  margin: 0 32px 0px 8px;
+}
+
+.profile-box {
+  text-align: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 32px 0;
+  margin: 0 32px;
+  border-bottom: 1px solid var(--card-bg-color);
+  /*
+  background-color: #111114;
+  */
+}
+
+.profile-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.profile-avatar {
+  height: 124px;
+  width: 124px;
+  overflow: hidden;
+  margin-right: 8px;
+}
+
+.profile-avatar--circle {
+  border-radius: 50%;
+}
+
+.profile-data {
+  margin: 16px;
+  text-align: left;
+}
+.name {
+  margin: 8px 0;
+  font-weight: bold;
+}
+
+.nickname {
+  font-size: 1em;
+  opacity: 0.64;
+}
+
+.tags-container {
+  margin: 32px 0;
+}
+
+.tag {
+  background-color: var(--button-bg-color);
+  padding: 4px 12px;
+  border-radius: 16px;
+  display: inline-block;
+  margin: 16px 8px 0 0;
+  text-transform: lowercase;
+  font-size: 0.8em;
+}

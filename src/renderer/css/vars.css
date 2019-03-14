@@ -1,17 +1,47 @@
 :root {
   --color-red: #fc5c65;
-  --color-primary: #778beb;
-  --main-color: #778beb;
-  --bg-color: rgba(18, 18, 20, 0.99);
-  --text-color: #fff;
-  --button-bg-color: #3f3f43;
-  --card-bg-color: #212125;
-  --card-alt-bg-color: #2a2a2f /* #2a2a2f */;
+  --color-green: #1dd1a1;
+  --color-yellow: #ffdd59;
+  --color-primary: #54a0ff;
 
-  --scrollbar-thumb-bg: #2a2a2f;
-  --scrollbar-track-bg: rgba(23, 25, 31, 0.99);
+  /* Default theme colors */
+  --default-palette-vibrant: #54a0ff;
+  --default-palette-dark: #25252d;
+
+  /* Adaptive theme colors */
+  --adaptive-palette-vibrant: var(--default-palette-vibrant);
+  --adaptive-palette-dark: var(--default-palette-dark);
+
+  /* Current theme colors*/
+  --color-palette-vibrant: var(--default-palette-vibrant);
+  --color-palette-dark: var(--default-palette-dark);
+
+  /* Accent color */
+  --main-color: var(--color-palette-vibrant);
+
+  --border-color: #1a1a1f;
+  --bg-color: #1a1a1f;
+  --text-color: #fff;
+  --text-size: 0.92em;
+  --subtext-color: #ababba;
+  --button-bg-color: #3c3c49;
+  --card-bg-color: #25252d;
+  --card-dark-bg-color: #151518;
+  --card-alt-bg-color: #2a2a2f;
+
+  --card-overlay-bg-color: rgba(26, 26, 31, 0.6);
+
+  --scrollbar-thumb-bg: #3c3c49;
+  --scrollbar-thumb-active-bg: #3c3c49;
+  --scrollbar-track-bg: transparent;
 
   --header-height: 48px;
   --player-height: 72px;
-  --sidebar-width: 220px;
+
+  --seekbar-height: 4px;
+  --sidebar-bg-color: #25252d;
+  --sidebar-active-color: #3c3c49;
+  --sidebar-width: 240px;
+
+  --track-list-active-color: var(--color-palette-dark);
 }

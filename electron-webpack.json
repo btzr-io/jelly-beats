@@ -1,7 +1,5 @@
 {
-  "main": {
-    "extraEntries": []
-  },
+  "main": {},
   "renderer": {
     "webpackConfig": "webpack.renderer.additions.js"
   }

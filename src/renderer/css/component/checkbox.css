@@ -1,0 +1,47 @@
+.checkbox-container input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  cursor: pointer;
+  position: absolute;
+}
+
+.checkbox-container input:checked ~ .checkbox {
+  opacity: 1;
+  border-color: var(--main-color);
+}
+
+.checkbox-container input:checked ~ .checkbox .icon {
+  opacity: 1;
+}
+
+.checkbox-container {
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.checkbox {
+  display: block;
+  width: 1em;
+  height: 1em;
+  margin: 0 auto;
+  border: 1px solid var(--subtext-color);
+  opacity: 0.64;
+  border-radius: 4px;
+  position: relative;
+  vertical-align: middle;
+}
+
+.checkbox .icon {
+  opacity: 0;
+  width: 94%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.checkbox .icon path {
+  fill: var(--main-color);
+}

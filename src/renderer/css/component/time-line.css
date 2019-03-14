@@ -1,0 +1,109 @@
+.time-line {
+  padding: 16px;
+}
+
+.bullet {
+  margin: 0 8px;
+}
+
+.time-line .event {
+  border-radius: 4px;
+  position: relative;
+  margin: 16px 48px;
+  color: var(--subtext-color);
+}
+.event--title {
+  text-align: left;
+}
+
+.event--header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  margin: 0;
+  position: relative;
+}
+
+.event--author {
+  color: var(--text-color);
+  margin-right: 8px;
+}
+
+.event--date {
+  opacity: 0.64;
+}
+
+.event--description {
+  border-radius: 4px;
+  padding: 16px;
+  background-color: var(--card-dark-bg-color);
+}
+
+.event--point {
+  padding: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  position: absolute;
+  right: 100%;
+  top: 0;
+  bottom: 0;
+  margin: auto 25px;
+  background-color: red;
+  background-color: var(--card-dark-bg-color);
+}
+
+.event:before {
+  content: '';
+  width: 4px;
+  height: 100%;
+  background-color: red;
+  position: absolute;
+  right: 100%;
+  margin: auto 32px;
+  top: 18px;
+  padding-bottom: 16px;
+  background-color: var(--card-dark-bg-color);
+}
+
+.event:last-of-type:before {
+  top: 0px;
+  height: 16px;
+}
+
+.event:only-of-type:before {
+  background: transparent;
+  height: 0;
+}
+
+.track-widget {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+}
+
+.track-widget--content {
+  margin: 0 16px;
+}
+
+.track-widget--title {
+  font-size: 1.12em;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.track-widget--author {
+  margin: 8px 0;
+  opacity: 0.8;
+}
+
+.track-widget--thumbnail {
+  height: 100px;
+  width: 100px;
+  background: var(--card-alt-bg-color);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

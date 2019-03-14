@@ -1,17 +1,42 @@
-const initialState = {}
+import settings from './defaultSettings'
+import { podcasts } from '@/apis/api'
+
+// Store properties undefined on "first render" #14
+// https://github.com/developit/stockroom/issues/14
+const initialState = {
+  ready: true,
+  streams: {},
+  podcasts,
+  settings,
+}
+
+initialState.searchQuery = null
+
+initialState.network = {
+  isReady: false,
+  connection: {},
+}
 
 initialState.navigation = {
-  stack: [],
-  currentPage: '/',
+  currentPage: '',
   currentQuery: {},
 }
 
 initialState.player = {
   paused: true,
-  isLoading: false,
+  loading: false,
   showPlayer: false,
   syncPaused: true,
-  currentTrack: {},
+  currentTrack: {
+    uri: null,
+  },
+  currentPlaylist: {
+    uri: null,
+    name: null,
+    index: 0,
+    totalTracks: 0,
+    skippedTracks: 0,
+  },
 }
 
 initialState.tooltip = {
@@ -22,8 +47,18 @@ initialState.tooltip = {
 
 initialState.cache = {}
 
-initialState.favorites = []
+initialState.playlists = {}
 
-initialState.downloads = {}
+initialState.history = {
+  stack: [],
+  forward: [],
+}
+
+initialState.collections = {
+  favorites: [],
+  downloads: [],
+}
+
+initialState.latestBlock = 0
 
 export default initialState

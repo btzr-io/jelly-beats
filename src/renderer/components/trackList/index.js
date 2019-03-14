@@ -1,14 +1,23 @@
 import React from 'react'
-import Progress from './view'
+import TrackList from './view'
+
 import { connect } from 'unistore/react'
 
 export default connect(
-  'player, favorites, downloads',
+  (state, props) => {
+    const { cache, streams, player, collections } = state
+    const { downloads, favorites } = collections
+    const { currentTrack, paused } = player
+    return { cache, streams, downloads, favorites, currentTrack, paused }
+  },
   {
-    purchase: 'purchase',
-    setTrack: 'setTrack',
+    storeTrack: 'storeTrack',
+    storeChannel: 'storeChannel',
+    storePalette: 'storePalette',
+    setPlaylist: 'setPlaylist',
     doNavigate: 'doNavigate',
+    attempPlay: 'triggerAttempPlay',
     togglePlay: 'triggerTogglePlay',
     toggleFavorite: 'toggleFavorite',
   }
-)(Progress)
+)(TrackList)

@@ -2,19 +2,49 @@
   height: 100%;
   margin: auto;
   width: var(--sidebar-width);
-  background: var(--card-bg-color);
+  background: var(--sidebar-bg-color);
   flex-shrink: 0;
+  overflow: auto;
+  font-size: 0.94em;
+  -webkit-user-select: none;
 }
 
 .nav__links {
+  margin: 0;
+}
+
+.nav__links--hidden {
+  display: none;
+}
+
+.nav__group {
   margin: 32px 0;
+}
+.nav__group--header {
+  color: var(--subtext-color);
+  opacity: 0.46;
+  padding: 0 12px;
+  font-size: 1em;
+  margin: 8px 12px;
+  cursor: pointer;
+}
+.nav__group--header .icon {
+  vertical-align: middle;
+  width: 1.26em;
+  margin-right: 4px;
+}
+
+.nav__group--title {
+  font-size: 0.78em;
+  font-weight: bold;
 }
 
 .nav__link {
   font-size: 1em;
   font-weight: 600;
-  padding: 8px;
-  margin: 8px 16px;
+  padding: 8px 12px;
+  margin: 0 12px;
+  margin-bottom: 8px;
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.3s ease;
@@ -29,11 +59,11 @@
 }
 
 .nav__link--active {
-  background: var(--button-bg-color);
+  background: var(--sidebar-active-color);
 }
 
 .link__body {
-  opacity: 0.64;
+  opacity: 0.52;
 }
 
 .link__icon {
@@ -62,4 +92,22 @@
 
 .link__icon + .link__label {
   margin-left: 16px;
+}
+
+/* Seekbar */
+.Slider {
+  margin: 12px 0;
+  flex-grow: 1;
+  position: relative;
+}
+
+.Slider .buffer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background-color: rgba(250, 250, 250, 0.32);
+  border-radius: 1em;
+  transition: width 0.3s ease;
 }

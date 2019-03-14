@@ -1,0 +1,154 @@
+{
+  "projectName": "jelly-beats",
+  "projectOwner": "btzr-io",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "btzr-io",
+      "name": "Baltazar Gomez",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/14793624?v=4",
+      "profile": "http://codepen.io/btzr-io",
+      "contributions": [
+        "doc",
+        "code",
+        "ideas",
+        "design",
+        "question",
+        "platform",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "dependabot-bot",
+      "name": "Dependabot",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/36207117?v=4",
+      "profile": "https://dependabot.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kodxana",
+      "name": "kodxana",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/16674412?v=4",
+      "profile": "https://github.com/kodxana",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "tomrimk",
+      "name": "Tomas Rimkus",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/31211514?v=4",
+      "profile": "https://github.com/tomrimk",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "guastallaigor",
+      "name": "Igor Guastalla",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/22016005?v=4",
+      "profile": "https://github.com/guastallaigor",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "izamglima",
+      "name": "Izabela Lima",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/3979577?v=4",
+      "profile": "http://izamglima.github.io",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "KumarManoj-S",
+      "name": "Manoj Kumar S",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/13919928?v=4",
+      "profile": "https://github.com/KumarManoj-S",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "micaelsbno",
+      "name": "micaelsbno",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/39452319?v=4",
+      "profile": "https://github.com/micaelsbno",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "aestevens",
+      "name": "Austin Stevens",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/9062913?v=4",
+      "profile": "https://github.com/aestevens",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "gcarlosr",
+      "name": "Carlos G",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/39308480?v=4",
+      "profile": "https://github.com/gcarlosr",
+      "contributions": [
+        "design"
+      ]
+    },
+    {
+      "login": "julianxhokaxhiu",
+      "name": "Julian Xhokaxhiu",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1237070?v=4",
+      "profile": "https://julianxhokaxhiu.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "michaelsanford",
+      "name": "Michael Sanford",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1800499?v=4",
+      "profile": "http://accidentalbeard.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "theonlymikeever",
+      "name": "Mike Kerslake",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6307066?v=4",
+      "profile": "http://www.mikekerslake.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "robotenique",
+      "name": "Juliano Garcia",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/8999467?v=4",
+      "profile": "https://linux.ime.usp.br/~robotenique/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "rogelio-o",
+      "name": "Rogelio Orts",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1966512?v=4",
+      "profile": "http://rogelioorts.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
+}

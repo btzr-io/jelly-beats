@@ -5,15 +5,23 @@ import Header from '@/components/header'
 import Player from '@/components/player'
 import SideBar from '@/components/sidebar'
 import navigate from '@/utils/navigate'
+import classnames from 'classnames'
+import Lbry from '@/apis/lbry'
+
+const TWO_POINT_FIVE_SECONDS = 2500
+const TWO_POINT_FIVE_MINUTES = 1000 * 60 * 2.5
 
 class App extends React.PureComponent {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
+    this.state = {
+      shouldRender: false,
+    }
   }
 
   componentDidUpdate(prevProps) {
     // Get current page
-    const { currentPage, currentQuery } = this.props.navigation
+    const { currentPage, currentQuery } = this.props.navigation || {}
 
     // Get previous navigation
     const prevNavigation = prevProps.navigation || {}
@@ -22,19 +30,53 @@ class App extends React.PureComponent {
     const query = currentQuery !== prevNavigation.currentQuery ? currentQuery : {}
 
     // Handle navigation
-    if (currentPage !== prevNavigation.currentPage) {
+    if (currentPage && currentPage !== prevNavigation.currentPage) {
       navigate(currentPage, query)
+    }
+
+    // Handle render
+    const { ready } = this.props
+
+    if (prevProps.ready !== ready) {
+      this.attempRender()
+    }
+  }
+
+  componentDidMount() {}
+
+  attempRender = () => {
+    const { ready, hydrated } = this.props
+    // Wait for store
+    if (ready && hydrated) {
+      const { updateBlockHeight, checkNetworkConnection } = this.props
+      // Tasks
+      checkNetworkConnection()
+      updateBlockHeight()
+      setInterval(updateBlockHeight, TWO_POINT_FIVE_MINUTES)
+      this.setState({ shouldRender: true })
     }
   }
 
   render() {
-    const { children, player } = this.props
-    const { showPlayer } = player || {}
+    const { shouldRender } = this.state
+
+    // Store properties undefined on "first render" #14
+    // https://github.com/developit/stockroom/issues/14
+    if (!shouldRender) {
+      return null
+    }
+
+    const { children, player, settings } = this.props
+    const { showPlayer } = player
+    const { adaptiveColors } = settings
 
     return (
       <React.Fragment>
         <Header />
-        <div id="window" className={showPlayer ? 'short' : ''}>
+        <div
+          id="window"
+          className={classnames({ short: showPlayer, adaptive: adaptiveColors })}
+        >
           <SideBar />
           <Router routes={routes} defaultRoute={'/'} />
           <Player />

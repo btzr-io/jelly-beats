@@ -7,7 +7,6 @@
   display: flex;
   font-size: 1em;
   font-weight: 700;
-  word-spacing: 4px;
   text-transform: uppercase;
   justify-content: center;
   align-items: center;
@@ -17,7 +16,7 @@
 }
 
 .button:disabled {
-  opacity: 0.4;
+  opacity: 0.24;
   cursor: default;
   pointer-events: none;
 }
@@ -30,6 +29,12 @@
   color: #fff;
   margin: 16px 0;
   padding: 8px 16px;
+}
+
+.button--secondary {
+  font-size: 0.84em;
+  border-radius: 32px;
+  padding: 4px 12px;
 }
 
 .button--empty-state {
@@ -49,11 +54,13 @@
 /* Card action button */
 
 .button--card-action {
-  margin-right: 8px;
+  margin-left: 16px;
   opacity: 0.64;
   border-radius: 50px;
   background: transparent;
   transition: all 0.4s ease;
+  display: inline-block;
+  vertical-align: middle;
 }
 .button--active,
 .button--card-action:hover {
@@ -62,10 +69,12 @@
 
 .button--toggle {
   opacity: 1;
+  /*
   animation-name: pulsate;
   animation-duration: 0.4s;
   animation-fill-mode: forwards;
   animation-timing-function: ease;
+  */
 }
 
 .button--header-nav {
@@ -81,8 +90,7 @@
   background: var(--button-bg-color);
 }
 
-/* Card action button #525257 */
-
+/* Table */
 .button--table-action {
   padding: 4px;
   border-radius: 16px;
@@ -102,19 +110,26 @@
   left: -8px;
   z-index: 1;
   border-radius: 32px;
-  background-color: var(--button-bg);
+  background-color: var(--button-bg-color);
+  transition: none;
+}
+
+/* Card action button #525257 */
+.button--toggle.button--action--overlay {
+  opacity: 1;
+  background: var(--main-color);
   transition: none;
 }
 
 .button--toggle.button--table-action--overlay {
   opacity: 1;
-  background: var(--color-primary);
+  background: var(--main-color);
   transition: none;
 }
 
 .button--table-action--overlay.button--toggle::before {
   border-radius: 50%;
-  background: var(--color-primary);
+  background: var(--main-color);
   width: 100%;
   height: 100%;
   content: '';
@@ -154,12 +169,12 @@
 }
 
 .button--card-action--overlay.button--toggle {
-  /* background: var(--color-primary); */
-  background: var(--color-primary);
+  /* background: var(--main-color); */
+  background: var(--main-color);
 }
 .button--card-action--overlay.button--toggle::before {
   border-radius: 50%;
-  background: var(--color-primary);
+  background: var(--main-color);
   width: 4em;
   height: 4em;
   content: '';
@@ -180,6 +195,88 @@
   animation-iteration-count: infinite;
 }
 
+.button--drop {
+  padding: 8px 16px;
+  height: 100%;
+  text-transform: none;
+  margin: 0 8px;
+  font-weight: normal;
+  background-color: transparent;
+  position: relative;
+}
+.button--drop:active,
+.button--drop.button--active {
+  background-color: var(--card-alt-bg-color);
+}
+
+.button--drop.button--active .drop-menu {
+  opacity: 1;
+  height: initial;
+  transition: opacity 0.3s ease;
+}
+
+.button--player-control,
+.button--player-action {
+  border: 0;
+  display: inline-block;
+  color: inherit;
+  font-size: 1em;
+  padding: 4px;
+  opacity: 0.64;
+  margin: 0 4px;
+  background: transparent;
+  transition: opacity 0.3s ease;
+}
+
+.button--player-main-action {
+  border: 0;
+  display: inline-block;
+  padding: 4px;
+  margin: 0 4px;
+  border-radius: 50%;
+  background-color: var(--button-bg-color);
+}
+
+.button--toggle.button--player-main-action {
+  background-color: var(--color-palette-vibrant);
+}
+
+.button--player-control {
+  opacity: 1;
+  border-radius: 50%;
+}
+
+.button--player-control:hover {
+  background-color: var(--button-bg-color);
+}
+
+.button--player-control svg path {
+  transition: fill 0.2s ease;
+}
+
+.button--toggle.button--player-action {
+  opacity: 1;
+}
+.button--player-action:hover {
+  background: transparent;
+}
+
+.button--player-action svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin: auto;
+}
+
+.button--search {
+  opacity: 0.64;
+  background: transparent;
+}
+
+.button--search:focus,
+.button--search:hover {
+  opacity: 1;
+}
+
 /* Button elements */
 
 .button_icon {
@@ -191,4 +288,8 @@
 
 .button_icon + .button_label {
   margin: 0 8px;
+}
+
+.button_icon svg path {
+  color: var(--subtext-color);
 }

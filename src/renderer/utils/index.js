@@ -3,3 +3,8 @@ export function updateObject(oldObject, newValues) {
   // to Object.assign to ensure we correctly copy data instead of mutating
   return Object.assign({}, oldObject, newValues)
 }
+
+// arr = [arr1, arr2]
+export function mergeDedupe(arr) {
+  return [...new Set([].concat(...arr))]
+}

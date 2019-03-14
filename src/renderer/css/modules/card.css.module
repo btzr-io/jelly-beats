@@ -1,10 +1,13 @@
 .card {
-  width: 46%;
-  max-width: 13em;
+  width: 164px;
   display: inline-block;
-  padding: 2%;
+  margin: 16px 0;
+  margin-right: 32px;
   text-align: left;
+  cursor: pointer;
   vertical-align: top;
+  border-radius: 0;
+  white-space: normal;
   overflow: hidden;
 }
 
@@ -17,15 +20,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100px;
+  font-size: 0.94em;
+  margin: 16px 0;
 }
 .card .title {
-  margin-top: 8px;
   font-size: 0.96em;
   font-weight: 600;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   flex-shrink: 0;
 }
@@ -37,15 +40,19 @@
 
 .card .subtitle {
   opacity: 0.5;
-  width: 80%;
   margin-top: 4px;
   font-size: 0.84em;
   font-weight: 600;
   overflow: hidden;
+  cursor: pointer;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   flex-shrink: 0;
+}
+
+.card .subtitle:hover {
+  text-decoration: underline;
 }
 
 .placeholder .title {
@@ -83,29 +90,9 @@
 }
 
 .actions {
-  margin-top: 8px;
+  margin-top: 16px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
-}
-
-@media (min-width: 768px) {
-   .card {
-    width: 29.3%;
-  }
-}
-
-@media (min-width: 1000px) {
-   .card {
-    width: 22%;
-    padding: 0.6em;
-  }
-}
-
-@media (min-width: 1200px) {
-   .card {
-    width: 14.5%;
-    padding: 0.6em;
-  }
 }

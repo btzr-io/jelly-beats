@@ -39,7 +39,7 @@ class Router extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { defaultRoute } = this.props
+    const { defaultRoute, doNavigate } = this.props
     // Listen for changes to the current location.
     const unlisten = history.listen((location, action) => {
       // Get route location
@@ -51,7 +51,7 @@ class Router extends React.PureComponent {
       this.resolve(route, params)
     })
     // if defaultRoute
-    defaultRoute && history.push({ hash: defaultRoute })
+    defaultRoute && doNavigate(defaultRoute)
   }
 
   render() {

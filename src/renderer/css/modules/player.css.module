@@ -5,9 +5,9 @@
   left: 0;
   right: 0;
   height: var(--player-height);
-  border-top: 1px solid var(--bg-color);
+  border-top: 1px solid var(--border-color);
   display: inline-block;
-  background: var(--card-bg-color);
+  background: var(--sidebar-bg-color);
   transform: translateY(100%);
   transition: transform 300ms ease;
   will-change: transform;
@@ -45,8 +45,7 @@
 }
 
 .player .seek {
-  margin: 12px 0;
-  flex-grow: 1;
+
 }
 
 .player .seekBar {
@@ -101,7 +100,7 @@
 }
 
 .button:disabled {
-  opacity: 0.4;
+  opacity: 0.24;
   cursor: default;
 }
 
@@ -111,15 +110,17 @@
   display: flex;
   align-items: center;
   align-content: center;
-  padding: 8px;
-  margin: 0 8px;
+  padding: 0px;
+  margin: 0;
   flex-shrink: 1;
   flex-grow: 0;
-  border-radius: 4px;
+  height: 100%;
+  width: var(--sidebar-width);
+  box-sizing: border-box;
+  text-align: left;
 }
 
 .stack:hover {
-  background: var(--button-bg-color);
 }
 
 .stack:hover .stackLabel {
@@ -127,18 +128,35 @@
 }
 
 .stackLabel {
-  display: inline-block;
-  margin: 0 16px;
-  font-size: 0.96em;
+  margin: 0;
+  margin-left: 16px;
+  font-size: 0.86em;
   font-weight: 600;
+}
+.stackLabel p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin: 2px 0;
+}
+.stackLabel .artist {
   opacity: 0.64;
+}
+
+.labelLink {
+  cursor: pointer;
+}
+
+.labelLink:hover {
+  text-decoration: underline;
 }
 
 .stackThumb {
   flex-shrink: 0;
-  height: 36px;
-  width: 36px;
-  margin: 0;
+  height: 40px;
+  width: 40px;
+  margin-left: 16px;
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.4);
   background-position: center;
@@ -168,6 +186,11 @@
 
 .trackData .trackArtist {
   opacity: 0.64;
+  cursor: pointer;
+}
+
+.trackData .trackArtist:hover {
+  text-decoration: underline;
 }
 
 .trackData .divider {

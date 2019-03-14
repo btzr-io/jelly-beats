@@ -3,6 +3,8 @@ import SideBar from './view'
 import { connect } from 'unistore/react'
 
 export default connect(
-  'navigation, favorites',
-  { doNavigate: 'doNavigate' }
+  'navigation',
+  {
+    doNavigate: 'doNavigate',
+  }
 )(SideBar)

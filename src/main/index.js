@@ -1,65 +1,63 @@
-import { app, BrowserWindow } from 'electron'
-import path from 'path'
-import { format as formatUrl } from 'url'
+import { app } from 'electron'
+import findProcess from 'find-process'
 
-const isDevelopment = process.env.NODE_ENV !== 'production'
+import Daemon from './daemon'
+import discordClient from './discord'
+import createMainWindow from './create-window'
 
-//localhost url
-const localURL = `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`;
+const IS_WINDOWS = process.platform === 'win32'
+const appState = {}
 
-//production url
-const formattedURL = formatUrl({
-  pathname: path.join(__dirname, 'index.html'),
-  protocol: 'file',
-  slashes: true,
+// LBRY daemon instace
+let daemon = null
+// Main window instace
+let rendererWindow = null
+
+// Discord integration
+discordClient()
+
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.on('ready', async () => {
+  // Main window props
+  const windowProps = {
+    title: `${app.getName()} ~ ${app.getVersion()}`,
+    webPreferences: { webSecurity: false },
+  }
+
+  // Create main BrowserWindow when electron is ready
+  rendererWindow = createMainWindow(windowProps)
+
+  // Windows WMIC returns lbrynet start with 2 spaces. https://github.com/yibn2008/find-process/issues/18
+  const processListArgs = IS_WINDOWS ? 'lbrynet  start' : 'lbrynet start'
+  const processList = await findProcess('name', processListArgs)
+  const isDaemonRunning = processList.length > 0
+
+  // Start LBRY DAEMON
+  if (!isDaemonRunning) {
+    daemon = new Daemon()
+    daemon.on('exit', () => {
+      daemon = null
+    })
+    daemon.launch()
+  }
 })
 
-// global reference to mainWindow (necessary to prevent window from being garbage collected)
-let mainWindow
-
-function createMainWindow() {
-  const window = new BrowserWindow({
-    webPreferences: {
-      webSecurity: false,
-    },
-  })
-
-  //open the Dev tools only if the environment is not production
-  isDevelopment && window.webContents.openDevTools();
-
-  //pick url based on the deployment environment
-  window.loadURL(isDevelopment ? localURL : formattedURL);
-
-  window.on('closed', () => {
-    mainWindow = null
-  })
-
-  window.webContents.on('devtools-opened', () => {
-    window.focus()
-    setImmediate(() => {
-      window.focus()
-    })
-  })
-
-  return window
-}
-
-// quit application when all windows are closed
-app.on('window-all-closed', () => {
-  // on macOS it is common for applications to stay open until the user explicitly quits
+// Quit when all windows are closed.
+app.on('window-all-closed', function() {
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
     app.quit()
   }
 })
 
-app.on('activate', () => {
-  // on macOS it is common to re-create a window even after all windows have been closed
-  if (mainWindow === null) {
-    mainWindow = createMainWindow()
+app.on('will-quit', event => {
+  if (daemon) {
+    daemon.quit()
   }
-})
-
-// create main BrowserWindow when electron is ready
-app.on('ready', () => {
-  mainWindow = createMainWindow()
+  if (rendererWindow) {
+    rendererWindow = null
+  }
 })

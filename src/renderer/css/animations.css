@@ -16,6 +16,14 @@
   animation-iteration-count: infinite;
 }
 
+.animated--fade-in {
+  animation-name: fade-in;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-direction: normal;
+  animation-timing-function: ease;
+}
+
 @-webkit-keyframes pulsate {
   0% {
     -webkit-transform: scale(1, 1);
@@ -72,5 +80,14 @@
   }
   to {
     -webkit-transform: rotate(359deg);
+  }
+}
+
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

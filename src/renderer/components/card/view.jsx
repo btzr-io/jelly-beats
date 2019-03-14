@@ -1,13 +1,21 @@
 import React from 'react'
+import Icon from '@mdi/react'
+import Lbry from '@/apis/lbry'
+import classnames from 'classnames'
+
+// import worker bundle
+import Vibrant from 'node-vibrant/lib/bundle-worker'
+
+import * as icons from '@/constants/icons'
+
+// Components
 import Button from '@/components/button'
 import Health from '@/components/common/health'
 import Loader from '@/components/common/loader'
-import Icon from '@mdi/react'
+import Thumbnail from '@/components/common/thumbnail'
+import PriceLabel from '@/components/common/priceLabel'
+
 import css from '@/css/modules/card.css.module'
-import Thumbnail from './thumbnail'
-import { Lbry } from 'lbry-redux'
-import { getTags } from '@/utils/tags'
-import * as icons from '@/constants/icons'
 
 class Card extends React.PureComponent {
   constructor(props) {
@@ -15,23 +23,24 @@ class Card extends React.PureComponent {
     this.state = { isReady: false }
   }
 
-  attempPlay = () => {
-    const { uri, player, downloads, setTrack, purchase, togglePlay } = this.props
-    //Get player status
-    const { paused, isLoading, currentTrack } = player || {}
-    //Get stream status
-    const { isAvailable, isDownloading } = downloads[uri] || {}
-    const shouldTogglePlay = currentTrack ? currentTrack.uri === uri : false
-    if (shouldTogglePlay) {
-      !isDownloading && !isLoading && togglePlay()
-    } else if (uri) {
-      setTrack(uri)
-      purchase(uri)
-    }
+  getPalette(src) {
+    // Adaptive UI
+    const { storePalette, uri } = this.props
+    Vibrant.from(src)
+      .quality(10)
+      .maxColorCount(32)
+      .getPalette()
+      .then(palette => {
+        const rgb = palette.DarkMuted.getRgb()
+        const dark = `rgba(${rgb[0]},${rgb[1]},${rgb[2]}, 0.4)`
+        const vibrant = palette.Vibrant.getHex()
+
+        storePalette(uri, { dark, vibrant })
+      })
   }
 
   componentDidMount() {
-    const { uri, cache, favorites } = this.props
+    const { uri, cache, favorites, storePalette } = this.props
     cache[uri] && this.setState({ isReady: true })
   }
 
@@ -47,30 +56,62 @@ class Card extends React.PureComponent {
 
   render() {
     // Get props
-    const { uri, cache, downloads, favorites, player, toggleFavorite } = this.props
+    const {
+      uri,
+      index,
+      cache,
+      player,
+      favorites,
+      fileSource,
+      doNavigate,
+      streamSource,
+      playlist,
+      setPlaylist,
+      attempPlay,
+      togglePlay,
+      toggleFavorite,
+      isLoading,
+    } = this.props
+
+    // Temp fix for:
+    // Store properties undefined on "first render" #287
+    if (!cache) return null
+
+    // Remove unresolved claims
+    if (cache && !cache[uri]) return null
 
     // Get state
     const { isReady } = this.state
 
     // Get metadata
-    const { title, artist, thumbnail } = cache[uri] || {}
+    const { title, artist, thumbnail, palette, fee } = (cache && cache[uri]) || {}
 
     //Get stream status
-    const { completed, isAvailable, isDownloading } = downloads[uri] || {}
+    const { completed, isAvailable, isDownloading } = fileSource
 
     //Get player status
-    const { paused, isLoading, currentTrack } = player || {}
-    const isActive = currentTrack ? currentTrack.uri === uri : false
+    const { paused, currentTrack } = player || {}
+    const isActive = (completed || streamSource) && currentTrack.uri === uri
     const isPlaying = !paused && isActive
+
     // Favorite selector
     const isFavorite = favorites.indexOf(uri) > -1
-    const showOverlay = !(isAvailable === false) && (isPlaying || isDownloading)
+    const showOverlay = isAvailable !== false && (isPlaying || isLoading)
 
-    const buttonIcon = isDownloading
-      ? icons.SPINNER
-      : !isPlaying
-        ? icons.PLAY
-        : icons.PAUSE
+    const shouldPurchase = !isLoading && !completed
+    let buttonIcon = isLoading ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE
+
+    const action = () => {
+      // Toggle play or purchase
+      if (isActive) {
+        togglePlay()
+      } else if (!isLoading && !isPlaying) {
+        attempPlay(uri, null)
+      }
+
+      // Update playlist state
+      playlist && setPlaylist({ ...playlist, index })
+    }
 
     return (
       <div
@@ -81,42 +122,62 @@ class Card extends React.PureComponent {
           (isAvailable === false ? css.block : '')
         }
       >
-        <Thumbnail className={css.thumb} src={thumbnail} showOverlay={showOverlay}>
-          {!(isAvailable === false) && (
-            <Button
-              icon={buttonIcon}
-              type="card-action--overlay"
-              size="large-x"
-              toggle={isPlaying && !isDownloading}
-              animation={isDownloading && 'spin'}
-              onClick={() => !isDownloading && this.attempPlay()}
-            />
-          )}
+        <Thumbnail className={'card--thumbnail'} src={thumbnail}>
+          <div
+            className={classnames('card--overlay', { 'card--overlay-show': showOverlay })}
+          >
+            {!(isAvailable === false) && (
+              <Button
+                icon={buttonIcon}
+                iconColor={fee && !isPlaying ? 'var(--color-yellow)' : ''}
+                type="card-action--overlay"
+                size="large-x"
+                toggle={isPlaying && !isLoading}
+                animation={isLoading && 'spin'}
+                onClick={() => {
+                  action()
+                }}
+              />
+            )}
+          </div>
         </Thumbnail>
         <div className={css.content}>
           <div className={css.metadata}>
-            <div className={css.title} onClick={() => isReady && this.attempPlay()}>
+            <div className={css.title} onClick={() => {}}>
               <Health status={{ completed, isAvailable, isDownloading }} />
               {title}
             </div>
-            <div className={css.subtitle}>{artist}</div>
+            {artist && (
+              <div
+                className={css.subtitle}
+                onClick={() => doNavigate('/profile', { uri: artist.channelUri })}
+              >
+                {artist.channelName}
+              </div>
+            )}
           </div>
           <div className={css.actions}>
-            <Button
-              toggle={isFavorite}
-              iconColor={isFavorite ? 'var(--color-red)' : ''}
-              icon={isFavorite ? icons.HEART : icons.HEART_OUTLINE}
-              type="card-action"
-              size="large"
-              tooltip={{ text: `${isFavorite ? 'Remove from' : 'Add to'} favorites` }}
-              onClick={() => uri && toggleFavorite(uri)}
-            />
-            <Button
-              icon={icons.PLAYLIST_PLUS}
+            <PriceLabel className={'card_label'} fee={fee} />
+            <div>
+              <Button
+                toggle={isFavorite}
+                iconColor={isFavorite ? 'var(--color-red)' : ''}
+                icon={isFavorite ? icons.HEART : icons.HEART_OUTLINE}
+                type="card-action"
+                size="large"
+                // TODO: FIX IT!
+                // tooltip={{ text: `${isFavorite ? 'Remove from' : 'Add to'} favorites` }}
+                onClick={() => uri && toggleFavorite(uri)}
+              />
+              {/*<Button
+              icon={icons.PLUS}
               size="large"
               type="card-action"
               onClick={() => null}
-            />
+              disabled={true}
+              />
+              */}
+            </div>
           </div>
         </div>
       </div>

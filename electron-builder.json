@@ -1,0 +1,43 @@
+{
+  "appId": "io.jelly.beats",
+  "productName": "Jelly-beats",
+  "publish": ["github"],
+  "mac": {
+    "category": "public.app-category.music"
+  },
+  "protocols": [
+    {
+      "name": "LBRY URI",
+      "schemes": ["lbry"],
+      "role": "Viewer"
+    }
+  ],
+  "linux": {
+    "target": "deb",
+    "category": "Audio"
+  },
+  "deb": {
+    "depends": [
+      "gconf2",
+      "gconf-service",
+      "libnotify4",
+      "libappindicator1",
+      "libxtst6",
+      "libnss3",
+      "libsecret-1-0"
+    ]
+  },
+  "nsis": {
+    "perMachine": true,
+    "createDesktopShortcut": "always"
+  },
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64", "ia32"]
+      }
+    ]
+  },
+  "artifactName": "${productName}_${version}.${ext}"
+}
