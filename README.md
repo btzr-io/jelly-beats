@@ -53,7 +53,7 @@ $ yarn dev
 ## Build
 
 ```sh
-# Run the app
+# Build the app
 $ yarn dist
 ```
 
@@ -63,18 +63,18 @@ $ yarn dist
 | **Windows** | **.exe** - Inside dist folder. |
 | **MacOS**   | **.dmg** - Inside dist folder. |
 
+
 ## Support
 
-If you'd like to help support the future of the project, please consider making a donation:
+If you'd like to help support the future of the project, please report [bugs](https://help.github.com/en/articles/creating-an-issue) or consider making a donation:
 
-**Lbry credits (LBC):**
-> bQaC73Mgs7D2vPk7oogej6Zx9YvGqf7znw
 
-**Bitcoin (BTC):**
-> 36StGtp6CVwYN8JkiqfcTnZKWeYiKbahuH
+| Crypto | Adress |
+| ------ | ------ |
+| **Bitcoin** | 36StGtp6CVwYN8JkiqfcTnZKWeYiKbahuH |
+| **Etherum** | 0xd3bcec62285b9209d96499f1d05d257eaf5b0439 |
+| **Lbry credits (LBC)** | bQaC73Mgs7D2vPk7oogej6Zx9YvGqf7znw |
 
-**Etherum (ETH):**
-> 0xd3bcec62285b9209d96499f1d05d257eaf5b0439
 
 ## Awesome contributors :tada:
 
