@@ -318,16 +318,15 @@ export default function(store) {
       if (tracks && limit) {
         // Get claim uri
         const uri = tracks[jump]
-        const stream = selectStreamByUri(state, uri)
+        const fileInfo = selectStreamByUri(state, uri)
         const isFree = cache[uri] && !cache[uri].fee
+        const { isAvailable, completed } = fileInfo || {}
+        const shouldSkip = !isFree && !completed
+        const shouldAttempPlay = uri && !shouldSkip
 
-        const { isAvailable, completed } = stream || {}
-
-        const shouldAttempPurchase = (!uri || !stream) && isFree
-
-        if (shouldAttempPurchase || completed) {
+        if (shouldAttempPlay) {
           store.action(playerActions.triggerAttempPlay)(uri, { name, index: jump })
-        } else if (!isAvailable || !isFree) {
+        } else if (shouldSkip) {
           // Skip track if there is no source to play
           store.action(playerActions[`triggerSkip${direction}Track`])()
         } else {
@@ -352,7 +351,7 @@ export default function(store) {
       }
     },
 
-    triggerAttempPlay(state, uri, playlist, forcePurchased) {
+    triggerAttempPlay(state, uri, playlist) {
       const { cache, player, collections } = state
 
       //Get player status
@@ -386,6 +385,7 @@ export default function(store) {
       } else if (shouldStreamSource) {
         store.action(playerActions.setTrack)(uri)
         store.action(streamActions.createStream)(uri)
+        playlist && store.action(playerActions.setPlaylistIndex)(playlist.index)
       }
     },
 
