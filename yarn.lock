@@ -625,15 +625,9 @@
     "@babel/plugin-transform-react-jsx-self" "^7.0.0"
     "@babel/plugin-transform-react-jsx-source" "^7.0.0"
 
-"@babel/runtime@^7.0.0":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.2.0":
   version "7.3.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.4.tgz#73d12ba819e365fcf7fd152aed56d6df97d21c83"
-  dependencies:
-    regenerator-runtime "^0.12.0"
-
-"@babel/runtime@^7.2.0":
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
   dependencies:
     regenerator-runtime "^0.12.0"
 
@@ -4664,9 +4658,9 @@ mem@^4.0.0:
     mimic-fn "^1.0.0"
     p-is-promise "^1.1.0"
 
-memoize-one@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-3.1.1.tgz#ef609811e3bc28970eac2884eece64d167830d17"
+"memoize-one@>=3.1.1 <6":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.0.0.tgz#d55007dffefb8de7546659a1722a5d42e128286e"
 
 memory-fs@^0.4.0, memory-fs@~0.4.1:
   version "0.4.1"
@@ -6103,12 +6097,12 @@ react-switch@^4.1.0:
   dependencies:
     prop-types "^15.6.2"
 
-react-window@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/react-window/-/react-window-1.5.2.tgz#39dbfd7aa47c1d80b37928f3269f7112a5900294"
+react-window@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/react-window/-/react-window-1.7.0.tgz#d9a5f3a2955e0244a3846cc22561dadb94770cc6"
   dependencies:
     "@babel/runtime" "^7.0.0"
-    memoize-one "^3.1.1"
+    memoize-one ">=3.1.1 <6"
 
 react@^16.8.3:
   version "16.8.3"
