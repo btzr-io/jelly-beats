@@ -12,12 +12,12 @@
  <a href="https://github.com/btzr-io/jelly-beats/releases">
    <img src="https://img.shields.io/github/downloads/btzr-io/jelly-beats/total.svg?style=for-the-badge" alt="Github All Releases"/>
  </a>
- <a href="https://github.com/btzr-io/electron-preact-app/blob/master/LICENSE">
-   <img src="https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=for-the-badge" alt="license" />
- </a>
  <a href="https://discord.gg/yq54qbS">
    <img alt="undefined" src="https://img.shields.io/discord/557272918854336513.svg?style=for-the-badge">
  </a> 
+ <a href="https://github.com/btzr-io/electron-preact-app/blob/master/LICENSE">
+   <img src="https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=for-the-badge" alt="license" />
+ </a>
  <a href="https://github.com/btzr-io/jelly-beats#support">
    <img src="https://img.shields.io/badge/support-yellow.svg?style=for-the-badge" alt="license" />
  </a>
