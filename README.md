@@ -15,7 +15,7 @@
  <a href="https://discord.gg/yq54qbS">
    <img alt="undefined" src="https://img.shields.io/discord/557272918854336513.svg?style=for-the-badge">
  </a> 
- <a href="https://github.com/btzr-io/electron-preact-app/blob/master/LICENSE">
+ <a href="https://github.com/btzr-io/jelly-beats/blob/master/LICENSE">
    <img src="https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=for-the-badge" alt="license" />
  </a>
  <a href="https://github.com/btzr-io/jelly-beats#support">
