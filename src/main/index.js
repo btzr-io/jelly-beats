@@ -24,6 +24,7 @@ app.on('ready', async () => {
   const windowProps = {
     title: `${app.getName()} ~ ${app.getVersion()}`,
     webPreferences: { webSecurity: false },
+    autoHideMenuBar: true,
   }
 
   // Create main BrowserWindow when electron is ready
