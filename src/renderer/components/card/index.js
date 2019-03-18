@@ -10,8 +10,7 @@ export default connect(
     const { favorites, downloads } = collections || {}
     const fileSource = selectStreamByUri(state, uri) || {}
     const streamSource = !fileSource.isAvailable && streams[uri]
-    const isLoading = fileSource.isDownloading || (streamSource && !streamSource.ready)
-    return { cache, player, favorites, fileSource, streamSource, isLoading }
+    return { cache, player, favorites, fileSource, streamSource }
   },
   {
     storePalette: 'storePalette',

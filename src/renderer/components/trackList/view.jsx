@@ -20,9 +20,10 @@ const ROW_HEIGHT = 50
 // Memoized data
 const createItemData = memoize((
   // State
-  items,
   cache,
+  items,
   paused,
+  loading,
   streams,
   downloads,
   favorites,
@@ -36,10 +37,11 @@ const createItemData = memoize((
   handleItemChecked
 ) => ({
   // State
-  items,
   cache,
-  streams,
+  items,
   paused,
+  loading,
+  streams,
   downloads,
   favorites,
   currentTrack,
@@ -197,9 +199,10 @@ class TrackList extends React.PureComponent {
     // props
     const {
       cache,
-      streams,
       tracks,
       paused,
+      loading,
+      streams,
       downloads,
       favorites,
       currentTrack,
@@ -210,9 +213,10 @@ class TrackList extends React.PureComponent {
     // Memoized props
     const data = createItemData(
       // State
-      tracks,
       cache,
+      tracks,
       paused,
+      loading,
       streams,
       downloads,
       favorites,

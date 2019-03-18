@@ -7,8 +7,8 @@ export default connect(
   (state, props) => {
     const { cache, streams, player, collections } = state
     const { downloads, favorites } = collections
-    const { currentTrack, paused } = player
-    return { cache, streams, downloads, favorites, currentTrack, paused }
+    const { currentTrack, paused, loading } = player
+    return { cache, streams, downloads, favorites, currentTrack, paused, loading }
   },
   {
     storeTrack: 'storeTrack',

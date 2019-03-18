@@ -70,7 +70,6 @@ class Card extends React.PureComponent {
       attempPlay,
       togglePlay,
       toggleFavorite,
-      isLoading,
     } = this.props
 
     // Temp fix for:
@@ -93,6 +92,10 @@ class Card extends React.PureComponent {
     const { paused, currentTrack } = player || {}
     const isActive = (completed || streamSource) && currentTrack.uri === uri
     const isPlaying = !paused && isActive
+    const isLoading =
+      (isActive && player.loading) ||
+      fileSource.isDownloading ||
+      (streamSource && !streamSource.ready)
 
     // Favorite selector
     const isFavorite = favorites.indexOf(uri) > -1
@@ -103,7 +106,7 @@ class Card extends React.PureComponent {
 
     const action = () => {
       // Toggle play or purchase
-      if (isActive) {
+      if (isActive && !isLoading) {
         togglePlay()
       } else if (!isLoading && !isPlaying) {
         attempPlay(uri, null)

@@ -55,7 +55,6 @@ class Player extends React.PureComponent {
       duration: 0,
       currentTime: 0,
       bufferedProgress: 0,
-      updatingBufferedProgress: false,
     }
   }
 
@@ -80,31 +79,35 @@ class Player extends React.PureComponent {
     }
   }
 
-  play = () => {
-    const audio = this.audioElement.current
-    audio.play()
-
+  playAudio = async () => {
+    const { duration, currentTime } = this.state
     const { cache, player, settings } = this.props
     const { currentTrack } = player
+    const audio = this.audioElement.current
 
-    if (currentTrack) {
-      const { duration, currentTime } = this.state
-      currentTrack.duration = duration || 0
-      currentTrack.currentTime = currentTime || 0
+    try {
+      await audio.play()
 
-      const { palette } = cache[currentTrack.uri] || {}
-
-      // Adaptive colors
-      if (palette) {
-        const root = document.documentElement
-        root.style.setProperty('--adaptive-palette-dark', palette.dark)
-        root.style.setProperty('--adaptive-palette-vibrant', palette.vibrant)
+      if (currentTrack) {
+        // Discord integration
+        if (settings && settings.discord) {
+          currentTrack.duration = duration || 0
+          currentTrack.currentTime = currentTime || 0
+          ipcRenderer.send('update-discord-presence', currentTrack)
+        }
       }
+    } catch (err) {
+      // TODO: Better error handler
+      // Silent error: https://github.com/btzr-io/jelly-beats/issues/301
+      // console.error(err)
+    }
+  }
 
-      // Discord integration
-      if (settings && settings.discord) {
-        ipcRenderer.send('update-discord-presence', currentTrack)
-      }
+  play = () => {
+    const audio = this.audioElement.current
+
+    if (audio.paused) {
+      this.playAudio()
     }
   }
 
@@ -128,12 +131,11 @@ class Player extends React.PureComponent {
     // Reset state
     this.setState({
       ready: false,
-      waiting: false,
       duration: 0,
       currentTime: 0,
       bufferedProgress: 0,
     })
-    updatePlayerStatus({ loading: true })
+    updatePlayerStatus({ loading: true, waiting: false })
   }
 
   toggleRepeat = () => {
@@ -182,8 +184,7 @@ class Player extends React.PureComponent {
     const { updatePlayerStatus } = this.props
     const audio = this.audioElement.current
     this.updateBuffer()
-    this.setState({ waiting: false })
-    updatePlayerStatus({ paused: audio.paused, syncPaused: audio.paused })
+    updatePlayerStatus({ loading: false, paused: audio.paused, syncPaused: audio.paused })
   }
 
   handleEnded = () => {
@@ -207,8 +208,9 @@ class Player extends React.PureComponent {
   }
 
   handleWaiting = () => {
+    const { updatePlayerStatus } = this.props
     this.updateBuffer()
-    this.setState({ waiting: true })
+    updatePlayerStatus({ loading: true })
   }
 
   toggleEventListeners(type) {
@@ -300,7 +302,7 @@ class Player extends React.PureComponent {
   }
 
   render() {
-    const { ready, waiting, repeat, duration, currentTime, bufferedProgress } = this.state
+    const { ready, repeat, duration, currentTime, bufferedProgress } = this.state
     const {
       player,
       navigation,
@@ -320,7 +322,7 @@ class Player extends React.PureComponent {
       isPlayingCollection,
     } = this.props
 
-    const { paused, syncPaused, currentTrack, showPlayer } = player
+    const { loading, paused, syncPaused, currentTrack, showPlayer } = player
     const { uri, title, artist, thumbnail } = currentTrack
     const { currentPage, currentQuery } = navigation
 
@@ -336,7 +338,7 @@ class Player extends React.PureComponent {
 
     // TODO: OPTIMIZE
     const currentTimeProgress = (currentTime / duration) * 100
-    const isBusy = isLoading || !bufferedProgress || waiting
+    const isBusy = isLoading || !bufferedProgress || loading
     const isPlaying = !paused && ready && !isBusy
     const buttonIcon = isBusy ? icons.SPINNER : !isPlaying ? icons.PLAY : icons.PAUSE
 

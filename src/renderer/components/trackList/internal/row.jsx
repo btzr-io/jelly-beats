@@ -17,12 +17,13 @@ import RowIndexRenderer from './rowIndexRenderer'
 const Row = React.memo(({ data, index, style }) => {
   // Props
   const {
+    cache,
     items,
     paused,
-    cache,
+    loading,
     streams,
-    favorites,
     downloads,
+    favorites,
     currentTrack,
     selectedItems,
   } = data
@@ -40,7 +41,8 @@ const Row = React.memo(({ data, index, style }) => {
   const isActive = (completed || streamSource) && currentTrack.uri === item
   const isSelected = item && selectedItems && selectedItems[item] ? true : false
   const isPlaying = !paused && isActive
-  const isLoading = isDownloading || (streamSource && !streamSource.ready)
+  const isLoading =
+    (isActive && loading) || isDownloading || (streamSource && !streamSource.ready)
 
   // Main button action
   const handlePlay = () => {
