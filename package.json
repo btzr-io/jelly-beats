@@ -44,7 +44,7 @@
     "proxy-polyfill": "^0.3.0",
     "rc-slider": "^8.6.9",
     "react": "^16.8.3",
-    "react-dom": "^16.8.3",
+    "react-dom": "^16.8.6",
     "react-measure": "^2.3.0",
     "react-switch": "^4.1.0",
     "react-window": "^1.8.1",
