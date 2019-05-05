@@ -6057,9 +6057,9 @@ rc-animate@2.x:
     raf "^3.4.0"
     react-lifecycles-compat "^3.0.4"
 
-rc-slider@^8.6.7:
-  version "8.6.7"
-  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-8.6.7.tgz#fa0cbbd0251394c7cda8dd1b62d10bb7e9b1b840"
+rc-slider@^8.6.9:
+  version "8.6.9"
+  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-8.6.9.tgz#b32148a498c927c93f20dc1f95e8682c4924bf8e"
   dependencies:
     babel-runtime "6.x"
     classnames "^2.2.5"
