@@ -8,6 +8,7 @@ import * as icons from '@/constants/icons'
 // Components
 import Icon from '@mdi/react'
 import Slider from './slider'
+import Banner from './banner'
 import Button from '@/components/button'
 import PlayerButton from './playerButton'
 
@@ -203,8 +204,30 @@ class Player extends React.PureComponent {
   }
 
   handleError = event => {
+    const { showPlayerBanner } = this.props
     const { error } = event.target
-    console.error(error)
+    let message
+    switch (error.code) {
+      case MediaError.MEDIA_ERR_ABORTED:
+        message = 'The user canceled the audio.'
+        break
+      case MediaError.MEDIA_ERR_NETWORK:
+        message = 'A network error occurred while fetching the audio.'
+        break
+      case MediaError.MEDIA_ERR_DECODE:
+        message = 'An error occurred while decoding the audio.'
+        break
+      case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+        message = 'The audio is missing or is in a format not supported by your browser.'
+        break
+      default:
+        message = 'An unknown error occurred.'
+        break
+    }
+
+    // Debug
+    console.error(message, error)
+    showPlayerBanner(message)
   }
 
   handleWaiting = () => {
@@ -407,7 +430,7 @@ class Player extends React.PureComponent {
     return (
       <div className={css.player + ' ' + (showPlayer ? css.active : '')}>
         <audio ref={this.audioElement} {...playerOptions} />
-
+        <Banner />
         <div className={css.container}>
           <div className={css.controls}>
             <StackButton

@@ -47,5 +47,7 @@ export default connect(
     updateStreamInfo: 'updateStreamInfo',
     updatePlayerStatus: 'updatePlayerStatus',
     updateFileSourceInfo: 'updateFileSourceInfo',
+    hidePlayerBanner: 'hidePlayerBanner',
+    showPlayerBanner: 'showPlayerBanner',
   }
 )(Player)

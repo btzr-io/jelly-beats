@@ -20,6 +20,7 @@
 @import url('./component/form.css');
 @import url('./component/label.css');
 @import url('./component/thumbnail.css');
+@import url('./component/banner.css');
 
 html {
   background: black;

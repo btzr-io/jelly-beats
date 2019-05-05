@@ -23,6 +23,9 @@ initialState.navigation = {
 }
 
 initialState.player = {
+  error: null,
+  showBanner: false,
+  bannerMessage: null,
   paused: true,
   loading: false,
   showPlayer: false,

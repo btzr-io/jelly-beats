@@ -304,6 +304,26 @@ export default function(store) {
       }
     },
 
+    showPlayerBanner(state, message) {
+      return {
+        player: {
+          ...state.player,
+          showBanner: true,
+          bannerMessage: message,
+        },
+      }
+    },
+
+    hidePlayerBanner(state) {
+      return {
+        player: {
+          ...state.player,
+          showBanner: false,
+          bannerMessage: null,
+        },
+      }
+    },
+
     playlistNavigation(state, steeps) {
       const { cache, player } = state
       const { currentPlaylist } = player

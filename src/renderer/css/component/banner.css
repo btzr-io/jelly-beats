@@ -1,0 +1,32 @@
+.banner {
+  position: absolute;
+  width: 100%;
+  height: 42px;
+  top: -42px;
+  background: #ee5253;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.banner-hide {
+  top: 0;
+  opacity: 0;
+}
+
+.banner--actions,
+.banner--content {
+  margin: 0 16px;
+  display: flex;
+  align-items: center;
+}
+
+.banner--message {
+  margin: 0 16px;
+}
+
+.banner--icon {
+  font-size: 1.4em;
+}

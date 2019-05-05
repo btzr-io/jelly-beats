@@ -23,13 +23,15 @@ export function chainquery(sqlQuery, queryOpts) {
         }
       })
       .then(json => {
-        const { error, data } = json
-        // Check for api errors
-
-        !error ? resolve(data) : reject(error)
+        if (json) {
+          const { error, data } = json
+          // Check for api errors
+          !error ? resolve(data) : reject(error)
+        } else {
+          reject(new Error('Chainquery api failed'))
+        }
       })
       .catch(error => {
-        console.error(error.message)
         reject(error)
       })
   })

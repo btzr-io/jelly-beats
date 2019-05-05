@@ -16,8 +16,6 @@ import Loader from '@/components/common/loader'
 import Thumbnail from '@/components/common/thumbnail'
 import EmptyState from '@/components/common/emptyState'
 
-// import TimeLine from '@/components/timeLine'
-
 class View extends React.PureComponent {
   constructor(props) {
     super(props)

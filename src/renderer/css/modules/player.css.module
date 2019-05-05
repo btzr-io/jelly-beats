@@ -27,6 +27,7 @@
   vertical-align: center;
   align-self: center;
   height: 100%;
+  background: var(--sidebar-bg-color);
 }
 
 .player .controls {
@@ -45,7 +46,6 @@
 }
 
 .player .seek {
-
 }
 
 .player .seekBar {
