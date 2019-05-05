@@ -23,7 +23,7 @@ app.on('ready', async () => {
   // Main window props
   const windowProps = {
     title: `${app.getName()} ~ ${app.getVersion()}`,
-    webPreferences: { webSecurity: false },
+    webPreferences: { webSecurity: false, nodeIntegration: true },
     autoHideMenuBar: true,
   }
 
