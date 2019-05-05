@@ -6138,9 +6138,9 @@ react-switch@^4.1.0:
   dependencies:
     prop-types "^15.6.2"
 
-react-window@^1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/react-window/-/react-window-1.7.1.tgz#c1db640415b97b85bc0a1c66eb82dadabca39b86"
+react-window@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/react-window/-/react-window-1.8.1.tgz#12f1db71d91552ed2263790e57cc77d950803db1"
   dependencies:
     "@babel/runtime" "^7.0.0"
     memoize-one ">=3.1.1 <6"
