@@ -45,7 +45,7 @@
     "rc-slider": "^8.6.7",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-measure": "^2.2.4",
+    "react-measure": "^2.3.0",
     "react-switch": "^4.1.0",
     "react-window": "^1.8.1",
     "register-scheme": "^0.0.2",
