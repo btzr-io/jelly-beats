@@ -62,7 +62,6 @@ class TrackList extends React.PureComponent {
     playlist: null,
     // Measure
     dimensions: { width: 0, height: 0 },
-    onRemoveItems: items => {},
   }
 
   constructor(props) {
@@ -87,13 +86,17 @@ class TrackList extends React.PureComponent {
   }
 
   handleItemChecked = (item, checked) => {
+    const { tracks } = this.props
+
     this.setState(prevState => {
       // Previous state
       let selectedItems = { ...prevState.selectedItems }
+
       // Add item
       if (checked) {
         selectedItems[item] = item
       }
+
       // Remove item
       if (!checked && selectedItems[item]) {
         delete selectedItems[item]
@@ -102,6 +105,23 @@ class TrackList extends React.PureComponent {
           selectedItems = null
         }
       }
+
+      const selectedItemsCount = selectedItems && Object.keys(selectedItems).length
+
+      // Items was unchecked
+      if (!checked && prevState.allItemsSelected) {
+        return { selectedItems, allItemsSelected: false }
+      }
+
+      // All items were selected
+      if (
+        !prevState.allItemsSelected &&
+        selectedItemsCount &&
+        selectedItemsCount === tracks.length
+      ) {
+        return { selectedItems, allItemsSelected: true }
+      }
+
       // Update items list
       return { selectedItems }
     })
@@ -206,7 +226,9 @@ class TrackList extends React.PureComponent {
       downloads,
       favorites,
       currentTrack,
+      onRemoveItems,
     } = this.props
+
     // actions
     const { attempPlay, doNavigate, togglePlay, toggleFavorite } = this.props
 
@@ -266,13 +288,6 @@ class TrackList extends React.PureComponent {
         width: '64px',
         cellRender: <Icon className="icon link__icon" path={iconClock} />,
       },
-      {
-        dataKey: 'options',
-        width: '32px',
-        isAction: true,
-        cellRender: null,
-        disabledSort: true,
-      },
     ]
 
     const editColumnProps = {
@@ -301,11 +316,13 @@ class TrackList extends React.PureComponent {
           {selectedItems && formatedItemsCount(Object.keys(selectedItems).length)}
         </span>
         <span>
-          <Button
-            type={'secondary'}
-            label={'Remove'}
-            onClick={this.handleRemoveRequest}
-          />
+          {onRemoveItems && (
+            <Button
+              type={'secondary'}
+              label={'Remove'}
+              onClick={this.handleRemoveRequest}
+            />
+          )}
         </span>
       </div>
     )

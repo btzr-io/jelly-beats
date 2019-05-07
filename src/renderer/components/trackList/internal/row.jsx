@@ -113,12 +113,6 @@ const Row = React.memo(({ data, index, style }) => {
         cellRender: duration ? memoizeFormatDuration(duration) : '?',
       },
       {
-        dataKey: 'options',
-        width: '32px',
-        isAction: true,
-        cellRender: <OptionsButton />,
-      },
-      {
         dataKey: 'selected',
         width: '32px',
         isAction: true,
