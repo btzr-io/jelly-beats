@@ -1,7 +1,7 @@
 import React from 'react'
 import Icon from '@mdi/react'
 import Lbry from '@/apis/lbry'
-import classnames from 'classnames'
+import clsx from 'clsx'
 
 // import worker bundle
 import Vibrant from 'node-vibrant/lib/bundle-worker'
@@ -126,9 +126,7 @@ class Card extends React.PureComponent {
         }
       >
         <Thumbnail className={'card--thumbnail'} src={thumbnail}>
-          <div
-            className={classnames('card--overlay', { 'card--overlay-show': showOverlay })}
-          >
+          <div className={clsx('card--overlay', { 'card--overlay-show': showOverlay })}>
             {!(isAvailable === false) && (
               <Button
                 icon={buttonIcon}

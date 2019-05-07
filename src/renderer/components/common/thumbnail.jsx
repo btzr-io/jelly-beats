@@ -1,5 +1,5 @@
 import React from 'react'
-import classnames from 'classnames'
+import clsx from 'clsx'
 
 class Thumbnail extends React.PureComponent {
   static defaultProps = {
@@ -29,7 +29,7 @@ class Thumbnail extends React.PureComponent {
     }
 
     return (
-      <div className={classnames('thumbnail', { 'thumbnail--ready': ready }, className)}>
+      <div className={clsx('thumbnail', { 'thumbnail--ready': ready }, className)}>
         <div className={'thumbnail--picture'} style={thumbnailStyle}>
           {this.props.children}
         </div>

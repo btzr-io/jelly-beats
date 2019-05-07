@@ -1,6 +1,6 @@
 import fs from 'fs'
 import React from 'react'
-import classnames from 'classnames'
+import clsx from 'clsx'
 import { ipcRenderer } from 'electron'
 import { memoizeFormatDuration } from '@/utils/formatMediaTime'
 import * as icons from '@/constants/icons'

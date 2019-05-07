@@ -1,12 +1,12 @@
 import React from 'react'
 import Icon from '@mdi/react'
-import classnames from 'classnames'
+import clsx from 'clsx'
 
 class Loader extends React.PureComponent {
   render() {
     const { icon, message, animation } = this.props
 
-    const iconClass = classnames('icon', 'loader__icon', {
+    const iconClass = clsx('icon', 'loader__icon', {
       [`animated--${animation}`]: animation,
     })
 

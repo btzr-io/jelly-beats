@@ -5,7 +5,7 @@ import Header from '@/components/header'
 import Player from '@/components/player'
 import SideBar from '@/components/sidebar'
 import navigate from '@/utils/navigate'
-import classnames from 'classnames'
+import clsx from 'clsx'
 import Lbry from '@/apis/lbry'
 
 const TWO_POINT_FIVE_SECONDS = 2500
@@ -75,7 +75,7 @@ class App extends React.PureComponent {
         <Header />
         <div
           id="window"
-          className={classnames({ short: showPlayer, adaptive: adaptiveColors })}
+          className={clsx({ short: showPlayer, adaptive: adaptiveColors })}
         >
           <SideBar />
           <Router routes={routes} defaultRoute={'/'} />

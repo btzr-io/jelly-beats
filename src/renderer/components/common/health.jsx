@@ -1,5 +1,5 @@
 import React from 'react'
-import classnames from 'classnames'
+import clsx from 'clsx'
 
 class Health extends React.PureComponent {
   static defaultProps = {
@@ -15,7 +15,7 @@ class Health extends React.PureComponent {
   render() {
     const { status } = this.props
     const health = Health.getHealth(status)
-    const statusClass = classnames('status', { [`status--${health}`]: health })
+    const statusClass = clsx('status', { [`status--${health}`]: health })
 
     return <span className={statusClass} />
   }

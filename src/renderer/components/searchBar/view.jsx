@@ -1,6 +1,6 @@
 import React from 'react'
 import Icon from '@mdi/react'
-import classnames from 'classnames'
+import clsx from 'clsx'
 
 import Button from '@/components/button'
 import { SEARCH as iconSearch, CLOSE as iconClose } from '@/constants/icons'
@@ -58,7 +58,7 @@ class SearchBar extends React.PureComponent {
       <form
         role="search"
         onSubmit={this.handleSubmit}
-        className={classnames('search-bar', { 'search-bar--focus': focus })}
+        className={clsx('search-bar', { 'search-bar--focus': focus })}
       >
         <Button
           type={'search'}

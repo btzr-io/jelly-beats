@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'unistore/react'
-import classname from 'classnames'
 import Icon from '@mdi/react'
+import clsx from 'clsx'
 import * as SortDirection from '@/constants/sortDirection'
 import { ARROW_UP, ARROW_DOWN } from '@/constants/icons'
 
@@ -33,7 +33,7 @@ const HeaderColumn = React.memo(
     return (
       <div
         style={{ flex: `0 1 ${width}` }}
-        className={classname('Row__cell', isAction && 'Row__cell--action')}
+        className={clsx('Row__cell', isAction && 'Row__cell--action')}
         onClick={event => onSort(dataKey)}
       >
         <div className={'Row__cell__label'}>{cellRender}</div>

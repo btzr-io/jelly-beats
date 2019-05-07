@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'unistore/react'
 import { areEqual } from 'react-window'
 import { memoizeFormatDuration } from '@/utils/formatMediaTime'
-import classname from 'classnames'
+import clsx from 'clsx'
 
 // React components
 import Link from '@/components/common/link'
@@ -134,13 +134,13 @@ const Row = React.memo(({ data, index, style }) => {
 
     return (
       <div
-        className={classname('Row', isActive && 'Row--active', isLoading && 'Row--busy')}
+        className={clsx('Row', isActive && 'Row--active', isLoading && 'Row--busy')}
         style={style}
       >
         {columns.map(({ dataKey, width, cellRender, isAction }) => (
           <div
             key={dataKey}
-            className={classname('Row__cell', isAction && 'Row__cell--action')}
+            className={clsx('Row__cell', isAction && 'Row__cell--action')}
             style={{ flex: `0 1 ${width}` }}
           >
             {cellRender}

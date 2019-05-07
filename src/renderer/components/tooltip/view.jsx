@@ -1,5 +1,5 @@
 import React from 'react'
-import classnames from 'classnames'
+import clsx from 'clsx'
 
 class Tooltip extends React.PureComponent {
   static defaultProps = {
@@ -19,7 +19,7 @@ class Tooltip extends React.PureComponent {
 
     return (
       <div
-        className={classnames('tooltip', `tooltip-${placement}`, { show })}
+        className={clsx('tooltip', `tooltip-${placement}`, { show })}
         style={tooltipStyle}
       >
         {text}

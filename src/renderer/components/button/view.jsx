@@ -1,6 +1,6 @@
 import React from 'react'
 import Icon from '@mdi/react'
-import classnames from 'classnames'
+import clsx from 'clsx'
 
 class Button extends React.PureComponent {
   static defaultProps = {
@@ -88,13 +88,13 @@ class Button extends React.PureComponent {
     } = this.props
     const { animated } = this.state
 
-    const buttonClass = classnames('button', `button--${type}`, {
+    const buttonClass = clsx('button', `button--${type}`, {
       'button--active': active,
       'button--toggle': toggle,
       [`animated--${animation}`]: animation,
     })
 
-    const iconClass = classnames('icon', 'button_icon', {
+    const iconClass = clsx('icon', 'button_icon', {
       [`icon--${size}`]: size !== 'normal',
     })
 

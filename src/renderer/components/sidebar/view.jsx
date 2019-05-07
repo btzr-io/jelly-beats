@@ -1,6 +1,6 @@
 import React from 'react'
 import Icon from '@mdi/react'
-import classnames from 'classnames'
+import clsx from 'clsx'
 import {
   HOME as home,
   PLAYLIST_PLUS as playlistPlus,
@@ -13,10 +13,7 @@ import {
 } from '@/constants/icons'
 
 const NavLink = ({ icon, label, active, action, badge }) => (
-  <div
-    onClick={action}
-    className={classnames('nav__link', { 'nav__link--active': active })}
-  >
+  <div onClick={action} className={clsx('nav__link', { 'nav__link--active': active })}>
     <div className="link__body">
       {icon && <Icon className="icon link__icon" path={icon} />}
       {label && <span className="link__label">{label}</span>}
@@ -37,9 +34,7 @@ const NavGroup = ({ title, links, action, active }) => (
       />
       <span className="nav__group--title">{title}</span>
     </div>
-    <div className={classnames('nav__links', { 'nav__links--hidden': !active })}>
-      {links}
-    </div>
+    <div className={clsx('nav__links', { 'nav__links--hidden': !active })}>{links}</div>
   </div>
 )
 

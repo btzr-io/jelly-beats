@@ -1,6 +1,6 @@
 import React from 'react'
 import Icon from '@mdi/react'
-import classnames from 'classnames'
+import clsx from 'clsx'
 import * as icons from '@/constants/icons'
 
 import * as StatusCode from '@/constants/statusCodes'
@@ -42,7 +42,7 @@ class ConnectionStatus extends React.PureComponent {
 
     if (!code) return null
 
-    const statusClass = classnames('connection-status', {
+    const statusClass = clsx('connection-status', {
       [`connection-status--${code.type}`]: code.type,
     })
 
@@ -53,7 +53,7 @@ class ConnectionStatus extends React.PureComponent {
         <Icon
           path={code.icon}
           color={iconColor}
-          className={classnames('icon', 'icon--normal', 'connection-status--icon', {
+          className={clsx('icon', 'icon--normal', 'connection-status--icon', {
             'animated--spin': code.type === 'connecting',
           })}
         />

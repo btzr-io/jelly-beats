@@ -32,7 +32,6 @@
   "dependencies": {
     "@mdi/js": "^3.6.95",
     "@mdi/react": "^1.0.1",
-    "classnames": "^2.2.6",
     "clsx": "^1.0.4",
     "discord-rich-presence": "^0.0.8",
     "find-process": "^1.4.1",
