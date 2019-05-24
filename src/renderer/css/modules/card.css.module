@@ -8,7 +8,6 @@
   vertical-align: top;
   border-radius: 0;
   white-space: normal;
-  overflow: hidden;
 }
 
 .block {

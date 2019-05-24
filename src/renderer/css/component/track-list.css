@@ -77,6 +77,10 @@
   color: var(--text-color);
 }
 
+.Row--active:first-child {
+  border-radius: 0 0 8px 8px;
+}
+
 .Row:hover .button--action--overlay,
 .Row--busy .button--action--overlay,
 .Row--active .button--action--overlay {

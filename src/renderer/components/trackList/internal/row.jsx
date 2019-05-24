@@ -36,13 +36,17 @@ const Row = React.memo(({ data, index, style }) => {
   const claimData = item && cache[item]
   const streamSource = streams[item]
   const fileSource = item && downloads.find(download => download.uri === item)
-  const { duration, completed, isDownloading } = fileSource || {}
+  const { completed, isDownloading } = fileSource || {}
   const isFavorite = item && favorites.indexOf(item) !== -1
   const isActive = (completed || streamSource) && currentTrack.uri === item
   const isSelected = item && selectedItems && selectedItems[item] ? true : false
   const isPlaying = !paused && isActive
   const isLoading =
     (isActive && loading) || isDownloading || (streamSource && !streamSource.ready)
+
+  // Extract duration from metadata or file source
+  const duration =
+    (claimData && claimData.duration) || (fileSource && fileSource.duration)
 
   // Main button action
   const handlePlay = () => {

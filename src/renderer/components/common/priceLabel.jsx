@@ -12,7 +12,7 @@ class PriceLabel extends React.PureComponent {
 
   render() {
     const { type, fee, className } = this.props
-    const price = fee ? `${fee.amount.toFixed(2)} ${fee.currency}` : 'FREE'
+    const price = fee ? `${fee.amount} ${fee.currency}` : 'FREE'
     return <span className={clsx(className, 'label', { price_label: fee })}>{price}</span>
   }
 }

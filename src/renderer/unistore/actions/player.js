@@ -169,9 +169,9 @@ export default function(store) {
       // Claim missing from cach or existning / invalid stream
       if (!claim || claim.fee || !claim.artist || state.streams[uri]) return null
 
-      const { artist, name } = claim
-      const { channelId, channelName } = artist
-      const streamSources = createStreamUrl(channelName, channelId, name)
+      const { name, id } = claim
+      console.info(claim)
+      const streamSources = createStreamUrl(name, id)
       const stream = { ...streamSources, ready: false }
       return { streams: { ...state.streams, [uri]: stream } }
     },

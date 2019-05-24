@@ -1,14 +1,16 @@
 // Api endpoint
 const APIS = {
   SPEECH: 'https://spee.ch',
+  LBRY_TV: 'https://api.lbry.tv/content/claims',
   SOUNDBYTEZ: 'https://soundbytez.io',
 }
 
-// Generate file url
-export const getStreamUrl = (api, channelName, channelId, name) =>
+// Generate file url (OLD)
+export const getStreamUrlLegacy = (api, channelName, channelId, name) =>
   `${api}/${channelName}:${channelId}/${name}.audio`
 
-export const createStreamUrl = (channelName, channelId, name) => ({
-  url: getStreamUrl(APIS.SPEECH, channelName, channelId, name),
-  fallback: getStreamUrl(APIS.SOUNDBYTEZ, channelName, channelId, name),
+export const getStreamUrl = (api, name, id) => `${api}/${name}/${id}/stream.mp4`
+
+export const createStreamUrl = (name, id) => ({
+  url: getStreamUrl(APIS.LBRY_TV, name, id),
 })

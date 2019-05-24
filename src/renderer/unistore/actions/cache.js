@@ -2,7 +2,7 @@ import getArtistTitle from 'get-artist-title'
 
 export default {
   storeTrack(state, uri, { claimData, channelData }) {
-    const { txid, nout, value, name } = claimData
+    const { txid, nout, value, name, claim_id: id } = claimData
 
     // Generate claim outpoint
     const outpoint = `${txid}:${nout}`
@@ -16,8 +16,8 @@ export default {
     }
 
     // Extract metadata
-    const metadata = value.stream.metadata
-    const { fee, title, author, thumbnail, description } = metadata
+    const metadata = value
+    const { fee, audio, title, author, thumbnail, description } = metadata
 
     // Channel
     const artist = {
@@ -37,25 +37,24 @@ export default {
 
     const defaultTitle = title || name
 
-    // Format title
-    /*
-    const [formatedArtist, formatedTitle] = getArtistTitle(defaultTitle, {
-      defaultTitle,
-      defaultArtist: artist.channelName,
-    })*/
+    let duration = null
+
+    if (audio) {
+      duration = audio.duration
+    }
 
     // New track data
     const track = {
+      id,
       fee,
       uri,
       name,
       artist,
       outpoint,
-      thumbnail,
-      description,
-      // formatedTitle,
-      // formatedArtist,
+      thumbnail: thumbnail ? thumbnail.url || null : null,
       title: defaultTitle,
+      duration,
+      description,
     }
 
     // Update cache
@@ -89,10 +88,13 @@ export default {
       name,
       nout,
       txid,
+      value,
       height: block,
       claim_id: id,
       permanent_url: uri,
     } = channelData
+
+    const { thumbnail } = value
 
     // Generate claim outpoint
     const outpoint = `${txid}:${nout}`
@@ -113,6 +115,10 @@ export default {
       name: name.substring(1),
       nickname: name,
       thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Cubozoa.jpg',
+    }
+
+    if (thumbnail && thumbnail.url) {
+      channel.thumbnail = thumbnail.url
     }
 
     // Update cache

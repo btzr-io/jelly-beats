@@ -81,7 +81,6 @@ class TrackList extends React.PureComponent {
   }
 
   handleResize = contentRect => {
-    console.info(contentRect.bounds)
     this.setState({ dimensions: contentRect.bounds })
   }
 

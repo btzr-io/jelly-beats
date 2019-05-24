@@ -29,7 +29,9 @@ class Thumbnail extends React.PureComponent {
     }
 
     return (
-      <div className={clsx('thumbnail', { 'thumbnail--ready': ready }, className)}>
+      <div
+        className={clsx('thumbnail', { 'thumbnail--ready': ready || !src }, className)}
+      >
         <div className={'thumbnail--picture'} style={thumbnailStyle}>
           {this.props.children}
         </div>
