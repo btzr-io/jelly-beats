@@ -76,7 +76,8 @@ If you'd like to help support the future of the project, please report [bugs](ht
 | ------ | ------ |
 | **Bitcoin** | 36StGtp6CVwYN8JkiqfcTnZKWeYiKbahuH |
 | **Etherum** | 0xd3bcec62285b9209d96499f1d05d257eaf5b0439 |
-| **Lbry credits (LBC)** | bQaC73Mgs7D2vPk7oogej6Zx9YvGqf7znw |
+| **Stellar** | GBEL2WZKLEVGGNJPXFNIXXNE62XNF75MYP6OJOC4IQRFMMG4DH5NQB4T |
+| **LBRY credits** | bQaC73Mgs7D2vPk7oogej6Zx9YvGqf7znw |
 
 
 ## Awesome contributors :tada:
