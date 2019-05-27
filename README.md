@@ -18,7 +18,7 @@
  <a href="https://github.com/btzr-io/jelly-beats/blob/master/LICENSE">
    <img src="https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=for-the-badge" alt="license" />
  </a>
- <a href="https://github.com/btzr-io/jelly-beats/blob/master/README.md#support">
+ <a href="https://github.com/btzr-io/jelly-beats/blob/master/README.md#heart-support">
    <img src="https://img.shields.io/badge/support-yellow.svg?style=for-the-badge" alt="license" />
  </a>
 </h1>
@@ -67,7 +67,7 @@ $ yarn dist
 | **MacOS**   | **.dmg** - Inside dist folder. |
 
 
-## Support :heart:
+## :heart: Support
 
 If you'd like to help support the future of the project, please report [bugs](https://help.github.com/en/articles/creating-an-issue) or consider making a donation:
 
@@ -80,7 +80,7 @@ If you'd like to help support the future of the project, please report [bugs](ht
 | **LBRY credits** | bQaC73Mgs7D2vPk7oogej6Zx9YvGqf7znw |
 
 
-## Awesome contributors :tada:
+## :tada: Awesome contributors
 
 Thanks goes to these wonderful people and bots ([emoji-key](https://all-contributors.js.org/docs/en/emoji-key)):
 
