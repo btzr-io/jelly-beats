@@ -18,7 +18,7 @@
  <a href="https://github.com/btzr-io/jelly-beats/blob/master/LICENSE">
    <img src="https://img.shields.io/github/license/btzr-io/jelly-beats.svg?style=for-the-badge" alt="license" />
  </a>
- <a href="https://github.com/btzr-io/jelly-beats#support">
+ <a href="https://github.com/btzr-io/jelly-beats/blob/master/README.md#support">
    <img src="https://img.shields.io/badge/support-yellow.svg?style=for-the-badge" alt="license" />
  </a>
 </h1>
