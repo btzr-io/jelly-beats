@@ -25,9 +25,6 @@
 
  <img src="https://user-images.githubusercontent.com/14793624/53688127-4a733480-3cfc-11e9-84a6-eb08664ab46f.png" alt="screenshot"/>
  
- 
- <img src="https://user-images.githubusercontent.com/14793624/53688171-e3a24b00-3cfc-11e9-9cac-4aad55c4d5a5.png"/>
- 
  > ### :information_source:  Note
  > This project is on early stages of development, we don't recommend to install, build or use it if you don't understand what you are doing. Pease expect bugs and missing features.
   
