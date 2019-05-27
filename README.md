@@ -67,7 +67,7 @@ $ yarn dist
 | **MacOS**   | **.dmg** - Inside dist folder. |
 
 
-## Support
+## Support :heart:
 
 If you'd like to help support the future of the project, please report [bugs](https://help.github.com/en/articles/creating-an-issue) or consider making a donation:
 
