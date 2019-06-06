@@ -67,7 +67,7 @@
     "github-url-from-git": "^1.5.0",
     "husky": "^2.2.0",
     "preact": "^8.4.2",
-    "prettier": "^1.17.0",
+    "prettier": "^1.17.1",
     "pretty-quick": "^1.8.0",
     "prop-types": "^15.7.2",
     "remote-origin-url": "^2.0.0",
