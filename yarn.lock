@@ -926,9 +926,9 @@
   version "3.6.95"
   resolved "https://registry.yarnpkg.com/@mdi/js/-/js-3.6.95.tgz#0a1e599680d241a2e77635c601fba25a44a635a0"
 
-"@mdi/react@^1.0.1":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@mdi/react/-/react-1.1.0.tgz#22b014e40152adbe0d7d36631fc9979854603c7a"
+"@mdi/react@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@mdi/react/-/react-1.1.1.tgz#73efd8f4d1ba71d6c4925b7bc7226417d2936b0e"
 
 "@posthtml/esm@^1.0.0":
   version "1.0.0"
