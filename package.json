@@ -52,7 +52,7 @@
     "stockroom": "^1.0.1",
     "unissist": "^1.4.0",
     "unistore": "^3.4.1",
-    "universal-router": "^8.1.0"
+    "universal-router": "^8.2.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.4",
