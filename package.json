@@ -41,7 +41,7 @@
     "moment": "^2.22.2",
     "node-vibrant": "^3.2.0-alpha",
     "proxy-polyfill": "^0.3.0",
-    "rc-slider": "^8.6.9",
+    "rc-slider": "^8.6.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-measure": "^2.3.0",
