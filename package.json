@@ -46,7 +46,7 @@
     "react-dom": "^16.8.6",
     "react-measure": "^2.3.0",
     "react-switch": "^5.0.0",
-    "react-window": "^1.8.1",
+    "react-window": "^1.8.2",
     "register-scheme": "^0.0.2",
     "source-map-support": "^0.5.12",
     "stockroom": "^1.0.1",
