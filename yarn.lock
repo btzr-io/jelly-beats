@@ -3519,9 +3519,9 @@ find-cache-dir@^2.0.0:
     make-dir "^1.0.0"
     pkg-dir "^3.0.0"
 
-find-process@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/find-process/-/find-process-1.4.1.tgz#628c576a494d1525a27673fb26c77af90db5db02"
+find-process@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/find-process/-/find-process-1.4.2.tgz#8703cbb542df0e4cd646f581fbcce860d0131c31"
   dependencies:
     chalk "^2.0.1"
     commander "^2.11.0"

@@ -34,7 +34,7 @@
     "@mdi/react": "^1.1.1",
     "clsx": "^1.0.4",
     "discord-rich-presence": "^0.0.8",
-    "find-process": "^1.4.1",
+    "find-process": "^1.4.2",
     "get-artist-title": "^1.1.1",
     "history": "^4.9.0",
     "mediasource": "^2.2.1",
