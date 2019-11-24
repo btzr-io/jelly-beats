@@ -1,6 +1,7 @@
  > ### :information_source:  Note
  > This project is on early stages of development, we don't recommend to install, build or use it if you don't understand what you are doing. Pease expect bugs and missing features.
-  
+ 
+ > :star:  Feel free to join the discord comunity [here](https://discordapp.com/invite/yq54qbS)  
 
 <h1 align=center>
   <img src="https://user-images.githubusercontent.com/39308480/43605302-e794780c-9665-11e8-9e25-7abefc7a3092.png" alt="jelly-              beats" width="54%">
