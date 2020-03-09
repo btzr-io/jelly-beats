@@ -1,5 +1,6 @@
 > ## :warning: Deprecated branch
-
+> This branch is not longer maintained, please check the `master` branch for active development.
+>
  
  > ### :information_source:  Note
  > This project is on early stages of development, we don't recommend to install, build or use it if you don't understand what you are doing. Pease expect bugs and missing features.
