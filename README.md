@@ -1,5 +1,5 @@
 > ## :warning: Deprecated branch
-> This branch is not longer maintained, please check the `master` branch for active development.
+> This project is not longer maintained, for a better alternative please check: https://hound.fm/
 >
  
  > ### :information_source:  Note
